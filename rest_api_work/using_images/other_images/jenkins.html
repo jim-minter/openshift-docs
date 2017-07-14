@@ -1,0 +1,1929 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Jenkins - Other Images | Using Images | OpenShift Origin Branch Build</title>
+  <link href="https://assets.openshift.net/content/subdomain.css" rel="stylesheet" type="text/css">
+  <link href="../../../rest_api_work/_stylesheets/docs.css" rel="stylesheet" />
+  <link href="../../../rest_api_work/_stylesheets/search.css" rel="stylesheet" />
+  <link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png">
+  <link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="text/css">
+  <!--[if IE]><link rel="shortcut icon" href="https://assets.openshift.net/content/subdomain/favicon.ico"><![endif]-->
+  <!-- or, set /favicon.ico for IE10 win -->
+  <meta content="OpenShift" name="application-name">
+  <meta content="#000000" name="msapplication-TileColor">
+  <meta content="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" name="msapplication-TileImage">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://assets.openshift.net/content/html5shiv.js" type="text/javascript"></script>
+    <script src="https://assets.openshift.net/content/respond.js" type="text/javascript"></script>
+    <link href="https://assets.openshift.net/content/vendor/respond-js/respond-proxy.html" id="respond-proxy" rel="respond-proxy">
+    <link href="../../../rest_api_work/_images/respond.proxy.gif" id="respond-redirect" rel="respond-redirect">
+    <script src="../../../rest_api_work/_javascripts/respond.proxy.js" type="text/javascript"></script>
+  <![endif]-->
+  <script src="https://assets.openshift.net/content/modernizr.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/subdomain.js" type="text/javascript"></script>
+  <script src="../../../rest_api_work/_javascripts/bootstrap-offcanvas.js" type="text/javascript"></script>
+  <script src="../../../rest_api_work/_javascripts/reformat-html.js" type="text/javascript"></script>
+  <script src="../../../rest_api_work/_javascripts/hc-search.js" type="text/javascript"></script>
+  <script async src="//www.google-analytics.com/analytics.js" type="text/javascript"></script>
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-40375612-1', 'openshift.org');
+  ga('set', 'forceSSL', true);
+  ga('send', 'pageview');
+</script>
+</head>
+<body>
+  <div class="navbar navbar-default navbar-openshift navbar-origin" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand origin" href="/"></a>
+  </div>
+</div>
+  <div class="container">
+    <p class="toggle-nav visible-xs pull-left">
+      <button class="btn btn-default btn-sm" type="button" data-toggle="offcanvas">Toggle nav</button>
+    </p>
+    <ol class="breadcrumb">
+      <li class="sitename">
+        <a href="../../../index.html">Documentation</a>
+      </li>
+      <li class="hidden-xs active">
+        <a href="../../welcome/index.html">OpenShift Origin Branch Build</a>
+      </li>
+      <li class="hidden-xs active">
+        <a href="../../using_images/index.html">Using Images</a>
+      </li>
+      <li class="hidden-xs active"><a href="../../using_images/other_images/index.html">Other Images</a></li>
+      <li class="hidden-xs active">
+        Jenkins
+      </li>
+    </ol>
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-8 col-sm-3 col-md-3 sidebar sidebar-offcanvas">
+        <div class="row-fluid">
+          <div id="hc-search">
+  <input id="hc-search-input" type="text">
+  <button id="hc-search-btn">Search</button>
+</div>
+
+<div id="hc-search-modal">
+  <div id="hc-modal-content">
+    <span id="hc-modal-close">&times;</span>
+    <div id="hc-search-results"></div>
+  </div>
+</div>
+
+<script>
+  hcSearchCategory("docs_origin", "Branch Build");
+</script>
+        </div>
+        <ul class="nav nav-sidebar">
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup0">
+        <span id="tgSpan0" class="fa fa-angle-right"></span>About
+      </a>
+      <ul id="topicGroup0" class="collapse  list-unstyled">
+            <li><a class="" href="../../welcome/index.html">Welcome</a></li>
+            <li><a class="" href="../../welcome/legal_notice.html">Legal Notice</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup1">
+        <span id="tgSpan1" class="fa fa-angle-right"></span>What's New?
+      </a>
+      <ul id="topicGroup1" class="collapse  list-unstyled">
+            <li><a class="" href="../../whats_new/index.html">Overview</a></li>
+            <li><a class="" href="../../whats_new/applications.html">Applications</a></li>
+            <li><a class="" href="../../whats_new/carts_vs_images.html">Cartridges vs Images</a></li>
+            <li><a class="" href="../../whats_new/terminology.html">Terminology</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup2">
+        <span id="tgSpan2" class="fa fa-angle-right"></span>Getting Started
+      </a>
+      <ul id="topicGroup2" class="collapse  list-unstyled">
+            <li><a class="" href="../../getting_started/index.html">Overview</a></li>
+            <li><a class="" href="../../getting_started/developers_console.html">Web Console Walkthrough</a></li>
+            <li><a class="" href="../../getting_started/developers_cli.html">Command-Line Walkthrough</a></li>
+            <li><a class="" href="../../getting_started/administrators.html">Setting Up a Cluster</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup3">
+        <span id="tgSpan3" class="fa fa-angle-right"></span>Architecture
+      </a>
+      <ul id="topicGroup3" class="collapse  list-unstyled">
+            <li><a class="" href="../../architecture/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-1">
+                <span id="sgSpan-3-1" class="fa fa-caret-right"></span>&nbsp;Infrastructure Components
+              </a>
+              <ul id="topicSubGroup-3-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/infrastructure_components/kubernetes_infrastructure.html">Kubernetes Infrastructure</a></li>
+                  <li><a class="" href="../../architecture/infrastructure_components/image_registry.html">Container Registry</a></li>
+                  <li><a class="" href="../../architecture/infrastructure_components/web_console.html">Web Console</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-2">
+                <span id="sgSpan-3-2" class="fa fa-caret-right"></span>&nbsp;Core Concepts
+              </a>
+              <ul id="topicSubGroup-3-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/core_concepts/index.html">Overview</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/containers_and_images.html">Containers and Images</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/pods_and_services.html">Pods and Services</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/projects_and_users.html">Projects and Users</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/builds_and_image_streams.html">Builds and Image Streams</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/deployments.html">Deployments</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/routes.html">Routes</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/haproxy-router.html">HAProxy Router Plug-in</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/templates.html">Templates</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-3">
+                <span id="sgSpan-3-3" class="fa fa-caret-right"></span>&nbsp;Additional Concepts
+              </a>
+              <ul id="topicSubGroup-3-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/additional_concepts/networking.html">Networking</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/sdn.html">OpenShift SDN</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/flannel.html">Flannel</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/f5_big_ip.html">F5 BIG-IP® Router Plug-in</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/contiv.html">Contiv</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/authentication.html">Authentication</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/authorization.html">Authorization</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/storage.html">Persistent Storage</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/remote_commands.html">Remote Commands</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/port_forwarding.html">Port Forwarding</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/scm.html">Source Control Management</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/admission_controllers.html">Admission Controllers</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/other_api_objects.html">Other API Objects</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-4">
+                <span id="sgSpan-3-4" class="fa fa-caret-right"></span>&nbsp;Service Catalog Components
+              </a>
+              <ul id="topicSubGroup-3-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/service_catalog/index.html">Service Catalog</a></li>
+                  <li><a class="" href="../../architecture/service_catalog/template_service_broker.html">Template Service Broker</a></li>
+                  <li><a class="" href="../../architecture/service_catalog/ansible_service_broker.html">Ansible Service Broker</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup4">
+        <span id="tgSpan4" class="fa fa-angle-right"></span>Container Security Guide
+      </a>
+      <ul id="topicGroup4" class="collapse  list-unstyled">
+            <li><a class="" href="../../security/index.html">Introduction</a></li>
+            <li><a class="" href="../../security/hosts_multitenancy.html">Container Hosts and Multi-tenancy</a></li>
+            <li><a class="" href="../../security/container_content.html">Container Content</a></li>
+            <li><a class="" href="../../security/registries.html">Registries</a></li>
+            <li><a class="" href="../../security/build_process.html">Build Process</a></li>
+            <li><a class="" href="../../security/deployment.html">Deployment</a></li>
+            <li><a class="" href="../../security/securing_container_platform.html">Securing the Container Platform</a></li>
+            <li><a class="" href="../../security/network_security.html">Network Security</a></li>
+            <li><a class="" href="../../security/storage.html">Attached Storage</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup5">
+        <span id="tgSpan5" class="fa fa-angle-right"></span>Installation and Configuration
+      </a>
+      <ul id="topicGroup5" class="collapse  list-unstyled">
+            <li><a class="" href="../../install_config/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-1">
+                <span id="sgSpan-5-1" class="fa fa-caret-right"></span>&nbsp;Installing a Cluster
+              </a>
+              <ul id="topicSubGroup-5-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/install/planning.html">Planning</a></li>
+                  <li><a class="" href="../../install_config/install/prerequisites.html">Prerequisites</a></li>
+                  <li><a class="" href="../../install_config/install/host_preparation.html">Host Preparation</a></li>
+                  <li><a class="" href="../../install_config/install/rpm_vs_containerized.html">Installing on Containerized Hosts</a></li>
+                  <li><a class="" href="../../install_config/install/quick_install.html">Quick Installation</a></li>
+                  <li><a class="" href="../../install_config/install/advanced_install.html">Advanced Installation</a></li>
+                  <li><a class="" href="../../install_config/install/stand_alone_registry.html">Installing a Stand-alone Deployment of OpenShift Container Registry</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-2">
+                <span id="sgSpan-5-2" class="fa fa-caret-right"></span>&nbsp;Setting up the Registry
+              </a>
+              <ul id="topicSubGroup-5-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/registry/index.html">Registry Overview</a></li>
+                  <li><a class="" href="../../install_config/registry/deploy_registry_existing_clusters.html">Deploying a Registry on Existing Clusters</a></li>
+                  <li><a class="" href="../../install_config/registry/accessing_registry.html">Accessing the Registry</a></li>
+                  <li><a class="" href="../../install_config/registry/securing_and_exposing_registry.html">Securing and Exposing the Registry</a></li>
+                  <li><a class="" href="../../install_config/registry/extended_registry_configuration.html">Extended Registry Configuration</a></li>
+                  <li><a class="" href="../../install_config/registry/registry_known_issues.html">Known Issues</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-3">
+                <span id="sgSpan-5-3" class="fa fa-caret-right"></span>&nbsp;Setting up a Router
+              </a>
+              <ul id="topicSubGroup-5-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/router/index.html">Router Overview</a></li>
+                  <li><a class="" href="../../install_config/router/default_haproxy_router.html">Using the Default HAProxy Router</a></li>
+                  <li><a class="" href="../../install_config/router/customized_haproxy_router.html">Deploying a Customized HAProxy Router</a></li>
+                  <li><a class="" href="../../install_config/router/proxy_protocol.html">Configuring the HAProxy Router to Use the PROXY Protocol</a></li>
+                  <li><a class="" href="../../install_config/router/f5_router.html">Using the F5 Router Plug-in</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-4">
+                <span id="sgSpan-5-4" class="fa fa-caret-right"></span>&nbsp;Upgrading a Cluster
+              </a>
+              <ul id="topicSubGroup-5-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/upgrading/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/upgrading/automated_upgrades.html">Automated In-place Upgrades</a></li>
+                  <li><a class="" href="../../install_config/upgrading/manual_upgrades.html">Manual In-place Upgrades</a></li>
+                  <li><a class="" href="../../install_config/upgrading/blue_green_deployments.html">Blue-Green Deployments</a></li>
+                  <li><a class="" href="../../install_config/upgrading/os_upgrades.html">Operating System Updates and Upgrades</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../install_config/master_node_configuration.html">Master and Node Configuration</a></li>
+            <li><a class="" href="../../install_config/adding_hosts_to_existing_cluster.html">Adding Hosts to an Existing Cluster</a></li>
+            <li><a class="" href="../../install_config/imagestreams_templates.html">Loading the Default Image Streams and Templates</a></li>
+            <li><a class="" href="../../install_config/certificate_customization.html">Configuring Custom Certificates</a></li>
+            <li><a class="" href="../../install_config/redeploying_certificates.html">Redeploying Certificates</a></li>
+            <li><a class="" href="../../install_config/configuring_authentication.html">Configuring Authentication and User Agent</a></li>
+            <li><a class="" href="../../install_config/syncing_groups_with_ldap.html">Syncing Groups With LDAP</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-12">
+                <span id="sgSpan-5-12" class="fa fa-caret-right"></span>&nbsp;Advanced LDAP Configuration
+              </a>
+              <ul id="topicSubGroup-5-12" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/sssd_for_ldap_failover.html">Setting up SSSD for LDAP Failover</a></li>
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/configuring_form_based_authentication.html">Configuring Form-Based Authentication</a></li>
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/configuring_extended_ldap_attributes.html">Configuring Extended LDAP Attributes</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../install_config/configuring_sdn.html">Configuring the SDN</a></li>
+            <li><a class="" href="../../install_config/configuring_nuagesdn.html">Configuring Nuage SDN</a></li>
+            <li><a class="" href="../../install_config/configuring_aws.html">Configuring for AWS</a></li>
+            <li><a class="" href="../../install_config/configuring_openstack.html">Configuring for OpenStack</a></li>
+            <li><a class="" href="../../install_config/configuring_gce.html">Configuring for GCE</a></li>
+            <li><a class="" href="../../install_config/configuring_azure.html">Configuring for Azure</a></li>
+            <li><a class="" href="../../install_config/configuring_vsphere.html">Configuring for VMWare vSphere</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-20">
+                <span id="sgSpan-5-20" class="fa fa-caret-right"></span>&nbsp;Configuring Persistent Storage
+              </a>
+              <ul id="topicSubGroup-5-20" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/persistent_storage/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_nfs.html">Using NFS</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_glusterfs.html">Using GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_cinder.html">Using OpenStack Cinder</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_ceph_rbd.html">Using Ceph RBD</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_aws.html">Using AWS Elastic Block Store</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_gce.html">Using GCE Persistent Disk</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_iscsi.html">Using iSCSI</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_fibre_channel.html">Using Fibre Channel</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_azure.html">Using Azure Disk</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_azure_file.html">Using Azure File</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_flex_volume.html">Using FlexVolume</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_vsphere.html">Persistent Storage Using VMWare vSphere Volume</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/dynamically_provisioning_pvs.html">Dynamic Provisioning and Creating Storage Classes</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/pod_security_context.html">Volume Security</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/selector_label_binding.html">Selector-Label Volume Binding</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/enabling_controller_attach_detach.html">Enabling Controller-managed Attachment and Detachment</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-21">
+                <span id="sgSpan-5-21" class="fa fa-caret-right"></span>&nbsp;Persistent Storage Examples
+              </a>
+              <ul id="topicSubGroup-5-21" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/storage_examples/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/shared_storage.html">Sharing an NFS PV Across Two Pods</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/ceph_example.html">Complete Example Using Ceph RBD</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/ceph_rbd_dynamic_example.html">Complete Example Using Ceph RBD for Dynamic Provisioning</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/gluster_example.html">Complete Example Using GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/gluster_dynamic_example.html">Dynamic Provisioning Example Using Containerized GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/dedicated_gluster_dynamic_example.html">Dynamic Provisioning Example Using Dedicated GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/privileged_pod_storage.html">Mounting Volumes To Privileged Pods</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/gluster_backed_registry.html">Backing Docker Registry with GlusterFS Storage</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/binding_pv_by_label.html">Binding Persistent Volumes by Label</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/storage_classes_dynamic_provisioning.html">Using StorageClasses for Dynamic Provisioning</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/storage_classes_legacy.html">Using StorageClasses for Existing Legacy Storage</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../install_config/http_proxies.html">Working with HTTP Proxies</a></li>
+            <li><a class="" href="../../install_config/build_defaults_overrides.html">Configuring Global Build Defaults and Overrides</a></li>
+            <li><a class="" href="../../install_config/configuring_pipeline_execution.html">Configuring Pipeline Execution</a></li>
+            <li><a class="" href="../../install_config/configuring_routing.html">Configuring Route Timeouts</a></li>
+            <li><a class="" href="../../install_config/configuring_native_container_routing.html">Configuring Native Container Routing</a></li>
+            <li><a class="" href="../../install_config/routing_from_edge_lb.html">Routing from Edge Load Balancers</a></li>
+            <li><a class="" href="../../install_config/aggregate_logging.html">Aggregating Container Logs</a></li>
+            <li><a class="" href="../../install_config/aggregate_logging_sizing.html">Aggregate Logging Sizing Guidelines</a></li>
+            <li><a class="" href="../../install_config/cluster_metrics.html">Enabling Cluster Metrics</a></li>
+            <li><a class="" href="../../install_config/web_console_customization.html">Customizing the Web Console</a></li>
+            <li><a class="" href="../../install_config/provisioners.html">Deploying External Persistent Volume Provisioners</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup6">
+        <span id="tgSpan6" class="fa fa-angle-right"></span>Cluster Administration
+      </a>
+      <ul id="topicGroup6" class="collapse  list-unstyled">
+            <li><a class="" href="../../admin_guide/index.html">Overview</a></li>
+            <li><a class="" href="../../admin_guide/manage_nodes.html">Managing Nodes</a></li>
+            <li><a class="" href="../../admin_guide/manage_users.html">Managing Users</a></li>
+            <li><a class="" href="../../admin_guide/managing_projects.html">Managing Projects</a></li>
+            <li><a class="" href="../../admin_guide/managing_pods.html">Managing Pods</a></li>
+            <li><a class="" href="../../admin_guide/managing_networking.html">Managing Networking</a></li>
+            <li><a class="" href="../../admin_guide/service_accounts.html">Configuring Service Accounts</a></li>
+            <li><a class="" href="../../admin_guide/manage_authorization_policy.html">Managing Authorization Policies</a></li>
+            <li><a class="" href="../../admin_guide/image_policy.html">Image Policy</a></li>
+            <li><a class="" href="../../admin_guide/image_signatures.html">Image Signatures</a></li>
+            <li><a class="" href="../../admin_guide/scoped_tokens.html">Scoped Tokens</a></li>
+            <li><a class="" href="../../admin_guide/monitoring_images.html">Monitoring Images</a></li>
+            <li><a class="" href="../../admin_guide/manage_scc.html">Managing Security Context Constraints</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-13">
+                <span id="sgSpan-6-13" class="fa fa-caret-right"></span>&nbsp;Scheduling
+              </a>
+              <ul id="topicSubGroup-6-13" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../admin_guide/scheduling/index.html">Overview</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/scheduler.html">Default Scheduling</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/custom_scheduler.html">Custom Scheduling</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/scheduler-advanced.html">Advanced Scheduling</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/node_affinity.html">Advanced Scheduling and Node Affinity</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/pod_affinity.html">Advanced Scheduling and Pod Affinity/Anti-affinity</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/node_selector.html">Advanced Scheduling and Node Selectors</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/taints_tolerations.html">Advanced Scheduling and Taints and Tolerations</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../admin_guide/quota.html">Setting Quotas</a></li>
+            <li><a class="" href="../../admin_guide/multiproject_quota.html">Setting Multi-Project Quotas</a></li>
+            <li><a class="" href="../../admin_guide/limits.html">Setting Limit Ranges</a></li>
+            <li><a class="" href="../../admin_guide/pruning_resources.html">Pruning Objects</a></li>
+            <li><a class="" href="../../admin_guide/garbage_collection.html">Garbage Collection</a></li>
+            <li><a class="" href="../../admin_guide/allocating_node_resources.html">Allocating Node Resources</a></li>
+            <li><a class="" href="../../admin_guide/overcommit.html">Overcommitting</a></li>
+            <li><a class="" href="../../admin_guide/tcp_ingress_external_ports.html">Assigning Unique External IPs for Ingress Traffic</a></li>
+            <li><a class="" href="../../admin_guide/out_of_resource_handling.html">Out of Resource Handling</a></li>
+            <li><a class="" href="../../admin_guide/router.html">Monitoring and Debugging Routers</a></li>
+            <li><a class="" href="../../admin_guide/high_availability.html">High Availability</a></li>
+            <li><a class="" href="../../admin_guide/iptables.html">IPtables</a></li>
+            <li><a class="" href="../../admin_guide/securing_builds.html">Securing Builds by Strategy</a></li>
+            <li><a class="" href="../../admin_guide/seccomp.html">Restricting Application Capabilities Using Seccomp</a></li>
+            <li><a class="" href="../../admin_guide/sysctls.html">Sysctls</a></li>
+            <li><a class="" href="../../admin_guide/ipsec.html">Encrypting Hosts with IPsec</a></li>
+            <li><a class="" href="../../admin_guide/building_dependency_trees.html">Building Dependency Trees</a></li>
+            <li><a class="" href="../../admin_guide/backup_restore.html">Backup and Restore</a></li>
+            <li><a class="" href="../../admin_guide/sdn_troubleshooting.html">Troubleshooting Networking</a></li>
+            <li><a class="" href="../../admin_guide/diagnostics_tool.html">Diagnostics Tool</a></li>
+            <li><a class="" href="../../admin_guide/idling_applications.html">Idling Applications</a></li>
+            <li><a class="" href="../../admin_guide/cluster_capacity.html">Analyzing Cluster Capacity</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup7">
+        <span id="tgSpan7" class="fa fa-angle-right"></span>Scaling and Performance Guide
+      </a>
+      <ul id="topicGroup7" class="collapse  list-unstyled">
+            <li><a class="" href="../../scaling_performance/index.html">Overview</a></li>
+            <li><a class="" href="../../scaling_performance/install_practices.html">Recommended Installation Practices</a></li>
+            <li><a class="" href="../../scaling_performance/host_practices.html">Recommended Host Practices</a></li>
+            <li><a class="" href="../../scaling_performance/optimizing_compute_resources.html">Optimizing Compute Resources</a></li>
+            <li><a class="" href="../../scaling_performance/optimizing_storage.html">Optimizing Storage</a></li>
+            <li><a class="" href="../../scaling_performance/network_optimization.html">Network Optimization</a></li>
+            <li><a class="" href="../../scaling_performance/scaling_cluster_metrics.html">Scaling Cluster Metrics</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup8">
+        <span id="tgSpan8" class="fa fa-angle-right"></span>CLI Reference
+      </a>
+      <ul id="topicGroup8" class="collapse  list-unstyled">
+            <li><a class="" href="../../cli_reference/index.html">Overview</a></li>
+            <li><a class="" href="../../cli_reference/get_started_cli.html">Get Started with the CLI</a></li>
+            <li><a class="" href="../../cli_reference/manage_cli_profiles.html">Managing CLI Profiles</a></li>
+            <li><a class="" href="../../cli_reference/basic_cli_operations.html">Developer CLI Operations</a></li>
+            <li><a class="" href="../../cli_reference/admin_cli_operations.html">Administrator CLI Operations</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup9">
+        <span id="tgSpan9" class="fa fa-angle-right"></span>Developer Guide
+      </a>
+      <ul id="topicGroup9" class="collapse  list-unstyled">
+            <li><a class="" href="../../dev_guide/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-9-1">
+                <span id="sgSpan-9-1" class="fa fa-caret-right"></span>&nbsp;Application Life Cycle Management
+              </a>
+              <ul id="topicSubGroup-9-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/application_lifecycle/development_process.html">Planning Your Development Process</a></li>
+                  <li><a class="" href="../../dev_guide/application_lifecycle/new_app.html">Creating New Applications</a></li>
+                  <li><a class="" href="../../dev_guide/application_lifecycle/promoting_applications.html">Promoting Applications Across Environments</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../dev_guide/authentication.html">Authentication</a></li>
+            <li><a class="" href="../../dev_guide/authorization.html">Authorization</a></li>
+            <li><a class="" href="../../dev_guide/projects.html">Projects</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-9-5">
+                <span id="sgSpan-9-5" class="fa fa-caret-right"></span>&nbsp;Migrating Applications
+              </a>
+              <ul id="topicSubGroup-9-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/migrating_applications/index.html">Overview</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/database_applications.html">Database Applications</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/web_framework_applications.html">Web Framework Applications</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/quickstart_examples.html">QuickStart Examples</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/continuous_integration_and_deployment.html">Continuous Integration and Deployment</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/web_hooks_action_hooks.html">Webhooks and Action Hooks</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/S2I_tool.html">S2I Tool</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/support_guide.html">Support Guide</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-9-6">
+                <span id="sgSpan-9-6" class="fa fa-caret-right"></span>&nbsp;Application Tutorials
+              </a>
+              <ul id="topicSubGroup-9-6" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/app_tutorials/index.html">Overview</a></li>
+                  <li><a class="" href="../../dev_guide/app_tutorials/quickstarts.html">Quickstart Templates</a></li>
+                  <li><a class="" href="../../dev_guide/app_tutorials/ruby_on_rails.html">Ruby on Rails</a></li>
+                  <li><a class="" href="../../dev_guide/app_tutorials/maven_tutorial.html">Setting Up a Nexus Mirror</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-9-7">
+                <span id="sgSpan-9-7" class="fa fa-caret-right"></span>&nbsp;Builds
+              </a>
+              <ul id="topicSubGroup-9-7" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/builds/index.html">How Builds Work</a></li>
+                  <li><a class="" href="../../dev_guide/builds/basic_build_operations.html">Basic Build Operations</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_inputs.html">Build Inputs</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_output.html">Build Output</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_strategies.html">Build Strategy Options</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_environment.html">Build Environment</a></li>
+                  <li><a class="" href="../../dev_guide/builds/triggering_builds.html">Triggering Builds</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_hooks.html">Build Hooks</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_run_policy.html">Build Run Policy</a></li>
+                  <li><a class="" href="../../dev_guide/builds/advanced_build_operations.html">Advanced Build Operations</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_troubleshooting.html">Troubleshooting</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-9-8">
+                <span id="sgSpan-9-8" class="fa fa-caret-right"></span>&nbsp;Deployments
+              </a>
+              <ul id="topicSubGroup-9-8" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/deployments/how_deployments_work.html">How Deployments Work</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/basic_deployment_operations.html">Basic Deployment Operations</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/deployment_strategies.html">Deployment Strategies</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/advanced_deployment_strategies.html">Advanced Deployment Strategies</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/kubernetes_deployments.html">Kubernetes Deployments Support</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../dev_guide/templates.html">Templates</a></li>
+            <li><a class="" href="../../dev_guide/ssh_environment.html">Opening a Remote Shell to Containers</a></li>
+            <li><a class="" href="../../dev_guide/service_accounts.html">Service Accounts</a></li>
+            <li><a class="" href="../../dev_guide/managing_images.html">Managing Images</a></li>
+            <li><a class="" href="../../dev_guide/compute_resources.html">Quotas and Limit Ranges</a></li>
+            <li><a class="" href="../../dev_guide/pod_preset.html">Injecting Information into Pods Using Pod Presets</a></li>
+            <li><a class="" href="../../dev_guide/getting_traffic_into_cluster.html">Getting Traffic Into The Cluster</a></li>
+            <li><a class="" href="../../dev_guide/routes.html">Routes</a></li>
+            <li><a class="" href="../../dev_guide/integrating_external_services.html">Integrating External Services</a></li>
+            <li><a class="" href="../../dev_guide/secrets.html">Secrets</a></li>
+            <li><a class="" href="../../dev_guide/configmaps.html">ConfigMaps</a></li>
+            <li><a class="" href="../../dev_guide/downward_api.html">Downward API</a></li>
+            <li><a class="" href="../../dev_guide/projected_volumes.html">Projected Volumes</a></li>
+            <li><a class="" href="../../dev_guide/daemonsets.html">Using Daemonsets</a></li>
+            <li><a class="" href="../../dev_guide/pod_autoscaling.html">Pod Autoscaling</a></li>
+            <li><a class="" href="../../dev_guide/volumes.html">Managing Volumes</a></li>
+            <li><a class="" href="../../dev_guide/persistent_volumes.html">Using Persistent Volumes</a></li>
+            <li><a class="" href="../../dev_guide/executing_remote_commands.html">Executing Remote Commands</a></li>
+            <li><a class="" href="../../dev_guide/copy_files_to_container.html">Copying Files</a></li>
+            <li><a class="" href="../../dev_guide/port_forwarding.html">Port Forwarding</a></li>
+            <li><a class="" href="../../dev_guide/shared_memory.html">Shared Memory</a></li>
+            <li><a class="" href="../../dev_guide/application_health.html">Application Health</a></li>
+            <li><a class="" href="../../dev_guide/events.html">Events</a></li>
+            <li><a class="" href="../../dev_guide/environment_variables.html">Managing Environment Variables</a></li>
+            <li><a class="" href="../../dev_guide/jobs.html">Jobs</a></li>
+            <li><a class="" href="../../dev_guide/cron_jobs.html">Cron Jobs</a></li>
+            <li><a class="" href="../../dev_guide/create_from_url.html">Create from URL</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup10">
+        <span id="tgSpan10" class="fa fa-angle-right"></span>Creating Images
+      </a>
+      <ul id="topicGroup10" class="collapse  list-unstyled">
+            <li><a class="" href="../../creating_images/index.html">Overview</a></li>
+            <li><a class="" href="../../creating_images/guidelines.html">Guidelines</a></li>
+            <li><a class="" href="../../creating_images/metadata.html">Image Metadata</a></li>
+            <li><a class="" href="../../creating_images/s2i.html">S2I Requirements</a></li>
+            <li><a class="" href="../../creating_images/s2i_testing.html">Testing S2I Images</a></li>
+            <li><a class="" href="../../creating_images/custom.html">Custom Builder</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup11">
+        <span id="tgSpan11" class="fa fa-angle-down"></span>Using Images
+      </a>
+      <ul id="topicGroup11" class="collapse in list-unstyled">
+            <li><a class="" href="../../using_images/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-11-1">
+                <span id="sgSpan-11-1" class="fa fa-caret-right"></span>&nbsp;Source-to-Image (S2I)
+              </a>
+              <ul id="topicSubGroup-11-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/s2i_images/index.html">Overview</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/nodejs.html">Node.js</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/perl.html">Perl</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/php.html">PHP</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/python.html">Python</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/ruby.html">Ruby</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/wildfly.html">Wildfly</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/customizing_s2i_images.html">Customizing S2I Images</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-11-2">
+                <span id="sgSpan-11-2" class="fa fa-caret-right"></span>&nbsp;Database Images
+              </a>
+              <ul id="topicSubGroup-11-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/db_images/index.html">Overview</a></li>
+                  <li><a class="" href="../../using_images/db_images/mysql.html">MySQL</a></li>
+                  <li><a class="" href="../../using_images/db_images/postgresql.html">PostgreSQL</a></li>
+                  <li><a class="" href="../../using_images/db_images/mongodb.html">MongoDB</a></li>
+                  <li><a class="" href="../../using_images/db_images/mariadb.html">MariaDB</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-11-3">
+                <span id="sgSpan-11-3" class="fa fa-caret-right"></span>&nbsp;Docker Images
+              </a>
+              <ul id="topicSubGroup-11-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/docker_images/index.html">Overview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-11-4">
+                <span id="sgSpan-11-4" class="fa fa-caret-down"></span>&nbsp;Other Images
+              </a>
+              <ul id="topicSubGroup-11-4" class="nav-tertiary list-unstyled collapse in">
+                  <li><a class="" href="../../using_images/other_images/index.html">Overview</a></li>
+                  <li><a class=" active" href="../../using_images/other_images/jenkins.html">Jenkins</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup12">
+        <span id="tgSpan12" class="fa fa-angle-right"></span>REST API Reference
+      </a>
+      <ul id="topicGroup12" class="collapse  list-unstyled">
+            <li><a class="" href="../../rest_api/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-1">
+                <span id="sgSpan-12-1" class="fa fa-caret-right"></span>&nbsp;/api/v1
+              </a>
+              <ul id="topicSubGroup-12-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/api/v1.APIResourceList.html">v1.APIResourceList</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.APIVersions.html">v1.APIVersions</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Binding.html">v1.Binding</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ComponentStatus.html">v1.ComponentStatus</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ConfigMap.html">v1.ConfigMap</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Endpoints.html">v1.Endpoints</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Event.html">v1.Event</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.LimitRange.html">v1.LimitRange</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Namespace.html">v1.Namespace</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Node.html">v1.Node</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.PersistentVolume.html">v1.PersistentVolume</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.PersistentVolumeClaim.html">v1.PersistentVolumeClaim</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Pod.html">v1.Pod</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.PodTemplate.html">v1.PodTemplate</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ReplicationController.html">v1.ReplicationController</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ResourceQuota.html">v1.ResourceQuota</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Secret.html">v1.Secret</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.SecurityContextConstraints.html">v1.SecurityContextConstraints</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Service.html">v1.Service</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ServiceAccount.html">v1.ServiceAccount</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-2">
+                <span id="sgSpan-12-2" class="fa fa-caret-right"></span>&nbsp;/apis/v1
+              </a>
+              <ul id="topicSubGroup-12-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis/v1.APIGroup.html">v1.APIGroup</a></li>
+                  <li><a class="" href="../../rest_api/apis/v1.APIGroupList.html">v1.APIGroupList</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-3">
+                <span id="sgSpan-12-3" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta1.ControllerRevision.html">v1beta1.ControllerRevision</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta1.Deployment.html">v1beta1.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta1.StatefulSet.html">v1beta1.StatefulSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-4">
+                <span id="sgSpan-12-4" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v1
+              </a>
+              <ul id="topicSubGroup-12-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-autoscaling/v1.HorizontalPodAutoscaler.html">v1.HorizontalPodAutoscaler</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-5">
+                <span id="sgSpan-12-5" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1
+              </a>
+              <ul id="topicSubGroup-12-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-batch/v1.Job.html">v1.Job</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-6">
+                <span id="sgSpan-12-6" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v2alpha1
+              </a>
+              <ul id="topicSubGroup-12-6" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-batch/v2alpha1.CronJob.html">v2alpha1.CronJob</a></li>
+                  <li><a class="" href="../../rest_api/apis-batch/v2alpha1.ScheduledJob.html">v2alpha1.ScheduledJob</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-7">
+                <span id="sgSpan-12-7" class="fa fa-caret-right"></span>&nbsp;/apis/extensions/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-7" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.DaemonSet.html">v1beta1.DaemonSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.Deployment.html">v1beta1.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.Ingress.html">v1beta1.Ingress</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.NetworkPolicy.html">v1beta1.NetworkPolicy</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.PodSecurityPolicy.html">v1beta1.PodSecurityPolicy</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.ReplicaSet.html">v1beta1.ReplicaSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.ThirdPartyResource.html">v1beta1.ThirdPartyResource</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-8">
+                <span id="sgSpan-12-8" class="fa fa-caret-right"></span>&nbsp;/apis/policy/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-8" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-policy/v1beta1.PodDisruptionBudget.html">v1beta1.PodDisruptionBudget</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-9">
+                <span id="sgSpan-12-9" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-12-9" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authentication.k8s.io/v1.TokenReview.html">v1.TokenReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-10">
+                <span id="sgSpan-12-10" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-10" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authentication.k8s.io/v1beta1.TokenReview.html">v1beta1.TokenReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-11">
+                <span id="sgSpan-12-11" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-12-11" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.SelfSubjectAccessReview.html">v1.SelfSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.SubjectAccessReview.html">v1.SubjectAccessReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-12">
+                <span id="sgSpan-12-12" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-12" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.LocalSubjectAccessReview.html">v1beta1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectAccessReview.html">v1beta1.SelfSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SubjectAccessReview.html">v1beta1.SubjectAccessReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-13">
+                <span id="sgSpan-12-13" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-13" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRole.html">v1beta1.ClusterRole</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRoleBinding.html">v1beta1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.Role.html">v1beta1.Role</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.RoleBinding.html">v1beta1.RoleBinding</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-14">
+                <span id="sgSpan-12-14" class="fa fa-caret-right"></span>&nbsp;/apis/certificates.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-14" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-certificates.k8s.io/v1beta1.CertificateSigningRequest.html">v1beta1.CertificateSigningRequest</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-15">
+                <span id="sgSpan-12-15" class="fa fa-caret-right"></span>&nbsp;/apis/networking.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-12-15" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-networking.k8s.io/v1.NetworkPolicy.html">v1.NetworkPolicy</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-16">
+                <span id="sgSpan-12-16" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-12-16" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-storage.k8s.io/v1.StorageClass.html">v1.StorageClass</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-17">
+                <span id="sgSpan-12-17" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-17" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-storage.k8s.io/v1beta1.StorageClass.html">v1beta1.StorageClass</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-18">
+                <span id="sgSpan-12-18" class="fa fa-caret-right"></span>&nbsp;/apis/apps.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-18" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apps.openshift.io/v1.DeploymentConfig.html">v1.DeploymentConfig</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-19">
+                <span id="sgSpan-12-19" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-19" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.ClusterRole.html">v1.ClusterRole</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.ClusterRoleBinding.html">v1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.LocalResourceAccessReview.html">v1.LocalResourceAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.ResourceAccessReview.html">v1.ResourceAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.Role.html">v1.Role</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.RoleBinding.html">v1.RoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.RoleBindingRestriction.html">v1.RoleBindingRestriction</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.SelfSubjectRulesReview.html">v1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.SubjectAccessReview.html">v1.SubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.SubjectRulesReview.html">v1.SubjectRulesReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-20">
+                <span id="sgSpan-12-20" class="fa fa-caret-right"></span>&nbsp;/apis/build.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-20" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-build.openshift.io/v1.Build.html">v1.Build</a></li>
+                  <li><a class="" href="../../rest_api/apis-build.openshift.io/v1.BuildConfig.html">v1.BuildConfig</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-21">
+                <span id="sgSpan-12-21" class="fa fa-caret-right"></span>&nbsp;/apis/image.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-21" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.Image.html">v1.Image</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageSignature.html">v1.ImageSignature</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageStream.html">v1.ImageStream</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageStreamImage.html">v1.ImageStreamImage</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageStreamImport.html">v1.ImageStreamImport</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageStreamMapping.html">v1.ImageStreamMapping</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageStreamTag.html">v1.ImageStreamTag</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-22">
+                <span id="sgSpan-12-22" class="fa fa-caret-right"></span>&nbsp;/apis/network.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-22" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-network.openshift.io/v1.ClusterNetwork.html">v1.ClusterNetwork</a></li>
+                  <li><a class="" href="../../rest_api/apis-network.openshift.io/v1.EgressNetworkPolicy.html">v1.EgressNetworkPolicy</a></li>
+                  <li><a class="" href="../../rest_api/apis-network.openshift.io/v1.HostSubnet.html">v1.HostSubnet</a></li>
+                  <li><a class="" href="../../rest_api/apis-network.openshift.io/v1.NetNamespace.html">v1.NetNamespace</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-23">
+                <span id="sgSpan-12-23" class="fa fa-caret-right"></span>&nbsp;/apis/oauth.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-23" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-oauth.openshift.io/v1.OAuthAccessToken.html">v1.OAuthAccessToken</a></li>
+                  <li><a class="" href="../../rest_api/apis-oauth.openshift.io/v1.OAuthAuthorizeToken.html">v1.OAuthAuthorizeToken</a></li>
+                  <li><a class="" href="../../rest_api/apis-oauth.openshift.io/v1.OAuthClient.html">v1.OAuthClient</a></li>
+                  <li><a class="" href="../../rest_api/apis-oauth.openshift.io/v1.OAuthClientAuthorization.html">v1.OAuthClientAuthorization</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-24">
+                <span id="sgSpan-12-24" class="fa fa-caret-right"></span>&nbsp;/apis/project.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-24" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-project.openshift.io/v1.Project.html">v1.Project</a></li>
+                  <li><a class="" href="../../rest_api/apis-project.openshift.io/v1.ProjectRequest.html">v1.ProjectRequest</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-25">
+                <span id="sgSpan-12-25" class="fa fa-caret-right"></span>&nbsp;/apis/quota.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-25" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-quota.openshift.io/v1.AppliedClusterResourceQuota.html">v1.AppliedClusterResourceQuota</a></li>
+                  <li><a class="" href="../../rest_api/apis-quota.openshift.io/v1.ClusterResourceQuota.html">v1.ClusterResourceQuota</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-26">
+                <span id="sgSpan-12-26" class="fa fa-caret-right"></span>&nbsp;/apis/route.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-26" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-route.openshift.io/v1.Route.html">v1.Route</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-27">
+                <span id="sgSpan-12-27" class="fa fa-caret-right"></span>&nbsp;/apis/security.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-27" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-security.openshift.io/v1.PodSecurityPolicyReview.html">v1.PodSecurityPolicyReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-security.openshift.io/v1.PodSecurityPolicySelfSubjectReview.html">v1.PodSecurityPolicySelfSubjectReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-security.openshift.io/v1.PodSecurityPolicySubjectReview.html">v1.PodSecurityPolicySubjectReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-security.openshift.io/v1.SecurityContextConstraints.html">v1.SecurityContextConstraints</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-28">
+                <span id="sgSpan-12-28" class="fa fa-caret-right"></span>&nbsp;/apis/template.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-28" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-template.openshift.io/v1.BrokerTemplateInstance.html">v1.BrokerTemplateInstance</a></li>
+                  <li><a class="" href="../../rest_api/apis-template.openshift.io/v1.Template.html">v1.Template</a></li>
+                  <li><a class="" href="../../rest_api/apis-template.openshift.io/v1.TemplateInstance.html">v1.TemplateInstance</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-29">
+                <span id="sgSpan-12-29" class="fa fa-caret-right"></span>&nbsp;/apis/user.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-29" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-user.openshift.io/v1.Group.html">v1.Group</a></li>
+                  <li><a class="" href="../../rest_api/apis-user.openshift.io/v1.Identity.html">v1.Identity</a></li>
+                  <li><a class="" href="../../rest_api/apis-user.openshift.io/v1.User.html">v1.User</a></li>
+                  <li><a class="" href="../../rest_api/apis-user.openshift.io/v1.UserIdentityMapping.html">v1.UserIdentityMapping</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-30">
+                <span id="sgSpan-12-30" class="fa fa-caret-right"></span>&nbsp;/oapi/v1
+              </a>
+              <ul id="topicSubGroup-12-30" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/oapi/v1.AppliedClusterResourceQuota.html">v1.AppliedClusterResourceQuota</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Build.html">v1.Build</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.BuildConfig.html">v1.BuildConfig</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ClusterNetwork.html">v1.ClusterNetwork</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ClusterResourceQuota.html">v1.ClusterResourceQuota</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ClusterRole.html">v1.ClusterRole</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ClusterRoleBinding.html">v1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.DeploymentConfig.html">v1.DeploymentConfig</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.DeploymentConfigRollback.html">v1.DeploymentConfigRollback</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.EgressNetworkPolicy.html">v1.EgressNetworkPolicy</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Group.html">v1.Group</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.HostSubnet.html">v1.HostSubnet</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Identity.html">v1.Identity</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Image.html">v1.Image</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageSignature.html">v1.ImageSignature</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageStream.html">v1.ImageStream</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageStreamImage.html">v1.ImageStreamImage</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageStreamImport.html">v1.ImageStreamImport</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageStreamMapping.html">v1.ImageStreamMapping</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageStreamTag.html">v1.ImageStreamTag</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.LocalResourceAccessReview.html">v1.LocalResourceAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.NetNamespace.html">v1.NetNamespace</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.OAuthAccessToken.html">v1.OAuthAccessToken</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.OAuthAuthorizeToken.html">v1.OAuthAuthorizeToken</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.OAuthClient.html">v1.OAuthClient</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.OAuthClientAuthorization.html">v1.OAuthClientAuthorization</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.PodSecurityPolicyReview.html">v1.PodSecurityPolicyReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.PodSecurityPolicySelfSubjectReview.html">v1.PodSecurityPolicySelfSubjectReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.PodSecurityPolicySubjectReview.html">v1.PodSecurityPolicySubjectReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ProcessedTemplate.html">v1.ProcessedTemplate</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Project.html">v1.Project</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ProjectRequest.html">v1.ProjectRequest</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ResourceAccessReview.html">v1.ResourceAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Role.html">v1.Role</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.RoleBinding.html">v1.RoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.RoleBindingRestriction.html">v1.RoleBindingRestriction</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Route.html">v1.Route</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.SelfSubjectRulesReview.html">v1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.SubjectAccessReview.html">v1.SubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.SubjectRulesReview.html">v1.SubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Template.html">v1.Template</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.User.html">v1.User</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.UserIdentityMapping.html">v1.UserIdentityMapping</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+</ul>
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-9 main">
+        <div class="page-header">
+          <h1>Jenkins</h1>
+        </div>
+        <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#overview">Overview</a></li>
+<li><a href="#jenkins-version">Versions</a></li>
+<li><a href="#jenkins-images">Images</a></li>
+<li><a href="#jenkins-configuration-and-usage">Configuration and Usage</a>
+<ul class="sectlevel2">
+<li><a href="#jenkins-initializing-jenkins">Initializing Jenkins</a></li>
+<li><a href="#jenkins-environment-variables">Environment Variables</a></li>
+<li><a href="#jenkins-cross-project-access">Cross Project Access</a></li>
+<li><a href="#jenkins-volume-mount-points">Volume Mount Points</a></li>
+</ul>
+</li>
+<li><a href="#jenkins-creating-jenkins-service-from-template">Creating a Jenkins Service from a Template</a></li>
+<li><a href="#jenkins-as-s2i-builder">Using Jenkins as a Source-To-Image builder</a></li>
+<li><a href="#using-the-jenkins-kubernetes-plug-in-to-run-jobs">Using the Jenkins Kubernetes Plug-in to Run Jobs</a></li>
+<li><a href="#tutorial">Tutorial</a></li>
+<li><a href="#pipeline-plug-in">OpenShift Origin Pipeline Plug-in</a></li>
+<li><a href="#client-plugin-in">OpenShift Origin Client Plug-in</a></li>
+<li><a href="#sync-plug-in">OpenShift Origin Sync Plug-in</a></li>
+<li><a href="#kubernetes-plug-in">Kubernetes Plug-in</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="anchor" href="#overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift Origin provides a container image for running Jenkins. This image
+provides a Jenkins server instance, which can be used to set up a basic flow for
+continuous testing, integration, and delivery.</p>
+</div>
+<div class="paragraph">
+<p>This image also includes a sample Jenkins job, which triggers a new build of a
+<code><strong>BuildConfig</strong></code> defined in OpenShift Origin, tests the output of that build, and
+then on successful build, retags the output to indicate the build is ready for
+production.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jenkins-version"><a class="anchor" href="#jenkins-version"></a>Versions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift Origin follows the <a href="https://jenkins.io/changelog-stable/">LTS</a> releases of Jenkins.
+Currently, OpenShift Origin provides versions 1.x and 2.x.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jenkins-images"><a class="anchor" href="#jenkins-images"></a>Images</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These images come in two flavors, depending on your needs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>RHEL 7</p>
+</li>
+<li>
+<p>CentOS 7</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>RHEL 7 Based Images</strong></p>
+</div>
+<div class="paragraph">
+<p>The RHEL 7 images are available through the Red Hat Registry:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ docker pull registry.access.redhat.com/openshift3/jenkins-1-rhel7
+$ docker pull registry.access.redhat.com/openshift3/jenkins-2-rhel7</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>CentOS 7 Based Images</strong></p>
+</div>
+<div class="paragraph">
+<p>This image is available on Docker Hub:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ docker pull openshift/jenkins-1-centos7
+$ docker pull openshift/jenkins-2-centos7</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To use these images, you can either access them directly from these registries
+or push them into your OpenShift Origin Docker registry. Additionally, you can
+create an ImageStream that points to the image, either in your Docker registry
+or at the external location. Your OpenShift Origin resources can then reference
+the ImageStream. You can find
+<a href="https://github.com/openshift/origin/tree/master/examples/image-streams">example</a>
+ImageStream definitions for all the provided OpenShift Origin images.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jenkins-configuration-and-usage"><a class="anchor" href="#jenkins-configuration-and-usage"></a>Configuration and Usage</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="jenkins-initializing-jenkins"><a class="anchor" href="#jenkins-initializing-jenkins"></a>Initializing Jenkins</h3>
+<div class="paragraph">
+<p>You can manage Jenkins authentication in two ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>OpenShift Origin OAuth authentication provided by the OpenShift Login plug-in.</p>
+</li>
+<li>
+<p>Standard authentication provided by Jenkins</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="jenkins-openshift-oauth-authentication"><a class="anchor" href="#jenkins-openshift-oauth-authentication"></a>OpenShift Origin OAuth authentication</h4>
+<div class="paragraph">
+<p><a href="../../architecture/additional_concepts/authentication.html#oauth">OAuth
+authentication</a> is activated by configuring the <code><strong>Configure Global Security</strong></code>
+panel in the Jenkins UI, or by setting the <code><strong>OPENSHIFT_ENABLE_OAUTH</strong></code>
+environment variable on the Jenkins <code><strong>Deployment Config</strong></code> to anything other than
+<code>false</code>. This activates the OpenShift Login plug-in, which retrieves the
+configuration information from pod data or by interacting with the
+OpenShift Origin API server.</p>
+</div>
+<div class="paragraph">
+<p>Valid credentials are controlled by the OpenShift Origin identity provider.
+For example, if <code>Allow All</code> is the default identity provider, you can provide
+any non-empty string for both the user name and password.</p>
+</div>
+<div class="paragraph">
+<p>Jenkins supports both
+<a href="https://github.com/openshift/jenkins-openshift-login-plugin/blob/master/README.md#browser-access">browser</a>
+and
+<a href="https://github.com/openshift/jenkins-openshift-login-plugin/blob/master/README.md#non-browser-access">non-browser</a>
+access.</p>
+</div>
+<div class="paragraph">
+<p>Valid users are automatically added to the Jenkins authorization matrix at log
+in, where OpenShift Origin <code><strong>Roles</strong></code> dictate the specific Jenkins permissions the
+user will have.</p>
+</div>
+<div class="paragraph">
+<p>Users with the <code>admin</code> role will have the traditional Jenkins administrative
+user permissions. Users with the <code>edit</code> or <code>view</code> role will have progressively
+less permissions. See the
+<a href="https://github.com/openshift/jenkins#jenkins-admin-user">Jenkins image source
+repository README</a> for the specifics on the OpenShift roles to Jenkins
+permissions mappings.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>admin</code> user that is pre-populated in the OpenShift Origin Jenkins image with
+administrative privileges will not be given those privileges when
+OpenShift Origin OAuth is
+used, unless the OpenShift Origin cluster administrator
+explicitly defines that user in the OpenShift Origin identity provider and
+assigns the <code>admin</code> role to the user.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Jenkins' users permissions can be changed after the users are initially
+established. The OpenShift Login plug-in polls the OpenShift Origin API server
+for permissions and updates the permissions stored in Jenkins for each user with
+the permissions retrieved from OpenShift Origin. If the Jenkins UI is used to
+update permissions for a Jenkins user, the permission changes are overwritten
+the next time the plug-in polls OpenShift Origin.</p>
+</div>
+<div class="paragraph">
+<p>You can control how often the polling occurs with the
+<code>OPENSHIFT_PERMISSIONS_POLL_INTERVAL</code> environment variable. The default polling
+interval is five minutes.</p>
+</div>
+<div class="paragraph">
+<p>The easiest way to create a new Jenkins service using OAuth authentication is to
+<a href="#jenkins-creating-jenkins-service-from-template">use a template</a> as described
+below.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="jenkins-jenkins-standard-authentication"><a class="anchor" href="#jenkins-jenkins-standard-authentication"></a>Jenkins Standard Authentication</h4>
+<div class="paragraph">
+<p>Jenkins authentication is used by default if the image is run directly, without
+using a template.</p>
+</div>
+<div class="paragraph">
+<p>The first time Jenkins starts, the configuration is created along with the
+administrator user and password. The default user credentials are <code><strong>admin</strong></code> and
+<code><strong>password</strong></code>. Configure the default password by setting the <code><strong>JENKINS_PASSWORD</strong></code>
+environment variable when using (and only when using) standard Jenkins
+authentication.</p>
+</div>
+<div class="paragraph">
+<p>To create a new Jenkins application using standard Jenkins authentication:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc new-app -e \
+    JENKINS_PASSWORD=&lt;password&gt; \
+    openshift/jenkins-1-centos7</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jenkins-environment-variables"><a class="anchor" href="#jenkins-environment-variables"></a>Environment Variables</h3>
+<div class="paragraph">
+<p>The Jenkins server can be configured with the following environment variables:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Jenkins Environment Variables</caption>
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code><strong>JENKINS_PASSWORD</strong></code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>The password for the <code><strong>admin</strong></code> user when using standard Jenkins authentication.
+Not applicable when using OpenShift Origin OAuth authentication.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code><strong>OPENSHIFT_ENABLE_OAUTH</strong></code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Determines whether the OpenShift Login plug-in manages authentication when
+logging into Jenkins. Enabled when set to any non-empty value other than
+"false".</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code><strong>OPENSHIFT_PERMISSIONS_POLL_INTERVAL</strong></code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Specifies in seconds how often the OpenShift Login plug-in polls OpenShift Origin
+for the permissions associated with each user defined in Jenkins.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code><strong>OVERRIDE_PV_CONFIG_WITH_IMAGE_CONFIG</strong></code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>When running this image with an OpenShift Origin persistent volume for the Jenkins
+config directory, the transfer of configuration from the image to the persistent
+volume is only done the first startup of the image as the persistent volume is
+assigned by the persistent volume claim creation. If you create a custom image
+that extends this image and updates configuration in the custom image after
+the initial startup, by default it will not be copied over, unless you set this
+environment variable to some non-empty value.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code><strong>OVERRIDE_PV_PLUGINS_WITH_IMAGE_PLUGINS</strong></code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>When running this image with an OpenShift Origin persistent volume for the Jenkins
+config directory, the transfer of plugins from the image to the persistent
+volume is only done the first startup of the image as the persistent volume is
+assigned by the persistent volume claim creation. If you create a custom image
+that extends this image and updates plugins in the custom image after
+the initial startup, by default they will not be copied over, unless you set this
+environment variable to some non-empty value.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="jenkins-cross-project-access"><a class="anchor" href="#jenkins-cross-project-access"></a>Cross Project Access</h3>
+<div class="paragraph">
+<p>If you are going to run Jenkins somewhere other than as a deployment within your
+same project, you will need to provide an access token to Jenkins to access your
+project.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Identify the secret for the service account that has appropriate permissions
+to access the project Jenkins needs to access:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc describe serviceaccount default
+Name:       default
+Labels:     &lt;none&gt;
+Secrets:    {  default-token-uyswp    }
+            {  default-dockercfg-xcr3d    }
+Tokens:     default-token-izv1u
+            default-token-uyswp</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case the secret is named <code>default-token-uyswp</code></p>
+</div>
+</li>
+<li>
+<p>Retrieve the token from the secret:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc describe secret &lt;secret name from above&gt; # e.g. default-token-izv1u
+Name:       default-token-izv1u
+Labels:     &lt;none&gt;
+Annotations:    kubernetes.io/service-account.name=default,kubernetes.io/service-account.uid=32f5b661-2a8f-11e5-9528-3c970e3bf0b7
+Type:   kubernetes.io/service-account-token
+Data
+====
+ca.crt: 1066 bytes
+token:  eyJhbGc..&lt;content cut&gt;....wRA</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The token field contains the token value Jenkins needs to access the project.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jenkins-volume-mount-points"><a class="anchor" href="#jenkins-volume-mount-points"></a>Volume Mount Points</h3>
+<div class="paragraph">
+<p>The Jenkins image can be run with mounted volumes to enable persistent storage
+for the configuration:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><em>/var/lib/jenkins</em></strong> - This is the data directory where Jenkins stores configuration files including job definitions.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jenkins-creating-jenkins-service-from-template"><a class="anchor" href="#jenkins-creating-jenkins-service-from-template"></a>Creating a Jenkins Service from a Template</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="../../dev_guide/templates.html#dev-guide-templates">Templates</a> provide parameter fields to
+define all the environment variables (password) with predefined defaults.
+OpenShift Origin provides templates to make creating a new Jenkins service easy. The
+Jenkins templates should have been registered in the default <strong>openshift</strong> project
+by your cluster administrator during the initial cluster setup.
+See <a href="../../install_config/imagestreams_templates.html#install-config-imagestreams-templates">Loading the Default Image Streams and Templates</a>
+for more details, if required.</p>
+</div>
+<div class="paragraph">
+<p>The two available templates both define
+a <a href="../../architecture/core_concepts/deployments.html#deployments-and-deployment-configurations">deployment
+configuration</a> and a
+<a href="../../architecture/core_concepts/pods_and_services.html#services">service</a>.
+The templates differ in their storage strategy, which affects whether or not
+the Jenkins content persists across a pod restart.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>A pod may be restarted when it is moved to another node, or when an update of
+the deployment configuration triggers a redeployment.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>jenkins-ephemeral</code> uses ephemeral storage. On pod restart, all data is lost.
+This template is useful for development or testing only.</p>
+</li>
+<li>
+<p><code>jenkins-persistent</code> uses a persistent volume store. Data survives a pod
+restart.
+To use a persistent volume store, the cluster administrator must
+define a persistent volume pool in the OpenShift Origin deployment.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Once you have selected which template you want, you
+must <a href="../../dev_guide/templates.html#dev-guide-templates">instantiate</a> the
+template to be able to use Jenkins:</p>
+</div>
+<div class="olist arabic">
+<div class="title">Creating a New Jenkins Service</div>
+<ol class="arabic">
+<li>
+<p>Ensure the
+<a href="../../install_config/imagestreams_templates.html#install-config-imagestreams-templates">the default image streams and templates</a>
+are already installed.</p>
+</li>
+<li>
+<p>Create a new Jenkins application using:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>A persistent volume:</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc new-app jenkins-persistent</pre>
+</div>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Or an <code>EmptyDir</code> type volume (where configuration does not persist across pod restarts):</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc new-app jenkins-ephemeral</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you instantiate the template against releases prior to v3.4 of
+OpenShift Origin, standard Jenkins authentication is used, and the default
+<code>admin</code> account will exist with password <code>password</code>. See
+<a href="../../using_images/other_images/jenkins.html#jenkins-jenkins-standard-authentication">Jenkins
+Standard Authentication</a> for details about changing this password.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jenkins-as-s2i-builder"><a class="anchor" href="#jenkins-as-s2i-builder"></a>Using Jenkins as a Source-To-Image builder</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To customize the official OpenShift Origin Jenkins image, you have two options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use Docker layering.</p>
+</li>
+<li>
+<p>Use the image as a Source-To-Image builder, described here.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can use <a href="../../architecture/core_concepts/builds_and_image_streams.html#source-build">S2I</a>
+to copy your custom Jenkins Jobs definitions, additional
+plug-ins or replace the provided <strong><em>config.xml</em></strong> file with your own, custom, configuration.</p>
+</div>
+<div class="paragraph">
+<p>In order to include your modifications in the Jenkins image, you need to have a Git
+repository with the following directory structure:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><strong><em>plugins</em></strong></dt>
+<dd>
+<p>This directory contains those binary Jenkins plug-ins you want to copy into Jenkins.</p>
+</dd>
+<dt class="hdlist1"><strong><em>plugins.txt</em></strong></dt>
+<dd>
+<p>This file lists the plug-ins you want to install:</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">pluginId:pluginVersion</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><strong><em>configuration/jobs</em></strong></dt>
+<dd>
+<p>This directory contains the Jenkins job definitions.</p>
+</dd>
+<dt class="hdlist1"><strong><em>configuration/config.xml</em></strong></dt>
+<dd>
+<p>This file contains your custom Jenkins configuration.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The contents of the <strong><em>configuration/</em></strong> directory will be copied
+into the <strong><em>/var/lib/jenkins/</em></strong> directory, so you can also include
+additional files, such as <strong><em>credentials.xml</em></strong>, there.</p>
+</div>
+<div class="paragraph">
+<p>The following is an example build configuration that customizes the Jenkins
+image in OpenShift Origin:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">v1</span></span>
+<span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">BuildConfig</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">custom-jenkins-build</span></span>
+<span style="color:#606">spec</span>:
+  <span style="color:#606">source</span>:                       <i class="conum" data-value="1"></i><b>(1)</b>
+    <span style="color:#606">git</span>:
+      <span style="color:#606">uri</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">https://github.com/custom/repository</span></span>
+    <span style="color:#606">type</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">Git</span></span>
+  <span style="color:#606">strategy</span>:                     <i class="conum" data-value="2"></i><b>(2)</b>
+    <span style="color:#606">sourceStrategy</span>:
+      <span style="color:#606">from</span>:
+        <span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ImageStreamTag</span></span>
+        <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">jenkins:latest</span></span>
+        <span style="color:#606">namespace</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">openshift</span></span>
+    <span style="color:#606">type</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">Source</span></span>
+  <span style="color:#606">output</span>:                       <i class="conum" data-value="3"></i><b>(3)</b>
+    <span style="color:#606">to</span>:
+      <span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ImageStreamTag</span></span>
+      <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">custom-jenkins:latest</span></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code>source</code> field defines the source Git repository
+with the layout described above.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <code>strategy</code> field defines the original Jenkins image to use
+as a source image for the build.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The <code>output</code> field defines the resulting, customized Jenkins image
+you can use in deployment configuration instead of the official Jenkins image.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using-the-jenkins-kubernetes-plug-in-to-run-jobs"><a class="anchor" href="#using-the-jenkins-kubernetes-plug-in-to-run-jobs"></a>Using the Jenkins Kubernetes Plug-in to Run Jobs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The official OpenShift Origin Jenkins image includes the pre-installed
+<a href="https://wiki.jenkins-ci.org/display/JENKINS/Kubernetes+Plugin">Kubernetes
+plug-in</a> that allows Jenkins slaves to be dynamically provisioned on multiple
+container hosts using Kubernetes and OpenShift Origin.</p>
+</div>
+<div class="paragraph">
+<p>To use the Kubernetes plug-in, OpenShift Origin provides three images
+suitable for use as Jenkins slaves: the <strong><em>Base</em></strong>, <strong><em>Maven</em></strong>, and <strong><em>Node.js</em></strong> images.</p>
+</div>
+<div class="paragraph">
+<p>The first is a <a href="https://github.com/openshift/jenkins/tree/master/slave-base">base image</a> for Jenkins slaves:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>It pulls in both the required tools (headless Java, the Jenkins JNLP client) and the useful ones
+(including git, tar, zip, and nss among others).</p>
+</li>
+<li>
+<p>It establishes the JNLP slave agent as the entrypoint.</p>
+</li>
+<li>
+<p>It includes the oc client tooling for invoking command line operations from within Jenkins jobs, and</p>
+</li>
+<li>
+<p>It provides Dockerfiles for both CentOS and RHEL images.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Two additional images that extend the base image are also provided:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/openshift/jenkins/tree/master/slave-maven">Maven</a></p>
+</li>
+<li>
+<p><a href="https://github.com/openshift/jenkins/tree/master/slave-nodejs">Node.js</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Both the Maven and Node.js slave images are configured as Kubernetes Pod
+Template images within the OpenShift Origin Jenkins image&#8217;s configuration for the
+Kubernetes plug-in. That configuration includes labels for each of the images
+that can be applied to any of your Jenkins jobs under their "Restrict where this
+project can be run" setting. If the label is applied, execution of the given job
+will be done under an OpenShift Origin pod running the respective slave image.</p>
+</div>
+<div class="paragraph">
+<p>The Maven and Node.js Jenkins slave images provide Dockerfiles for both CentOS
+and RHEL that you can reference when building new slave images. Also note the
+<code>contrib</code> and <code>contrib/bin</code> subdirectories. They allow for the insertion of
+configuration files and executable scripts for your image.</p>
+</div>
+<div class="paragraph">
+<p>The Jenkins image also provides auto-discovery and auto-configuration of slave
+images for the Kubernetes plug-in. With the
+<a href="https://github.com/openshift/jenkins-sync-plugin">OpenShift Sync plug-in</a>,
+the Jenkins image on Jenkins start-up searches within the project that it is
+running, or the projects specifically listed in the plug-in&#8217;s configuration for
+the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Image streams that have the label <code>role</code> set to <code>jenkins-slave</code>.</p>
+</li>
+<li>
+<p>Image stream tags that have the annotation <code>role</code> set to <code>jenkins-slave</code>.</p>
+</li>
+<li>
+<p>ConfigMaps that have the label <code>role</code> set to <code>jenkins-slave</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When it finds an image stream with the appropriate label, or image stream tag
+with the appropriate  annotation, it generates the corresponding Kubernetes
+plug-in configuration so you can assign your Jenkins jobs to run in a pod
+running the container image provided by the image stream.</p>
+</div>
+<div class="paragraph">
+<p>The name and image references of the image stream or image stream tag are mapped
+to the name and image fields in the Kubernetes plug-in pod template. You can
+control the label field of the Kubernetes plug-in pod template by setting an
+annotation on the image stream or image stream tag object with the key
+<code>slave-label</code>. Otherwise, the name is used as the label.</p>
+</div>
+<div class="paragraph">
+<p>When it finds a ConfigMap with the appropriate label, it assumes that any
+values in the key-value data payload of the ConfigMap contains XML consistent
+with the config format for Jenkins and the Kubernetes plug-in pod templates. A
+key differentiator to note when using ConfigMaps, instead of image streams or
+image stream tags, is that you can control all the various fields of the
+Kubernetes plug-in pod template.</p>
+</div>
+<div class="paragraph">
+<p>The following is an example ConfigMap:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">v1</span></span>
+<span style="color:#606">items</span>:
+- <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">apiVersion: v1</span></span>
+  <span style="color:#606">data</span>:
+    <span style="color:#606">template1</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">|-</span><span style="color:#D20">
+      &lt;org.csanchez.jenkins.plugins.kubernetes.PodTemplate&gt;
+        &lt;inheritFrom&gt;&lt;/inheritFrom&gt;
+        &lt;name&gt;template1&lt;/name&gt;
+        &lt;instanceCap&gt;2147483647&lt;/instanceCap&gt;
+        &lt;idleMinutes&gt;0&lt;/idleMinutes&gt;
+        &lt;label&gt;template1&lt;/label&gt;
+        &lt;serviceAccount&gt;jenkins&lt;/serviceAccount&gt;
+        &lt;nodeSelector&gt;&lt;/nodeSelector&gt;
+        &lt;volumes/&gt;
+        &lt;containers&gt;
+          &lt;org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate&gt;
+            &lt;name&gt;jnlp&lt;/name&gt;
+            &lt;image&gt;openshift/jenkins-slave-maven-centos7&lt;/image&gt;
+            &lt;privileged&gt;false&lt;/privileged&gt;
+            &lt;alwaysPullImage&gt;false&lt;/alwaysPullImage&gt;
+            &lt;workingDir&gt;/tmp&lt;/workingDir&gt;
+            &lt;command&gt;&lt;/command&gt;
+            &lt;args&gt;${computer.jnlpmac} ${computer.name}&lt;/args&gt;
+            &lt;ttyEnabled&gt;false&lt;/ttyEnabled&gt;
+            &lt;resourceRequestCpu&gt;&lt;/resourceRequestCpu&gt;
+            &lt;resourceRequestMemory&gt;&lt;/resourceRequestMemory&gt;
+            &lt;resourceLimitCpu&gt;&lt;/resourceLimitCpu&gt;
+            &lt;resourceLimitMemory&gt;&lt;/resourceLimitMemory&gt;
+            &lt;envVars/&gt;
+          &lt;/org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate&gt;
+        &lt;/containers&gt;
+        &lt;envVars/&gt;
+        &lt;annotations/&gt;
+        &lt;imagePullSecrets/&gt;
+        &lt;nodeProperties/&gt;
+      &lt;/org.csanchez.jenkins.plugins.kubernetes.PodTemplate&gt;</span></span>
+    <span style="color:#606">template2</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">|-</span><span style="color:#D20">
+      &lt;org.csanchez.jenkins.plugins.kubernetes.PodTemplate&gt;
+        &lt;inheritFrom&gt;&lt;/inheritFrom&gt;
+        &lt;name&gt;template2&lt;/name&gt;
+        &lt;instanceCap&gt;2147483647&lt;/instanceCap&gt;
+        &lt;idleMinutes&gt;0&lt;/idleMinutes&gt;
+        &lt;label&gt;template2&lt;/label&gt;
+        &lt;serviceAccount&gt;jenkins&lt;/serviceAccount&gt;
+        &lt;nodeSelector&gt;&lt;/nodeSelector&gt;
+        &lt;volumes/&gt;
+        &lt;containers&gt;
+          &lt;org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate&gt;
+            &lt;name&gt;jnlp&lt;/name&gt;
+            &lt;image&gt;openshift/jenkins-slave-maven-centos7&lt;/image&gt;
+            &lt;privileged&gt;false&lt;/privileged&gt;
+            &lt;alwaysPullImage&gt;false&lt;/alwaysPullImage&gt;
+            &lt;workingDir&gt;/tmp&lt;/workingDir&gt;
+            &lt;command&gt;&lt;/command&gt;
+            &lt;args&gt;${computer.jnlpmac} ${computer.name}&lt;/args&gt;
+            &lt;ttyEnabled&gt;false&lt;/ttyEnabled&gt;
+            &lt;resourceRequestCpu&gt;&lt;/resourceRequestCpu&gt;
+            &lt;resourceRequestMemory&gt;&lt;/resourceRequestMemory&gt;
+            &lt;resourceLimitCpu&gt;&lt;/resourceLimitCpu&gt;
+            &lt;resourceLimitMemory&gt;&lt;/resourceLimitMemory&gt;
+            &lt;envVars/&gt;
+          &lt;/org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate&gt;
+        &lt;/containers&gt;
+        &lt;envVars/&gt;
+        &lt;annotations/&gt;
+        &lt;imagePullSecrets/&gt;
+        &lt;nodeProperties/&gt;
+      &lt;/org.csanchez.jenkins.plugins.kubernetes.PodTemplate&gt;</span></span>
+  <span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ConfigMap</span></span>
+  <span style="color:#606">metadata</span>:
+    <span style="color:#606">labels</span>:
+      <span style="color:#606">role</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">jenkins-slave</span></span>
+    <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">jenkins-slave</span></span>
+    <span style="color:#606">namespace</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">myproject</span></span>
+<span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">List</span></span>
+<span style="color:#606">metadata</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">{}</span></span>
+<span style="color:#606">resourceVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>
+<span style="color:#606">selfLink</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After startup, the
+<a href="https://github.com/openshift/jenkins-sync-plugin">OpenShift Sync plug-in</a>
+monitors the API server of OpenShift Origin for updates to <code>ImageStreams</code>,
+<code>ImageStreamTags</code>, and <code>ConfigMaps</code> and adjusts the configuration of the
+Kubernetes plug-in based on the presence or absence of the noted labels and
+annotations.</p>
+</div>
+<div class="paragraph">
+<p>To use a container image as a Jenkins slave, the image must run the slave agent as
+an entrypoint. For more details about this, refer to the official
+<a href="https://wiki.jenkins-ci.org/display/JENKINS/Distributed+builds#Distributedbuilds-Launchslaveagentheadlessly">Jenkins
+documentation</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="tutorial"><a class="anchor" href="#tutorial"></a>Tutorial</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For more details on the sample job included in this image, see this <a href="https://github.com/openshift/origin/blob/master/examples/jenkins/README.md">tutorial</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pipeline-plug-in"><a class="anchor" href="#pipeline-plug-in"></a>OpenShift Origin Pipeline Plug-in</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jenkins image&#8217;s list of pre-installed plug-ins includes the OpenShift
+Pipeline plug-in, which assists in the creation of CI/CD workflows in Jenkins
+that run against an OpenShift Origin server. A series of build steps, post-build
+actions, and SCM-style polling are provided, which equate to administrative and
+operational actions on the OpenShift Origin server and the API artifacts hosted
+there.</p>
+</div>
+<div class="paragraph">
+<p>In addition to being accessible from the classic "freestyle" form of Jenkins
+job, the build steps as of version 1.0.14 of the OpenShift Origin Pipeline
+Plug-in are also available to Jenkins Pipeline jobs via the DSL extension points
+provided by the Jenkins Pipeline Plug-in. The <a href="https://github.com/openshift/origin/tree/master/examples/jenkins/pipeline">OpenShift Jenkins Pipeline build strategy sample</a>
+illustrates how to use the OpenShift Pipeline plugin DSL versions of its steps.</p>
+</div>
+<div class="paragraph">
+<p>The
+<a href="https://github.com/openshift/jenkins/tree/master/1/contrib/openshift/configuration/jobs/OpenShift%20Sample">sample
+Jenkins job</a> that is pre-configured in the Jenkins image utilizes the
+OpenShift Origin pipeline plug-in and serves as an example of how to leverage the
+plug-in for creating CI/CD flows for OpenShift Origin in Jenkins.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="https://github.com/openshift/jenkins-plugin/">the plug-in&#8217;s README</a> for a
+detailed description of what is available.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="client-plugin-in"><a class="anchor" href="#client-plugin-in"></a>OpenShift Origin Client Plug-in</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The experiences gained working with users of the OpenShift Pipeline plug-in,
+coupled with the rapid evolution of both Jenkins and OpenShift, have provided
+valuable insight into how to integrate OpenShift Origin from Jenkins jobs.</p>
+</div>
+<div class="paragraph">
+<p>As such, the new experimental
+<a href="https://github.com/openshift/jenkins-client-plugin">OpenShift Client Plug-in
+for Jenkins</a> is now offered as a technical preview and is included in the
+OpenShift Jenkins images on CentOS
+(<strong>docker.io/openshift/jenkins-1-centos7:latest</strong> and
+<strong>docker.io/openshift/jenkins-2-centos7:latest</strong>). The plug-in is also available
+from the Jenkins Update Center. The OpenShift Client plug-in will eventually
+replace the OpenShift Pipeline plug-in as the tool for OpenShift integration
+from Jenkins jobs. The OpenShift Client Plug-in provides:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A Fluent-style syntax for use in Jenkins Pipelines.</p>
+</li>
+<li>
+<p>Use of and exposure to any option available with <code>oc</code>.</p>
+</li>
+<li>
+<p>Integration with Jenkins credentials and clusters.</p>
+</li>
+<li>
+<p>Continued support for classic Jenkins Freestyle jobs.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sync-plug-in"><a class="anchor" href="#sync-plug-in"></a>OpenShift Origin Sync Plug-in</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To facilitate OpenShift Origin
+<a href="../../dev_guide/builds/build_strategies.html#pipeline-strategy-options">Pipeline
+build strategy</a> for integration between Jenkins and OpenShift Origin, the
+<a href="https://github.com/openshift/jenkins-sync-plugin">OpenShift Sync plug-in</a>
+monitors the API server of OpenShift Origin for updates to <code>BuildConfigs</code> and
+<code>Builds</code> that employ the Pipeline strategy and either creates Jenkins Pipeline
+projects (when a <code>BuildConfig</code> is created) or starts jobs in the resulting
+projects (when a <code>Build</code> is started).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="kubernetes-plug-in"><a class="anchor" href="#kubernetes-plug-in"></a>Kubernetes Plug-in</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Kubernetes plug-in is used to run Jenkins slaves as pods on your cluster.
+The auto-configuration of the Kubernetes plug-in is described
+in <a href="../../using_images/other_images/jenkins.html#using-the-jenkins-kubernetes-plug-in-to-run-jobs">Using the Jenkins Kubernetes Plug-in to Run Jobs</a>.</p>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    /*<![CDATA[*/
+    $(document).ready(function() {
+      $("[id^='topicGroup']").on('show.bs.collapse', function (event) {
+        if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+          $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+        }
+      });
+      $("[id^='topicGroup']").on('hide.bs.collapse', function (event) {
+        if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+          $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+        }
+      });
+      $("[id^='topicSubGroup']").on('show.bs.collapse', function () {
+        $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+      });
+      $("[id^='topicSubGroup']").on('hide.bs.collapse', function () {
+        $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+      });
+    });
+    /*]]>*/
+  </script>
+    <footer class="footer-origin-docs">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="footer_social">
+          <a href="https://twitter.com/openshift" class="first">
+            <span>
+              <i class="fa fa-twitter-square fa-2x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="https://github.com/openshift/origin">
+            <span>
+              <i class="fa fa-github fa-2x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="https://plus.google.com/communities/114361859072744017486">
+            <span>
+              <i class="fa fa-google-plus-square fa-2x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="https://www.facebook.com/openshift">
+            <span>
+              <i class="fa fa-facebook-square fa-2x fa-inverse"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <a id="footer_logo" href="https://www.redhat.com/">
+          <img alt="Red Hat" src="https://assets.openshift.net/app/assets/redhat.svg">
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 text-center">
+        <a id="powered_by_openshift" title="Powered by OpenShift Online with the DIY Cartridge" href="https://hub.openshift.com/quickstarts/92-do-it-yourself-0-1">
+          <img src="https://www.openshift.com/sites/default/files/images/powered-transparent-white.png" alt="Powered by OpenShift Online">
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 text-right">
+        <a id="built_with_asciibinder" title="Built with AsciiBinder docs management system" href="http://asciibinder.org/">
+          <img src="../../../rest_api_work/_images/asciibinder_web_logo.svg" alt="AsciiBinder">
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="attribution">
+          <button type="button" class="btn btn-link" data-html="true" data-container="body" data-toggle="popover" data-placement="top" data-content="
+            '<a target='_blank' href='https://www.flickr.com/photos/eflon/3655695161/'>Spin</a>' by <a target='_blank' href='https://www.flickr.com/photos/eflon/'>eflon</a>,</br> used under <a target='_blank' href='https://creativecommons.org/licenses/by/2.0/'>CC BY 2.0</a> </br>Color tint added to original">
+            Image attribution
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
+    </script>
+  </div>
+</footer>
+</body>
+</html>

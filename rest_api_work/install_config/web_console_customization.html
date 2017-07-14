@@ -1,0 +1,2301 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Customizing the Web Console | Installation and Configuration | OpenShift Origin Branch Build</title>
+  <link href="https://assets.openshift.net/content/subdomain.css" rel="stylesheet" type="text/css">
+  <link href="../../rest_api_work/_stylesheets/docs.css" rel="stylesheet" />
+  <link href="../../rest_api_work/_stylesheets/search.css" rel="stylesheet" />
+  <link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png">
+  <link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="text/css">
+  <!--[if IE]><link rel="shortcut icon" href="https://assets.openshift.net/content/subdomain/favicon.ico"><![endif]-->
+  <!-- or, set /favicon.ico for IE10 win -->
+  <meta content="OpenShift" name="application-name">
+  <meta content="#000000" name="msapplication-TileColor">
+  <meta content="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" name="msapplication-TileImage">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://assets.openshift.net/content/html5shiv.js" type="text/javascript"></script>
+    <script src="https://assets.openshift.net/content/respond.js" type="text/javascript"></script>
+    <link href="https://assets.openshift.net/content/vendor/respond-js/respond-proxy.html" id="respond-proxy" rel="respond-proxy">
+    <link href="../../rest_api_work/_images/respond.proxy.gif" id="respond-redirect" rel="respond-redirect">
+    <script src="../../rest_api_work/_javascripts/respond.proxy.js" type="text/javascript"></script>
+  <![endif]-->
+  <script src="https://assets.openshift.net/content/modernizr.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/subdomain.js" type="text/javascript"></script>
+  <script src="../../rest_api_work/_javascripts/bootstrap-offcanvas.js" type="text/javascript"></script>
+  <script src="../../rest_api_work/_javascripts/reformat-html.js" type="text/javascript"></script>
+  <script src="../../rest_api_work/_javascripts/hc-search.js" type="text/javascript"></script>
+  <script async src="//www.google-analytics.com/analytics.js" type="text/javascript"></script>
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-40375612-1', 'openshift.org');
+  ga('set', 'forceSSL', true);
+  ga('send', 'pageview');
+</script>
+</head>
+<body>
+  <div class="navbar navbar-default navbar-openshift navbar-origin" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand origin" href="/"></a>
+  </div>
+</div>
+  <div class="container">
+    <p class="toggle-nav visible-xs pull-left">
+      <button class="btn btn-default btn-sm" type="button" data-toggle="offcanvas">Toggle nav</button>
+    </p>
+    <ol class="breadcrumb">
+      <li class="sitename">
+        <a href="../../index.html">Documentation</a>
+      </li>
+      <li class="hidden-xs active">
+        <a href="../welcome/index.html">OpenShift Origin Branch Build</a>
+      </li>
+      <li class="hidden-xs active">
+        <a href="../install_config/index.html">Installation and Configuration</a>
+      </li>
+      
+      <li class="hidden-xs active">
+        Customizing the Web Console
+      </li>
+    </ol>
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-8 col-sm-3 col-md-3 sidebar sidebar-offcanvas">
+        <div class="row-fluid">
+          <div id="hc-search">
+  <input id="hc-search-input" type="text">
+  <button id="hc-search-btn">Search</button>
+</div>
+
+<div id="hc-search-modal">
+  <div id="hc-modal-content">
+    <span id="hc-modal-close">&times;</span>
+    <div id="hc-search-results"></div>
+  </div>
+</div>
+
+<script>
+  hcSearchCategory("docs_origin", "Branch Build");
+</script>
+        </div>
+        <ul class="nav nav-sidebar">
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup0">
+        <span id="tgSpan0" class="fa fa-angle-right"></span>About
+      </a>
+      <ul id="topicGroup0" class="collapse  list-unstyled">
+            <li><a class="" href="../welcome/index.html">Welcome</a></li>
+            <li><a class="" href="../welcome/legal_notice.html">Legal Notice</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup1">
+        <span id="tgSpan1" class="fa fa-angle-right"></span>What's New?
+      </a>
+      <ul id="topicGroup1" class="collapse  list-unstyled">
+            <li><a class="" href="../whats_new/index.html">Overview</a></li>
+            <li><a class="" href="../whats_new/applications.html">Applications</a></li>
+            <li><a class="" href="../whats_new/carts_vs_images.html">Cartridges vs Images</a></li>
+            <li><a class="" href="../whats_new/terminology.html">Terminology</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup2">
+        <span id="tgSpan2" class="fa fa-angle-right"></span>Getting Started
+      </a>
+      <ul id="topicGroup2" class="collapse  list-unstyled">
+            <li><a class="" href="../getting_started/index.html">Overview</a></li>
+            <li><a class="" href="../getting_started/developers_console.html">Web Console Walkthrough</a></li>
+            <li><a class="" href="../getting_started/developers_cli.html">Command-Line Walkthrough</a></li>
+            <li><a class="" href="../getting_started/administrators.html">Setting Up a Cluster</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup3">
+        <span id="tgSpan3" class="fa fa-angle-right"></span>Architecture
+      </a>
+      <ul id="topicGroup3" class="collapse  list-unstyled">
+            <li><a class="" href="../architecture/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-1">
+                <span id="sgSpan-3-1" class="fa fa-caret-right"></span>&nbsp;Infrastructure Components
+              </a>
+              <ul id="topicSubGroup-3-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../architecture/infrastructure_components/kubernetes_infrastructure.html">Kubernetes Infrastructure</a></li>
+                  <li><a class="" href="../architecture/infrastructure_components/image_registry.html">Container Registry</a></li>
+                  <li><a class="" href="../architecture/infrastructure_components/web_console.html">Web Console</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-2">
+                <span id="sgSpan-3-2" class="fa fa-caret-right"></span>&nbsp;Core Concepts
+              </a>
+              <ul id="topicSubGroup-3-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../architecture/core_concepts/index.html">Overview</a></li>
+                  <li><a class="" href="../architecture/core_concepts/containers_and_images.html">Containers and Images</a></li>
+                  <li><a class="" href="../architecture/core_concepts/pods_and_services.html">Pods and Services</a></li>
+                  <li><a class="" href="../architecture/core_concepts/projects_and_users.html">Projects and Users</a></li>
+                  <li><a class="" href="../architecture/core_concepts/builds_and_image_streams.html">Builds and Image Streams</a></li>
+                  <li><a class="" href="../architecture/core_concepts/deployments.html">Deployments</a></li>
+                  <li><a class="" href="../architecture/core_concepts/routes.html">Routes</a></li>
+                  <li><a class="" href="../architecture/core_concepts/haproxy-router.html">HAProxy Router Plug-in</a></li>
+                  <li><a class="" href="../architecture/core_concepts/templates.html">Templates</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-3">
+                <span id="sgSpan-3-3" class="fa fa-caret-right"></span>&nbsp;Additional Concepts
+              </a>
+              <ul id="topicSubGroup-3-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../architecture/additional_concepts/networking.html">Networking</a></li>
+                  <li><a class="" href="../architecture/additional_concepts/sdn.html">OpenShift SDN</a></li>
+                  <li><a class="" href="../architecture/additional_concepts/flannel.html">Flannel</a></li>
+                  <li><a class="" href="../architecture/additional_concepts/f5_big_ip.html">F5 BIG-IP® Router Plug-in</a></li>
+                  <li><a class="" href="../architecture/additional_concepts/contiv.html">Contiv</a></li>
+                  <li><a class="" href="../architecture/additional_concepts/authentication.html">Authentication</a></li>
+                  <li><a class="" href="../architecture/additional_concepts/authorization.html">Authorization</a></li>
+                  <li><a class="" href="../architecture/additional_concepts/storage.html">Persistent Storage</a></li>
+                  <li><a class="" href="../architecture/additional_concepts/remote_commands.html">Remote Commands</a></li>
+                  <li><a class="" href="../architecture/additional_concepts/port_forwarding.html">Port Forwarding</a></li>
+                  <li><a class="" href="../architecture/additional_concepts/scm.html">Source Control Management</a></li>
+                  <li><a class="" href="../architecture/additional_concepts/admission_controllers.html">Admission Controllers</a></li>
+                  <li><a class="" href="../architecture/additional_concepts/other_api_objects.html">Other API Objects</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-4">
+                <span id="sgSpan-3-4" class="fa fa-caret-right"></span>&nbsp;Service Catalog Components
+              </a>
+              <ul id="topicSubGroup-3-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../architecture/service_catalog/index.html">Service Catalog</a></li>
+                  <li><a class="" href="../architecture/service_catalog/template_service_broker.html">Template Service Broker</a></li>
+                  <li><a class="" href="../architecture/service_catalog/ansible_service_broker.html">Ansible Service Broker</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup4">
+        <span id="tgSpan4" class="fa fa-angle-right"></span>Container Security Guide
+      </a>
+      <ul id="topicGroup4" class="collapse  list-unstyled">
+            <li><a class="" href="../security/index.html">Introduction</a></li>
+            <li><a class="" href="../security/hosts_multitenancy.html">Container Hosts and Multi-tenancy</a></li>
+            <li><a class="" href="../security/container_content.html">Container Content</a></li>
+            <li><a class="" href="../security/registries.html">Registries</a></li>
+            <li><a class="" href="../security/build_process.html">Build Process</a></li>
+            <li><a class="" href="../security/deployment.html">Deployment</a></li>
+            <li><a class="" href="../security/securing_container_platform.html">Securing the Container Platform</a></li>
+            <li><a class="" href="../security/network_security.html">Network Security</a></li>
+            <li><a class="" href="../security/storage.html">Attached Storage</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup5">
+        <span id="tgSpan5" class="fa fa-angle-down"></span>Installation and Configuration
+      </a>
+      <ul id="topicGroup5" class="collapse in list-unstyled">
+            <li><a class="" href="../install_config/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-1">
+                <span id="sgSpan-5-1" class="fa fa-caret-right"></span>&nbsp;Installing a Cluster
+              </a>
+              <ul id="topicSubGroup-5-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../install_config/install/planning.html">Planning</a></li>
+                  <li><a class="" href="../install_config/install/prerequisites.html">Prerequisites</a></li>
+                  <li><a class="" href="../install_config/install/host_preparation.html">Host Preparation</a></li>
+                  <li><a class="" href="../install_config/install/rpm_vs_containerized.html">Installing on Containerized Hosts</a></li>
+                  <li><a class="" href="../install_config/install/quick_install.html">Quick Installation</a></li>
+                  <li><a class="" href="../install_config/install/advanced_install.html">Advanced Installation</a></li>
+                  <li><a class="" href="../install_config/install/stand_alone_registry.html">Installing a Stand-alone Deployment of OpenShift Container Registry</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-2">
+                <span id="sgSpan-5-2" class="fa fa-caret-right"></span>&nbsp;Setting up the Registry
+              </a>
+              <ul id="topicSubGroup-5-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../install_config/registry/index.html">Registry Overview</a></li>
+                  <li><a class="" href="../install_config/registry/deploy_registry_existing_clusters.html">Deploying a Registry on Existing Clusters</a></li>
+                  <li><a class="" href="../install_config/registry/accessing_registry.html">Accessing the Registry</a></li>
+                  <li><a class="" href="../install_config/registry/securing_and_exposing_registry.html">Securing and Exposing the Registry</a></li>
+                  <li><a class="" href="../install_config/registry/extended_registry_configuration.html">Extended Registry Configuration</a></li>
+                  <li><a class="" href="../install_config/registry/registry_known_issues.html">Known Issues</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-3">
+                <span id="sgSpan-5-3" class="fa fa-caret-right"></span>&nbsp;Setting up a Router
+              </a>
+              <ul id="topicSubGroup-5-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../install_config/router/index.html">Router Overview</a></li>
+                  <li><a class="" href="../install_config/router/default_haproxy_router.html">Using the Default HAProxy Router</a></li>
+                  <li><a class="" href="../install_config/router/customized_haproxy_router.html">Deploying a Customized HAProxy Router</a></li>
+                  <li><a class="" href="../install_config/router/proxy_protocol.html">Configuring the HAProxy Router to Use the PROXY Protocol</a></li>
+                  <li><a class="" href="../install_config/router/f5_router.html">Using the F5 Router Plug-in</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-4">
+                <span id="sgSpan-5-4" class="fa fa-caret-right"></span>&nbsp;Upgrading a Cluster
+              </a>
+              <ul id="topicSubGroup-5-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../install_config/upgrading/index.html">Overview</a></li>
+                  <li><a class="" href="../install_config/upgrading/automated_upgrades.html">Automated In-place Upgrades</a></li>
+                  <li><a class="" href="../install_config/upgrading/manual_upgrades.html">Manual In-place Upgrades</a></li>
+                  <li><a class="" href="../install_config/upgrading/blue_green_deployments.html">Blue-Green Deployments</a></li>
+                  <li><a class="" href="../install_config/upgrading/os_upgrades.html">Operating System Updates and Upgrades</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../install_config/master_node_configuration.html">Master and Node Configuration</a></li>
+            <li><a class="" href="../install_config/adding_hosts_to_existing_cluster.html">Adding Hosts to an Existing Cluster</a></li>
+            <li><a class="" href="../install_config/imagestreams_templates.html">Loading the Default Image Streams and Templates</a></li>
+            <li><a class="" href="../install_config/certificate_customization.html">Configuring Custom Certificates</a></li>
+            <li><a class="" href="../install_config/redeploying_certificates.html">Redeploying Certificates</a></li>
+            <li><a class="" href="../install_config/configuring_authentication.html">Configuring Authentication and User Agent</a></li>
+            <li><a class="" href="../install_config/syncing_groups_with_ldap.html">Syncing Groups With LDAP</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-12">
+                <span id="sgSpan-5-12" class="fa fa-caret-right"></span>&nbsp;Advanced LDAP Configuration
+              </a>
+              <ul id="topicSubGroup-5-12" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../install_config/advanced_ldap_configuration/index.html">Overview</a></li>
+                  <li><a class="" href="../install_config/advanced_ldap_configuration/sssd_for_ldap_failover.html">Setting up SSSD for LDAP Failover</a></li>
+                  <li><a class="" href="../install_config/advanced_ldap_configuration/configuring_form_based_authentication.html">Configuring Form-Based Authentication</a></li>
+                  <li><a class="" href="../install_config/advanced_ldap_configuration/configuring_extended_ldap_attributes.html">Configuring Extended LDAP Attributes</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../install_config/configuring_sdn.html">Configuring the SDN</a></li>
+            <li><a class="" href="../install_config/configuring_nuagesdn.html">Configuring Nuage SDN</a></li>
+            <li><a class="" href="../install_config/configuring_aws.html">Configuring for AWS</a></li>
+            <li><a class="" href="../install_config/configuring_openstack.html">Configuring for OpenStack</a></li>
+            <li><a class="" href="../install_config/configuring_gce.html">Configuring for GCE</a></li>
+            <li><a class="" href="../install_config/configuring_azure.html">Configuring for Azure</a></li>
+            <li><a class="" href="../install_config/configuring_vsphere.html">Configuring for VMWare vSphere</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-20">
+                <span id="sgSpan-5-20" class="fa fa-caret-right"></span>&nbsp;Configuring Persistent Storage
+              </a>
+              <ul id="topicSubGroup-5-20" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../install_config/persistent_storage/index.html">Overview</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/persistent_storage_nfs.html">Using NFS</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/persistent_storage_glusterfs.html">Using GlusterFS</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/persistent_storage_cinder.html">Using OpenStack Cinder</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/persistent_storage_ceph_rbd.html">Using Ceph RBD</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/persistent_storage_aws.html">Using AWS Elastic Block Store</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/persistent_storage_gce.html">Using GCE Persistent Disk</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/persistent_storage_iscsi.html">Using iSCSI</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/persistent_storage_fibre_channel.html">Using Fibre Channel</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/persistent_storage_azure.html">Using Azure Disk</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/persistent_storage_azure_file.html">Using Azure File</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/persistent_storage_flex_volume.html">Using FlexVolume</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/persistent_storage_vsphere.html">Persistent Storage Using VMWare vSphere Volume</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/dynamically_provisioning_pvs.html">Dynamic Provisioning and Creating Storage Classes</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/pod_security_context.html">Volume Security</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/selector_label_binding.html">Selector-Label Volume Binding</a></li>
+                  <li><a class="" href="../install_config/persistent_storage/enabling_controller_attach_detach.html">Enabling Controller-managed Attachment and Detachment</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-21">
+                <span id="sgSpan-5-21" class="fa fa-caret-right"></span>&nbsp;Persistent Storage Examples
+              </a>
+              <ul id="topicSubGroup-5-21" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../install_config/storage_examples/index.html">Overview</a></li>
+                  <li><a class="" href="../install_config/storage_examples/shared_storage.html">Sharing an NFS PV Across Two Pods</a></li>
+                  <li><a class="" href="../install_config/storage_examples/ceph_example.html">Complete Example Using Ceph RBD</a></li>
+                  <li><a class="" href="../install_config/storage_examples/ceph_rbd_dynamic_example.html">Complete Example Using Ceph RBD for Dynamic Provisioning</a></li>
+                  <li><a class="" href="../install_config/storage_examples/gluster_example.html">Complete Example Using GlusterFS</a></li>
+                  <li><a class="" href="../install_config/storage_examples/gluster_dynamic_example.html">Dynamic Provisioning Example Using Containerized GlusterFS</a></li>
+                  <li><a class="" href="../install_config/storage_examples/dedicated_gluster_dynamic_example.html">Dynamic Provisioning Example Using Dedicated GlusterFS</a></li>
+                  <li><a class="" href="../install_config/storage_examples/privileged_pod_storage.html">Mounting Volumes To Privileged Pods</a></li>
+                  <li><a class="" href="../install_config/storage_examples/gluster_backed_registry.html">Backing Docker Registry with GlusterFS Storage</a></li>
+                  <li><a class="" href="../install_config/storage_examples/binding_pv_by_label.html">Binding Persistent Volumes by Label</a></li>
+                  <li><a class="" href="../install_config/storage_examples/storage_classes_dynamic_provisioning.html">Using StorageClasses for Dynamic Provisioning</a></li>
+                  <li><a class="" href="../install_config/storage_examples/storage_classes_legacy.html">Using StorageClasses for Existing Legacy Storage</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../install_config/http_proxies.html">Working with HTTP Proxies</a></li>
+            <li><a class="" href="../install_config/build_defaults_overrides.html">Configuring Global Build Defaults and Overrides</a></li>
+            <li><a class="" href="../install_config/configuring_pipeline_execution.html">Configuring Pipeline Execution</a></li>
+            <li><a class="" href="../install_config/configuring_routing.html">Configuring Route Timeouts</a></li>
+            <li><a class="" href="../install_config/configuring_native_container_routing.html">Configuring Native Container Routing</a></li>
+            <li><a class="" href="../install_config/routing_from_edge_lb.html">Routing from Edge Load Balancers</a></li>
+            <li><a class="" href="../install_config/aggregate_logging.html">Aggregating Container Logs</a></li>
+            <li><a class="" href="../install_config/aggregate_logging_sizing.html">Aggregate Logging Sizing Guidelines</a></li>
+            <li><a class="" href="../install_config/cluster_metrics.html">Enabling Cluster Metrics</a></li>
+            <li><a class=" active" href="../install_config/web_console_customization.html">Customizing the Web Console</a></li>
+            <li><a class="" href="../install_config/provisioners.html">Deploying External Persistent Volume Provisioners</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup6">
+        <span id="tgSpan6" class="fa fa-angle-right"></span>Cluster Administration
+      </a>
+      <ul id="topicGroup6" class="collapse  list-unstyled">
+            <li><a class="" href="../admin_guide/index.html">Overview</a></li>
+            <li><a class="" href="../admin_guide/manage_nodes.html">Managing Nodes</a></li>
+            <li><a class="" href="../admin_guide/manage_users.html">Managing Users</a></li>
+            <li><a class="" href="../admin_guide/managing_projects.html">Managing Projects</a></li>
+            <li><a class="" href="../admin_guide/managing_pods.html">Managing Pods</a></li>
+            <li><a class="" href="../admin_guide/managing_networking.html">Managing Networking</a></li>
+            <li><a class="" href="../admin_guide/service_accounts.html">Configuring Service Accounts</a></li>
+            <li><a class="" href="../admin_guide/manage_authorization_policy.html">Managing Authorization Policies</a></li>
+            <li><a class="" href="../admin_guide/image_policy.html">Image Policy</a></li>
+            <li><a class="" href="../admin_guide/image_signatures.html">Image Signatures</a></li>
+            <li><a class="" href="../admin_guide/scoped_tokens.html">Scoped Tokens</a></li>
+            <li><a class="" href="../admin_guide/monitoring_images.html">Monitoring Images</a></li>
+            <li><a class="" href="../admin_guide/manage_scc.html">Managing Security Context Constraints</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-13">
+                <span id="sgSpan-6-13" class="fa fa-caret-right"></span>&nbsp;Scheduling
+              </a>
+              <ul id="topicSubGroup-6-13" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../admin_guide/scheduling/index.html">Overview</a></li>
+                  <li><a class="" href="../admin_guide/scheduling/scheduler.html">Default Scheduling</a></li>
+                  <li><a class="" href="../admin_guide/scheduling/custom_scheduler.html">Custom Scheduling</a></li>
+                  <li><a class="" href="../admin_guide/scheduling/scheduler-advanced.html">Advanced Scheduling</a></li>
+                  <li><a class="" href="../admin_guide/scheduling/node_affinity.html">Advanced Scheduling and Node Affinity</a></li>
+                  <li><a class="" href="../admin_guide/scheduling/pod_affinity.html">Advanced Scheduling and Pod Affinity/Anti-affinity</a></li>
+                  <li><a class="" href="../admin_guide/scheduling/node_selector.html">Advanced Scheduling and Node Selectors</a></li>
+                  <li><a class="" href="../admin_guide/scheduling/taints_tolerations.html">Advanced Scheduling and Taints and Tolerations</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../admin_guide/quota.html">Setting Quotas</a></li>
+            <li><a class="" href="../admin_guide/multiproject_quota.html">Setting Multi-Project Quotas</a></li>
+            <li><a class="" href="../admin_guide/limits.html">Setting Limit Ranges</a></li>
+            <li><a class="" href="../admin_guide/pruning_resources.html">Pruning Objects</a></li>
+            <li><a class="" href="../admin_guide/garbage_collection.html">Garbage Collection</a></li>
+            <li><a class="" href="../admin_guide/allocating_node_resources.html">Allocating Node Resources</a></li>
+            <li><a class="" href="../admin_guide/overcommit.html">Overcommitting</a></li>
+            <li><a class="" href="../admin_guide/tcp_ingress_external_ports.html">Assigning Unique External IPs for Ingress Traffic</a></li>
+            <li><a class="" href="../admin_guide/out_of_resource_handling.html">Out of Resource Handling</a></li>
+            <li><a class="" href="../admin_guide/router.html">Monitoring and Debugging Routers</a></li>
+            <li><a class="" href="../admin_guide/high_availability.html">High Availability</a></li>
+            <li><a class="" href="../admin_guide/iptables.html">IPtables</a></li>
+            <li><a class="" href="../admin_guide/securing_builds.html">Securing Builds by Strategy</a></li>
+            <li><a class="" href="../admin_guide/seccomp.html">Restricting Application Capabilities Using Seccomp</a></li>
+            <li><a class="" href="../admin_guide/sysctls.html">Sysctls</a></li>
+            <li><a class="" href="../admin_guide/ipsec.html">Encrypting Hosts with IPsec</a></li>
+            <li><a class="" href="../admin_guide/building_dependency_trees.html">Building Dependency Trees</a></li>
+            <li><a class="" href="../admin_guide/backup_restore.html">Backup and Restore</a></li>
+            <li><a class="" href="../admin_guide/sdn_troubleshooting.html">Troubleshooting Networking</a></li>
+            <li><a class="" href="../admin_guide/diagnostics_tool.html">Diagnostics Tool</a></li>
+            <li><a class="" href="../admin_guide/idling_applications.html">Idling Applications</a></li>
+            <li><a class="" href="../admin_guide/cluster_capacity.html">Analyzing Cluster Capacity</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup7">
+        <span id="tgSpan7" class="fa fa-angle-right"></span>Scaling and Performance Guide
+      </a>
+      <ul id="topicGroup7" class="collapse  list-unstyled">
+            <li><a class="" href="../scaling_performance/index.html">Overview</a></li>
+            <li><a class="" href="../scaling_performance/install_practices.html">Recommended Installation Practices</a></li>
+            <li><a class="" href="../scaling_performance/host_practices.html">Recommended Host Practices</a></li>
+            <li><a class="" href="../scaling_performance/optimizing_compute_resources.html">Optimizing Compute Resources</a></li>
+            <li><a class="" href="../scaling_performance/optimizing_storage.html">Optimizing Storage</a></li>
+            <li><a class="" href="../scaling_performance/network_optimization.html">Network Optimization</a></li>
+            <li><a class="" href="../scaling_performance/scaling_cluster_metrics.html">Scaling Cluster Metrics</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup8">
+        <span id="tgSpan8" class="fa fa-angle-right"></span>CLI Reference
+      </a>
+      <ul id="topicGroup8" class="collapse  list-unstyled">
+            <li><a class="" href="../cli_reference/index.html">Overview</a></li>
+            <li><a class="" href="../cli_reference/get_started_cli.html">Get Started with the CLI</a></li>
+            <li><a class="" href="../cli_reference/manage_cli_profiles.html">Managing CLI Profiles</a></li>
+            <li><a class="" href="../cli_reference/basic_cli_operations.html">Developer CLI Operations</a></li>
+            <li><a class="" href="../cli_reference/admin_cli_operations.html">Administrator CLI Operations</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup9">
+        <span id="tgSpan9" class="fa fa-angle-right"></span>Developer Guide
+      </a>
+      <ul id="topicGroup9" class="collapse  list-unstyled">
+            <li><a class="" href="../dev_guide/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-9-1">
+                <span id="sgSpan-9-1" class="fa fa-caret-right"></span>&nbsp;Application Life Cycle Management
+              </a>
+              <ul id="topicSubGroup-9-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../dev_guide/application_lifecycle/development_process.html">Planning Your Development Process</a></li>
+                  <li><a class="" href="../dev_guide/application_lifecycle/new_app.html">Creating New Applications</a></li>
+                  <li><a class="" href="../dev_guide/application_lifecycle/promoting_applications.html">Promoting Applications Across Environments</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../dev_guide/authentication.html">Authentication</a></li>
+            <li><a class="" href="../dev_guide/authorization.html">Authorization</a></li>
+            <li><a class="" href="../dev_guide/projects.html">Projects</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-9-5">
+                <span id="sgSpan-9-5" class="fa fa-caret-right"></span>&nbsp;Migrating Applications
+              </a>
+              <ul id="topicSubGroup-9-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../dev_guide/migrating_applications/index.html">Overview</a></li>
+                  <li><a class="" href="../dev_guide/migrating_applications/database_applications.html">Database Applications</a></li>
+                  <li><a class="" href="../dev_guide/migrating_applications/web_framework_applications.html">Web Framework Applications</a></li>
+                  <li><a class="" href="../dev_guide/migrating_applications/quickstart_examples.html">QuickStart Examples</a></li>
+                  <li><a class="" href="../dev_guide/migrating_applications/continuous_integration_and_deployment.html">Continuous Integration and Deployment</a></li>
+                  <li><a class="" href="../dev_guide/migrating_applications/web_hooks_action_hooks.html">Webhooks and Action Hooks</a></li>
+                  <li><a class="" href="../dev_guide/migrating_applications/S2I_tool.html">S2I Tool</a></li>
+                  <li><a class="" href="../dev_guide/migrating_applications/support_guide.html">Support Guide</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-9-6">
+                <span id="sgSpan-9-6" class="fa fa-caret-right"></span>&nbsp;Application Tutorials
+              </a>
+              <ul id="topicSubGroup-9-6" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../dev_guide/app_tutorials/index.html">Overview</a></li>
+                  <li><a class="" href="../dev_guide/app_tutorials/quickstarts.html">Quickstart Templates</a></li>
+                  <li><a class="" href="../dev_guide/app_tutorials/ruby_on_rails.html">Ruby on Rails</a></li>
+                  <li><a class="" href="../dev_guide/app_tutorials/maven_tutorial.html">Setting Up a Nexus Mirror</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-9-7">
+                <span id="sgSpan-9-7" class="fa fa-caret-right"></span>&nbsp;Builds
+              </a>
+              <ul id="topicSubGroup-9-7" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../dev_guide/builds/index.html">How Builds Work</a></li>
+                  <li><a class="" href="../dev_guide/builds/basic_build_operations.html">Basic Build Operations</a></li>
+                  <li><a class="" href="../dev_guide/builds/build_inputs.html">Build Inputs</a></li>
+                  <li><a class="" href="../dev_guide/builds/build_output.html">Build Output</a></li>
+                  <li><a class="" href="../dev_guide/builds/build_strategies.html">Build Strategy Options</a></li>
+                  <li><a class="" href="../dev_guide/builds/build_environment.html">Build Environment</a></li>
+                  <li><a class="" href="../dev_guide/builds/triggering_builds.html">Triggering Builds</a></li>
+                  <li><a class="" href="../dev_guide/builds/build_hooks.html">Build Hooks</a></li>
+                  <li><a class="" href="../dev_guide/builds/build_run_policy.html">Build Run Policy</a></li>
+                  <li><a class="" href="../dev_guide/builds/advanced_build_operations.html">Advanced Build Operations</a></li>
+                  <li><a class="" href="../dev_guide/builds/build_troubleshooting.html">Troubleshooting</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-9-8">
+                <span id="sgSpan-9-8" class="fa fa-caret-right"></span>&nbsp;Deployments
+              </a>
+              <ul id="topicSubGroup-9-8" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../dev_guide/deployments/how_deployments_work.html">How Deployments Work</a></li>
+                  <li><a class="" href="../dev_guide/deployments/basic_deployment_operations.html">Basic Deployment Operations</a></li>
+                  <li><a class="" href="../dev_guide/deployments/deployment_strategies.html">Deployment Strategies</a></li>
+                  <li><a class="" href="../dev_guide/deployments/advanced_deployment_strategies.html">Advanced Deployment Strategies</a></li>
+                  <li><a class="" href="../dev_guide/deployments/kubernetes_deployments.html">Kubernetes Deployments Support</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../dev_guide/templates.html">Templates</a></li>
+            <li><a class="" href="../dev_guide/ssh_environment.html">Opening a Remote Shell to Containers</a></li>
+            <li><a class="" href="../dev_guide/service_accounts.html">Service Accounts</a></li>
+            <li><a class="" href="../dev_guide/managing_images.html">Managing Images</a></li>
+            <li><a class="" href="../dev_guide/compute_resources.html">Quotas and Limit Ranges</a></li>
+            <li><a class="" href="../dev_guide/pod_preset.html">Injecting Information into Pods Using Pod Presets</a></li>
+            <li><a class="" href="../dev_guide/getting_traffic_into_cluster.html">Getting Traffic Into The Cluster</a></li>
+            <li><a class="" href="../dev_guide/routes.html">Routes</a></li>
+            <li><a class="" href="../dev_guide/integrating_external_services.html">Integrating External Services</a></li>
+            <li><a class="" href="../dev_guide/secrets.html">Secrets</a></li>
+            <li><a class="" href="../dev_guide/configmaps.html">ConfigMaps</a></li>
+            <li><a class="" href="../dev_guide/downward_api.html">Downward API</a></li>
+            <li><a class="" href="../dev_guide/projected_volumes.html">Projected Volumes</a></li>
+            <li><a class="" href="../dev_guide/daemonsets.html">Using Daemonsets</a></li>
+            <li><a class="" href="../dev_guide/pod_autoscaling.html">Pod Autoscaling</a></li>
+            <li><a class="" href="../dev_guide/volumes.html">Managing Volumes</a></li>
+            <li><a class="" href="../dev_guide/persistent_volumes.html">Using Persistent Volumes</a></li>
+            <li><a class="" href="../dev_guide/executing_remote_commands.html">Executing Remote Commands</a></li>
+            <li><a class="" href="../dev_guide/copy_files_to_container.html">Copying Files</a></li>
+            <li><a class="" href="../dev_guide/port_forwarding.html">Port Forwarding</a></li>
+            <li><a class="" href="../dev_guide/shared_memory.html">Shared Memory</a></li>
+            <li><a class="" href="../dev_guide/application_health.html">Application Health</a></li>
+            <li><a class="" href="../dev_guide/events.html">Events</a></li>
+            <li><a class="" href="../dev_guide/environment_variables.html">Managing Environment Variables</a></li>
+            <li><a class="" href="../dev_guide/jobs.html">Jobs</a></li>
+            <li><a class="" href="../dev_guide/cron_jobs.html">Cron Jobs</a></li>
+            <li><a class="" href="../dev_guide/create_from_url.html">Create from URL</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup10">
+        <span id="tgSpan10" class="fa fa-angle-right"></span>Creating Images
+      </a>
+      <ul id="topicGroup10" class="collapse  list-unstyled">
+            <li><a class="" href="../creating_images/index.html">Overview</a></li>
+            <li><a class="" href="../creating_images/guidelines.html">Guidelines</a></li>
+            <li><a class="" href="../creating_images/metadata.html">Image Metadata</a></li>
+            <li><a class="" href="../creating_images/s2i.html">S2I Requirements</a></li>
+            <li><a class="" href="../creating_images/s2i_testing.html">Testing S2I Images</a></li>
+            <li><a class="" href="../creating_images/custom.html">Custom Builder</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup11">
+        <span id="tgSpan11" class="fa fa-angle-right"></span>Using Images
+      </a>
+      <ul id="topicGroup11" class="collapse  list-unstyled">
+            <li><a class="" href="../using_images/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-11-1">
+                <span id="sgSpan-11-1" class="fa fa-caret-right"></span>&nbsp;Source-to-Image (S2I)
+              </a>
+              <ul id="topicSubGroup-11-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../using_images/s2i_images/index.html">Overview</a></li>
+                  <li><a class="" href="../using_images/s2i_images/nodejs.html">Node.js</a></li>
+                  <li><a class="" href="../using_images/s2i_images/perl.html">Perl</a></li>
+                  <li><a class="" href="../using_images/s2i_images/php.html">PHP</a></li>
+                  <li><a class="" href="../using_images/s2i_images/python.html">Python</a></li>
+                  <li><a class="" href="../using_images/s2i_images/ruby.html">Ruby</a></li>
+                  <li><a class="" href="../using_images/s2i_images/wildfly.html">Wildfly</a></li>
+                  <li><a class="" href="../using_images/s2i_images/customizing_s2i_images.html">Customizing S2I Images</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-11-2">
+                <span id="sgSpan-11-2" class="fa fa-caret-right"></span>&nbsp;Database Images
+              </a>
+              <ul id="topicSubGroup-11-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../using_images/db_images/index.html">Overview</a></li>
+                  <li><a class="" href="../using_images/db_images/mysql.html">MySQL</a></li>
+                  <li><a class="" href="../using_images/db_images/postgresql.html">PostgreSQL</a></li>
+                  <li><a class="" href="../using_images/db_images/mongodb.html">MongoDB</a></li>
+                  <li><a class="" href="../using_images/db_images/mariadb.html">MariaDB</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-11-3">
+                <span id="sgSpan-11-3" class="fa fa-caret-right"></span>&nbsp;Docker Images
+              </a>
+              <ul id="topicSubGroup-11-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../using_images/docker_images/index.html">Overview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-11-4">
+                <span id="sgSpan-11-4" class="fa fa-caret-right"></span>&nbsp;Other Images
+              </a>
+              <ul id="topicSubGroup-11-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../using_images/other_images/index.html">Overview</a></li>
+                  <li><a class="" href="../using_images/other_images/jenkins.html">Jenkins</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup12">
+        <span id="tgSpan12" class="fa fa-angle-right"></span>REST API Reference
+      </a>
+      <ul id="topicGroup12" class="collapse  list-unstyled">
+            <li><a class="" href="../rest_api/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-1">
+                <span id="sgSpan-12-1" class="fa fa-caret-right"></span>&nbsp;/api/v1
+              </a>
+              <ul id="topicSubGroup-12-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/api/v1.APIResourceList.html">v1.APIResourceList</a></li>
+                  <li><a class="" href="../rest_api/api/v1.APIVersions.html">v1.APIVersions</a></li>
+                  <li><a class="" href="../rest_api/api/v1.Binding.html">v1.Binding</a></li>
+                  <li><a class="" href="../rest_api/api/v1.ComponentStatus.html">v1.ComponentStatus</a></li>
+                  <li><a class="" href="../rest_api/api/v1.ConfigMap.html">v1.ConfigMap</a></li>
+                  <li><a class="" href="../rest_api/api/v1.Endpoints.html">v1.Endpoints</a></li>
+                  <li><a class="" href="../rest_api/api/v1.Event.html">v1.Event</a></li>
+                  <li><a class="" href="../rest_api/api/v1.LimitRange.html">v1.LimitRange</a></li>
+                  <li><a class="" href="../rest_api/api/v1.Namespace.html">v1.Namespace</a></li>
+                  <li><a class="" href="../rest_api/api/v1.Node.html">v1.Node</a></li>
+                  <li><a class="" href="../rest_api/api/v1.PersistentVolume.html">v1.PersistentVolume</a></li>
+                  <li><a class="" href="../rest_api/api/v1.PersistentVolumeClaim.html">v1.PersistentVolumeClaim</a></li>
+                  <li><a class="" href="../rest_api/api/v1.Pod.html">v1.Pod</a></li>
+                  <li><a class="" href="../rest_api/api/v1.PodTemplate.html">v1.PodTemplate</a></li>
+                  <li><a class="" href="../rest_api/api/v1.ReplicationController.html">v1.ReplicationController</a></li>
+                  <li><a class="" href="../rest_api/api/v1.ResourceQuota.html">v1.ResourceQuota</a></li>
+                  <li><a class="" href="../rest_api/api/v1.Secret.html">v1.Secret</a></li>
+                  <li><a class="" href="../rest_api/api/v1.SecurityContextConstraints.html">v1.SecurityContextConstraints</a></li>
+                  <li><a class="" href="../rest_api/api/v1.Service.html">v1.Service</a></li>
+                  <li><a class="" href="../rest_api/api/v1.ServiceAccount.html">v1.ServiceAccount</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-2">
+                <span id="sgSpan-12-2" class="fa fa-caret-right"></span>&nbsp;/apis/v1
+              </a>
+              <ul id="topicSubGroup-12-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis/v1.APIGroup.html">v1.APIGroup</a></li>
+                  <li><a class="" href="../rest_api/apis/v1.APIGroupList.html">v1.APIGroupList</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-3">
+                <span id="sgSpan-12-3" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-apps/v1beta1.ControllerRevision.html">v1beta1.ControllerRevision</a></li>
+                  <li><a class="" href="../rest_api/apis-apps/v1beta1.Deployment.html">v1beta1.Deployment</a></li>
+                  <li><a class="" href="../rest_api/apis-apps/v1beta1.StatefulSet.html">v1beta1.StatefulSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-4">
+                <span id="sgSpan-12-4" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v1
+              </a>
+              <ul id="topicSubGroup-12-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-autoscaling/v1.HorizontalPodAutoscaler.html">v1.HorizontalPodAutoscaler</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-5">
+                <span id="sgSpan-12-5" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1
+              </a>
+              <ul id="topicSubGroup-12-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-batch/v1.Job.html">v1.Job</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-6">
+                <span id="sgSpan-12-6" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v2alpha1
+              </a>
+              <ul id="topicSubGroup-12-6" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-batch/v2alpha1.CronJob.html">v2alpha1.CronJob</a></li>
+                  <li><a class="" href="../rest_api/apis-batch/v2alpha1.ScheduledJob.html">v2alpha1.ScheduledJob</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-7">
+                <span id="sgSpan-12-7" class="fa fa-caret-right"></span>&nbsp;/apis/extensions/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-7" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-extensions/v1beta1.DaemonSet.html">v1beta1.DaemonSet</a></li>
+                  <li><a class="" href="../rest_api/apis-extensions/v1beta1.Deployment.html">v1beta1.Deployment</a></li>
+                  <li><a class="" href="../rest_api/apis-extensions/v1beta1.Ingress.html">v1beta1.Ingress</a></li>
+                  <li><a class="" href="../rest_api/apis-extensions/v1beta1.NetworkPolicy.html">v1beta1.NetworkPolicy</a></li>
+                  <li><a class="" href="../rest_api/apis-extensions/v1beta1.PodSecurityPolicy.html">v1beta1.PodSecurityPolicy</a></li>
+                  <li><a class="" href="../rest_api/apis-extensions/v1beta1.ReplicaSet.html">v1beta1.ReplicaSet</a></li>
+                  <li><a class="" href="../rest_api/apis-extensions/v1beta1.ThirdPartyResource.html">v1beta1.ThirdPartyResource</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-8">
+                <span id="sgSpan-12-8" class="fa fa-caret-right"></span>&nbsp;/apis/policy/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-8" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-policy/v1beta1.PodDisruptionBudget.html">v1beta1.PodDisruptionBudget</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-9">
+                <span id="sgSpan-12-9" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-12-9" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-authentication.k8s.io/v1.TokenReview.html">v1.TokenReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-10">
+                <span id="sgSpan-12-10" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-10" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-authentication.k8s.io/v1beta1.TokenReview.html">v1beta1.TokenReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-11">
+                <span id="sgSpan-12-11" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-12-11" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-authorization.k8s.io/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../rest_api/apis-authorization.k8s.io/v1.SelfSubjectAccessReview.html">v1.SelfSubjectAccessReview</a></li>
+                  <li><a class="" href="../rest_api/apis-authorization.k8s.io/v1.SubjectAccessReview.html">v1.SubjectAccessReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-12">
+                <span id="sgSpan-12-12" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-12" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-authorization.k8s.io/v1beta1.LocalSubjectAccessReview.html">v1beta1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectAccessReview.html">v1beta1.SelfSubjectAccessReview</a></li>
+                  <li><a class="" href="../rest_api/apis-authorization.k8s.io/v1beta1.SubjectAccessReview.html">v1beta1.SubjectAccessReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-13">
+                <span id="sgSpan-12-13" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-13" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRole.html">v1beta1.ClusterRole</a></li>
+                  <li><a class="" href="../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRoleBinding.html">v1beta1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../rest_api/apis-rbac.authorization.k8s.io/v1beta1.Role.html">v1beta1.Role</a></li>
+                  <li><a class="" href="../rest_api/apis-rbac.authorization.k8s.io/v1beta1.RoleBinding.html">v1beta1.RoleBinding</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-14">
+                <span id="sgSpan-12-14" class="fa fa-caret-right"></span>&nbsp;/apis/certificates.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-14" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-certificates.k8s.io/v1beta1.CertificateSigningRequest.html">v1beta1.CertificateSigningRequest</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-15">
+                <span id="sgSpan-12-15" class="fa fa-caret-right"></span>&nbsp;/apis/networking.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-12-15" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-networking.k8s.io/v1.NetworkPolicy.html">v1.NetworkPolicy</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-16">
+                <span id="sgSpan-12-16" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-12-16" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-storage.k8s.io/v1.StorageClass.html">v1.StorageClass</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-17">
+                <span id="sgSpan-12-17" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-12-17" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-storage.k8s.io/v1beta1.StorageClass.html">v1beta1.StorageClass</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-18">
+                <span id="sgSpan-12-18" class="fa fa-caret-right"></span>&nbsp;/apis/apps.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-18" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-apps.openshift.io/v1.DeploymentConfig.html">v1.DeploymentConfig</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-19">
+                <span id="sgSpan-12-19" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-19" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-authorization.openshift.io/v1.ClusterRole.html">v1.ClusterRole</a></li>
+                  <li><a class="" href="../rest_api/apis-authorization.openshift.io/v1.ClusterRoleBinding.html">v1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../rest_api/apis-authorization.openshift.io/v1.LocalResourceAccessReview.html">v1.LocalResourceAccessReview</a></li>
+                  <li><a class="" href="../rest_api/apis-authorization.openshift.io/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../rest_api/apis-authorization.openshift.io/v1.ResourceAccessReview.html">v1.ResourceAccessReview</a></li>
+                  <li><a class="" href="../rest_api/apis-authorization.openshift.io/v1.Role.html">v1.Role</a></li>
+                  <li><a class="" href="../rest_api/apis-authorization.openshift.io/v1.RoleBinding.html">v1.RoleBinding</a></li>
+                  <li><a class="" href="../rest_api/apis-authorization.openshift.io/v1.RoleBindingRestriction.html">v1.RoleBindingRestriction</a></li>
+                  <li><a class="" href="../rest_api/apis-authorization.openshift.io/v1.SelfSubjectRulesReview.html">v1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../rest_api/apis-authorization.openshift.io/v1.SubjectAccessReview.html">v1.SubjectAccessReview</a></li>
+                  <li><a class="" href="../rest_api/apis-authorization.openshift.io/v1.SubjectRulesReview.html">v1.SubjectRulesReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-20">
+                <span id="sgSpan-12-20" class="fa fa-caret-right"></span>&nbsp;/apis/build.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-20" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-build.openshift.io/v1.Build.html">v1.Build</a></li>
+                  <li><a class="" href="../rest_api/apis-build.openshift.io/v1.BuildConfig.html">v1.BuildConfig</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-21">
+                <span id="sgSpan-12-21" class="fa fa-caret-right"></span>&nbsp;/apis/image.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-21" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-image.openshift.io/v1.Image.html">v1.Image</a></li>
+                  <li><a class="" href="../rest_api/apis-image.openshift.io/v1.ImageSignature.html">v1.ImageSignature</a></li>
+                  <li><a class="" href="../rest_api/apis-image.openshift.io/v1.ImageStream.html">v1.ImageStream</a></li>
+                  <li><a class="" href="../rest_api/apis-image.openshift.io/v1.ImageStreamImage.html">v1.ImageStreamImage</a></li>
+                  <li><a class="" href="../rest_api/apis-image.openshift.io/v1.ImageStreamImport.html">v1.ImageStreamImport</a></li>
+                  <li><a class="" href="../rest_api/apis-image.openshift.io/v1.ImageStreamMapping.html">v1.ImageStreamMapping</a></li>
+                  <li><a class="" href="../rest_api/apis-image.openshift.io/v1.ImageStreamTag.html">v1.ImageStreamTag</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-22">
+                <span id="sgSpan-12-22" class="fa fa-caret-right"></span>&nbsp;/apis/network.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-22" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-network.openshift.io/v1.ClusterNetwork.html">v1.ClusterNetwork</a></li>
+                  <li><a class="" href="../rest_api/apis-network.openshift.io/v1.EgressNetworkPolicy.html">v1.EgressNetworkPolicy</a></li>
+                  <li><a class="" href="../rest_api/apis-network.openshift.io/v1.HostSubnet.html">v1.HostSubnet</a></li>
+                  <li><a class="" href="../rest_api/apis-network.openshift.io/v1.NetNamespace.html">v1.NetNamespace</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-23">
+                <span id="sgSpan-12-23" class="fa fa-caret-right"></span>&nbsp;/apis/oauth.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-23" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-oauth.openshift.io/v1.OAuthAccessToken.html">v1.OAuthAccessToken</a></li>
+                  <li><a class="" href="../rest_api/apis-oauth.openshift.io/v1.OAuthAuthorizeToken.html">v1.OAuthAuthorizeToken</a></li>
+                  <li><a class="" href="../rest_api/apis-oauth.openshift.io/v1.OAuthClient.html">v1.OAuthClient</a></li>
+                  <li><a class="" href="../rest_api/apis-oauth.openshift.io/v1.OAuthClientAuthorization.html">v1.OAuthClientAuthorization</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-24">
+                <span id="sgSpan-12-24" class="fa fa-caret-right"></span>&nbsp;/apis/project.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-24" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-project.openshift.io/v1.Project.html">v1.Project</a></li>
+                  <li><a class="" href="../rest_api/apis-project.openshift.io/v1.ProjectRequest.html">v1.ProjectRequest</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-25">
+                <span id="sgSpan-12-25" class="fa fa-caret-right"></span>&nbsp;/apis/quota.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-25" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-quota.openshift.io/v1.AppliedClusterResourceQuota.html">v1.AppliedClusterResourceQuota</a></li>
+                  <li><a class="" href="../rest_api/apis-quota.openshift.io/v1.ClusterResourceQuota.html">v1.ClusterResourceQuota</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-26">
+                <span id="sgSpan-12-26" class="fa fa-caret-right"></span>&nbsp;/apis/route.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-26" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-route.openshift.io/v1.Route.html">v1.Route</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-27">
+                <span id="sgSpan-12-27" class="fa fa-caret-right"></span>&nbsp;/apis/security.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-27" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-security.openshift.io/v1.PodSecurityPolicyReview.html">v1.PodSecurityPolicyReview</a></li>
+                  <li><a class="" href="../rest_api/apis-security.openshift.io/v1.PodSecurityPolicySelfSubjectReview.html">v1.PodSecurityPolicySelfSubjectReview</a></li>
+                  <li><a class="" href="../rest_api/apis-security.openshift.io/v1.PodSecurityPolicySubjectReview.html">v1.PodSecurityPolicySubjectReview</a></li>
+                  <li><a class="" href="../rest_api/apis-security.openshift.io/v1.SecurityContextConstraints.html">v1.SecurityContextConstraints</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-28">
+                <span id="sgSpan-12-28" class="fa fa-caret-right"></span>&nbsp;/apis/template.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-28" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-template.openshift.io/v1.BrokerTemplateInstance.html">v1.BrokerTemplateInstance</a></li>
+                  <li><a class="" href="../rest_api/apis-template.openshift.io/v1.Template.html">v1.Template</a></li>
+                  <li><a class="" href="../rest_api/apis-template.openshift.io/v1.TemplateInstance.html">v1.TemplateInstance</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-29">
+                <span id="sgSpan-12-29" class="fa fa-caret-right"></span>&nbsp;/apis/user.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-12-29" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/apis-user.openshift.io/v1.Group.html">v1.Group</a></li>
+                  <li><a class="" href="../rest_api/apis-user.openshift.io/v1.Identity.html">v1.Identity</a></li>
+                  <li><a class="" href="../rest_api/apis-user.openshift.io/v1.User.html">v1.User</a></li>
+                  <li><a class="" href="../rest_api/apis-user.openshift.io/v1.UserIdentityMapping.html">v1.UserIdentityMapping</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-30">
+                <span id="sgSpan-12-30" class="fa fa-caret-right"></span>&nbsp;/oapi/v1
+              </a>
+              <ul id="topicSubGroup-12-30" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../rest_api/oapi/v1.AppliedClusterResourceQuota.html">v1.AppliedClusterResourceQuota</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.Build.html">v1.Build</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.BuildConfig.html">v1.BuildConfig</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.ClusterNetwork.html">v1.ClusterNetwork</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.ClusterResourceQuota.html">v1.ClusterResourceQuota</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.ClusterRole.html">v1.ClusterRole</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.ClusterRoleBinding.html">v1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.DeploymentConfig.html">v1.DeploymentConfig</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.DeploymentConfigRollback.html">v1.DeploymentConfigRollback</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.EgressNetworkPolicy.html">v1.EgressNetworkPolicy</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.Group.html">v1.Group</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.HostSubnet.html">v1.HostSubnet</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.Identity.html">v1.Identity</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.Image.html">v1.Image</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.ImageSignature.html">v1.ImageSignature</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.ImageStream.html">v1.ImageStream</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.ImageStreamImage.html">v1.ImageStreamImage</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.ImageStreamImport.html">v1.ImageStreamImport</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.ImageStreamMapping.html">v1.ImageStreamMapping</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.ImageStreamTag.html">v1.ImageStreamTag</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.LocalResourceAccessReview.html">v1.LocalResourceAccessReview</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.NetNamespace.html">v1.NetNamespace</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.OAuthAccessToken.html">v1.OAuthAccessToken</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.OAuthAuthorizeToken.html">v1.OAuthAuthorizeToken</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.OAuthClient.html">v1.OAuthClient</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.OAuthClientAuthorization.html">v1.OAuthClientAuthorization</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.PodSecurityPolicyReview.html">v1.PodSecurityPolicyReview</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.PodSecurityPolicySelfSubjectReview.html">v1.PodSecurityPolicySelfSubjectReview</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.PodSecurityPolicySubjectReview.html">v1.PodSecurityPolicySubjectReview</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.ProcessedTemplate.html">v1.ProcessedTemplate</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.Project.html">v1.Project</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.ProjectRequest.html">v1.ProjectRequest</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.ResourceAccessReview.html">v1.ResourceAccessReview</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.Role.html">v1.Role</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.RoleBinding.html">v1.RoleBinding</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.RoleBindingRestriction.html">v1.RoleBindingRestriction</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.Route.html">v1.Route</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.SelfSubjectRulesReview.html">v1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.SubjectAccessReview.html">v1.SubjectAccessReview</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.SubjectRulesReview.html">v1.SubjectRulesReview</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.Template.html">v1.Template</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.User.html">v1.User</a></li>
+                  <li><a class="" href="../rest_api/oapi/v1.UserIdentityMapping.html">v1.UserIdentityMapping</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+</ul>
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-9 main">
+        <div class="page-header">
+          <h1>Customizing the Web Console</h1>
+        </div>
+        <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#overview">Overview</a></li>
+<li><a href="#loading-custom-scripts-and-stylesheets">Loading Extension Scripts and Stylesheets</a>
+<ul class="sectlevel2">
+<li><a href="#setting-extension-properties">Setting Extension Properties</a></li>
+</ul>
+</li>
+<li><a href="#extension-option-for-external-logging-solutions">Extension Option for External Logging Solutions</a></li>
+<li><a href="#customizing-the-logo">Customizing the Logo</a></li>
+<li><a href="#changing-links-to-documentation">Changing Links to Documentation</a></li>
+<li><a href="#adding-or-changing-links-to-download-the-cli">Adding or Changing Links to Download the CLI</a>
+<ul class="sectlevel2">
+<li><a href="#customizing-the-about-page">Customizing the About Page</a></li>
+</ul>
+</li>
+<li><a href="#configuring-navigation-menus">Configuring Navigation Menus</a>
+<ul class="sectlevel2">
+<li><a href="#top-navigation-dropdown-menus">Top Navigation Dropdown Menus</a></li>
+<li><a href="#web-console-application-launcher">Application Launcher</a></li>
+<li><a href="#web-console-project-left-navigation">Project Left Navigation</a></li>
+</ul>
+</li>
+<li><a href="#configuring-catalog-categories">Configuring Catalog Categories</a></li>
+<li><a href="#configuring-the-create-from-url-namespace-whitelist">Configuring the Create From URL Namespace Whitelist</a></li>
+<li><a href="#web-console-enable-wildcard-routes">Enabling Wildcard Routes</a></li>
+<li><a href="#web-console-enable-tech-preview-feature">Enabling Features in Technology Preview</a></li>
+<li><a href="#serving-static-files">Serving Static Files</a>
+<ul class="sectlevel2">
+<li><a href="#enabling-html5-mode">Enabling HTML5 Mode</a></li>
+</ul>
+</li>
+<li><a href="#customizing-the-login-page">Customizing the Login Page</a>
+<ul class="sectlevel2">
+<li><a href="#custom-login-page-example-usage">Example Usage</a></li>
+</ul>
+</li>
+<li><a href="#customizing-the-oauth-error-page">Customizing the OAuth Error Page</a></li>
+<li><a href="#changing-the-logout-url">Changing the Logout URL</a></li>
+<li><a href="#ansible-config-web-console-customizations">Configuring Web Console Customizations with Ansible</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="anchor" href="#overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Administrators can customize the
+<a href="../architecture/infrastructure_components/web_console.html#architecture-infrastructure-components-web-console">web
+console</a> using extensions, which let you run scripts and load custom stylesheets
+when the web console loads. Extension scripts allow you to override the default
+behavior of the web console and customize it for your needs.</p>
+</div>
+<div class="paragraph">
+<p>For example, extension scripts can be used to add your own
+company&#8217;s branding or to add company-specific capabilities. A common use case
+for this is rebranding or white-labelling for different environments. You can
+use the same extension code, but provide settings that change the web console.
+You can change the look and feel of nearly any aspect of the user interface in
+this way.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="loading-custom-scripts-and-stylesheets"><a class="anchor" href="#loading-custom-scripts-and-stylesheets"></a>Loading Extension Scripts and Stylesheets</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To add scripts and stylesheets, edit the
+<a href="../install_config/master_node_configuration.html#install-config-master-node-configuration">master configuration
+file</a>. The scripts and stylesheet files must exist on the Asset Server and are
+added with the following options:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">assetConfig</span>:
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">extensionScripts</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/script1.js</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/script2.js</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">...</span></span>
+  <span style="color:#606">extensionStylesheets</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/stylesheet1.css</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/stylesheet2.css</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">...</span></span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Wrap extension scripts in an Immediately Invoked Function Expression (IIFE).
+This ensures that you do not create global variables that conflict with the
+names used by the web console or by other extensions. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="javascript">(<span style="color:#080;font-weight:bold">function</span>() {
+  <span style="color:#777">// Put your extension code here...</span>
+}());</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Relative paths are resolved relative to the master configuration file. To pick
+up configuration changes, restart the server.</p>
+</div>
+<div class="paragraph">
+<p>Custom scripts and stylesheets are read once at server start time. To make
+developing extensions easier, you can reload scripts and stylesheets on every
+request by enabling development mode with the following setting:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">assetConfig</span>:
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">extensionDevelopment</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When set, the web console reloads any changes to existing extension script or
+stylesheet files when you refresh the page in your browser. You still must
+restart the server when adding new extension stylesheets or scripts, however.
+This setting is only recommended for testing changes and not for production.</p>
+</div>
+<div class="paragraph">
+<p>The examples in the following sections show common ways you can customize the
+web console.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Additional extension examples are available in the
+<a href="https://github.com/openshift/origin-web-console/tree/master/extensions/examples">OpenShift
+Origin</a> repository on GitHub.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="setting-extension-properties"><a class="anchor" href="#setting-extension-properties"></a>Setting Extension Properties</h3>
+<div class="paragraph">
+<p>If you have a specific extension, but want to use different text in it for each
+of the environments, you can define the environment in the
+<strong><em>master-config.yaml</em></strong> file, and use the same extension script across
+environments. Pass settings from the <strong><em>master-config.yaml</em></strong> file to be used by
+the extension using the
+<a href="../install_config/master_node_configuration.html#master-config-asset-config"><code>extensionProperties</code>
+mechanism</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">assetConfig</span>:
+  <span style="color:#606">extensionDevelopment</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span>
+  <span style="color:#606">extensionProperties</span>:
+    <span style="color:#606">doc_url</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">https://docs.openshift.com</span></span>
+    <span style="color:#606">key1</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">value1</span></span>
+    <span style="color:#606">key2</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">value2</span></span>
+  <span style="color:#606">extensionScripts</span>:</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This results in a global variable that can be accessed by the extension, as if
+the following code was executed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="javascript">window.OPENSHIFT_EXTENSION_PROPERTIES = {
+  <span style="color:#606">doc_url</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://docs.openshift.com</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#606">key1</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">value1</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#606">key2</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">value2</span><span style="color:#710">&quot;</span></span>,
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="extension-option-for-external-logging-solutions"><a class="anchor" href="#extension-option-for-external-logging-solutions"></a>Extension Option for External Logging Solutions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As of OpenShift Origin 3.6, there is an extension option to link to external
+logging solutions instead of using OpenShift Origin&#8217;s EFK logging stack:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">'use strict';
+angular.module("mylinkextensions", ['openshiftConsole'])
+       .run(function(extensionRegistry) {
+          extensionRegistry.add('log-links', _.spread(function(resource, options) {
+            return {
+              type: 'dom',
+              node: '&lt;span&gt;&lt;a href="https://extension-point.example.com"&gt;' + resource.metadata.name + '&lt;/a&gt;&lt;span class="action-divider"&gt;|&lt;/span&gt;&lt;/span&gt;'
+            };
+          }));
+       });
+hawtioPluginLoader.addModule("mylinkextensions");</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The URL to the logging stack you are wanting to access
+(<code>https://extension-point.example.com</code>, in this example) must be a valid HTTPS
+URL.</p>
+</div>
+<div class="paragraph">
+<p>The <code>resource</code> argument is the object that the logs are for (for example, a pod,
+deployment configuration, or build).</p>
+</div>
+<div class="paragraph">
+<p>The <code>options</code> objects are the log options we pass to the log REST API
+endpoint, including <code>options.container</code> and <code>options.version</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>options</code> argument depends on the kind of object, but will contain
+information like the specific container to pull logs for (<code>options.container</code>),
+or which replication controller the logs are for when getting logs for a
+deployment configuration (<code>options.version</code>).</p>
+</div>
+<div class="paragraph">
+<p>For pods, <code>options.container</code> specifies the pod container name (for example,
+<code>"my-container"</code>). For deployment configurations, <code>options.version</code> specifies
+the deployment version number (for example, <code>"2"</code>).</p>
+</div>
+<div class="paragraph">
+<p>Save this script to a file and add it to the master configuration file. Then,
+restart the master host:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap"># systemctl restart origin-master</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="customizing-the-logo"><a class="anchor" href="#customizing-the-logo"></a>Customizing the Logo</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following style changes the logo in the web console header:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="css"><span style="color:#33D;font-weight:bold">#header-logo</span> {
+  <span style="color:#606">background-image</span>: <span style="color:#06B;font-weight:bold"><span style="color:#059">url(</span><span style="color:#037">&quot;https://www.example.com/images/logo.png&quot;</span><span style="color:#059">)</span></span>;
+  <span style="color:#606">width</span>: <span style="color:#60E">190px</span>;
+  <span style="color:#606">height</span>: <span style="color:#60E">20px</span>;
+}</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Replace the <strong>example.com</strong> URL with a URL to an actual image, and adjust the
+width and height. The ideal height is <strong>20px</strong>.</p>
+</li>
+<li>
+<p>Save the style to a file (for example, <strong><em>logo.css</em></strong>) and add it to the master
+configuration file:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">assetConfig</span>:
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">extensionStylesheets</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/logo.css</span></span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Restart the master host:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap"># systemctl restart origin-master</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="changing-links-to-documentation"><a class="anchor" href="#changing-links-to-documentation"></a>Changing Links to Documentation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Links to external documentation are shown in various sections of the web
+console. The following example changes the URL for two given links to the
+documentation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="javascript">window.OPENSHIFT_CONSTANTS.HELP[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">get_started_cli</span><span style="color:#710">'</span></span>]      = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://example.com/doc1.html</span><span style="color:#710">&quot;</span></span>;
+window.OPENSHIFT_CONSTANTS.HELP[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">basic_cli_operations</span><span style="color:#710">'</span></span>] = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://example.com/doc2.html</span><span style="color:#710">&quot;</span></span>;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can change the base URL for all documentation links.</p>
+</div>
+<div class="paragraph">
+<p>This example would result in the default help URL <code>https://example.com/docs/welcome/index.html</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="javascript">window.OPENSHIFT_CONSTANTS.HELP_BASE_URL = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://example.com/docs/</span><span style="color:#710">&quot;</span></span>; <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The path must end in a <code>/</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Save this script to a file (for example, <strong><em>help-links.js</em></strong>) and add it to the
+master configuration file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">assetConfig</span>:
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">extensionScripts</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/help-links.js</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Restart the master host:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap"># systemctl restart origin-master</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="adding-or-changing-links-to-download-the-cli"><a class="anchor" href="#adding-or-changing-links-to-download-the-cli"></a>Adding or Changing Links to Download the CLI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong>About</strong> page in the web console provides download links for the
+<a href="../cli_reference/index.html#cli-reference-index">command line interface (CLI)</a> tools. These
+links can be configured by providing both the link text and URL, so that you can
+choose to point them directly to file packages, or to an external page that
+points to the actual packages.</p>
+</div>
+<div class="paragraph">
+<p>For example, to point directly to packages that can be downloaded, where the
+link text is the package platform:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="javascript">window.OPENSHIFT_CONSTANTS.CLI = {
+  <span style="color:#606"><span style="color:#404">&quot;</span><span>Linux (32 bits)</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://&lt;cdn&gt;/openshift-client-tools-linux-32bit.tar.gz</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#606"><span style="color:#404">&quot;</span><span>Linux (64 bits)</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://&lt;cdn&gt;/openshift-client-tools-linux-64bit.tar.gz</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#606"><span style="color:#404">&quot;</span><span>Windows</span><span style="color:#404">&quot;</span></span>:         <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://&lt;cdn&gt;/openshift-client-tools-windows.zip</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#606"><span style="color:#404">&quot;</span><span>Mac OS X</span><span style="color:#404">&quot;</span></span>:        <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://&lt;cdn&gt;/openshift-client-tools-mac.zip</span><span style="color:#710">&quot;</span></span>
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, to point to a page that links the actual download packages, with
+the <strong>Latest Release</strong> link text:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="javascript">window.OPENSHIFT_CONSTANTS.CLI = {
+  <span style="color:#606"><span style="color:#404">&quot;</span><span>Latest Release</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://&lt;cdn&gt;/openshift-client-tools/latest.html</span><span style="color:#710">&quot;</span></span>
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Save this script to a file (for example, <strong><em>cli-links.js</em></strong>) and add it to the
+master configuration file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">assetConfig</span>:
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">extensionScripts</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/cli-links.js</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Restart the master host:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap"># systemctl restart origin-master</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="customizing-the-about-page"><a class="anchor" href="#customizing-the-about-page"></a>Customizing the About Page</h3>
+<div class="paragraph">
+<p>To provide a custom <strong>About</strong> page for the web console:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Write an extension that looks like:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="javascript">angular
+  .module(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">aboutPageExtension</span><span style="color:#710">'</span></span>, [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">openshiftConsole</span><span style="color:#710">'</span></span>])
+  .config(<span style="color:#080;font-weight:bold">function</span>(<span style="color:#369;font-weight:bold">$routeProvider</span>) {
+    <span style="color:#369;font-weight:bold">$routeProvider</span>
+      .when(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/about</span><span style="color:#710">'</span></span>, {
+        <span style="color:#606">templateUrl</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">extensions/about/about.html</span><span style="color:#710">'</span></span>,
+        <span style="color:#606">controller</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">AboutController</span><span style="color:#710">'</span></span>
+      });
+    }
+  );
+
+hawtioPluginLoader.addModule(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">aboutPageExtension</span><span style="color:#710">'</span></span>);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Save the script to a file (for example, <strong><em>about/about.js</em></strong>).</p>
+</li>
+<li>
+<p>Write a customized template.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Start from the version of
+<a href="https://github.com/openshift/origin-web-console/blob/master/app/views/about.html"><strong><em>about.html</em></strong></a>
+from the OpenShift Container Platform
+<a href="https://github.com/openshift/origin-web-console/branches">release</a> you are
+using. Within the template, there are two angular scope variables available:
+<code>version.master.openshift</code> and <code>version.master.kubernetes</code>.</p>
+</li>
+<li>
+<p>Save the custom template to a file (for example, <strong><em>about/about.html</em></strong>).</p>
+</li>
+<li>
+<p>Modify the master configuration file:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">assetConfig</span>:
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">extensionScripts</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">about/about.js</span></span>
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">extensions</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: about</span></span>
+      <span style="color:#606">sourceDirectory</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/about</span></span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Restart the master host:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap"># systemctl restart origin-master</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring-navigation-menus"><a class="anchor" href="#configuring-navigation-menus"></a>Configuring Navigation Menus</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="top-navigation-dropdown-menus"><a class="anchor" href="#top-navigation-dropdown-menus"></a>Top Navigation Dropdown Menus</h3>
+<div class="paragraph">
+<p>The top navigation bar of the web console contains the help icon and the user
+dropdown menus. You can add additional menu items to these using the
+<a href="https://github.com/openshift/angular-extension-registry">angular-extension-registry</a>.</p>
+</div>
+<div class="paragraph">
+<p>The available extension points are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>nav-help-dropdown</code> - the help icon dropdown menu, visible at desktop screen widths</p>
+</li>
+<li>
+<p><code>nav-user-dropdown</code> - the user dropdown menu, visible at desktop screen widths</p>
+</li>
+<li>
+<p><code>nav-dropdown-mobile</code> - the single menu for top navigation items at mobile screen widths</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following example extends the <code>nav-help-dropdown</code> menu, with a name of
+<code>&lt;myExtensionModule&gt;</code>:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>&lt;myExtensionModule&gt;</code> is a placeholder name. Each dropdown menu extension must
+be unique enough so that it does not clash with any future angular modules.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="javascript">angular
+  .module(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">&lt;myExtensionModule&gt;</span><span style="color:#710">'</span></span>, [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">openshiftConsole</span><span style="color:#710">'</span></span>])
+  .run([
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">extensionRegistry</span><span style="color:#710">'</span></span>,
+    <span style="color:#080;font-weight:bold">function</span>(extensionRegistry) {
+      extensionRegistry
+        .add(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">nav-help-dropdown</span><span style="color:#710">'</span></span>, <span style="color:#080;font-weight:bold">function</span>() {
+          <span style="color:#080;font-weight:bold">return</span> [
+            {
+              <span style="color:#606">type</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">dom</span><span style="color:#710">'</span></span>,
+              <span style="color:#606">node</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">&lt;li&gt;&lt;a href=&quot;http://www.example.com/report&quot; target=&quot;_blank&quot;&gt;Report a Bug&lt;/a&gt;&lt;/li&gt;</span><span style="color:#710">'</span></span>
+            }, {
+              <span style="color:#606">type</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">dom</span><span style="color:#710">'</span></span>,
+              <span style="color:#606">node</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">&lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;</span><span style="color:#710">'</span></span>  <span style="color:#777">// If you want a horizontal divider to appear in the menu</span>
+            }, {
+              <span style="color:#606">type</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">dom</span><span style="color:#710">'</span></span>,
+              <span style="color:#606">node</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">&lt;li&gt;&lt;a href=&quot;http://www.example.com/status&quot; target=&quot;_blank&quot;&gt;System Status&lt;/a&gt;&lt;/li&gt;</span><span style="color:#710">'</span></span>
+            }
+          ];
+        });
+    }
+  ]);
+
+hawtioPluginLoader.addModule(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">&lt;myExtensionModule&gt;</span><span style="color:#710">'</span></span>);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="web-console-application-launcher"><a class="anchor" href="#web-console-application-launcher"></a>Application Launcher</h3>
+<div class="paragraph">
+<p>The top navigation bar also contains an optional application launcher for
+linking to other web applications. This dropdown menu is empty by default, but
+when links are added, appears to the left of the help menu in the masthead.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create the configuration scripts within a file (for example,
+<strong><em>applicationLauncher.js</em></strong>):</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="javascript"><span style="color:#777">// Add items to the application launcher dropdown menu.</span>
+window.OPENSHIFT_CONSTANTS.APP_LAUNCHER_NAVIGATION = [{
+  <span style="color:#606">title</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Dashboard</span><span style="color:#710">&quot;</span></span>,                    <span style="color:#777">// The text label</span>
+  <span style="color:#606">iconClass</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">fa fa-dashboard</span><span style="color:#710">&quot;</span></span>,          <span style="color:#777">// The icon you want to appear</span>
+  <span style="color:#606">href</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">http://example.com/dashboard</span><span style="color:#710">&quot;</span></span>,  <span style="color:#777">// Where to go when this item is clicked</span>
+  <span style="color:#606">tooltip</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">View dashboard</span><span style="color:#710">'</span></span>              <span style="color:#777">// Optional tooltip to display on hover</span>
+}, {
+  <span style="color:#606">title</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Manage Account</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#606">iconClass</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">pficon pficon-user</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#606">href</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">http://example.com/account</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#606">tooltip</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Update email address or password.</span><span style="color:#710">&quot;</span></span>
+}];</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Save the file and add it to the master configuration at
+<strong><em>/etc/origin/master/master-config.yaml</em></strong>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">assetConfig</span>:
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">extensionScripts</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/applicationLauncher.js</span></span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Restart the master host:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap"># systemctl restart origin-master</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="web-console-project-left-navigation"><a class="anchor" href="#web-console-project-left-navigation"></a>Project Left Navigation</h3>
+<div class="paragraph">
+<p>When navigating within a project, a menu appears on the left with primary and
+secondary navigation. This menu structure is defined as a constant and can be
+overridden or modified.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Significant customizations to the project navigation may affect the user
+experience and should be done with careful consideration. You may need to update
+this customization in future upgrades if you modify existing navigation items.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create the configuration scripts within a file (for example,
+<strong><em>navigation.js</em></strong>):</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="javascript"><span style="color:#777">// Append a new primary nav item.  This is a simple direct navigation item</span>
+<span style="color:#777">// with no secondary menu.</span>
+window.OPENSHIFT_CONSTANTS.PROJECT_NAVIGATION.push({
+  <span style="color:#606">label</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Dashboard</span><span style="color:#710">&quot;</span></span>,           <span style="color:#777">// The text label</span>
+  <span style="color:#606">iconClass</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">fa fa-dashboard</span><span style="color:#710">&quot;</span></span>, <span style="color:#777">// The icon you want to appear</span>
+  <span style="color:#606">href</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">/dashboard</span><span style="color:#710">&quot;</span></span>            <span style="color:#777">// Where to go when this nav item is clicked.</span>
+                                <span style="color:#777">// Relative URLs are pre-pended with the path</span>
+                                <span style="color:#777">// '/project/&lt;project-name&gt;'</span>
+});
+
+<span style="color:#777">// Splice a primary nav item to a specific spot in the list.  This primary item has</span>
+<span style="color:#777">// a secondary menu.</span>
+window.OPENSHIFT_CONSTANTS.PROJECT_NAVIGATION.splice(<span style="color:#00D">2</span>, <span style="color:#00D">0</span>, { <span style="color:#777">// Insert at the third spot</span>
+  <span style="color:#606">label</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Git</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#606">iconClass</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">fa fa-code</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#606">secondaryNavSections</span>: [       <span style="color:#777">// Instead of an href, a sub-menu can be defined</span>
+    {
+      <span style="color:#606">items</span>: [
+        {
+          <span style="color:#606">label</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Branches</span><span style="color:#710">&quot;</span></span>,
+          <span style="color:#606">href</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">/git/branches</span><span style="color:#710">&quot;</span></span>,
+          <span style="color:#606">prefixes</span>: [
+            <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">/git/branches/</span><span style="color:#710">&quot;</span></span>     <span style="color:#777">// Defines prefix URL patterns that will cause</span>
+                                 <span style="color:#777">// this nav item to show the active state, so</span>
+                                 <span style="color:#777">// tertiary or lower pages show the right context</span>
+          ]
+        }
+      ]
+    },
+    {
+      <span style="color:#606">header</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Collaboration</span><span style="color:#710">&quot;</span></span>,   <span style="color:#777">// Sections within a sub-menu can have an optional header</span>
+      <span style="color:#606">items</span>: [
+        {
+          <span style="color:#606">label</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Pull Requests</span><span style="color:#710">&quot;</span></span>,
+          <span style="color:#606">href</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">/git/pull-requests</span><span style="color:#710">&quot;</span></span>,
+          <span style="color:#606">prefixes</span>: [
+            <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">/git/pull-requests/</span><span style="color:#710">&quot;</span></span>
+          ]
+        }
+      ]
+    }
+  ]
+});
+
+<span style="color:#777">// Add a primary item to the top of the list.  This primary item is shown conditionally.</span>
+window.OPENSHIFT_CONSTANTS.PROJECT_NAVIGATION.unshift({
+  <span style="color:#606">label</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Getting Started</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#606">iconClass</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">pficon pficon-screen</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#606">href</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">/getting-started</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#606">prefixes</span>: [                   <span style="color:#777">// Primary nav items can also specify prefixes to trigger</span>
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">/getting-started/</span><span style="color:#710">&quot;</span></span>         <span style="color:#777">// active state</span>
+  ],
+  <span style="color:#06B;font-weight:bold">isValid</span>: <span style="color:#080;font-weight:bold">function</span>() {         <span style="color:#777">// Primary or secondary items can define an isValid</span>
+    <span style="color:#080;font-weight:bold">return</span> isNewUser;           <span style="color:#777">// function. If present it will be called to test whether</span>
+                                <span style="color:#777">// the item should be shown, it should return a boolean</span>
+  }
+});
+
+<span style="color:#777">// Modify an existing menu item</span>
+<span style="color:#080;font-weight:bold">var</span> applicationsMenu = _.find(window.OPENSHIFT_CONSTANTS.PROJECT_NAVIGATION, { <span style="color:#606">label</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Applications</span><span style="color:#710">'</span></span> });
+applicationsMenu.secondaryNavSections.push({ <span style="color:#777">// Add a new secondary nav section to the Applications menu</span>
+  <span style="color:#777">// my secondary nav section</span>
+});</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Save the file and add it to the master configuration at
+<strong><em>/etc/origin/master/master-config.yaml</em></strong>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">assetConfig</span>:
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">extensionScripts</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/navigation.js</span></span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Restart the master host:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap"># systemctl restart origin-master</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring-catalog-categories"><a class="anchor" href="#configuring-catalog-categories"></a>Configuring Catalog Categories</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Catalog categories organize the display of builder images and templates on the
+<strong>Add to Project</strong> page on the OpenShift Origin web console. A builder image or
+template is grouped in a category if it includes a tag with the same name of the
+category or category alias. Categories only display if one or more builder
+images or templates with matching tags are present in the catalog.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Significant customizations to the catalog categories may affect the user
+experience and should be done with careful consideration. You may need to update
+this customization in future upgrades if you modify existing category items.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create the following configuration scripts within a file (for example,
+<strong><em>catalog-categories.js</em></strong>):</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="javascript"><span style="color:#777">// Add Go to the Languages category</span>
+<span style="color:#080;font-weight:bold">var</span> category = _.find(window.OPENSHIFT_CONSTANTS.CATALOG_CATEGORIES,
+{ <span style="color:#606">id</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">languages</span><span style="color:#710">'</span></span> });
+category.items.splice(<span style="color:#00D">2</span>,<span style="color:#00D">0</span>,{ <span style="color:#777">// Insert at the third spot</span>
+  <span style="color:#777">// Required.  Must be unique</span>
+  <span style="color:#606">id</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">go</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#777">// Required</span>
+  <span style="color:#606">label</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Go</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#777">// Optional.  If specified, defines a unique icon for this item</span>
+  <span style="color:#606">iconClass</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">font-icon icon-go-gopher</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#777">// Optional.  If specified, enables matching other tag values to this category</span>
+  <span style="color:#777">// item</span>
+  <span style="color:#606">categoryAliases</span>: [
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">golang</span><span style="color:#710">&quot;</span></span>
+  ]
+});
+
+<span style="color:#777">// Add a Featured category section at the top of the catalog</span>
+window.OPENSHIFT_CONSTANTS.CATALOG_CATEGORIES.unshift({
+  <span style="color:#777">// Required.  Must be unique</span>
+  <span style="color:#606">id</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">featured</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#777">// Required</span>
+  <span style="color:#606">label</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Featured</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#777">// Optional.  If specified, each item in the category will utilize this icon</span>
+  <span style="color:#777">// as a default</span>
+  <span style="color:#606">iconClassDefault</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">fa fa-code</span><span style="color:#710">&quot;</span></span>,
+  <span style="color:#606">items</span>: [
+    {
+      <span style="color:#777">// Required.  Must be unique</span>
+      <span style="color:#606">id</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">go</span><span style="color:#710">&quot;</span></span>,
+      <span style="color:#777">// Required</span>
+      <span style="color:#606">label</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Go</span><span style="color:#710">&quot;</span></span>,
+      <span style="color:#777">// Optional.  If specified, defines a unique icon for this item</span>
+      <span style="color:#606">iconClass</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">font-icon icon-go-gopher</span><span style="color:#710">&quot;</span></span>,
+      <span style="color:#777">// Optional.  If specified, enables matching other tag values to this</span>
+      <span style="color:#777">// category item</span>
+      <span style="color:#606">categoryAliases</span>: [
+        <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">golang</span><span style="color:#710">&quot;</span></span>
+      ],
+      <span style="color:#777">// Optional.  If specified, will display below the item label</span>
+      <span style="color:#606">description</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">An open source programming language developed at Google in </span><span style="color:#710">&quot;</span></span> +
+      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">2007 by Robert Griesemer, Rob Pike, and Ken Thompson.</span><span style="color:#710">&quot;</span></span>
+    },
+    {
+      <span style="color:#777">// Required.  Must be unique</span>
+      <span style="color:#606">id</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">jenkins</span><span style="color:#710">&quot;</span></span>,
+      <span style="color:#777">// Required</span>
+      <span style="color:#606">label</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Jenkins</span><span style="color:#710">&quot;</span></span>,
+      <span style="color:#777">// Optional.  If specified, defines a unique icon for this item</span>
+      <span style="color:#606">iconClass</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">font-icon icon-jenkins</span><span style="color:#710">&quot;</span></span>,
+      <span style="color:#777">// Optional.  If specified, will display below the item label</span>
+      <span style="color:#606">description</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">An open source continuous integration tool written in Java.</span><span style="color:#710">&quot;</span></span>
+    }
+  ]
+});</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Save the file and add it to the master configuration at
+<strong><em>/etc/origin/master/master-config.yaml</em></strong>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">assetConfig</span>:
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">extensionScripts</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/catalog-categories.js</span></span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Restart the master host:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap"># systemctl restart origin-master</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring-the-create-from-url-namespace-whitelist"><a class="anchor" href="#configuring-the-create-from-url-namespace-whitelist"></a>Configuring the Create From URL Namespace Whitelist</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="../dev_guide/create_from_url.html#dev-guide-create-from-url">Create from URL</a>
+only works with image streams or templates from namespaces that have been
+explicitly specified in <code>OPENSHIFT_CONSTANTS.CREATE_FROM_URL_WHITELIST</code>.  To add
+namespaces to the whitelist, follow these steps:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>openshift</code> is included in the whitelist by default. Do not remove it.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create the following configuration scripts within a file (for example,
+<strong><em>create-from-url-whitelist.js</em></strong>):</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="javascript"><span style="color:#777">// Add a namespace containing the image streams and/or templates</span>
+window.OPENSHIFT_CONSTANTS.CREATE_FROM_URL_WHITELIST.push(
+  <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">shared-stuff</span><span style="color:#710">'</span></span>
+);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Save the file and add it to the master configuration file at
+<strong><em>/etc/origin/master/master-config.yaml</em></strong>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">assetConfig</span>:
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">extensionScripts</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/create-from-url-whitelist.js</span></span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Restart the master host:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap"># systemctl restart origin-master</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="web-console-enable-wildcard-routes"><a class="anchor" href="#web-console-enable-wildcard-routes"></a>Enabling Wildcard Routes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you enabled wildcard routes for a router, you can also enable wildcard
+routes in the web console. This lets users enter hostnames starting with an
+asterisk like <code>*.example.com</code> when creating a route. To enable wildcard routes:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Save this script to a file (for example, <strong><em>enable-wildcard-routes.js</em></strong>):</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="jsvascript">window.OPENSHIFT_CONSTANTS.DISABLE_WILDCARD_ROUTES = false;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add it to the master configuration file:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">assetConfig</span>:
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">extensionScripts</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/enable-wildcard-routes.js</span></span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Restart the master host:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap"># systemctl restart origin-master</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><a href="../install_config/router/default_haproxy_router.html#using-wildcard-routes">Learn
+how to configure HAProxy routers to allow wildcard routes</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="web-console-enable-tech-preview-feature"><a class="anchor" href="#web-console-enable-tech-preview-feature"></a>Enabling Features in Technology Preview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sometimes features are available in Technology Preview. By default, these
+features are disabled and hidden in the web console.</p>
+</div>
+<div class="paragraph">
+<p>Currently, there are no web console features in Technology Preview.</p>
+</div>
+<div class="paragraph">
+<p>To enable a Technology Preview feature:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Save this script to a file (for example, <strong><em>tech-preview.js</em></strong>):</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="javascript">window.OPENSHIFT_CONSTANTS.ENABLE_TECH_PREVIEW_FEATURE.&lt;feature_name&gt; = <span style="color:#069">true</span>;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add it to the master configuration file:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="javascript">assetConfig:
+  ...
+  extensionScripts:
+    - <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">path</span><span style="color:#404">/</span></span>to/tech-preview.js</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Restart the master host:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap"># systemctl restart origin-master</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="serving-static-files"><a class="anchor" href="#serving-static-files"></a>Serving Static Files</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can serve other files from the Asset Server as well. For example, you might
+want to make the CLI executable available for download from the web console or
+add images to use in a custom stylesheet.</p>
+</div>
+<div class="paragraph">
+<p>Add the directory with the files you want using the following configuration
+option:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">assetConfig</span>:
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">extensions</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: images</span></span>
+      <span style="color:#606">sourceDirectory</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/my_images</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The files under the <strong><em>/path/to/my_images</em></strong> directory will be available under the
+URL <em>/&lt;context&gt;/extensions/images</em> in the web console.</p>
+</div>
+<div class="paragraph">
+<p>To reference these files from a stylesheet, you should generally use a relative
+path. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="css"><span style="color:#33D;font-weight:bold">#header-logo</span> {
+  <span style="color:#606">background-image</span>: <span style="color:#06B;font-weight:bold"><span style="color:#059">url(</span><span style="color:#037">&quot;../extensions/images/my-logo.png&quot;</span><span style="color:#059">)</span></span>;
+}</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enabling-html5-mode"><a class="anchor" href="#enabling-html5-mode"></a>Enabling HTML5 Mode</h3>
+<div class="paragraph">
+<p>The web console has a special mode for supporting certain static web
+applications that use the HTML5 history API:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">assetConfig</span>:
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">extensions</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: my_extension</span></span>
+      <span style="color:#606">sourceDirectory</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/myExtension</span></span>
+      <span style="color:#606">html5Mode</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Setting <code>html5Mode</code> to <strong>true</strong> enables two behaviors:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Any request for a non-existent file under
+<strong><em>/&lt;context&gt;/extensions/my_extension/</em></strong> instead serves
+<strong><em>/path/to/myExtension/index.html</em></strong> rather than a "404 Not Found" page.</p>
+</li>
+<li>
+<p>The element <code>&lt;base href="/"&gt;</code> will be rewritten in
+<strong><em>/path/to/myExtension/index.html</em></strong> to use the actual base depending on the
+asset configuration; only this exact string is rewritten.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This is needed for JavaScript frameworks such as AngularJS that require <code>base</code>
+to be set in <strong><em>index.html</em></strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="customizing-the-login-page"><a class="anchor" href="#customizing-the-login-page"></a>Customizing the Login Page</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can also change the login page, and the login provider selection page for
+the web console. Run the following commands to create templates you can modify:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oadm create-login-template &gt; login-template.html
+$ oadm create-provider-selection-template &gt; provider-selection-template.html</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Edit the file to change the styles or add content, but be careful not to remove
+any required parameters inside the curly brackets.</p>
+</div>
+<div class="paragraph">
+<p>To use your custom login page or provider selection page, set the following
+options in the master configuration file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">oauthConfig</span>:
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">templates</span>:
+    <span style="color:#606">login</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/login-template.html</span></span>
+    <span style="color:#606">providerSelection</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/provider-selection-template.html</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Relative paths are resolved relative to the master configuration file. You must
+restart the server after changing this configuration.</p>
+</div>
+<div class="paragraph">
+<p>When there are multiple login providers configured or when the
+<a href="../install_config/configuring_authentication.html#identity-providers"><code>alwaysShowProviderSelection</code></a>
+option in the <strong><em>master-config.yaml</em></strong> file is set to <strong>true</strong>, each time a user&#8217;s
+token to OpenShift Origin expires, the user is presented with this custom page
+before they can proceed with other tasks.</p>
+</div>
+<div class="sect2">
+<h3 id="custom-login-page-example-usage"><a class="anchor" href="#custom-login-page-example-usage"></a>Example Usage</h3>
+<div class="paragraph">
+<p>Custom login pages can be used to create Terms of Service information. They can
+also be helpful if you use a third-party login provider, like GitHub or Google,
+to show users a branded page that they trust and expect before being redirected
+to the authentication provider.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="customizing-the-oauth-error-page"><a class="anchor" href="#customizing-the-oauth-error-page"></a>Customizing the OAuth Error Page</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When errors occur during authentication, you can change the page shown.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Run the following command to create a template you can modify:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oadm create-error-template &gt; error-template.html</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Edit the file to change the styles or add content.</p>
+<div class="paragraph">
+<p>You can use the <code>Error</code> and <code>ErrorCode</code> variables in the template. To use
+your custom error page, set the following option in the master configuration
+file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">oauthConfig</span>:
+  <span style="color:#F00;background-color:#FAA">...</span>
+  <span style="color:#606">templates</span>:
+    <span style="color:#606">error</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/path/to/error-template.html</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Relative paths are resolved relative to the master configuration file.</p>
+</div>
+</li>
+<li>
+<p>You must restart the server after changing this configuration.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="changing-the-logout-url"><a class="anchor" href="#changing-the-logout-url"></a>Changing the Logout URL</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can change the location a console user is sent to when logging out of
+the console by modifying the <code>logoutURL</code> parameter in the
+<strong><em>/etc/origin/master/master-config.yaml</em></strong> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#f8f;background:#505"><span style="color:#f4f">...</span></span>
+<span style="color:#606">assetConfig</span>:
+  <span style="color:#606">logoutURL</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">http://www.example.com</span><span style="color:#710">&quot;</span></span>
+<span style="color:#f8f;background:#505"><span style="color:#f4f">...</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This can be useful when authenticating with
+<a href="../install_config/configuring_authentication.html#RequestHeaderIdentityProvider">Request
+Header</a> and OAuth or
+<a href="../install_config/configuring_authentication.html#OpenID">OpenID</a> identity
+providers, which require visiting an external URL to destroy single sign-on
+sessions.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ansible-config-web-console-customizations"><a class="anchor" href="#ansible-config-web-console-customizations"></a>Configuring Web Console Customizations with Ansible</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>During
+<a href="../install_config/install/advanced_install.html#install-config-install-advanced-install">advanced installations</a>,
+many modifications to the web console can be configured using
+<a href="../install_config/install/advanced_install.html#advanced-install-configuring-global-proxy">the following parameters</a>, which are configurable in the inventory file:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#changing-the-logout-url"><code>openshift_master_logout_url</code></a></p>
+</li>
+<li>
+<p><a href="#loading-custom-scripts-and-stylesheets"><code>openshift_master_extension_scripts</code></a></p>
+</li>
+<li>
+<p><a href="#loading-custom-scripts-and-stylesheets"><code>openshift_master_extension_stylesheets</code></a></p>
+</li>
+<li>
+<p><a href="#serving-static-files"><code>openshift_master_extensions</code></a></p>
+</li>
+<li>
+<p><a href="#serving-static-files"><code>openshift_master_oauth_template</code></a></p>
+</li>
+<li>
+<p><a href="../install_config/cluster_metrics.html#install-config-cluster-metrics"><code>openshift_master_metrics_public_url</code></a></p>
+</li>
+<li>
+<p><a href="../install_config/aggregate_logging.html#install-config-aggregate-logging"><code>openshift_master_logging_public_url</code></a></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Example Web Console Customization with Ansible</div>
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash"># Configure logoutURL in the master config for console customization
+# See: https://docs.openshift.com/enterprise/latest/install_config/web_console_customization.html#changing-the-logout-url
+#openshift_master_logout_url=http://example.com
+
+# Configure extensionScripts in the master config for console customization
+# See: https://docs.openshift.com/enterprise/latest/install_config/web_console_customization.html#loading-custom-scripts-and-stylesheets
+#openshift_master_extension_scripts=['/path/on/host/to/script1.js','/path/on/host/to/script2.js']
+
+# Configure extensionStylesheets in the master config for console customization
+# See: https://docs.openshift.com/enterprise/latest/install_config/web_console_customization.html#loading-custom-scripts-and-stylesheets
+#openshift_master_extension_stylesheets=['/path/on/host/to/stylesheet1.css','/path/on/host/to/stylesheet2.css']
+
+# Configure extensions in the master config for console customization
+# See: https://docs.openshift.com/enterprise/latest/install_config/web_console_customization.html#serving-static-files
+#openshift_master_extensions=[{'name': 'images', 'sourceDirectory': '/path/to/my_images'}]
+
+# Configure extensions in the master config for console customization
+# See: https://docs.openshift.com/enterprise/latest/install_config/web_console_customization.html#serving-static-files
+#openshift_master_oauth_template=/path/on/host/to/login-template.html
+
+# Configure metricsPublicURL in the master config for cluster metrics. Ansible is also able to configure metrics for you.
+# See: https://docs.openshift.com/enterprise/latest/install_config/cluster_metrics.html
+#openshift_master_metrics_public_url=https://hawkular-metrics.example.com/hawkular/metrics
+
+# Configure loggingPublicURL in the master config for aggregate logging. Ansible is also able to install logging for you.
+# See: https://docs.openshift.com/enterprise/latest/install_config/aggregate_logging.html
+#openshift_master_logging_public_url=https://kibana.example.com</code></pre>
+</div>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    /*<![CDATA[*/
+    $(document).ready(function() {
+      $("[id^='topicGroup']").on('show.bs.collapse', function (event) {
+        if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+          $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+        }
+      });
+      $("[id^='topicGroup']").on('hide.bs.collapse', function (event) {
+        if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+          $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+        }
+      });
+      $("[id^='topicSubGroup']").on('show.bs.collapse', function () {
+        $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+      });
+      $("[id^='topicSubGroup']").on('hide.bs.collapse', function () {
+        $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+      });
+    });
+    /*]]>*/
+  </script>
+    <footer class="footer-origin-docs">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="footer_social">
+          <a href="https://twitter.com/openshift" class="first">
+            <span>
+              <i class="fa fa-twitter-square fa-2x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="https://github.com/openshift/origin">
+            <span>
+              <i class="fa fa-github fa-2x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="https://plus.google.com/communities/114361859072744017486">
+            <span>
+              <i class="fa fa-google-plus-square fa-2x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="https://www.facebook.com/openshift">
+            <span>
+              <i class="fa fa-facebook-square fa-2x fa-inverse"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <a id="footer_logo" href="https://www.redhat.com/">
+          <img alt="Red Hat" src="https://assets.openshift.net/app/assets/redhat.svg">
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 text-center">
+        <a id="powered_by_openshift" title="Powered by OpenShift Online with the DIY Cartridge" href="https://hub.openshift.com/quickstarts/92-do-it-yourself-0-1">
+          <img src="https://www.openshift.com/sites/default/files/images/powered-transparent-white.png" alt="Powered by OpenShift Online">
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 text-right">
+        <a id="built_with_asciibinder" title="Built with AsciiBinder docs management system" href="http://asciibinder.org/">
+          <img src="../../rest_api_work/_images/asciibinder_web_logo.svg" alt="AsciiBinder">
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="attribution">
+          <button type="button" class="btn btn-link" data-html="true" data-container="body" data-toggle="popover" data-placement="top" data-content="
+            '<a target='_blank' href='https://www.flickr.com/photos/eflon/3655695161/'>Spin</a>' by <a target='_blank' href='https://www.flickr.com/photos/eflon/'>eflon</a>,</br> used under <a target='_blank' href='https://creativecommons.org/licenses/by/2.0/'>CC BY 2.0</a> </br>Color tint added to original">
+            Image attribution
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
+    </script>
+  </div>
+</footer>
+</body>
+</html>
