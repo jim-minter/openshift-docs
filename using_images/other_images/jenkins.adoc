@@ -22,47 +22,40 @@ This image also includes a sample Jenkins job, which triggers a new build of a
 then on successful build, retags the output to indicate the build is ready for
 production.
 
-[[jenkins-version]]
-== Versions
-
-{product-title} follows the link:https://jenkins.io/changelog-stable/[LTS] releases of Jenkins.
-Currently, {product-title} provides versions 1.x and 2.x.
+{product-title} follows the link:https://jenkins.io/changelog-stable/[LTS]
+release of Jenkins.  {product-title} provides an image containing Jenkins 2.x.
+A separate image with Jenkins 1.x was previously made available but is now no
+longer maintained.
 
 [[jenkins-images]]
 == Images
 
 ifdef::openshift-online[]
-RHEL 7 images are available through the Red Hat Registry:
+The RHEL 7 image is available through the Red Hat Registry:
 
 ----
-$ docker pull registry.access.redhat.com/openshift3/jenkins-1-rhel7
 $ docker pull registry.access.redhat.com/openshift3/jenkins-2-rhel7
 ----
 
-You can use these images through the `jenkins` image stream.
+You can use this image through the `jenkins` image stream.
 endif::[]
 
 ifndef::openshift-online[]
-These images come in two flavors, depending on your needs:
+The {product-title} Jenkins image comes in two flavors:
 
-* RHEL 7
-* CentOS 7
+*RHEL 7 Based Image*
 
-*RHEL 7 Based Images*
-
-The RHEL 7 images are available through the Red Hat Registry:
+The RHEL 7 image is available through the Red Hat Registry:
 
 ----
-$ docker pull registry.access.redhat.com/openshift3/jenkins-1-rhel7
 $ docker pull registry.access.redhat.com/openshift3/jenkins-2-rhel7
 ----
 
-*CentOS 7 Based Images*
+*CentOS 7 Based Image*
 
 This image is available on Docker Hub:
 
 ----
-$ docker pull openshift/jenkins-1-centos7
 $ docker pull openshift/jenkins-2-centos7
 ----
 
@@ -169,7 +162,7 @@ To create a new Jenkins application using standard Jenkins authentication:
 ----
 $ oc new-app -e \
     JENKINS_PASSWORD=<password> \
-    openshift/jenkins-1-centos7
+    openshift/jenkins-2-centos7
 ----
 
 [[jenkins-environment-variables]]
@@ -623,7 +616,7 @@ provided by the Jenkins Pipeline Plug-in. The link:https://github.com/openshift/
 illustrates how to use the OpenShift Pipeline plugin DSL versions of its steps.
 
 The
-https://github.com/openshift/jenkins/tree/master/1/contrib/openshift/configuration/jobs/OpenShift%20Sample[sample
+https://github.com/openshift/jenkins/tree/master/2/contrib/openshift/configuration/jobs/OpenShift%20Sample[sample
 Jenkins job] that is pre-configured in the Jenkins image utilizes the
 {product-title} pipeline plug-in and serves as an example of how to leverage the
 plug-in for creating CI/CD flows for {product-title} in Jenkins.
@@ -642,8 +635,7 @@ As such, the new experimental
 link:https://github.com/openshift/jenkins-client-plugin[OpenShift Client Plug-in
 for Jenkins] is now offered as a technical preview and is included in the
 OpenShift Jenkins images on CentOS
-(*docker.io/openshift/jenkins-1-centos7:latest* and
-*docker.io/openshift/jenkins-2-centos7:latest*). The plug-in is also available
+(*docker.io/openshift/jenkins-2-centos7:latest*). The plug-in is also available
 from the Jenkins Update Center. The OpenShift Client plug-in will eventually
 replace the OpenShift Pipeline plug-in as the tool for OpenShift integration
 from Jenkins jobs. The OpenShift Client Plug-in provides:
@@ -684,4 +676,4 @@ or monitoring PIDs, as these can quickly use your memory allocation.
 
 You can increase the amount of memory available to Jenkins by overriding
 the *MEMORY_LIMIT* paramenter when instantiating the Jenkins Ephemeral or
-Jenkins Persistent template. 
+Jenkins Persistent template.
