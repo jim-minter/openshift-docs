@@ -170,43 +170,103 @@ $ oc new-app -e \
 
 The Jenkins server can be configured with the following environment variables:
 
-.Jenkins Environment Variables
-[cols="4a,6a",options="header"]
-|===
+* `OPENSHIFT_ENABLE_OAUTH` (default: `false`)
++
+Determines whether the OpenShift Login plug-in manages authentication when
+logging into Jenkins. To enable, set to `true`.
 
-|Variable name |Description
+* `JENKINS_PASSWORD` (default: `password`)
++
+The password for the `admin` user when using standard Jenkins authentication.
+Not applicable when `OPENSHIFT_ENABLE_OAUTH` is set to `true`.
 
-|`*JENKINS_PASSWORD*`
-|The password for the `*admin*` user when using standard Jenkins authentication.
-Not applicable when using {product-title} OAuth authentication.
+* `OPENSHIFT_JENKINS_JVM_ARCH`
++
+Set to `x86_64` or `i386` to override the JVM used to host Jenkins.  For memory
+efficiency, by default the Jenkins image dynamically uses a 32-bit JVM if
+running in a container with a memory limit under 2GiB.
 
-|`*OPENSHIFT_ENABLE_OAUTH*`
-|Determines whether the OpenShift Login plug-in manages authentication when
-logging into Jenkins. Enabled when set to any non-empty value other than
-"false".
+* `JAVA_MAX_HEAP_PARAM` +
+`CONTAINER_HEAP_PERCENT` (default: `0.5`, i.e. 50%) +
+`JENKINS_MAX_HEAP_UPPER_BOUND_MB` +
++
+These values control the maximum heap size of the Jenkins JVM.  If
+`JAVA_MAX_HEAP_PARAM` is set (example setting: `-Xmx512m`), its value takes
+precedence.  Otherwise, the maximum heap size is dynamically calculated as
+`CONTAINER_HEAP_PERCENT`% (example setting: `0.5`, i.e. 50%) of the container
+memory limit, optionally capped at `JENKINS_MAX_HEAP_UPPER_BOUND_MB` MiB
+(example setting: `512`).
++
+By default, the maximum heap size of the Jenkins JVM is set to 50% of the
+container memory limit with no cap.
 
-|`*OPENSHIFT_PERMISSIONS_POLL_INTERVAL*`
-|Specifies in seconds how often the OpenShift Login plug-in polls {product-title}
-for the permissions associated with each user defined in Jenkins.
+* `JAVA_INITIAL_HEAP_PARAM` +
+`CONTAINER_INITIAL_PERCENT`
++
+These values control the initial heap size of the Jenkins JVM.  If
+`JAVA_INITIAL_HEAP_PARAM` is set (example setting: `-Xms32m`), its value takes
+precedence.  Otherwise, the initial heap size may be dynamically calculated as
+`CONTAINER_INITIAL_PERCENT`% (example setting: `0.1`, i.e. 10%) of the
+dynamically calculated maximum heap size.
++
+By default, the initial heap sizing is left to the JVM.
 
-|`*OVERRIDE_PV_CONFIG_WITH_IMAGE_CONFIG*`
-|When running this image with an {product-title} persistent volume for the Jenkins
+* `CONTAINER_CORE_LIMIT`
++
+If set, specifies an integer number of cores used for sizing numbers of internal
+JVM threads.  Example setting: `2`.
+
+* `JAVA_TOOL_OPTIONS` (default: `-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dsun.zip.disableMemoryMapping=true`)
++
+Specifies options to be heeded by all JVMs running in this container.  It is not
+recommended to override this.
+
+* `JAVA_GC_OPTS` (default: `-XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90`)
++
+Specifies Jenkins JVM garbage collection parameters.  It is not recommended to
+override this.
+
+* `JENKINS_JAVA_OVERRIDES`
++
+Specifies additional options for the Jenkins JVM.  These options are appended to
+all other options, including the Java options above, and may be used to override
+any of them if necessary.
+
+* `JENKINS_OPTS`
++
+Specifies arguments to Jenkins.
+
+* `INSTALL_PLUGINS`
++
+Specifies additional Jenkins plug-ins to install when the container is first run
+or when `OVERRIDE_PV_PLUGINS_WITH_IMAGE_PLUGINS` is set to `true` (see below).
+Plug-ins are specified as a comma-delimited list of name:version pairs. Example
+setting: `git:3.7.0,subversion:2.10.2`.
+
+* `OPENSHIFT_PERMISSIONS_POLL_INTERVAL` (default: `300000` - 5 minutes)
++
+Specifies in milliseconds how often the OpenShift Login plug-in polls
+{product-title} for the permissions associated with each user defined in Jenkins.
+
+* `OVERRIDE_PV_CONFIG_WITH_IMAGE_CONFIG` (default: `false`)
++
+When running this image with an {product-title} persistent volume for the Jenkins
 config directory, the transfer of configuration from the image to the persistent
 volume is only done the first startup of the image as the persistent volume is
 assigned by the persistent volume claim creation. If you create a custom image
 that extends this image and updates configuration in the custom image after
 the initial startup, by default it will not be copied over, unless you set this
-environment variable to some non-empty value.
+environment variable to `true`.
 
-|`*OVERRIDE_PV_PLUGINS_WITH_IMAGE_PLUGINS*`
-|When running this image with an {product-title} persistent volume for the Jenkins
+* `OVERRIDE_PV_PLUGINS_WITH_IMAGE_PLUGINS` (default: `false`)
++
+When running this image with an {product-title} persistent volume for the Jenkins
 config directory, the transfer of plugins from the image to the persistent
 volume is only done the first startup of the image as the persistent volume is
 assigned by the persistent volume claim creation. If you create a custom image
 that extends this image and updates plugins in the custom image after
 the initial startup, by default they will not be copied over, unless you set this
-environment variable to some non-empty value.
-|===
+environment variable to `true`.
 
 [[jenkins-cross-project-access]]
 === Cross Project Access
