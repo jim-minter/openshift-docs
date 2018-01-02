@@ -71,8 +71,8 @@ endif::[]
 [[jenkins-configuration-and-usage]]
 == Configuration and Usage
 
-[[jenkins-initializing-jenkins]]
-=== Initializing Jenkins
+[[jenkins-authentication]]
+=== Authentication
 
 You can manage Jenkins authentication in two ways:
 
@@ -349,7 +349,7 @@ Standard Authentication] for details about changing this password.
 endif::[]
 
 [[jenkins-as-s2i-builder]]
-== Using Jenkins as a Source-To-Image builder
+== Customising the Jenkins image via Source-To-Image
 
 To customize the official {product-title} Jenkins image, you have two options:
 
