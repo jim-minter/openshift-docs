@@ -606,7 +606,7 @@ is removed from the Kubernetes plug-in.
 initial creation, leads to the creation of a `PodTemplate` in the Kubernetes-plugin
 configuration.
 - In the case of the `PodTemplate` via `ConfigMap` form, changes to the `ConfigMap`
-data for the `PodTemplate`will be applied to the `PodTemplate` settings in the
+data for the `PodTemplate` will be applied to the `PodTemplate` settings in the
 Kubernetes plug-in configuration, and will override any changes made to the
 `PodTemplate` via the Jenkins UI in the interim between changes to the `ConfigMap`.
 
