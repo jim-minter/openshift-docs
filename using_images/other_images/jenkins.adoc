@@ -721,6 +721,41 @@ For more information on Kubernetes plug-in configuration, see the
 link:https://github.com/jenkinsci/kubernetes-plugin[Kubernetes plug-in
 documentation].
 
+[[memory-requirements]]
+=== Memory Requirements
+
+The default memory limit for the Jenkins container is 512MiB, regardless of
+whether the Jenkins Ephemeral or Jenkins Persistent template is being used.
+
+See xref:../../dev_guide/application_memory_sizing.adoc#sizing-openjdk[Sizing
+OpenJDK on {product-title}] for background information on tuning the JVM used by
+Jenkins.
+
+For memory efficiency, by default the Jenkins image dynamically uses a 32-bit
+JVM if running in a container with a memory limit under 2GiB.  This behavior can
+be overridden via the `OPENSHIFT_JENKINS_JVM_ARCH` environment variable.
+
+By default the Jenkins JVM uses 50% of the container memory limit for its heap.
+This value can be modified via the `CONTAINER_HEAP_PERCENT` environment
+variable.  It can also be capped at an upper limit or overridden entirely.  See
+xref:#jenkins-environment-variables[Environment Variables] for more details.
+
+Consider that by default any/all other processes executed in the Jenkins
+container, e.g. shell scripts or `oc` commands run locally from pipelines, are
+not likely to be able to use more than the remaining 256MiB memory combined
+without provoking an OOM kill.  It is therefore highly recommended that
+pipelines run external commands in a slave container wherever possible.
+
+It is recommended to specify memory request and limit values on slave containers
+created by the Jenkins Kubernetes Plug-in.  As admin, defaults can be set on a
+per-slave image basis via the Jenkins configuration.  The memory request
+and limit can also be overridden on a per-container basis as documented
+xref:#using-the-jenkins-kubernetes-plug-in[above].
+
+You can increase the amount of memory available to Jenkins by overriding
+the *MEMORY_LIMIT* paramenter when instantiating the Jenkins Ephemeral or
+Jenkins Persistent template.
+
 [[tutorial]]
 === Tutorial
 
@@ -779,17 +814,3 @@ projects (when a `Build` is started).
 The Kubernetes plug-in is used to run Jenkins slaves as pods on your cluster.
 The auto-configuration of the Kubernetes plug-in is described
 in xref:../../using_images/other_images/jenkins.adoc#using-the-jenkins-kubernetes-plug-in-to-run-jobs[Using the Jenkins Kubernetes Plug-in to Run Jobs].
-
-[[memory-requirements]]
-== Memory Requirements
-
-The default memory allocation for the Jenkins container is 512Mi, regardless of
-whether you are using the Jenkins Ephemeral or Jenkins Persistent template.
-While Jenkins can easily operate within this limit, you will need to be
-mindful of any `sh` invocations that you might be making from your pipelines,
-such as shell scripts, invoking the `oc` command through the OpenShift DSL,
-or monitoring PIDs, as these can quickly use your memory allocation.
-
-You can increase the amount of memory available to Jenkins by overriding
-the *MEMORY_LIMIT* paramenter when instantiating the Jenkins Ephemeral or
-Jenkins Persistent template.
