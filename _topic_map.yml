@@ -887,6 +887,8 @@ Topics:
   Distros: openshift-enterprise,openshift-dedicated,openshift-origin,openshift-online
 - Name: Create from URL
   File: create_from_url
+- Name: Application memory sizing
+  File: application_memory_sizing
 - Name: Revision History
   File: revhistory_dev_guide
   Distros: openshift-enterprise,openshift-dedicated
