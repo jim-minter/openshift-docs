@@ -1,0 +1,2486 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en-us"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en-us"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if IE 9]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if lt IE 10]> <html class="no-js lt-ie10" lang="en-us"> <![endif]-->
+<!--[if !IE]> > <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<title>Atomic Registry Branch Build | REST API Reference | /apis/extensions/v1beta1 | v1beta1.NetworkPolicy</title>
+<meta charset='utf-8'>
+<meta content='' name='description'>
+<meta content='Project Atomic. Sponsored by Red Hat, Inc.' name='author'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width' name='viewport'>
+
+<link href='http://www.projectatomic.io/images/favicon.ico' rel='shortcut icon'>
+<link href='http://www.projectatomic.io/images/apple-touch-icon-precomposed.png' rel='apple-touch-icon-precomposed'>
+<link href='http://www.projectatomic.io/images/apple-touch-icon-57x57-precomposed.png' rel='apple-touch-icon-precomposed' sizes='57x57'>
+<link href='http://www.projectatomic.io/images/apple-touch-icon-72x72-precomposed.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
+<link href='http://www.projectatomic.io/images/apple-touch-icon-114x114-precomposed.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
+<link href='http://www.projectatomic.io/blog/feed.xml' rel='alternate' title='Project Atomic' type='application/atom+xml'>
+<link href="http://www.projectatomic.io/stylesheets/application.css" rel="stylesheet" type="text/css" />
+<link href="http://www.projectatomic.io/stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+</head>
+<body class=' docs docs_introduction docs_introduction_index source-md'>
+<section class='container' id='page-wrap'>
+  <div class='row'>
+  <div class='col-md-3 col-lg-2' id='sidebar'>
+    <div id='nav-primary'>
+      <nav class='navbar navbar-default' role='navigation'>
+        <div class='navbar-header'>
+          <button class='navbar-toggle' data-target='.navbar-ex1-collapse' data-toggle='collapse'>
+            <span class='sr-only'>
+              Toggle navigation
+            </span>
+            <span class='icon-bar'></span>
+            <span class='icon-bar'></span>
+            <span class='icon-bar'></span>
+          </button>
+          <a class='navbar-brand' href='http://www.projectatomic.io/'>
+            Project Atomic
+          </a>
+        </div>
+        <div class='collapse navbar-collapse navbar-ex1-collapse'>
+          <ul class='nav navbar-nav'>
+            <li><a class="get-started" href="http://www.projectatomic.io/download">Get Started</a></li>
+            <li><a class="documentation" href="http://www.projectatomic.io/docs">Documentation</a></li>
+            <li><a class="developer-community" href="http://www.projectatomic.io/community">Developer Community</a></li>
+            <li><a class="on-github" href="https://github.com/projectatomic/">On GitHub</a></li>
+            <li><a class="ask" href="http://ask.projectatomic.io/">Ask</a></li>
+            <li><a class="blog" href="http://www.projectatomic.io/blog">Blog</a></li>
+            <li><a class="twitter" href="http://www.twitter.com/projectatomic">Twitter</a></li>
+            <li><a class="facebook" href="https://www.facebook.com/projectatomic">Facebook</a></li>
+            <li><a class="google" href="https://plus.google.com/108727025270662383247/posts">Google+</a></li>
+            <li><a class="rss" href="http://www.projectatomic.io/blog/feed.xml">RSS</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+<section class='col-lg-10 col-md-9 container-fluid' id='content'>
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an outdated browser.
+<a href="http://browsehappy.com/">Upgrade your browser today</a> or
+<a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+<![endif]-->
+<div class='row'>
+  <div class='col-sm-9'>
+    <h2>v1beta1.NetworkPolicy</h2>
+    <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#description">Description</a></li>
+<li><a href="#object-schema">Object Schema</a></li>
+<li><a href="#operations">Operations</a>
+<ul class="sectlevel2">
+<li><a href="#Post-apis-extensions-v1beta1-networkpolicies">Create a NetworkPolicy</a></li>
+<li><a href="#Post-apis-extensions-v1beta1-namespaces-namespace-networkpolicies">Create a NetworkPolicy in a namespace</a></li>
+<li><a href="#Get-apis-extensions-v1beta1-namespaces-namespace-networkpolicies-name">Get a NetworkPolicy in a namespace</a></li>
+<li><a href="#Get-apis-extensions-v1beta1-networkpolicies">Get all NetworkPolicies</a></li>
+<li><a href="#Get-apis-extensions-v1beta1-namespaces-namespace-networkpolicies">Get all NetworkPolicies in a namespace</a></li>
+<li><a href="#Get-apis-extensions-v1beta1-watch-namespaces-namespace-networkpolicies-name">Watch a NetworkPolicy in a namespace</a></li>
+<li><a href="#Get-apis-extensions-v1beta1-watch-networkpolicies">Watch all NetworkPolicies</a></li>
+<li><a href="#Get-apis-extensions-v1beta1-watch-namespaces-namespace-networkpolicies">Watch all NetworkPolicies in a namespace</a></li>
+<li><a href="#Put-apis-extensions-v1beta1-namespaces-namespace-networkpolicies-name">Update a NetworkPolicy in a namespace</a></li>
+<li><a href="#Patch-apis-extensions-v1beta1-namespaces-namespace-networkpolicies-name">Patch a NetworkPolicy in a namespace</a></li>
+<li><a href="#Delete-apis-extensions-v1beta1-namespaces-namespace-networkpolicies-name">Delete a NetworkPolicy in a namespace</a></li>
+<li><a href="#Delete-apis-extensions-v1beta1-namespaces-namespace-networkpolicies">Delete all NetworkPolicies in a namespace</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="description"><a class="anchor" href="#description"></a>Description</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>NetworkPolicy describes what network traffic is allowed for a set of Pods</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="object-schema"><a class="anchor" href="#object-schema"></a>Object Schema</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Expand or mouse-over a field for more information about it.</p>
+</div>
+<pre>
+<div style="margin-left:13px;"><span title="(string) APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources">apiVersion</span>:
+</div><div style="margin-left:13px;"><span title="(string) Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds">kind</span>:
+</div><details open><summary><span title="(v1.ObjectMeta) Standard object&#39;s metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata">metadata</span>:
+</summary><details><summary>  <span title="(object) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations">annotations</span>:
+</summary><div style="margin-left:13px;">    <span title="(string)">[string]</span>:
+</div></details><div style="margin-left:13px;">  <span title="(string) The name of the cluster which the object belongs to. This is used to distinguish resources with same name and namespace in different clusters. This field is not set anywhere right now and apiserver is going to ignore it if set in create or update request.">clusterName</span>:
+</div><div style="margin-left:13px;">  <span title="(v1.Time) CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata">creationTimestamp</span>:
+</div><div style="margin-left:13px;">  <span title="(integer) Number of seconds allowed for this object to gracefully terminate before it will be removed from the system. Only set when deletionTimestamp is also set. May only be shortened. Read-only.">deletionGracePeriodSeconds</span>:
+</div><div style="margin-left:13px;">  <span title="(v1.Time) DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field. Once set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata">deletionTimestamp</span>:
+</div><details><summary>  <span title="(array) Must be empty before the object is deleted from the registry. Each entry is an identifier for the responsible component that will remove the entry from the list. If the deletionTimestamp of the object is non-nil, entries in this list can only be removed.">finalizers</span>:
+</summary><div style="margin-left:13px;">  - <span title="(string)">[string]</span>:
+</div></details><div style="margin-left:13px;">  <span title="(string) GenerateName is an optional prefix, used by the server, to generate a unique name ONLY IF the Name field has not been provided. If this field is used, the name returned to the client will be different than the name passed. This value will also be combined with a unique suffix. The provided value has the same validation rules as the Name field, and may be truncated by the length of the suffix required to make the value unique on the server.
+
+If this field is specified and the generated name exists, the server will NOT return a 409 - instead, it will either return 201 Created or 500 with Reason ServerTimeout indicating a unique name could not be found in the time allotted, and the client should retry (optionally after the time indicated in the Retry-After header).
+
+Applied only if Name is not specified. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#idempotency">generateName</span>:
+</div><div style="margin-left:13px;">  <span title="(integer) A sequence number representing a specific generation of the desired state. Populated by the system. Read-only.">generation</span>:
+</div><details><summary>  <span title="(v1.Initializers) An initializer is a controller which enforces some system invariant at object creation time. This field is a list of initializers that have not yet acted on this object. If nil or empty, this object has been completely initialized. Otherwise, the object is considered uninitialized and is hidden (in list/watch and get calls) from clients that haven&#39;t explicitly asked to observe uninitialized objects.
+
+When an object is created, the system will populate this list with the current set of initializers. Only privileged users may set or modify this list. Once it is empty, it may not be modified further by any user.">initializers</span>:
+</summary><details><summary>    <span title="(array) Pending is a list of initializers that must execute in order before this object is visible. When the last pending initializer is removed, and no failing result is set, the initializers struct will be set to nil and the object is considered as initialized and visible to all clients.">pending</span>:
+</summary><div style="margin-left:13px;">    - <span title="(string) name of the process that is responsible for initializing this object.">name</span>:
+</div></details><details><summary>    <span title="(v1.Status) If result is set with the Failure field, the object will be persisted to storage and then deleted, ensuring that other clients can observe the deletion.">result</span>:
+</summary><div style="margin-left:13px;">      <span title="(string) APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources">apiVersion</span>:
+</div><div style="margin-left:13px;">      <span title="(integer) Suggested HTTP return code for this status, 0 if not set.">code</span>:
+</div><details><summary>      <span title="(v1.StatusDetails) Extended data associated with the reason.  Each reason may define its own extended details. This field is optional and the data returned is not guaranteed to conform to any schema except that defined by the reason type.">details</span>:
+</summary><details><summary>        <span title="(array) The Causes array includes more details associated with the StatusReason failure. Not all StatusReasons may provide detailed causes.">causes</span>:
+</summary><div style="margin-left:13px;">        - <span title="(string) The field of the resource that has caused this error, as named by its JSON serialization. May include dot and postfix notation for nested attributes. Arrays are zero-indexed.  Fields may appear more than once in an array of causes due to fields having multiple errors. Optional.
+
+Examples:
+  &#34;name&#34; - the field &#34;name&#34; on the current resource
+  &#34;items[0].name&#34; - the field &#34;name&#34; on the first array entry in &#34;items&#34;">field</span>:
+</div><div style="margin-left:13px;">          <span title="(string) A human-readable description of the cause of the error.  This field may be presented as-is to a reader.">message</span>:
+</div><div style="margin-left:13px;">          <span title="(string) A machine-readable description of the cause of the error. If this value is empty there is no information available.">reason</span>:
+</div></details><div style="margin-left:13px;">        <span title="(string) The group attribute of the resource associated with the status StatusReason.">group</span>:
+</div><div style="margin-left:13px;">        <span title="(string) The kind attribute of the resource associated with the status StatusReason. On some operations may differ from the requested resource Kind. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds">kind</span>:
+</div><div style="margin-left:13px;">        <span title="(string) The name attribute of the resource associated with the status StatusReason (when there is a single name which can be described).">name</span>:
+</div><div style="margin-left:13px;">        <span title="(integer) If specified, the time in seconds before the operation should be retried. Some errors may indicate the client must take an alternate action - for those errors this field may indicate how long to wait before taking the alternate action.">retryAfterSeconds</span>:
+</div><div style="margin-left:13px;">        <span title="(string) UID of the resource. (when there is a single resource which can be described). More info: http://kubernetes.io/docs/user-guide/identifiers#uids">uid</span>:
+</div></details><div style="margin-left:13px;">      <span title="(string) Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds">kind</span>:
+</div><div style="margin-left:13px;">      <span title="(string) A human-readable description of the status of this operation.">message</span>:
+</div><details><summary>      <span title="(v1.ListMeta) Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds">metadata</span>:
+</summary><div style="margin-left:13px;">        <span title="(string) continue may be set if the user set a limit on the number of items returned, and indicates that the server has more data available. The value is opaque and may be used to issue another request to the endpoint that served this list to retrieve the next set of available objects. Continuing a list may not be possible if the server configuration has changed or more than a few minutes have passed. The resourceVersion field returned when using this continue value will be identical to the value in the first response.">continue</span>:
+</div><div style="margin-left:13px;">        <span title="(string) String that identifies the server&#39;s internal version of this object that can be used by clients to determine when objects have changed. Value must be treated as opaque by clients and passed unmodified back to the server. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#concurrency-control-and-consistency">resourceVersion</span>:
+</div><div style="margin-left:13px;">        <span title="(string) selfLink is a URL representing this object. Populated by the system. Read-only.">selfLink</span>:
+</div></details><div style="margin-left:13px;">      <span title="(string) A machine-readable description of why this operation is in the &#34;Failure&#34; status. If this value is empty there is no information available. A Reason clarifies an HTTP status code but does not override it.">reason</span>:
+</div><div style="margin-left:13px;">      <span title="(string) Status of the operation. One of: &#34;Success&#34; or &#34;Failure&#34;. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status">status</span>:
+</div></details></details><details><summary>  <span title="(object) Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels">labels</span>:
+</summary><div style="margin-left:13px;">    <span title="(string)">[string]</span>:
+</div></details><div style="margin-left:13px;">  <span title="(string) Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names">name</span>:
+</div><div style="margin-left:13px;">  <span title="(string) Namespace defines the space within each name must be unique. An empty namespace is equivalent to the &#34;default&#34; namespace, but &#34;default&#34; is the canonical representation. Not all objects are required to be scoped to a namespace - the value of this field for those objects will be empty.
+
+Must be a DNS_LABEL. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/namespaces">namespace</span>:
+</div><details><summary>  <span title="(array) List of objects depended by this object. If ALL objects in the list have been deleted, this object will be garbage collected. If this object is managed by a controller, then an entry in this list will point to this controller, with the controller field set to true. There cannot be more than one managing controller.">ownerReferences</span>:
+</summary><div style="margin-left:13px;">  - <span title="(string) API version of the referent.">apiVersion</span>:
+</div><div style="margin-left:13px;">    <span title="(boolean) If true, AND if the owner has the &#34;foregroundDeletion&#34; finalizer, then the owner cannot be deleted from the key-value store until this reference is removed. Defaults to false. To set this field, a user needs &#34;delete&#34; permission of the owner, otherwise 422 (Unprocessable Entity) will be returned.">blockOwnerDeletion</span>:
+</div><div style="margin-left:13px;">    <span title="(boolean) If true, this reference points to the managing controller.">controller</span>:
+</div><div style="margin-left:13px;">    <span title="(string) Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds">kind</span>:
+</div><div style="margin-left:13px;">    <span title="(string) Name of the referent. More info: http://kubernetes.io/docs/user-guide/identifiers#names">name</span>:
+</div><div style="margin-left:13px;">    <span title="(string) UID of the referent. More info: http://kubernetes.io/docs/user-guide/identifiers#uids">uid</span>:
+</div></details><div style="margin-left:13px;">  <span title="(string) An opaque value that represents the internal version of this object that can be used by clients to determine when objects have changed. May be used for optimistic concurrency, change detection, and the watch operation on a resource or set of resources. Clients must treat these values as opaque and passed unmodified back to the server. They may only be valid for a particular resource or set of resources.
+
+Populated by the system. Read-only. Value must be treated as opaque by clients and . More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#concurrency-control-and-consistency">resourceVersion</span>:
+</div><div style="margin-left:13px;">  <span title="(string) SelfLink is a URL representing this object. Populated by the system. Read-only.">selfLink</span>:
+</div><div style="margin-left:13px;">  <span title="(string) UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids">uid</span>:
+</div></details><details open><summary><span title="(v1beta1.NetworkPolicySpec) Specification of the desired behavior for this NetworkPolicy.">spec</span>:
+</summary><details><summary>  <span title="(array) List of egress rules to be applied to the selected pods. Outgoing traffic is allowed if there are no NetworkPolicies selecting the pod (and cluster policy otherwise allows the traffic), OR if the traffic matches at least one egress rule across all of the NetworkPolicy objects whose podSelector matches the pod. If this field is empty then this NetworkPolicy limits all outgoing traffic (and serves solely to ensure that the pods it selects are isolated by default). This field is beta-level in 1.8">egress</span>:
+</summary><details><summary>  - <span title="(array) List of destination ports for outgoing traffic. Each item in this list is combined using a logical OR. If this field is empty or missing, this rule matches all ports (traffic not restricted by port). If this field is present and contains at least one item, then this rule allows traffic only if the traffic matches at least one port in the list.">ports</span>:
+</summary><div style="margin-left:13px;">  - - <span title="(intstr.IntOrString) If specified, the port on the given protocol.  This can either be a numerical or named port on a pod.  If this field is not provided, this matches all port names and numbers. If present, only traffic on the specified protocol AND port will be matched.">port</span>:
+</div><div style="margin-left:13px;">      <span title="(string) Optional.  The protocol (TCP or UDP) which traffic must match. If not specified, this field defaults to TCP.">protocol</span>:
+</div></details><details><summary>    <span title="(array) List of destinations for outgoing traffic of pods selected for this rule. Items in this list are combined using a logical OR operation. If this field is empty or missing, this rule matches all destinations (traffic not restricted by destination). If this field is present and contains at least one item, this rule allows traffic only if the traffic matches at least one item in the to list.">to</span>:
+</summary><details><summary>    - <span title="(v1beta1.IPBlock) IPBlock defines policy on a particular IPBlock">ipBlock</span>:
+</summary><div style="margin-left:13px;">    -   <span title="(string) CIDR is a string representing the IP Block Valid examples are &#34;192.168.1.1/24&#34;">cidr</span>:
+</div><details><summary>        <span title="(array) Except is a slice of CIDRs that should not be included within an IP Block Valid examples are &#34;192.168.1.1/24&#34; Except values will be rejected if they are outside the CIDR range">except</span>:
+</summary><div style="margin-left:13px;">        - <span title="(string)">[string]</span>:
+</div></details></details><details><summary>      <span title="(v1.LabelSelector) Selects Namespaces using cluster scoped-labels.  This matches all pods in all namespaces selected by this label selector. This field follows standard label selector semantics. If present but empty, this selector selects all namespaces.">namespaceSelector</span>:
+</summary><details><summary>        <span title="(array) matchExpressions is a list of label selector requirements. The requirements are ANDed.">matchExpressions</span>:
+</summary><div style="margin-left:13px;">        - <span title="(string) key is the label key that the selector applies to.">key</span>:
+</div><div style="margin-left:13px;">          <span title="(string) operator represents a key&#39;s relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.">operator</span>:
+</div><details><summary>          <span title="(array) values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.">values</span>:
+</summary><div style="margin-left:13px;">          - <span title="(string)">[string]</span>:
+</div></details></details><details><summary>        <span title="(object) matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is &#34;key&#34;, the operator is &#34;In&#34;, and the values array contains only &#34;value&#34;. The requirements are ANDed.">matchLabels</span>:
+</summary><div style="margin-left:13px;">          <span title="(string)">[string]</span>:
+</div></details></details><details><summary>      <span title="(v1.LabelSelector) This is a label selector which selects Pods in this namespace. This field follows standard label selector semantics. If present but empty, this selector selects all pods in this namespace.">podSelector</span>:
+</summary><details><summary>        <span title="(array) matchExpressions is a list of label selector requirements. The requirements are ANDed.">matchExpressions</span>:
+</summary><div style="margin-left:13px;">        - <span title="(string) key is the label key that the selector applies to.">key</span>:
+</div><div style="margin-left:13px;">          <span title="(string) operator represents a key&#39;s relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.">operator</span>:
+</div><details><summary>          <span title="(array) values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.">values</span>:
+</summary><div style="margin-left:13px;">          - <span title="(string)">[string]</span>:
+</div></details></details><details><summary>        <span title="(object) matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is &#34;key&#34;, the operator is &#34;In&#34;, and the values array contains only &#34;value&#34;. The requirements are ANDed.">matchLabels</span>:
+</summary><div style="margin-left:13px;">          <span title="(string)">[string]</span>:
+</div></details></details></details></details><details><summary>  <span title="(array) List of ingress rules to be applied to the selected pods. Traffic is allowed to a pod if there are no NetworkPolicies selecting the pod OR if the traffic source is the pod&#39;s local node, OR if the traffic matches at least one ingress rule across all of the NetworkPolicy objects whose podSelector matches the pod. If this field is empty then this NetworkPolicy does not allow any traffic (and serves solely to ensure that the pods it selects are isolated by default).">ingress</span>:
+</summary><details><summary>  - <span title="(array) List of sources which should be able to access the pods selected for this rule. Items in this list are combined using a logical OR operation. If this field is empty or missing, this rule matches all sources (traffic not restricted by source). If this field is present and contains at least on item, this rule allows traffic only if the traffic matches at least one item in the from list.">from</span>:
+</summary><details><summary>  - - <span title="(v1beta1.IPBlock) IPBlock defines policy on a particular IPBlock">ipBlock</span>:
+</summary><div style="margin-left:13px;">  - -   <span title="(string) CIDR is a string representing the IP Block Valid examples are &#34;192.168.1.1/24&#34;">cidr</span>:
+</div><details><summary>        <span title="(array) Except is a slice of CIDRs that should not be included within an IP Block Valid examples are &#34;192.168.1.1/24&#34; Except values will be rejected if they are outside the CIDR range">except</span>:
+</summary><div style="margin-left:13px;">        - <span title="(string)">[string]</span>:
+</div></details></details><details><summary>      <span title="(v1.LabelSelector) Selects Namespaces using cluster scoped-labels.  This matches all pods in all namespaces selected by this label selector. This field follows standard label selector semantics. If present but empty, this selector selects all namespaces.">namespaceSelector</span>:
+</summary><details><summary>        <span title="(array) matchExpressions is a list of label selector requirements. The requirements are ANDed.">matchExpressions</span>:
+</summary><div style="margin-left:13px;">        - <span title="(string) key is the label key that the selector applies to.">key</span>:
+</div><div style="margin-left:13px;">          <span title="(string) operator represents a key&#39;s relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.">operator</span>:
+</div><details><summary>          <span title="(array) values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.">values</span>:
+</summary><div style="margin-left:13px;">          - <span title="(string)">[string]</span>:
+</div></details></details><details><summary>        <span title="(object) matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is &#34;key&#34;, the operator is &#34;In&#34;, and the values array contains only &#34;value&#34;. The requirements are ANDed.">matchLabels</span>:
+</summary><div style="margin-left:13px;">          <span title="(string)">[string]</span>:
+</div></details></details><details><summary>      <span title="(v1.LabelSelector) This is a label selector which selects Pods in this namespace. This field follows standard label selector semantics. If present but empty, this selector selects all pods in this namespace.">podSelector</span>:
+</summary><details><summary>        <span title="(array) matchExpressions is a list of label selector requirements. The requirements are ANDed.">matchExpressions</span>:
+</summary><div style="margin-left:13px;">        - <span title="(string) key is the label key that the selector applies to.">key</span>:
+</div><div style="margin-left:13px;">          <span title="(string) operator represents a key&#39;s relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.">operator</span>:
+</div><details><summary>          <span title="(array) values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.">values</span>:
+</summary><div style="margin-left:13px;">          - <span title="(string)">[string]</span>:
+</div></details></details><details><summary>        <span title="(object) matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is &#34;key&#34;, the operator is &#34;In&#34;, and the values array contains only &#34;value&#34;. The requirements are ANDed.">matchLabels</span>:
+</summary><div style="margin-left:13px;">          <span title="(string)">[string]</span>:
+</div></details></details></details><details><summary>    <span title="(array) List of ports which should be made accessible on the pods selected for this rule. Each item in this list is combined using a logical OR. If this field is empty or missing, this rule matches all ports (traffic not restricted by port). If this field is present and contains at least one item, then this rule allows traffic only if the traffic matches at least one port in the list.">ports</span>:
+</summary><div style="margin-left:13px;">    - <span title="(intstr.IntOrString) If specified, the port on the given protocol.  This can either be a numerical or named port on a pod.  If this field is not provided, this matches all port names and numbers. If present, only traffic on the specified protocol AND port will be matched.">port</span>:
+</div><div style="margin-left:13px;">      <span title="(string) Optional.  The protocol (TCP or UDP) which traffic must match. If not specified, this field defaults to TCP.">protocol</span>:
+</div></details></details><details><summary>  <span title="(v1.LabelSelector) Selects the pods to which this NetworkPolicy object applies.  The array of ingress rules is applied to any pods selected by this field. Multiple network policies can select the same set of pods.  In this case, the ingress rules for each are combined additively. This field is NOT optional and follows standard label selector semantics. An empty podSelector matches all pods in this namespace.">podSelector</span>:
+</summary><details><summary>    <span title="(array) matchExpressions is a list of label selector requirements. The requirements are ANDed.">matchExpressions</span>:
+</summary><div style="margin-left:13px;">    - <span title="(string) key is the label key that the selector applies to.">key</span>:
+</div><div style="margin-left:13px;">      <span title="(string) operator represents a key&#39;s relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.">operator</span>:
+</div><details><summary>      <span title="(array) values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.">values</span>:
+</summary><div style="margin-left:13px;">      - <span title="(string)">[string]</span>:
+</div></details></details><details><summary>    <span title="(object) matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is &#34;key&#34;, the operator is &#34;In&#34;, and the values array contains only &#34;value&#34;. The requirements are ANDed.">matchLabels</span>:
+</summary><div style="margin-left:13px;">      <span title="(string)">[string]</span>:
+</div></details></details><details><summary>  <span title="(array) List of rule types that the NetworkPolicy relates to. Valid options are Ingress, Egress, or Ingress,Egress. If this field is not specified, it will default based on the existence of Ingress or Egress rules; policies that contain an Egress section are assumed to affect Egress, and all policies (whether or not they contain an Ingress section) are assumed to affect Ingress. If you want to write an egress-only policy, you must explicitly specify policyTypes [ &#34;Egress&#34; ]. Likewise, if you want to write a policy that specifies that no egress is allowed, you must specify a policyTypes value that include &#34;Egress&#34; (since such a policy would not include an Egress section and would otherwise default to just [ &#34;Ingress&#34; ]). This field is beta-level in 1.8">policyTypes</span>:
+</summary><div style="margin-left:13px;">  - <span title="(string)">[string]</span>:
+</div></details></details>
+</pre>
+</div>
+</div>
+<div class="sect1">
+<h2 id="operations"><a class="anchor" href="#operations"></a>Operations</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="Post-apis-extensions-v1beta1-networkpolicies"><a class="anchor" href="#Post-apis-extensions-v1beta1-networkpolicies"></a>Create a NetworkPolicy</h3>
+<div class="paragraph">
+<p>Create a NetworkPolicy</p>
+</div>
+<div class="sect3">
+<h4 id="http-request"><a class="anchor" href="#http-request"></a>HTTP request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>POST /apis/extensions/v1beta1/networkpolicies HTTP/1.1
+Authorization: Bearer $TOKEN
+Accept: application/json
+Connection: close
+Content-Type: application/json'
+
+{
+  "kind": "NetworkPolicy",
+  "apiVersion": "extensions/v1beta1",
+  ...
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="curl-request"><a class="anchor" href="#curl-request"></a>Curl request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>$ curl -k \
+    -X POST \
+    -d @- \
+    -H "Authorization: Bearer $TOKEN" \
+    -H 'Accept: application/json' \
+    -H 'Content-Type: application/json' \
+    https://$ENDPOINT/apis/extensions/v1beta1/networkpolicies &lt;&lt;'EOF'
+{
+  "kind": "NetworkPolicy",
+  "apiVersion": "extensions/v1beta1",
+  ...
+}
+EOF</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="http-body"><a class="anchor" href="#http-body"></a>HTTP body</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">body</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1beta1.NetworkPolicy</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="query-parameters"><a class="anchor" href="#query-parameters"></a>Query parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pretty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If 'true', then the output is pretty printed.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="responses"><a class="anchor" href="#responses"></a>Responses</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">HTTP Code</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1beta1.NetworkPolicy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="consumes"><a class="anchor" href="#consumes"></a>Consumes</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>*/*</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="produces"><a class="anchor" href="#produces"></a>Produces</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>application/json</p>
+</li>
+<li>
+<p>application/yaml</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Post-apis-extensions-v1beta1-namespaces-namespace-networkpolicies"><a class="anchor" href="#Post-apis-extensions-v1beta1-namespaces-namespace-networkpolicies"></a>Create a NetworkPolicy in a namespace</h3>
+<div class="paragraph">
+<p>Create a NetworkPolicy</p>
+</div>
+<div class="sect3">
+<h4 id="http-request-2"><a class="anchor" href="#http-request-2"></a>HTTP request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>POST /apis/extensions/v1beta1/namespaces/$NAMESPACE/networkpolicies HTTP/1.1
+Authorization: Bearer $TOKEN
+Accept: application/json
+Connection: close
+Content-Type: application/json'
+
+{
+  "kind": "NetworkPolicy",
+  "apiVersion": "extensions/v1beta1",
+  ...
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="curl-request-2"><a class="anchor" href="#curl-request-2"></a>Curl request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>$ curl -k \
+    -X POST \
+    -d @- \
+    -H "Authorization: Bearer $TOKEN" \
+    -H 'Accept: application/json' \
+    -H 'Content-Type: application/json' \
+    https://$ENDPOINT/apis/extensions/v1beta1/namespaces/$NAMESPACE/networkpolicies &lt;&lt;'EOF'
+{
+  "kind": "NetworkPolicy",
+  "apiVersion": "extensions/v1beta1",
+  ...
+}
+EOF</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="http-body-2"><a class="anchor" href="#http-body-2"></a>HTTP body</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">body</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1beta1.NetworkPolicy</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="path-parameters"><a class="anchor" href="#path-parameters"></a>Path parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">namespace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object name and auth scope, such as for teams and projects</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="query-parameters-2"><a class="anchor" href="#query-parameters-2"></a>Query parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pretty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If 'true', then the output is pretty printed.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="responses-2"><a class="anchor" href="#responses-2"></a>Responses</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">HTTP Code</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1beta1.NetworkPolicy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="consumes-2"><a class="anchor" href="#consumes-2"></a>Consumes</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>*/*</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="produces-2"><a class="anchor" href="#produces-2"></a>Produces</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>application/json</p>
+</li>
+<li>
+<p>application/yaml</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Get-apis-extensions-v1beta1-namespaces-namespace-networkpolicies-name"><a class="anchor" href="#Get-apis-extensions-v1beta1-namespaces-namespace-networkpolicies-name"></a>Get a NetworkPolicy in a namespace</h3>
+<div class="paragraph">
+<p>Read the specified NetworkPolicy</p>
+</div>
+<div class="sect3">
+<h4 id="http-request-3"><a class="anchor" href="#http-request-3"></a>HTTP request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>GET /apis/extensions/v1beta1/namespaces/$NAMESPACE/networkpolicies/$NAME HTTP/1.1
+Authorization: Bearer $TOKEN
+Accept: application/json
+Connection: close</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="curl-request-3"><a class="anchor" href="#curl-request-3"></a>Curl request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>$ curl -k \
+    -H "Authorization: Bearer $TOKEN" \
+    -H 'Accept: application/json' \
+    https://$ENDPOINT/apis/extensions/v1beta1/namespaces/$NAMESPACE/networkpolicies/$NAME</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="path-parameters-2"><a class="anchor" href="#path-parameters-2"></a>Path parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name of the NetworkPolicy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">namespace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object name and auth scope, such as for teams and projects</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="query-parameters-3"><a class="anchor" href="#query-parameters-3"></a>Query parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pretty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If 'true', then the output is pretty printed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exact</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">export</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Should this value be exported.  Export strips fields that a user can not specify.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="responses-3"><a class="anchor" href="#responses-3"></a>Responses</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">HTTP Code</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1beta1.NetworkPolicy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="consumes-3"><a class="anchor" href="#consumes-3"></a>Consumes</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>*/*</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="produces-3"><a class="anchor" href="#produces-3"></a>Produces</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>application/json</p>
+</li>
+<li>
+<p>application/yaml</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Get-apis-extensions-v1beta1-networkpolicies"><a class="anchor" href="#Get-apis-extensions-v1beta1-networkpolicies"></a>Get all NetworkPolicies</h3>
+<div class="paragraph">
+<p>List or watch objects of kind NetworkPolicy</p>
+</div>
+<div class="sect3">
+<h4 id="http-request-4"><a class="anchor" href="#http-request-4"></a>HTTP request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>GET /apis/extensions/v1beta1/networkpolicies HTTP/1.1
+Authorization: Bearer $TOKEN
+Accept: application/json
+Connection: close</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="curl-request-4"><a class="anchor" href="#curl-request-4"></a>Curl request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>$ curl -k \
+    -H "Authorization: Bearer $TOKEN" \
+    -H 'Accept: application/json' \
+    https://$ENDPOINT/apis/extensions/v1beta1/networkpolicies</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="query-parameters-4"><a class="anchor" href="#query-parameters-4"></a>Query parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pretty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If 'true', then the output is pretty printed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">continue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fieldSelector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A selector to restrict the list of returned objects by their fields. Defaults to everything.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">includeUninitialized</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true, partially initialized resources are included in the response.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">labelSelector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A selector to restrict the list of returned objects by their labels. Defaults to everything.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit is a maximum number of responses to return for a list call. If more items exist, the server will set the <code>continue</code> field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.</p>
+<p class="tableblock">The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resourceVersion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#8217;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">timeoutSeconds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout for the list/watch call.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">watch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="responses-4"><a class="anchor" href="#responses-4"></a>Responses</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">HTTP Code</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1beta1.NetworkPolicyList</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="consumes-4"><a class="anchor" href="#consumes-4"></a>Consumes</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>*/*</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="produces-4"><a class="anchor" href="#produces-4"></a>Produces</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>application/json</p>
+</li>
+<li>
+<p>application/yaml</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf</p>
+</li>
+<li>
+<p>application/json;stream=watch</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf;stream=watch</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Get-apis-extensions-v1beta1-namespaces-namespace-networkpolicies"><a class="anchor" href="#Get-apis-extensions-v1beta1-namespaces-namespace-networkpolicies"></a>Get all NetworkPolicies in a namespace</h3>
+<div class="paragraph">
+<p>List or watch objects of kind NetworkPolicy</p>
+</div>
+<div class="sect3">
+<h4 id="http-request-5"><a class="anchor" href="#http-request-5"></a>HTTP request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>GET /apis/extensions/v1beta1/namespaces/$NAMESPACE/networkpolicies HTTP/1.1
+Authorization: Bearer $TOKEN
+Accept: application/json
+Connection: close</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="curl-request-5"><a class="anchor" href="#curl-request-5"></a>Curl request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>$ curl -k \
+    -H "Authorization: Bearer $TOKEN" \
+    -H 'Accept: application/json' \
+    https://$ENDPOINT/apis/extensions/v1beta1/namespaces/$NAMESPACE/networkpolicies</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="path-parameters-3"><a class="anchor" href="#path-parameters-3"></a>Path parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">namespace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object name and auth scope, such as for teams and projects</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="query-parameters-5"><a class="anchor" href="#query-parameters-5"></a>Query parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pretty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If 'true', then the output is pretty printed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">continue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fieldSelector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A selector to restrict the list of returned objects by their fields. Defaults to everything.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">includeUninitialized</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true, partially initialized resources are included in the response.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">labelSelector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A selector to restrict the list of returned objects by their labels. Defaults to everything.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit is a maximum number of responses to return for a list call. If more items exist, the server will set the <code>continue</code> field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.</p>
+<p class="tableblock">The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resourceVersion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#8217;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">timeoutSeconds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout for the list/watch call.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">watch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="responses-5"><a class="anchor" href="#responses-5"></a>Responses</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">HTTP Code</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1beta1.NetworkPolicyList</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="consumes-5"><a class="anchor" href="#consumes-5"></a>Consumes</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>*/*</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="produces-5"><a class="anchor" href="#produces-5"></a>Produces</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>application/json</p>
+</li>
+<li>
+<p>application/yaml</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf</p>
+</li>
+<li>
+<p>application/json;stream=watch</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf;stream=watch</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Get-apis-extensions-v1beta1-watch-namespaces-namespace-networkpolicies-name"><a class="anchor" href="#Get-apis-extensions-v1beta1-watch-namespaces-namespace-networkpolicies-name"></a>Watch a NetworkPolicy in a namespace</h3>
+<div class="paragraph">
+<p>Watch changes to an object of kind NetworkPolicy</p>
+</div>
+<div class="sect3">
+<h4 id="http-request-6"><a class="anchor" href="#http-request-6"></a>HTTP request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>GET /apis/extensions/v1beta1/watch/namespaces/$NAMESPACE/networkpolicies/$NAME HTTP/1.1
+Authorization: Bearer $TOKEN
+Accept: application/json
+Connection: close</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="curl-request-6"><a class="anchor" href="#curl-request-6"></a>Curl request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>$ curl -k \
+    -H "Authorization: Bearer $TOKEN" \
+    -H 'Accept: application/json' \
+    https://$ENDPOINT/apis/extensions/v1beta1/watch/namespaces/$NAMESPACE/networkpolicies/$NAME</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="path-parameters-4"><a class="anchor" href="#path-parameters-4"></a>Path parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name of the NetworkPolicy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">namespace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object name and auth scope, such as for teams and projects</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="query-parameters-6"><a class="anchor" href="#query-parameters-6"></a>Query parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">continue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fieldSelector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A selector to restrict the list of returned objects by their fields. Defaults to everything.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">includeUninitialized</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true, partially initialized resources are included in the response.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">labelSelector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A selector to restrict the list of returned objects by their labels. Defaults to everything.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit is a maximum number of responses to return for a list call. If more items exist, the server will set the <code>continue</code> field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.</p>
+<p class="tableblock">The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pretty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If 'true', then the output is pretty printed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resourceVersion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#8217;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">timeoutSeconds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout for the list/watch call.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">watch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="responses-6"><a class="anchor" href="#responses-6"></a>Responses</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">HTTP Code</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1.WatchEvent</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="consumes-6"><a class="anchor" href="#consumes-6"></a>Consumes</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>*/*</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="produces-6"><a class="anchor" href="#produces-6"></a>Produces</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>application/json</p>
+</li>
+<li>
+<p>application/yaml</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf</p>
+</li>
+<li>
+<p>application/json;stream=watch</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf;stream=watch</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Get-apis-extensions-v1beta1-watch-networkpolicies"><a class="anchor" href="#Get-apis-extensions-v1beta1-watch-networkpolicies"></a>Watch all NetworkPolicies</h3>
+<div class="paragraph">
+<p>Watch individual changes to a list of NetworkPolicy</p>
+</div>
+<div class="sect3">
+<h4 id="http-request-7"><a class="anchor" href="#http-request-7"></a>HTTP request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>GET /apis/extensions/v1beta1/watch/networkpolicies HTTP/1.1
+Authorization: Bearer $TOKEN
+Accept: application/json
+Connection: close</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="curl-request-7"><a class="anchor" href="#curl-request-7"></a>Curl request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>$ curl -k \
+    -H "Authorization: Bearer $TOKEN" \
+    -H 'Accept: application/json' \
+    https://$ENDPOINT/apis/extensions/v1beta1/watch/networkpolicies</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="query-parameters-7"><a class="anchor" href="#query-parameters-7"></a>Query parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">continue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fieldSelector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A selector to restrict the list of returned objects by their fields. Defaults to everything.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">includeUninitialized</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true, partially initialized resources are included in the response.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">labelSelector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A selector to restrict the list of returned objects by their labels. Defaults to everything.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit is a maximum number of responses to return for a list call. If more items exist, the server will set the <code>continue</code> field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.</p>
+<p class="tableblock">The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pretty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If 'true', then the output is pretty printed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resourceVersion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#8217;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">timeoutSeconds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout for the list/watch call.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">watch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="responses-7"><a class="anchor" href="#responses-7"></a>Responses</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">HTTP Code</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1.WatchEvent</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="consumes-7"><a class="anchor" href="#consumes-7"></a>Consumes</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>*/*</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="produces-7"><a class="anchor" href="#produces-7"></a>Produces</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>application/json</p>
+</li>
+<li>
+<p>application/yaml</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf</p>
+</li>
+<li>
+<p>application/json;stream=watch</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf;stream=watch</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Get-apis-extensions-v1beta1-watch-namespaces-namespace-networkpolicies"><a class="anchor" href="#Get-apis-extensions-v1beta1-watch-namespaces-namespace-networkpolicies"></a>Watch all NetworkPolicies in a namespace</h3>
+<div class="paragraph">
+<p>Watch individual changes to a list of NetworkPolicy</p>
+</div>
+<div class="sect3">
+<h4 id="http-request-8"><a class="anchor" href="#http-request-8"></a>HTTP request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>GET /apis/extensions/v1beta1/watch/namespaces/$NAMESPACE/networkpolicies HTTP/1.1
+Authorization: Bearer $TOKEN
+Accept: application/json
+Connection: close</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="curl-request-8"><a class="anchor" href="#curl-request-8"></a>Curl request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>$ curl -k \
+    -H "Authorization: Bearer $TOKEN" \
+    -H 'Accept: application/json' \
+    https://$ENDPOINT/apis/extensions/v1beta1/watch/namespaces/$NAMESPACE/networkpolicies</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="path-parameters-5"><a class="anchor" href="#path-parameters-5"></a>Path parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">namespace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object name and auth scope, such as for teams and projects</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="query-parameters-8"><a class="anchor" href="#query-parameters-8"></a>Query parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">continue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fieldSelector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A selector to restrict the list of returned objects by their fields. Defaults to everything.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">includeUninitialized</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true, partially initialized resources are included in the response.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">labelSelector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A selector to restrict the list of returned objects by their labels. Defaults to everything.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit is a maximum number of responses to return for a list call. If more items exist, the server will set the <code>continue</code> field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.</p>
+<p class="tableblock">The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pretty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If 'true', then the output is pretty printed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resourceVersion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#8217;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">timeoutSeconds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout for the list/watch call.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">watch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="responses-8"><a class="anchor" href="#responses-8"></a>Responses</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">HTTP Code</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1.WatchEvent</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="consumes-8"><a class="anchor" href="#consumes-8"></a>Consumes</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>*/*</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="produces-8"><a class="anchor" href="#produces-8"></a>Produces</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>application/json</p>
+</li>
+<li>
+<p>application/yaml</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf</p>
+</li>
+<li>
+<p>application/json;stream=watch</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf;stream=watch</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Put-apis-extensions-v1beta1-namespaces-namespace-networkpolicies-name"><a class="anchor" href="#Put-apis-extensions-v1beta1-namespaces-namespace-networkpolicies-name"></a>Update a NetworkPolicy in a namespace</h3>
+<div class="paragraph">
+<p>Replace the specified NetworkPolicy</p>
+</div>
+<div class="sect3">
+<h4 id="http-request-9"><a class="anchor" href="#http-request-9"></a>HTTP request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>PUT /apis/extensions/v1beta1/namespaces/$NAMESPACE/networkpolicies/$NAME HTTP/1.1
+Authorization: Bearer $TOKEN
+Accept: application/json
+Connection: close
+Content-Type: application/json'
+
+{
+  "kind": "NetworkPolicy",
+  "apiVersion": "extensions/v1beta1",
+  ...
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="curl-request-9"><a class="anchor" href="#curl-request-9"></a>Curl request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>$ curl -k \
+    -X PUT \
+    -d @- \
+    -H "Authorization: Bearer $TOKEN" \
+    -H 'Accept: application/json' \
+    -H 'Content-Type: application/json' \
+    https://$ENDPOINT/apis/extensions/v1beta1/namespaces/$NAMESPACE/networkpolicies/$NAME &lt;&lt;'EOF'
+{
+  "kind": "NetworkPolicy",
+  "apiVersion": "extensions/v1beta1",
+  ...
+}
+EOF</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="http-body-3"><a class="anchor" href="#http-body-3"></a>HTTP body</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">body</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1beta1.NetworkPolicy</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="path-parameters-6"><a class="anchor" href="#path-parameters-6"></a>Path parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name of the NetworkPolicy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">namespace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object name and auth scope, such as for teams and projects</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="query-parameters-9"><a class="anchor" href="#query-parameters-9"></a>Query parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pretty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If 'true', then the output is pretty printed.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="responses-9"><a class="anchor" href="#responses-9"></a>Responses</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">HTTP Code</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1beta1.NetworkPolicy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="consumes-9"><a class="anchor" href="#consumes-9"></a>Consumes</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>*/*</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="produces-9"><a class="anchor" href="#produces-9"></a>Produces</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>application/json</p>
+</li>
+<li>
+<p>application/yaml</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Patch-apis-extensions-v1beta1-namespaces-namespace-networkpolicies-name"><a class="anchor" href="#Patch-apis-extensions-v1beta1-namespaces-namespace-networkpolicies-name"></a>Patch a NetworkPolicy in a namespace</h3>
+<div class="paragraph">
+<p>Partially update the specified NetworkPolicy</p>
+</div>
+<div class="sect3">
+<h4 id="http-request-10"><a class="anchor" href="#http-request-10"></a>HTTP request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>PATCH /apis/extensions/v1beta1/namespaces/$NAMESPACE/networkpolicies/$NAME HTTP/1.1
+Authorization: Bearer $TOKEN
+Accept: application/json
+Connection: close
+Content-Type: application/json-patch+json'
+
+{
+  ...
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="curl-request-10"><a class="anchor" href="#curl-request-10"></a>Curl request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>$ curl -k \
+    -X PATCH \
+    -d @- \
+    -H "Authorization: Bearer $TOKEN" \
+    -H 'Accept: application/json' \
+    -H 'Content-Type: application/json-patch+json' \
+    https://$ENDPOINT/apis/extensions/v1beta1/namespaces/$NAMESPACE/networkpolicies/$NAME &lt;&lt;'EOF'
+{
+  ...
+}
+EOF</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="http-body-4"><a class="anchor" href="#http-body-4"></a>HTTP body</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">body</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1.Patch</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="path-parameters-7"><a class="anchor" href="#path-parameters-7"></a>Path parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name of the NetworkPolicy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">namespace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object name and auth scope, such as for teams and projects</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="query-parameters-10"><a class="anchor" href="#query-parameters-10"></a>Query parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pretty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If 'true', then the output is pretty printed.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="responses-10"><a class="anchor" href="#responses-10"></a>Responses</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">HTTP Code</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1beta1.NetworkPolicy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="consumes-10"><a class="anchor" href="#consumes-10"></a>Consumes</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>application/json-patch+json</p>
+</li>
+<li>
+<p>application/merge-patch+json</p>
+</li>
+<li>
+<p>application/strategic-merge-patch+json</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="produces-10"><a class="anchor" href="#produces-10"></a>Produces</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>application/json</p>
+</li>
+<li>
+<p>application/yaml</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Delete-apis-extensions-v1beta1-namespaces-namespace-networkpolicies-name"><a class="anchor" href="#Delete-apis-extensions-v1beta1-namespaces-namespace-networkpolicies-name"></a>Delete a NetworkPolicy in a namespace</h3>
+<div class="paragraph">
+<p>Delete a NetworkPolicy</p>
+</div>
+<div class="sect3">
+<h4 id="http-request-11"><a class="anchor" href="#http-request-11"></a>HTTP request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>DELETE /apis/extensions/v1beta1/namespaces/$NAMESPACE/networkpolicies/$NAME HTTP/1.1
+Authorization: Bearer $TOKEN
+Accept: application/json
+Connection: close
+Content-Type: application/json'
+
+{
+  ...
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="curl-request-11"><a class="anchor" href="#curl-request-11"></a>Curl request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>$ curl -k \
+    -X DELETE \
+    -d @- \
+    -H "Authorization: Bearer $TOKEN" \
+    -H 'Accept: application/json' \
+    -H 'Content-Type: application/json' \
+    https://$ENDPOINT/apis/extensions/v1beta1/namespaces/$NAMESPACE/networkpolicies/$NAME &lt;&lt;'EOF'
+{
+  ...
+}
+EOF</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="http-body-5"><a class="anchor" href="#http-body-5"></a>HTTP body</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">body</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1.DeleteOptions</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="path-parameters-8"><a class="anchor" href="#path-parameters-8"></a>Path parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name of the NetworkPolicy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">namespace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object name and auth scope, such as for teams and projects</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="query-parameters-11"><a class="anchor" href="#query-parameters-11"></a>Query parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pretty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If 'true', then the output is pretty printed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gracePeriodSeconds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">orphanDependents</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object&#8217;s finalizers list. Either this field or PropagationPolicy may be set, but not both.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">propagationPolicy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="responses-11"><a class="anchor" href="#responses-11"></a>Responses</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">HTTP Code</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1.Status</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="consumes-11"><a class="anchor" href="#consumes-11"></a>Consumes</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>*/*</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="produces-11"><a class="anchor" href="#produces-11"></a>Produces</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>application/json</p>
+</li>
+<li>
+<p>application/yaml</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Delete-apis-extensions-v1beta1-namespaces-namespace-networkpolicies"><a class="anchor" href="#Delete-apis-extensions-v1beta1-namespaces-namespace-networkpolicies"></a>Delete all NetworkPolicies in a namespace</h3>
+<div class="paragraph">
+<p>Delete collection of NetworkPolicy</p>
+</div>
+<div class="sect3">
+<h4 id="http-request-12"><a class="anchor" href="#http-request-12"></a>HTTP request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>DELETE /apis/extensions/v1beta1/namespaces/$NAMESPACE/networkpolicies HTTP/1.1
+Authorization: Bearer $TOKEN
+Accept: application/json
+Connection: close</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="curl-request-12"><a class="anchor" href="#curl-request-12"></a>Curl request</h4>
+<div class="listingblock">
+<div class="content">
+<pre>$ curl -k \
+    -X DELETE \
+    -H "Authorization: Bearer $TOKEN" \
+    -H 'Accept: application/json' \
+    https://$ENDPOINT/apis/extensions/v1beta1/namespaces/$NAMESPACE/networkpolicies</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="path-parameters-9"><a class="anchor" href="#path-parameters-9"></a>Path parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">namespace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object name and auth scope, such as for teams and projects</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="query-parameters-12"><a class="anchor" href="#query-parameters-12"></a>Query parameters</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pretty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If 'true', then the output is pretty printed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">continue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server the server will respond with a 410 ResourceExpired error indicating the client must restart their list without the continue field. This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fieldSelector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A selector to restrict the list of returned objects by their fields. Defaults to everything.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">includeUninitialized</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true, partially initialized resources are included in the response.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">labelSelector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A selector to restrict the list of returned objects by their labels. Defaults to everything.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit is a maximum number of responses to return for a list call. If more items exist, the server will set the <code>continue</code> field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.</p>
+<p class="tableblock">The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resourceVersion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it&#8217;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">timeoutSeconds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout for the list/watch call.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">watch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="responses-12"><a class="anchor" href="#responses-12"></a>Responses</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">HTTP Code</th>
+<th class="tableblock halign-left valign-top">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v1.Status</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthorized</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="consumes-12"><a class="anchor" href="#consumes-12"></a>Consumes</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>*/*</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="produces-12"><a class="anchor" href="#produces-12"></a>Produces</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>application/json</p>
+</li>
+<li>
+<p>application/yaml</p>
+</li>
+<li>
+<p>application/vnd.kubernetes.protobuf</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+  </div>
+
+  <div class='col-sm-3 hidden-print'>
+    <h2>Atomic Registry</h2>
+    <nav role='navigation'>
+      <ul class='docbrowser nav nav-vertical'>
+        <li class='disabled'>
+          <h3>Quickstart</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../../registry_quickstart/index.html">Overview</a></li>
+              <li role="menuitem" class=""><a href="../../registry_quickstart/developers.html">Developers</a></li>
+            <!-- <li role="menuitem"><a>Administrators</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-0-2">
+                <span id="sgSpan-0-2" class="fa fa-caret-right"></span>&nbsp;Administrators
+              </a>
+              <ul id="topicSubGroup-0-2" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../registry_quickstart/administrators/index.html">Overview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../registry_quickstart/administrators/system_configuration.html">System Configuration</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../registry_quickstart/administrators/uninstall.html">Uninstall</strong></a><li>
+              </ul>
+            </li>
+        <li class='disabled'>
+          <h3>Architecture</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../../architecture/index.html">Overview</a></li>
+            <!-- <li role="menuitem"><a>Infrastructure Components</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-1-1">
+                <span id="sgSpan-1-1" class="fa fa-caret-right"></span>&nbsp;Infrastructure Components
+              </a>
+              <ul id="topicSubGroup-1-1" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../architecture/infrastructure_components/kubernetes_infrastructure.html">Kubernetes Infrastructure</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../architecture/infrastructure_components/image_registry.html">Container Registry</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../architecture/infrastructure_components/web_console.html">Web Console</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>Core Concepts</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-1-2">
+                <span id="sgSpan-1-2" class="fa fa-caret-right"></span>&nbsp;Core Concepts
+              </a>
+              <ul id="topicSubGroup-1-2" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../architecture/core_concepts/containers_and_images.html">Images</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../architecture/core_concepts/projects_and_users.html">Projects and Users</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../architecture/core_concepts/builds_and_image_streams.html">Image Streams</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>Additional Concepts</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-1-3">
+                <span id="sgSpan-1-3" class="fa fa-caret-right"></span>&nbsp;Additional Concepts
+              </a>
+              <ul id="topicSubGroup-1-3" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../architecture/additional_concepts/authentication.html">Authentication</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../architecture/additional_concepts/authorization.html">Authorization</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../architecture/additional_concepts/other_api_objects.html">Other API Objects</strong></a><li>
+              </ul>
+            </li>
+        <li class='disabled'>
+          <h3>Installation and Configuration</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../../install_config/adding_hosts_to_existing_cluster.html">Adding Hosts to an Existing Cluster</a></li>
+              <li role="menuitem" class=""><a href="../../install_config/certificate_customization.html">Configuring Custom Certificates</a></li>
+              <li role="menuitem" class=""><a href="../../install_config/redeploying_certificates.html">Redeploying Certificates</a></li>
+              <li role="menuitem" class=""><a href="../../install_config/configuring_authentication.html">Configuring Authentication and User Agent</a></li>
+              <li role="menuitem" class=""><a href="../../install_config/syncing_groups_with_ldap.html">Syncing Groups With LDAP</a></li>
+            <!-- <li role="menuitem"><a>Advanced LDAP Configuration</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-2-5">
+                <span id="sgSpan-2-5" class="fa fa-caret-right"></span>&nbsp;Advanced LDAP Configuration
+              </a>
+              <ul id="topicSubGroup-2-5" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../install_config/advanced_ldap_configuration/index.html">Overview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../install_config/advanced_ldap_configuration/sssd_for_ldap_failover.html">Setting up SSSD for LDAP Failover</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../install_config/advanced_ldap_configuration/configuring_form_based_authentication.html">Configuring Form-Based Authentication</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../install_config/advanced_ldap_configuration/configuring_extended_ldap_attributes.html">Configuring Extended LDAP Attributes</strong></a><li>
+              </ul>
+            </li>
+              <li role="menuitem" class=""><a href="../../install_config/configuring_vsphere.html">Configuring for VMWare vSphere</a></li>
+              <li role="menuitem" class=""><a href="../../install_config/configuring_local.html">Configuring for local Volume</a></li>
+              <li role="menuitem" class=""><a href="../../install_config/web_console_customization.html">Customizing the Web Console</a></li>
+        <li class='disabled'>
+          <h3>Cluster Administration</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../../admin_guide/index.html">Overview</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/manage_users.html">Managing Users</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/managing_projects.html">Managing Projects</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/managing_pods.html">Managing Pods</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/managing_networking.html">Managing Networking</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/service_accounts.html">Configuring Service Accounts</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/manage_rbac.html">Managing Role-based Access Control</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/image_policy.html">Image Policy</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/scoped_tokens.html">Scoped Tokens</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/quota.html">Setting Quotas</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/multiproject_quota.html">Setting Multi-Project Quotas</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/limits.html">Setting Limit Ranges</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/allocating_node_resources.html">Allocating Node Resources</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/seccomp.html">Restricting Application Capabilities Using Seccomp</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/backup_restore.html">Backup and Restore</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/idling_applications.html">Idling Applications</a></li>
+              <li role="menuitem" class=""><a href="../../admin_guide/cluster_capacity.html">Analyzing Cluster Capacity</a></li>
+        <li class='disabled'>
+          <h3>User Guide</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../../dev_guide/index.html">Overview</a></li>
+              <li role="menuitem" class=""><a href="../../dev_guide/authentication.html">Authentication</a></li>
+              <li role="menuitem" class=""><a href="../../dev_guide/managing_images.html">Managing Images</a></li>
+              <li role="menuitem" class=""><a href="../../dev_guide/service_accounts.html">Service Accounts</a></li>
+        <li class='disabled'>
+          <h3>CLI Reference</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../../cli_reference/index.html">Overview</a></li>
+              <li role="menuitem" class=""><a href="../../cli_reference/get_started_cli.html">Get Started with the CLI</a></li>
+              <li role="menuitem" class=""><a href="../../cli_reference/manage_cli_profiles.html">Managing CLI Profiles</a></li>
+        <li class='disabled'>
+          <h3>REST API Reference</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../../rest_api/index.html">Overview</a></li>
+              <li role="menuitem" class=""><a href="../../rest_api/examples.html">Examples</a></li>
+            <!-- <li role="menuitem"><a>/api/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-2">
+                <span id="sgSpan-6-2" class="fa fa-caret-right"></span>&nbsp;/api/v1
+              </a>
+              <ul id="topicSubGroup-6-2" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.APIResourceList.html">v1.APIResourceList</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.APIVersions.html">v1.APIVersions</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.Binding.html">v1.Binding</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.ComponentStatus.html">v1.ComponentStatus</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.ConfigMap.html">v1.ConfigMap</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.Endpoints.html">v1.Endpoints</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.Event.html">v1.Event</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.LimitRange.html">v1.LimitRange</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.Namespace.html">v1.Namespace</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.Node.html">v1.Node</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.PersistentVolume.html">v1.PersistentVolume</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.PersistentVolumeClaim.html">v1.PersistentVolumeClaim</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.Pod.html">v1.Pod</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.PodTemplate.html">v1.PodTemplate</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.ReplicationController.html">v1.ReplicationController</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.ResourceQuota.html">v1.ResourceQuota</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.Secret.html">v1.Secret</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.SecurityContextConstraints.html">v1.SecurityContextConstraints</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.Service.html">v1.Service</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/api/v1.ServiceAccount.html">v1.ServiceAccount</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-3">
+                <span id="sgSpan-6-3" class="fa fa-caret-right"></span>&nbsp;/apis/v1
+              </a>
+              <ul id="topicSubGroup-6-3" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis/v1.APIGroup.html">v1.APIGroup</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis/v1.APIGroupList.html">v1.APIGroupList</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/apps/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-4">
+                <span id="sgSpan-6-4" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-4" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-apps/v1beta1.ControllerRevision.html">v1beta1.ControllerRevision</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-apps/v1beta1.Deployment.html">v1beta1.Deployment</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-apps/v1beta1.StatefulSet.html">v1beta1.StatefulSet</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/apps/v1beta2</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-5">
+                <span id="sgSpan-6-5" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta2
+              </a>
+              <ul id="topicSubGroup-6-5" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-apps/v1beta2.ControllerRevision.html">v1beta2.ControllerRevision</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-apps/v1beta2.DaemonSet.html">v1beta2.DaemonSet</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-apps/v1beta2.Deployment.html">v1beta2.Deployment</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-apps/v1beta2.ReplicaSet.html">v1beta2.ReplicaSet</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-apps/v1beta2.StatefulSet.html">v1beta2.StatefulSet</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/autoscaling/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-6">
+                <span id="sgSpan-6-6" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v1
+              </a>
+              <ul id="topicSubGroup-6-6" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-autoscaling/v1.HorizontalPodAutoscaler.html">v1.HorizontalPodAutoscaler</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/autoscaling/v2beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-7">
+                <span id="sgSpan-6-7" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v2beta1
+              </a>
+              <ul id="topicSubGroup-6-7" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-autoscaling/v2beta1.HorizontalPodAutoscaler.html">v2beta1.HorizontalPodAutoscaler</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/batch/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-8">
+                <span id="sgSpan-6-8" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1
+              </a>
+              <ul id="topicSubGroup-6-8" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-batch/v1.Job.html">v1.Job</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/batch/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-9">
+                <span id="sgSpan-6-9" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-9" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-batch/v1beta1.CronJob.html">v1beta1.CronJob</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/batch/v2alpha1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-10">
+                <span id="sgSpan-6-10" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v2alpha1
+              </a>
+              <ul id="topicSubGroup-6-10" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-batch/v2alpha1.CronJob.html">v2alpha1.CronJob</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/extensions/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-11">
+                <span id="sgSpan-6-11" class="fa fa-caret-down"></span>&nbsp;/apis/extensions/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-11" class="nav-tertiary list-unstyled collapse in">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-extensions/v1beta1.DaemonSet.html">v1beta1.DaemonSet</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-extensions/v1beta1.Deployment.html">v1beta1.Deployment</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-extensions/v1beta1.Ingress.html">v1beta1.Ingress</strong></a><li>
+                  <li class=" active">&nbsp;<a role="menuitem" href="../../rest_api/apis-extensions/v1beta1.NetworkPolicy.html">v1beta1.NetworkPolicy</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-extensions/v1beta1.PodSecurityPolicy.html">v1beta1.PodSecurityPolicy</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-extensions/v1beta1.ReplicaSet.html">v1beta1.ReplicaSet</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/policy/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-12">
+                <span id="sgSpan-6-12" class="fa fa-caret-right"></span>&nbsp;/apis/policy/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-12" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-policy/v1beta1.PodDisruptionBudget.html">v1beta1.PodDisruptionBudget</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/authentication.k8s.io/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-13">
+                <span id="sgSpan-6-13" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-6-13" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-authentication.k8s.io/v1.TokenReview.html">v1.TokenReview</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/authentication.k8s.io/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-14">
+                <span id="sgSpan-6-14" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-14" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-authentication.k8s.io/v1beta1.TokenReview.html">v1beta1.TokenReview</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/authorization.k8s.io/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-15">
+                <span id="sgSpan-6-15" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-6-15" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-authorization.k8s.io/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-authorization.k8s.io/v1.SelfSubjectAccessReview.html">v1.SelfSubjectAccessReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-authorization.k8s.io/v1.SelfSubjectRulesReview.html">v1.SelfSubjectRulesReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-authorization.k8s.io/v1.SubjectAccessReview.html">v1.SubjectAccessReview</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/authorization.k8s.io/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-16">
+                <span id="sgSpan-6-16" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-16" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-authorization.k8s.io/v1beta1.LocalSubjectAccessReview.html">v1beta1.LocalSubjectAccessReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectAccessReview.html">v1beta1.SelfSubjectAccessReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectRulesReview.html">v1beta1.SelfSubjectRulesReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SubjectAccessReview.html">v1beta1.SubjectAccessReview</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/rbac.authorization.k8s.io/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-17">
+                <span id="sgSpan-6-17" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-6-17" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.ClusterRole.html">v1.ClusterRole</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.ClusterRoleBinding.html">v1.ClusterRoleBinding</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.Role.html">v1.Role</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.RoleBinding.html">v1.RoleBinding</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/rbac.authorization.k8s.io/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-18">
+                <span id="sgSpan-6-18" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-18" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRole.html">v1beta1.ClusterRole</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRoleBinding.html">v1beta1.ClusterRoleBinding</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.Role.html">v1beta1.Role</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.RoleBinding.html">v1beta1.RoleBinding</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/certificates.k8s.io/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-19">
+                <span id="sgSpan-6-19" class="fa fa-caret-right"></span>&nbsp;/apis/certificates.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-19" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-certificates.k8s.io/v1beta1.CertificateSigningRequest.html">v1beta1.CertificateSigningRequest</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/networking.k8s.io/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-20">
+                <span id="sgSpan-6-20" class="fa fa-caret-right"></span>&nbsp;/apis/networking.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-6-20" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-networking.k8s.io/v1.NetworkPolicy.html">v1.NetworkPolicy</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/storage.k8s.io/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-21">
+                <span id="sgSpan-6-21" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-6-21" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-storage.k8s.io/v1.StorageClass.html">v1.StorageClass</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/storage.k8s.io/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-22">
+                <span id="sgSpan-6-22" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-22" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../../rest_api/apis-storage.k8s.io/v1beta1.StorageClass.html">v1beta1.StorageClass</strong></a><li>
+              </ul>
+            </li>
+</ul>
+    </nav>
+  </div>
+</div>
+</section>
+</div>
+<div class='row'>
+<div class='col-md-offset-3 col-md-9 col-lg-offset-2 col-lg-10' id='footer'>
+  <footer>
+<hr class='visible-print'>
+
+&copy; 2014&ndash;2016 Project Atomic. Sponsored by Red Hat, Inc.
+<div class='edit-this-page pull-right'>
+<a href="https://github.com/openshift/openshift-docs#contributing-to-openshift-documentation"><i class="icon fa fa-fw fa-github"></i>Edit this page on GitHub</a>
+</div>
+        <script type="text/javascript">
+        var _paq = _paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u=(("https:" == document.location.protocol) ? "https" : "http") + "://piwik-osasteam.rhcloud.com/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 4]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+        g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+<noscript><p><img src="https://piwik-osasteam.rhcloud.com/piwik/piwik.php?idsite=4" style="border:0;" alt="" /></p></noscript>
+</footer>
+</div>
+</div>
+
+</section>
+
+<script src="http://www.projectatomic.io/javascripts/application.js" type="text/javascript"></script>
+
+
+</body>
+</html>

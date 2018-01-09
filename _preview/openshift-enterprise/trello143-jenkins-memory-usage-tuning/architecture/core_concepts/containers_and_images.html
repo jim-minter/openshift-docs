@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Containers and Images - Core Concepts | Architecture | OpenShift Container Platform Branch Build</title>
+  <link href="https://assets.openshift.net/content/subdomain.css" rel="stylesheet" type="text/css">
+  <link href="../../../trello143-jenkins-memory-usage-tuning/_stylesheets/docs.css" rel="stylesheet" />
+  <link href="../../../trello143-jenkins-memory-usage-tuning/_stylesheets/search.css" rel="stylesheet" />
+  <link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png">
+  <link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="text/css">
+  <!--[if IE]><link rel="shortcut icon" href="https://assets.openshift.net/content/subdomain/favicon.ico"><![endif]-->
+  <!-- or, set /favicon.ico for IE10 win -->
+  <meta content="OpenShift" name="application-name">
+  <meta content="#000000" name="msapplication-TileColor">
+  <meta content="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" name="msapplication-TileImage">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://assets.openshift.net/content/html5shiv.js" type="text/javascript"></script>
+    <script src="https://assets.openshift.net/content/respond.js" type="text/javascript"></script>
+    <link href="https://assets.openshift.net/content/vendor/respond-js/respond-proxy.html" id="respond-proxy" rel="respond-proxy">
+    <link href="../../../trello143-jenkins-memory-usage-tuning/_images/respond.proxy.gif" id="respond-redirect" rel="respond-redirect">
+    <script src="../../../trello143-jenkins-memory-usage-tuning/_javascripts/respond.proxy.js" type="text/javascript"></script>
+  <![endif]-->
+  <script src="https://assets.openshift.net/content/modernizr.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/subdomain.js" type="text/javascript"></script>
+  <script src="../../../trello143-jenkins-memory-usage-tuning/_javascripts/bootstrap-offcanvas.js" type="text/javascript"></script>
+  <script src="../../../trello143-jenkins-memory-usage-tuning/_javascripts/reformat-html.js" type="text/javascript"></script>
+  <script src="../../../trello143-jenkins-memory-usage-tuning/_javascripts/hc-search.js" type="text/javascript"></script>
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PMDVKG');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Adobe DTM -->
+<script src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+<!-- End Adobe DTM -->
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PMDVKG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="navbar navbar-default navbar-openshift" role="navigation">
+  <div class="navbar-header">
+    <div class="dropdown">
+      <a href="#" class="dropdown-toggle navbar-menu-toggle" data-toggle="dropdown">
+        <span class="navbar-menu-title">MENU</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <ul class="dropdown-menu navbar-menu" role="menu">
+        <li class="submenu">
+          <a href="#">Overview</a>
+          <ul id="submenu-overview" class="dropdown-submenu">
+            <li class="submenu-heading">Introduction to OpenShift</li>
+            <li>
+              <a href="https://www.openshift.com/about/index.html">
+                What is OpenShift?
+                <span class="submenu-item-desc">Learn about Red Hat's next-generation cloud application platform.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/container-platform/customers.html">
+                Our Customers
+                <span class="submenu-item-desc">Discover what companies are using OpenShift to deliver a flexible, scalable cloud application environment.</span>
+              </a>
+            </li>
+            <li class="submenu-heading">News</li>
+            <li>
+              <a href="https://www.openshift.com/about/awards.html">
+                Awards
+                <span class="submenu-item-desc">Industry recognition and awards.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://blog.openshift.com/">
+                OpenShift Blog
+                <span class="submenu-item-desc">Keep your finger on the pulse of all things OpenShift.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://blog.openshift.com/category/events/">
+                Events
+                <span class="submenu-item-desc">OpenShift sponsors and attends a variety of in-person events around the globe.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/about/press.html">
+                In the Press
+                <span class="submenu-item-desc">The latest OpenShift news and press releases.</span>
+              </a>
+            </li>
+            <li class="submenu-divider"></li>
+            <li>
+              <a href="http://jobs.redhat.com/job-search-results/?keywords=openshift">
+                Careers <i class="fa fa-external-link pull-right"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/about/logos.html">
+                Logos &amp; Media
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#">Features</a>
+          <ul id="submenu-features" class="dropdown-submenu">
+            <li class="submenu-heading">OpenShift Online</li>
+            <li>
+              <a href="https://www.openshift.com/features/index.html">
+                Overview
+                <span class="submenu-item-desc">Quickly develop, host, and scale containerized apps in the public cloud with on-demand access.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/pricing/index.html">
+                Plans &amp; Pricing
+                <span class="submenu-item-desc">Deploy up to 4 services for free. Upgrade and power your apps with up to 48GiB of memory and 100GiB of storage.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://manage.openshift.com/">
+                Sign up for Free
+              </a>
+            </li>
+            <li class="submenu-heading">OpenShift Dedicated</li>
+            <li>
+              <a href="https://www.openshift.com/dedicated/index.html">
+                Overview
+                <span class="submenu-item-desc">Your own private OpenShift cluster, operated by Red Hat.</span>
+              </a>
+            </li>
+            <li class="submenu-heading">OpenShift Container Platform</li>
+            <li>
+              <a href="https://www.openshift.com/container-platform/index.html">
+                Overview
+                <span class="submenu-item-desc">Run OpenShift in your data center or private cloud.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/container-platform/resources.html">
+                Resources
+                <span class="submenu-item-desc">Webinars, datasheets, reference architectures, demo videos and more.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/container-platform/trial.html">
+                Try it for Free
+              </a>
+            </li>
+            <li class="submenu-divider"></li>
+            <li>
+              <a href="https://www.openshift.com/showcase/index.html">
+                Application Gallery
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#">Developers</a>
+          <ul id="submenu-developers" class="dropdown-submenu">
+            <li>
+              <a href="https://docs.openshift.com/online/getting_started/index.html">
+                Getting Started
+                <span class="submenu-item-desc">New to OpenShift? Get your first application up and running and learn the basics.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://hub.openshift.com/">
+                Hub
+                <span class="submenu-item-desc">Find languages, frameworks, databases, and add-on services for OpenShift.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://developers.openshift.com/">
+                Developer Portal
+                <span class="submenu-item-desc">Learn about building, deploying, and managing your applications.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.openshift.com/">
+                Documentation
+              </a>
+            </li>
+            <li class="submenu-divider"></li>
+            <li>
+              <a href="http://stackoverflow.com/questions/tagged/openshift">
+                Stack Overflow
+                <span class="submenu-item-desc">A Q&amp;A site for everything development related. Post a question or browse answers on the 'openshift' tag.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/container-platform/resources.html#training">
+                Training &amp; Certification
+                <span class="submenu-item-desc">Red Hat Training's hands-on, task-focused courses and certifications for IT professionals and developers.</span>
+              </a>
+            </li>
+            <li class="submenu-divider"></li>
+            <li>
+              <a href="https://www.openshift.com/showcase/index.html">
+                Application Gallery
+                <span class="submenu-item-desc">Our showcase of applications running on Red Hat OpenShift Online.</span>
+              </a>
+            </li>
+            <li>
+              <a href="http://www.openshift.org/#contribute">
+                Contribute to OpenShift <i class="fa fa-external-link pull-right"></i>
+                <span class="submenu-item-desc">Get in touch with our product team, or become a part of the OpenShift Origin open source project.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://openshift.uservoice.com/">
+                Vote on Features
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#">Partners</a>
+          <ul id="submenu-partners" class="dropdown-submenu">
+            <li>
+              <a href="https://www.openshift.com/partners/index.html">
+                Become a Partner
+                <span class="submenu-item-desc">Build on the strength of the world's leading open source company.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/partners/index.html">
+                Find OpenShift Partners
+                <span class="submenu-item-desc">Find qualified partners to help you with your OpenShift projects.</span>
+              </a>
+            </li>
+            <li class="submenu-divider"></li>
+            <li>
+              <a href="http://commons.openshift.org/">
+                OpenShift Commons <i class="fa fa-external-link pull-right"></i>
+                <span class="submenu-item-desc">Where users, partners, customers, and contributors come together to collaborate on OpenShift.</span>
+              </a>
+            </li>
+            <li class="submenu-divider"></li>
+            <li>
+              <a href="https://www.openshift.com/grants/index.html">
+                Resource Grants
+                <span class="submenu-item-desc">For non-profits, educational institutions, and open source initiatives.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/startups/index.html">
+                Startup Program
+                <span class="submenu-item-desc">Designed to help startups build and scale.</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#">Support</a>
+          <ul id="submenu-support" class="dropdown-submenu">
+            <li>
+              <a href="https://access.redhat.com/">
+                Red Hat Customer Portal <i class="fa fa-external-link pull-right"></i>
+                <span class="submenu-item-desc">Manage support cases, browse Knowledgebase articles, and more.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.openshift.com/">
+                Documentation
+                <span class="submenu-item-desc">Official product documentation from Red Hat.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://help.openshift.com/">
+                Help Center
+                <span class="submenu-item-desc">The fastest way to find your available support options.</span>
+              </a>
+            </li>
+            <li>
+              <a href="http://stackoverflow.com/questions/tagged/openshift">
+                Stack Overflow <i class="fa fa-external-link pull-right"></i>
+                <span class="submenu-item-desc">A Q&amp;A site for everything development related. Post a question or browse answers on the 'openshift' tag.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/about/contact.html">
+                Contact Us
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#">Connect</a>
+          <ul id="submenu-connect" class="dropdown-submenu">
+            <li>
+              <a href="https://blog.openshift.com/">
+                Blog
+              </a>
+            </li>
+            <li>
+              <a href="https://blog.openshift.com/category/events/">
+                Events &amp; Conferences
+              </a>
+            </li>
+            <li>
+              <a href="http://commons.openshift.org/">
+                OpenShift Commons <i class="fa fa-external-link pull-right"></i>
+                <span class="submenu-item-desc">Where users, partners, customers, and contributors come together to collaborate on OpenShift.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/openshift">
+                Twitter <i class="fa fa-external-link pull-right"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/openshift">
+                Facebook <i class="fa fa-external-link pull-right"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/grp/home?gid=4185734">
+                LinkedIn <i class="fa fa-external-link pull-right"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/openshift/">
+                GitHub <i class="fa fa-external-link pull-right"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://plus.google.com/+OpenShift">
+                Google+ <i class="fa fa-external-link pull-right"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/user/rhopenshift">
+                YouTube <i class="fa fa-external-link pull-right"></i>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu visible-xs-block">
+          <a href="#">My Account</a>
+          <ul id="submenu-account" class="dropdown-submenu">
+            <li><a href="https://manage.openshift.com/">OpenShift Online 3 (New!)</a></li>
+            <li><a href="https://openshift.redhat.com/app/console">OpenShift Online 2</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openshift.com/about/contact.html">
+            Contact Us
+          </a>
+        </li>
+        <li>
+          <form action="https://help.openshift.com/hc/en-us/search" method="get" id="cse-search-form">
+            <input name="query" id="cse-search-input" class="navbar-search-query form-control" type="text" placeholder="Search" tabindex="1" autocomplete="off" autofocus>
+            <button type="submit" class="btn btn-default fa fa-search" value="Search"></button>
+          </form>
+        </li>
+      </ul>
+    </div>
+    <a class="navbar-brand" href="/"></a>
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="hidden-xs dropdown"> <a href="#" class="dropdown-toggle nav-log-in" data-toggle="dropdown"> My Account<span class="caret"></span> </a>
+        <ul class="dropdown-menu">
+          <li><a href="https://manage.openshift.com/">OpenShift Online 3 (New!)</a></li>
+          <li><a href="https://openshift.redhat.com/app/console">OpenShift Online 2</a></li>
+        </ul>
+      </li>
+      <li class="hidden-xs hidden-sm"><a class="nav-sign-up" href="https://manage.openshift.com/">Sign up for Free</a></li>
+    </ul>
+  </div>
+</div>
+  <div class="container">
+    <p class="toggle-nav visible-xs pull-left">
+      <button class="btn btn-default btn-sm" type="button" data-toggle="offcanvas">Toggle nav</button>
+    </p>
+    <ol class="breadcrumb">
+      <li class="sitename">
+        <a href="../../../index.html">Documentation</a>
+      </li>
+      <li class="hidden-xs active">
+        <a href="../../welcome/index.html">OpenShift Container Platform Branch Build</a>
+      </li>
+      <li class="hidden-xs active">
+        <a href="../../architecture/index.html">Architecture</a>
+      </li>
+      <li class="hidden-xs active"><a href="../../architecture/core_concepts/index.html">Core Concepts</a></li>
+      <li class="hidden-xs active">
+        Containers and Images
+      </li>
+    </ol>
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-8 col-sm-3 col-md-3 sidebar sidebar-offcanvas">
+        <div class="row-fluid">
+          <div id="hc-search">
+  <input id="hc-search-input" type="text">
+  <button id="hc-search-btn">Search</button>
+</div>
+
+<div id="hc-search-modal">
+  <div id="hc-modal-content">
+    <span id="hc-modal-close">&times;</span>
+    <div id="hc-search-results"></div>
+  </div>
+</div>
+
+<script>
+  hcSearchCategory("docs_cp", "Branch Build");
+</script>
+        </div>
+        <ul class="nav nav-sidebar">
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup0">
+        <span id="tgSpan0" class="fa fa-angle-right"></span>About
+      </a>
+      <ul id="topicGroup0" class="collapse  list-unstyled">
+            <li><a class="" href="../../welcome/index.html">Welcome</a></li>
+            <li><a class="" href="../../welcome/legal_notice.html">Legal Notice</a></li>
+            <li><a class="" href="../../welcome/revhistory_full.html">Full Revision History</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup1">
+        <span id="tgSpan1" class="fa fa-angle-right"></span>Release Notes
+      </a>
+      <ul id="topicGroup1" class="collapse  list-unstyled">
+            <li><a class="" href="../../release_notes/index.html">Overview</a></li>
+            <li><a class="" href="../../release_notes/ocp_3_7_release_notes.html">OpenShift Container Platform 3.7 Release Notes</a></li>
+            <li><a class="" href="../../release_notes/xpaas_release_notes.html">xPaaS Release Notes</a></li>
+            <li><a class="" href="../../release_notes/v2_vs_v3.html">Comparing with OpenShift Enterprise 2</a></li>
+            <li><a class="" href="../../release_notes/revhistory_release_notes.html">Revision History</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup2">
+        <span id="tgSpan2" class="fa fa-angle-right"></span>Getting Started
+      </a>
+      <ul id="topicGroup2" class="collapse  list-unstyled">
+            <li><a class="" href="../../getting_started/index.html">Overview</a></li>
+            <li><a class="" href="../../getting_started/install_openshift.html">Install OpenShift</a></li>
+            <li><a class="" href="../../getting_started/configure_openshift.html">Configure OpenShift</a></li>
+            <li><a class="" href="../../getting_started/developers_console.html">Web Console Walkthrough</a></li>
+            <li><a class="" href="../../getting_started/developers_cli.html">Command-Line Walkthrough</a></li>
+            <li><a class="" href="../../getting_started/revhistory_getting_started.html">Revision History</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup3">
+        <span id="tgSpan3" class="fa fa-angle-down"></span>Architecture
+      </a>
+      <ul id="topicGroup3" class="collapse in list-unstyled">
+            <li><a class="" href="../../architecture/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-1">
+                <span id="sgSpan-3-1" class="fa fa-caret-right"></span>&nbsp;Infrastructure Components
+              </a>
+              <ul id="topicSubGroup-3-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/infrastructure_components/kubernetes_infrastructure.html">Kubernetes Infrastructure</a></li>
+                  <li><a class="" href="../../architecture/infrastructure_components/image_registry.html">Container Registry</a></li>
+                  <li><a class="" href="../../architecture/infrastructure_components/web_console.html">Web Console</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-2">
+                <span id="sgSpan-3-2" class="fa fa-caret-down"></span>&nbsp;Core Concepts
+              </a>
+              <ul id="topicSubGroup-3-2" class="nav-tertiary list-unstyled collapse in">
+                  <li><a class="" href="../../architecture/core_concepts/index.html">Overview</a></li>
+                  <li><a class=" active" href="../../architecture/core_concepts/containers_and_images.html">Containers and Images</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/pods_and_services.html">Pods and Services</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/projects_and_users.html">Projects and Users</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/builds_and_image_streams.html">Builds and Image Streams</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/deployments.html">Deployments</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/templates.html">Templates</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-3">
+                <span id="sgSpan-3-3" class="fa fa-caret-right"></span>&nbsp;Additional Concepts
+              </a>
+              <ul id="topicSubGroup-3-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/additional_concepts/authentication.html">Authentication</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/authorization.html">Authorization</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/storage.html">Persistent Storage</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/scm.html">Source Control Management</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/admission_controllers.html">Admission Controllers</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/other_api_objects.html">Other API Objects</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-4">
+                <span id="sgSpan-3-4" class="fa fa-caret-right"></span>&nbsp;Networking
+              </a>
+              <ul id="topicSubGroup-3-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/networking/networking.html">Networking</a></li>
+                  <li><a class="" href="../../architecture/networking/sdn.html">OpenShift SDN</a></li>
+                  <li><a class="" href="../../architecture/networking/network_plugins.html">Network Plug-ins</a></li>
+                  <li><a class="" href="../../architecture/networking/port_forwarding.html">Port Forwarding</a></li>
+                  <li><a class="" href="../../architecture/networking/remote_commands.html">Remote Commands</a></li>
+                  <li><a class="" href="../../architecture/networking/haproxy-router.html">HAProxy Router Plug-in</a></li>
+                  <li><a class="" href="../../architecture/networking/routes.html">Routes</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-5">
+                <span id="sgSpan-3-5" class="fa fa-caret-right"></span>&nbsp;Service Catalog Components
+              </a>
+              <ul id="topicSubGroup-3-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/service_catalog/index.html">Service Catalog</a></li>
+                  <li><a class="" href="../../architecture/service_catalog/template_service_broker.html">Template Service Broker</a></li>
+                  <li><a class="" href="../../architecture/service_catalog/ansible_service_broker.html">OpenShift Ansible Broker</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../architecture/revhistory_architecture.html">Revision History</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup4">
+        <span id="tgSpan4" class="fa fa-angle-right"></span>Container Security Guide
+      </a>
+      <ul id="topicGroup4" class="collapse  list-unstyled">
+            <li><a class="" href="../../security/index.html">Introduction</a></li>
+            <li><a class="" href="../../security/hosts_multitenancy.html">Container Hosts and Multi-tenancy</a></li>
+            <li><a class="" href="../../security/container_content.html">Container Content</a></li>
+            <li><a class="" href="../../security/registries.html">Registries</a></li>
+            <li><a class="" href="../../security/build_process.html">Build Process</a></li>
+            <li><a class="" href="../../security/deployment.html">Deployment</a></li>
+            <li><a class="" href="../../security/securing_container_platform.html">Securing the Container Platform</a></li>
+            <li><a class="" href="../../security/network_security.html">Network Security</a></li>
+            <li><a class="" href="../../security/storage.html">Attached Storage</a></li>
+            <li><a class="" href="../../security/monitoring.html">Monitoring Events and Logs</a></li>
+            <li><a class="" href="../../security/revhistory_security.html">Revision History</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup5">
+        <span id="tgSpan5" class="fa fa-angle-right"></span>Installation and Configuration
+      </a>
+      <ul id="topicGroup5" class="collapse  list-unstyled">
+            <li><a class="" href="../../install_config/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-1">
+                <span id="sgSpan-5-1" class="fa fa-caret-right"></span>&nbsp;Installing a Cluster
+              </a>
+              <ul id="topicSubGroup-5-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/install/planning.html">Planning</a></li>
+                  <li><a class="" href="../../install_config/install/prerequisites.html">Prerequisites</a></li>
+                  <li><a class="" href="../../install_config/install/host_preparation.html">Host Preparation</a></li>
+                  <li><a class="" href="../../install_config/install/rpm_vs_containerized.html">Installing on Containerized Hosts</a></li>
+                  <li><a class="" href="../../install_config/install/quick_install.html">Quick Installation</a></li>
+                  <li><a class="" href="../../install_config/install/advanced_install.html">Advanced Installation</a></li>
+                  <li><a class="" href="../../install_config/install/disconnected_install.html">Disconnected Installation</a></li>
+                  <li><a class="" href="../../install_config/install/stand_alone_registry.html">Installing a Stand-alone Deployment of OpenShift Container Registry</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-2">
+                <span id="sgSpan-5-2" class="fa fa-caret-right"></span>&nbsp;Setting up the Registry
+              </a>
+              <ul id="topicSubGroup-5-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/registry/index.html">Registry Overview</a></li>
+                  <li><a class="" href="../../install_config/registry/deploy_registry_existing_clusters.html">Deploying a Registry on Existing Clusters</a></li>
+                  <li><a class="" href="../../install_config/registry/accessing_registry.html">Accessing the Registry</a></li>
+                  <li><a class="" href="../../install_config/registry/securing_and_exposing_registry.html">Securing and Exposing the Registry</a></li>
+                  <li><a class="" href="../../install_config/registry/extended_registry_configuration.html">Extended Registry Configuration</a></li>
+                  <li><a class="" href="../../install_config/registry/registry_known_issues.html">Known Issues</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-3">
+                <span id="sgSpan-5-3" class="fa fa-caret-right"></span>&nbsp;Setting up a Router
+              </a>
+              <ul id="topicSubGroup-5-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/router/index.html">Router Overview</a></li>
+                  <li><a class="" href="../../install_config/router/default_haproxy_router.html">Using the Default HAProxy Router</a></li>
+                  <li><a class="" href="../../install_config/router/customized_haproxy_router.html">Deploying a Customized HAProxy Router</a></li>
+                  <li><a class="" href="../../install_config/router/proxy_protocol.html">Configuring the HAProxy Router to Use the PROXY Protocol</a></li>
+                  <li><a class="" href="../../install_config/router/f5_router.html">Using the F5 Router Plug-in</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-4">
+                <span id="sgSpan-5-4" class="fa fa-caret-right"></span>&nbsp;Upgrading a Cluster
+              </a>
+              <ul id="topicSubGroup-5-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/upgrading/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/upgrading/automated_upgrades.html">Automated In-place Upgrades</a></li>
+                  <li><a class="" href="../../install_config/upgrading/manual_upgrades.html">Manual In-place Upgrades</a></li>
+                  <li><a class="" href="../../install_config/upgrading/blue_green_deployments.html">Blue-Green Deployments</a></li>
+                  <li><a class="" href="../../install_config/upgrading/os_upgrades.html">Operating System Updates and Upgrades</a></li>
+                  <li><a class="" href="../../install_config/upgrading/migrating_embedded_etcd.html">Migrating Embedded etcd to External etcd</a></li>
+                  <li><a class="" href="../../install_config/upgrading/migrating_etcd.html">Migrating etcd Data (v2 to v3)</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../install_config/downgrade.html">Downgrading</a></li>
+            <li><a class="" href="../../install_config/master_node_configuration.html">Master and Node Configuration</a></li>
+            <li><a class="" href="../../install_config/adding_hosts_to_existing_cluster.html">Adding Hosts to an Existing Cluster</a></li>
+            <li><a class="" href="../../install_config/imagestreams_templates.html">Loading the Default Image Streams and Templates</a></li>
+            <li><a class="" href="../../install_config/certificate_customization.html">Configuring Custom Certificates</a></li>
+            <li><a class="" href="../../install_config/redeploying_certificates.html">Redeploying Certificates</a></li>
+            <li><a class="" href="../../install_config/configuring_authentication.html">Configuring Authentication and User Agent</a></li>
+            <li><a class="" href="../../install_config/syncing_groups_with_ldap.html">Syncing Groups With LDAP</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-13">
+                <span id="sgSpan-5-13" class="fa fa-caret-right"></span>&nbsp;Advanced LDAP Configuration
+              </a>
+              <ul id="topicSubGroup-5-13" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/sssd_for_ldap_failover.html">Setting up SSSD for LDAP Failover</a></li>
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/configuring_form_based_authentication.html">Configuring Form-Based Authentication</a></li>
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/configuring_extended_ldap_attributes.html">Configuring Extended LDAP Attributes</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../install_config/configuring_sdn.html">Configuring the SDN</a></li>
+            <li><a class="" href="../../install_config/configuring_nuagesdn.html">Configuring Nuage SDN</a></li>
+            <li><a class="" href="../../install_config/configuring_aws.html">Configuring for AWS</a></li>
+            <li><a class="" href="../../install_config/configuring_openstack.html">Configuring for OpenStack</a></li>
+            <li><a class="" href="../../install_config/configuring_gce.html">Configuring for GCE</a></li>
+            <li><a class="" href="../../install_config/configuring_azure.html">Configuring for Azure</a></li>
+            <li><a class="" href="../../install_config/configuring_vsphere.html">Configuring for VMWare vSphere</a></li>
+            <li><a class="" href="../../install_config/configuring_local.html">Configuring for local Volume</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-22">
+                <span id="sgSpan-5-22" class="fa fa-caret-right"></span>&nbsp;Configuring Persistent Storage
+              </a>
+              <ul id="topicSubGroup-5-22" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/persistent_storage/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_nfs.html">Using NFS</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_glusterfs.html">Using GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_cinder.html">Using OpenStack Cinder</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_ceph_rbd.html">Using Ceph RBD</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_aws.html">Using AWS Elastic Block Store</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_gce.html">Using GCE Persistent Disk</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_iscsi.html">Using iSCSI</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_fibre_channel.html">Using Fibre Channel</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_azure.html">Using Azure Disk</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_azure_file.html">Using Azure File</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_flex_volume.html">Using FlexVolume</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_vsphere.html">Using VMWare vSphere</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_local.html">Using Local Volume</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/dynamically_provisioning_pvs.html">Dynamic Provisioning and Creating Storage Classes</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/pod_security_context.html">Volume Security</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/selector_label_binding.html">Selector-Label Volume Binding</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/enabling_controller_attach_detach.html">Enabling Controller-managed Attachment and Detachment</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-23">
+                <span id="sgSpan-5-23" class="fa fa-caret-right"></span>&nbsp;Persistent Storage Examples
+              </a>
+              <ul id="topicSubGroup-5-23" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/storage_examples/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/shared_storage.html">Sharing an NFS PV Across Two Pods</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/ceph_example.html">Complete Example Using Ceph RBD</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/ceph_rbd_dynamic_example.html">Complete Example Using Ceph RBD for Dynamic Provisioning</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/gluster_example.html">Complete Example Using GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/gluster_dynamic_example.html">Dynamic Provisioning Example Using Containerized GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/dedicated_gluster_dynamic_example.html">Dynamic Provisioning Example Using Dedicated GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/containerized_heketi_with_dedicated_gluster.html">Containerized Heketi for Managing Dedicated GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/privileged_pod_storage.html">Mounting Volumes To Privileged Pods</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/gluster_backed_registry.html">Backing Docker Registry with GlusterFS Storage</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/binding_pv_by_label.html">Binding Persistent Volumes by Label</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/storage_classes_dynamic_provisioning.html">Using StorageClasses for Dynamic Provisioning</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/storage_classes_legacy.html">Using StorageClasses for Existing Legacy Storage</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/azure_blob_docker_registry_example.html">Configuring Azure Blob Storage for Integrated Docker Registry</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../install_config/http_proxies.html">Working with HTTP Proxies</a></li>
+            <li><a class="" href="../../install_config/build_defaults_overrides.html">Configuring Global Build Defaults and Overrides</a></li>
+            <li><a class="" href="../../install_config/configuring_pipeline_execution.html">Configuring Pipeline Execution</a></li>
+            <li><a class="" href="../../install_config/configuring_routing.html">Configuring Route Timeouts</a></li>
+            <li><a class="" href="../../install_config/configuring_native_container_routing.html">Configuring Native Container Routing</a></li>
+            <li><a class="" href="../../install_config/routing_from_edge_lb.html">Routing from Edge Load Balancers</a></li>
+            <li><a class="" href="../../install_config/aggregate_logging.html">Aggregating Container Logs</a></li>
+            <li><a class="" href="../../install_config/aggregate_logging_sizing.html">Aggregate Logging Sizing Guidelines</a></li>
+            <li><a class="" href="../../install_config/cluster_metrics.html">Enabling Cluster Metrics</a></li>
+            <li><a class="" href="../../install_config/web_console_customization.html">Customizing the Web Console</a></li>
+            <li><a class="" href="../../install_config/provisioners.html">Deploying External Persistent Volume Provisioners</a></li>
+            <li><a class="" href="../../install_config/revhistory_install_config.html">Revision History</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup6">
+        <span id="tgSpan6" class="fa fa-angle-right"></span>Administrator Solutions
+      </a>
+      <ul id="topicGroup6" class="collapse  list-unstyled">
+            <li><a class="" href="../../admin_solutions/index.html">Overview</a></li>
+            <li><a class="" href="../../admin_solutions/master_node_config.html">Master and Node Configuration</a></li>
+            <li><a class="" href="../../admin_solutions/user_role_mgmt.html">User and Role Management</a></li>
+            <li><a class="" href="../../admin_solutions/authentication.html">Authentication</a></li>
+            <li><a class="" href="../../admin_solutions/certificate_management.html">Certificate Management</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup7">
+        <span id="tgSpan7" class="fa fa-angle-right"></span>Cluster Administration
+      </a>
+      <ul id="topicGroup7" class="collapse  list-unstyled">
+            <li><a class="" href="../../admin_guide/index.html">Overview</a></li>
+            <li><a class="" href="../../admin_guide/manage_nodes.html">Managing Nodes</a></li>
+            <li><a class="" href="../../admin_guide/manage_users.html">Managing Users</a></li>
+            <li><a class="" href="../../admin_guide/managing_projects.html">Managing Projects</a></li>
+            <li><a class="" href="../../admin_guide/managing_pods.html">Managing Pods</a></li>
+            <li><a class="" href="../../admin_guide/managing_networking.html">Managing Networking</a></li>
+            <li><a class="" href="../../admin_guide/service_accounts.html">Configuring Service Accounts</a></li>
+            <li><a class="" href="../../admin_guide/manage_rbac.html">Managing Role-based Access Control</a></li>
+            <li><a class="" href="../../admin_guide/image_policy.html">Image Policy</a></li>
+            <li><a class="" href="../../admin_guide/image_signatures.html">Image Signatures</a></li>
+            <li><a class="" href="../../admin_guide/scoped_tokens.html">Scoped Tokens</a></li>
+            <li><a class="" href="../../admin_guide/monitoring_images.html">Monitoring Images</a></li>
+            <li><a class="" href="../../admin_guide/manage_scc.html">Managing Security Context Constraints</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-7-13">
+                <span id="sgSpan-7-13" class="fa fa-caret-right"></span>&nbsp;Scheduling
+              </a>
+              <ul id="topicSubGroup-7-13" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../admin_guide/scheduling/index.html">Overview</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/scheduler.html">Default Scheduling</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/custom_scheduler.html">Custom Scheduling</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/scheduler-advanced.html">Advanced Scheduling</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/node_affinity.html">Advanced Scheduling and Node Affinity</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/pod_affinity.html">Advanced Scheduling and Pod Affinity/Anti-affinity</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/node_selector.html">Advanced Scheduling and Node Selectors</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/taints_tolerations.html">Advanced Scheduling and Taints and Tolerations</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../admin_guide/quota.html">Setting Quotas</a></li>
+            <li><a class="" href="../../admin_guide/multiproject_quota.html">Setting Multi-Project Quotas</a></li>
+            <li><a class="" href="../../admin_guide/limits.html">Setting Limit Ranges</a></li>
+            <li><a class="" href="../../admin_guide/pruning_resources.html">Pruning Objects</a></li>
+            <li><a class="" href="../../admin_guide/custom_resource_definitions.html">Extending the Kubernetes API with Custom Resources</a></li>
+            <li><a class="" href="../../admin_guide/garbage_collection.html">Garbage Collection</a></li>
+            <li><a class="" href="../../admin_guide/allocating_node_resources.html">Allocating Node Resources</a></li>
+            <li><a class="" href="../../admin_guide/opaque_integer_resources.html">Opaque Integer Resources</a></li>
+            <li><a class="" href="../../admin_guide/overcommit.html">Overcommitting</a></li>
+            <li><a class="" href="../../admin_guide/tcp_ingress_external_ports.html">Assigning Unique External IPs for Ingress Traffic</a></li>
+            <li><a class="" href="../../admin_guide/out_of_resource_handling.html">Out of Resource Handling</a></li>
+            <li><a class="" href="../../admin_guide/router.html">Monitoring and Debugging Routers</a></li>
+            <li><a class="" href="../../admin_guide/high_availability.html">High Availability</a></li>
+            <li><a class="" href="../../admin_guide/iptables.html">IPtables</a></li>
+            <li><a class="" href="../../admin_guide/securing_builds.html">Securing Builds by Strategy</a></li>
+            <li><a class="" href="../../admin_guide/seccomp.html">Restricting Application Capabilities Using Seccomp</a></li>
+            <li><a class="" href="../../admin_guide/sysctls.html">Sysctls</a></li>
+            <li><a class="" href="../../admin_guide/encrypting_data.html">Encrypting Data at Datastore Layer</a></li>
+            <li><a class="" href="../../admin_guide/ipsec.html">Encrypting Hosts with IPsec</a></li>
+            <li><a class="" href="../../admin_guide/building_dependency_trees.html">Building Dependency Trees</a></li>
+            <li><a class="" href="../../admin_guide/backup_restore.html">Backup and Restore</a></li>
+            <li><a class="" href="../../admin_guide/sdn_troubleshooting.html">Troubleshooting Networking</a></li>
+            <li><a class="" href="../../admin_guide/diagnostics_tool.html">Diagnostics Tool</a></li>
+            <li><a class="" href="../../admin_guide/idling_applications.html">Idling Applications</a></li>
+            <li><a class="" href="../../admin_guide/cluster_capacity.html">Analyzing Cluster Capacity</a></li>
+            <li><a class="" href="../../admin_guide/aws_cluster_labeling.html">Labeling Clusters for Amazon Web Services</a></li>
+            <li><a class="" href="../../admin_guide/revhistory_admin_guide.html">Revision History</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup8">
+        <span id="tgSpan8" class="fa fa-angle-right"></span>Scaling and Performance Guide
+      </a>
+      <ul id="topicGroup8" class="collapse  list-unstyled">
+            <li><a class="" href="../../scaling_performance/index.html">Overview</a></li>
+            <li><a class="" href="../../scaling_performance/install_practices.html">Recommended Installation Practices</a></li>
+            <li><a class="" href="../../scaling_performance/host_practices.html">Recommended Host Practices</a></li>
+            <li><a class="" href="../../scaling_performance/optimizing_compute_resources.html">Optimizing Compute Resources</a></li>
+            <li><a class="" href="../../scaling_performance/optimizing_storage.html">Optimizing Storage</a></li>
+            <li><a class="" href="../../scaling_performance/network_optimization.html">Network Optimization</a></li>
+            <li><a class="" href="../../scaling_performance/routing_optimization.html">Routing Optimization</a></li>
+            <li><a class="" href="../../scaling_performance/scaling_cluster_metrics.html">Scaling Cluster Metrics</a></li>
+            <li><a class="" href="../../scaling_performance/cluster_limits.html">Cluster Limits</a></li>
+            <li><a class="" href="../../scaling_performance/using_cluster_loader.html">Using Cluster Loader</a></li>
+            <li><a class="" href="../../scaling_performance/revhistory_scaling_performance.html">Revision History</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup9">
+        <span id="tgSpan9" class="fa fa-angle-right"></span>CLI Reference
+      </a>
+      <ul id="topicGroup9" class="collapse  list-unstyled">
+            <li><a class="" href="../../cli_reference/index.html">Overview</a></li>
+            <li><a class="" href="../../cli_reference/get_started_cli.html">Get Started with the CLI</a></li>
+            <li><a class="" href="../../cli_reference/manage_cli_profiles.html">Managing CLI Profiles</a></li>
+            <li><a class="" href="../../cli_reference/basic_cli_operations.html">Developer CLI Operations</a></li>
+            <li><a class="" href="../../cli_reference/admin_cli_operations.html">Administrator CLI Operations</a></li>
+            <li><a class="" href="../../cli_reference/extend_cli.html">Extending the CLI</a></li>
+            <li><a class="" href="../../cli_reference/revhistory_cli_reference.html">Revision History</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup10">
+        <span id="tgSpan10" class="fa fa-angle-right"></span>Developer Guide
+      </a>
+      <ul id="topicGroup10" class="collapse  list-unstyled">
+            <li><a class="" href="../../dev_guide/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-1">
+                <span id="sgSpan-10-1" class="fa fa-caret-right"></span>&nbsp;Application Life Cycle Management
+              </a>
+              <ul id="topicSubGroup-10-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/application_lifecycle/development_process.html">Planning Your Development Process</a></li>
+                  <li><a class="" href="../../dev_guide/application_lifecycle/new_app.html">Creating New Applications</a></li>
+                  <li><a class="" href="../../dev_guide/application_lifecycle/promoting_applications.html">Promoting Applications Across Environments</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../dev_guide/authentication.html">Authentication</a></li>
+            <li><a class="" href="../../dev_guide/authorization.html">Authorization</a></li>
+            <li><a class="" href="../../dev_guide/projects.html">Projects</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-5">
+                <span id="sgSpan-10-5" class="fa fa-caret-right"></span>&nbsp;Migrating Applications
+              </a>
+              <ul id="topicSubGroup-10-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/migrating_applications/index.html">Overview</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/database_applications.html">Database Applications</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/web_framework_applications.html">Web Framework Applications</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/quickstart_examples.html">QuickStart Examples</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/continuous_integration_and_deployment.html">Continuous Integration and Deployment</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/web_hooks_action_hooks.html">Webhooks and Action Hooks</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/S2I_tool.html">S2I Tool</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/support_guide.html">Support Guide</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-6">
+                <span id="sgSpan-10-6" class="fa fa-caret-right"></span>&nbsp;Tutorials
+              </a>
+              <ul id="topicSubGroup-10-6" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/dev_tutorials/index.html">Overview</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/quickstarts.html">Quickstart Templates</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/ruby_on_rails.html">Ruby on Rails</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/maven_tutorial.html">Setting Up a Nexus Mirror</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/openshift_pipeline.html">OpenShift Pipeline Builds</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/binary_builds.html">Binary Builds</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-7">
+                <span id="sgSpan-10-7" class="fa fa-caret-right"></span>&nbsp;Builds
+              </a>
+              <ul id="topicSubGroup-10-7" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/builds/index.html">How Builds Work</a></li>
+                  <li><a class="" href="../../dev_guide/builds/basic_build_operations.html">Basic Build Operations</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_inputs.html">Build Inputs</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_output.html">Build Output</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_strategies.html">Build Strategy Options</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_environment.html">Build Environment</a></li>
+                  <li><a class="" href="../../dev_guide/builds/triggering_builds.html">Triggering Builds</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_hooks.html">Build Hooks</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_run_policy.html">Build Run Policy</a></li>
+                  <li><a class="" href="../../dev_guide/builds/advanced_build_operations.html">Advanced Build Operations</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_troubleshooting.html">Troubleshooting</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-8">
+                <span id="sgSpan-10-8" class="fa fa-caret-right"></span>&nbsp;Deployments
+              </a>
+              <ul id="topicSubGroup-10-8" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/deployments/how_deployments_work.html">How Deployments Work</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/basic_deployment_operations.html">Basic Deployment Operations</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/deployment_strategies.html">Deployment Strategies</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/advanced_deployment_strategies.html">Advanced Deployment Strategies</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/kubernetes_deployments.html">Kubernetes Deployments Support</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../dev_guide/templates.html">Templates</a></li>
+            <li><a class="" href="../../dev_guide/ssh_environment.html">Opening a Remote Shell to Containers</a></li>
+            <li><a class="" href="../../dev_guide/service_accounts.html">Service Accounts</a></li>
+            <li><a class="" href="../../dev_guide/managing_images.html">Managing Images</a></li>
+            <li><a class="" href="../../dev_guide/compute_resources.html">Quotas and Limit Ranges</a></li>
+            <li><a class="" href="../../dev_guide/pod_preset.html">Injecting Information into Pods Using Pod Presets</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-15">
+                <span id="sgSpan-10-15" class="fa fa-caret-right"></span>&nbsp;Getting Traffic into a Cluster over Non-Standard Ports
+              </a>
+              <ul id="topicSubGroup-10-15" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/expose_service/index.html">Overview</a></li>
+                  <li><a class="" href="../../dev_guide/expose_service/expose_internal_ip_router.html">Using a Router</a></li>
+                  <li><a class="" href="../../dev_guide/expose_service/expose_internal_ip_load_balancer.html">Using a Load Balancer</a></li>
+                  <li><a class="" href="../../dev_guide/expose_service/expose_internal_ip_service.html">Using a Service ExternalIP</a></li>
+                  <li><a class="" href="../../dev_guide/expose_service/expose_internal_ip_nodeport.html">Using a NodePort</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../dev_guide/routes.html">Routes</a></li>
+            <li><a class="" href="../../dev_guide/integrating_external_services.html">Integrating External Services</a></li>
+            <li><a class="" href="../../dev_guide/secrets.html">Secrets</a></li>
+            <li><a class="" href="../../dev_guide/configmaps.html">ConfigMaps</a></li>
+            <li><a class="" href="../../dev_guide/downward_api.html">Downward API</a></li>
+            <li><a class="" href="../../dev_guide/projected_volumes.html">Projected Volumes</a></li>
+            <li><a class="" href="../../dev_guide/daemonsets.html">Using Daemonsets</a></li>
+            <li><a class="" href="../../dev_guide/pod_autoscaling.html">Pod Autoscaling</a></li>
+            <li><a class="" href="../../dev_guide/volumes.html">Managing Volumes</a></li>
+            <li><a class="" href="../../dev_guide/persistent_volumes.html">Using Persistent Volumes</a></li>
+            <li><a class="" href="../../dev_guide/executing_remote_commands.html">Executing Remote Commands</a></li>
+            <li><a class="" href="../../dev_guide/copy_files_to_container.html">Copying Files</a></li>
+            <li><a class="" href="../../dev_guide/port_forwarding.html">Port Forwarding</a></li>
+            <li><a class="" href="../../dev_guide/shared_memory.html">Shared Memory</a></li>
+            <li><a class="" href="../../dev_guide/application_health.html">Application Health</a></li>
+            <li><a class="" href="../../dev_guide/events.html">Events</a></li>
+            <li><a class="" href="../../dev_guide/environment_variables.html">Managing Environment Variables</a></li>
+            <li><a class="" href="../../dev_guide/jobs.html">Jobs</a></li>
+            <li><a class="" href="../../dev_guide/openshift_pipeline.html">OpenShift Pipeline</a></li>
+            <li><a class="" href="../../dev_guide/cron_jobs.html">Cron Jobs</a></li>
+            <li><a class="" href="../../dev_guide/create_from_url.html">Create from URL</a></li>
+            <li><a class="" href="../../dev_guide/application_memory_sizing.html">Application memory sizing</a></li>
+            <li><a class="" href="../../dev_guide/revhistory_dev_guide.html">Revision History</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup11">
+        <span id="tgSpan11" class="fa fa-angle-right"></span>Creating Images
+      </a>
+      <ul id="topicGroup11" class="collapse  list-unstyled">
+            <li><a class="" href="../../creating_images/index.html">Overview</a></li>
+            <li><a class="" href="../../creating_images/guidelines.html">Guidelines</a></li>
+            <li><a class="" href="../../creating_images/metadata.html">Image Metadata</a></li>
+            <li><a class="" href="../../creating_images/s2i.html">S2I Requirements</a></li>
+            <li><a class="" href="../../creating_images/s2i_testing.html">Testing S2I Images</a></li>
+            <li><a class="" href="../../creating_images/custom.html">Custom Builder</a></li>
+            <li><a class="" href="../../creating_images/revhistory_creating_images.html">Revision History</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup12">
+        <span id="tgSpan12" class="fa fa-angle-right"></span>Using Images
+      </a>
+      <ul id="topicGroup12" class="collapse  list-unstyled">
+            <li><a class="" href="../../using_images/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-1">
+                <span id="sgSpan-12-1" class="fa fa-caret-right"></span>&nbsp;Source-to-Image (S2I)
+              </a>
+              <ul id="topicSubGroup-12-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/s2i_images/index.html">Overview</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/dot_net_core.html">.NET Core</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/nodejs.html">Node.js</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/perl.html">Perl</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/php.html">PHP</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/python.html">Python</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/ruby.html">Ruby</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/customizing_s2i_images.html">Customizing S2I Images</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-2">
+                <span id="sgSpan-12-2" class="fa fa-caret-right"></span>&nbsp;Database Images
+              </a>
+              <ul id="topicSubGroup-12-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/db_images/index.html">Overview</a></li>
+                  <li><a class="" href="../../using_images/db_images/mysql.html">MySQL</a></li>
+                  <li><a class="" href="../../using_images/db_images/postgresql.html">PostgreSQL</a></li>
+                  <li><a class="" href="../../using_images/db_images/mongodb.html">MongoDB</a></li>
+                  <li><a class="" href="../../using_images/db_images/mariadb.html">MariaDB</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-3">
+                <span id="sgSpan-12-3" class="fa fa-caret-right"></span>&nbsp;Docker Images
+              </a>
+              <ul id="topicSubGroup-12-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/docker_images/index.html">Overview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-4">
+                <span id="sgSpan-12-4" class="fa fa-caret-right"></span>&nbsp;Other Images
+              </a>
+              <ul id="topicSubGroup-12-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/other_images/index.html">Overview</a></li>
+                  <li><a class="" href="../../using_images/other_images/jenkins.html">Jenkins</a></li>
+                  <li><a class="" href="../../using_images/other_images/jenkins_slaves.html">Jenkins Slaves</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-5">
+                <span id="sgSpan-12-5" class="fa fa-caret-right"></span>&nbsp;xPaaS Middleware Images
+              </a>
+              <ul id="topicSubGroup-12-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/xpaas_images/index.html">Overview</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../using_images/revhistory_using_images.html">Revision History</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup13">
+        <span id="tgSpan13" class="fa fa-angle-right"></span>Ansible Playbook Bundle Development Guide
+      </a>
+      <ul id="topicGroup13" class="collapse  list-unstyled">
+            <li><a class="" href="../../apb_devel/index.html">Introduction</a></li>
+            <li><a class="" href="../../apb_devel/cli_tooling.html">CLI Tooling</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-13-2">
+                <span id="sgSpan-13-2" class="fa fa-caret-right"></span>&nbsp;Writing APBs
+              </a>
+              <ul id="topicSubGroup-13-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../apb_devel/writing/getting_started.html">Getting Started</a></li>
+                  <li><a class="" href="../../apb_devel/writing/reference.html">Reference</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../apb_devel/revhistory_apb_devel.html">Revision History</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup14">
+        <span id="tgSpan14" class="fa fa-angle-right"></span>REST API Reference
+      </a>
+      <ul id="topicGroup14" class="collapse  list-unstyled">
+            <li><a class="" href="../../rest_api/index.html">Overview</a></li>
+            <li><a class="" href="../../rest_api/examples.html">Examples</a></li>
+            <li><a class="" href="../../rest_api/revhistory_rest_api.html">Revision History</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-3">
+                <span id="sgSpan-14-3" class="fa fa-caret-right"></span>&nbsp;/api/v1
+              </a>
+              <ul id="topicSubGroup-14-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/api/v1.APIResourceList.html">v1.APIResourceList</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.APIVersions.html">v1.APIVersions</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Binding.html">v1.Binding</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ComponentStatus.html">v1.ComponentStatus</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ConfigMap.html">v1.ConfigMap</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Endpoints.html">v1.Endpoints</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Event.html">v1.Event</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.LimitRange.html">v1.LimitRange</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Namespace.html">v1.Namespace</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Node.html">v1.Node</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.PersistentVolume.html">v1.PersistentVolume</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.PersistentVolumeClaim.html">v1.PersistentVolumeClaim</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Pod.html">v1.Pod</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.PodTemplate.html">v1.PodTemplate</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ReplicationController.html">v1.ReplicationController</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ResourceQuota.html">v1.ResourceQuota</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Secret.html">v1.Secret</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.SecurityContextConstraints.html">v1.SecurityContextConstraints</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Service.html">v1.Service</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ServiceAccount.html">v1.ServiceAccount</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-4">
+                <span id="sgSpan-14-4" class="fa fa-caret-right"></span>&nbsp;/apis/v1
+              </a>
+              <ul id="topicSubGroup-14-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis/v1.APIGroup.html">v1.APIGroup</a></li>
+                  <li><a class="" href="../../rest_api/apis/v1.APIGroupList.html">v1.APIGroupList</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-5">
+                <span id="sgSpan-14-5" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta1
+              </a>
+              <ul id="topicSubGroup-14-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta1.ControllerRevision.html">v1beta1.ControllerRevision</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta1.Deployment.html">v1beta1.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta1.StatefulSet.html">v1beta1.StatefulSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-6">
+                <span id="sgSpan-14-6" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta2
+              </a>
+              <ul id="topicSubGroup-14-6" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.ControllerRevision.html">v1beta2.ControllerRevision</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.DaemonSet.html">v1beta2.DaemonSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.Deployment.html">v1beta2.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.ReplicaSet.html">v1beta2.ReplicaSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.StatefulSet.html">v1beta2.StatefulSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-7">
+                <span id="sgSpan-14-7" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v1
+              </a>
+              <ul id="topicSubGroup-14-7" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-autoscaling/v1.HorizontalPodAutoscaler.html">v1.HorizontalPodAutoscaler</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-8">
+                <span id="sgSpan-14-8" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v2beta1
+              </a>
+              <ul id="topicSubGroup-14-8" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-autoscaling/v2beta1.HorizontalPodAutoscaler.html">v2beta1.HorizontalPodAutoscaler</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-9">
+                <span id="sgSpan-14-9" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1
+              </a>
+              <ul id="topicSubGroup-14-9" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-batch/v1.Job.html">v1.Job</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-10">
+                <span id="sgSpan-14-10" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1beta1
+              </a>
+              <ul id="topicSubGroup-14-10" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-batch/v1beta1.CronJob.html">v1beta1.CronJob</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-11">
+                <span id="sgSpan-14-11" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v2alpha1
+              </a>
+              <ul id="topicSubGroup-14-11" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-batch/v2alpha1.CronJob.html">v2alpha1.CronJob</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-12">
+                <span id="sgSpan-14-12" class="fa fa-caret-right"></span>&nbsp;/apis/extensions/v1beta1
+              </a>
+              <ul id="topicSubGroup-14-12" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.DaemonSet.html">v1beta1.DaemonSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.Deployment.html">v1beta1.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.Ingress.html">v1beta1.Ingress</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.NetworkPolicy.html">v1beta1.NetworkPolicy</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.PodSecurityPolicy.html">v1beta1.PodSecurityPolicy</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.ReplicaSet.html">v1beta1.ReplicaSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-13">
+                <span id="sgSpan-14-13" class="fa fa-caret-right"></span>&nbsp;/apis/policy/v1beta1
+              </a>
+              <ul id="topicSubGroup-14-13" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-policy/v1beta1.PodDisruptionBudget.html">v1beta1.PodDisruptionBudget</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-14">
+                <span id="sgSpan-14-14" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-14-14" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authentication.k8s.io/v1.TokenReview.html">v1.TokenReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-15">
+                <span id="sgSpan-14-15" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-14-15" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authentication.k8s.io/v1beta1.TokenReview.html">v1beta1.TokenReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-16">
+                <span id="sgSpan-14-16" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-14-16" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.SelfSubjectAccessReview.html">v1.SelfSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.SelfSubjectRulesReview.html">v1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.SubjectAccessReview.html">v1.SubjectAccessReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-17">
+                <span id="sgSpan-14-17" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-14-17" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.LocalSubjectAccessReview.html">v1beta1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectAccessReview.html">v1beta1.SelfSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectRulesReview.html">v1beta1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SubjectAccessReview.html">v1beta1.SubjectAccessReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-18">
+                <span id="sgSpan-14-18" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-14-18" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.ClusterRole.html">v1.ClusterRole</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.ClusterRoleBinding.html">v1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.Role.html">v1.Role</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.RoleBinding.html">v1.RoleBinding</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-19">
+                <span id="sgSpan-14-19" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-14-19" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRole.html">v1beta1.ClusterRole</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRoleBinding.html">v1beta1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.Role.html">v1beta1.Role</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.RoleBinding.html">v1beta1.RoleBinding</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-20">
+                <span id="sgSpan-14-20" class="fa fa-caret-right"></span>&nbsp;/apis/certificates.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-14-20" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-certificates.k8s.io/v1beta1.CertificateSigningRequest.html">v1beta1.CertificateSigningRequest</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-21">
+                <span id="sgSpan-14-21" class="fa fa-caret-right"></span>&nbsp;/apis/networking.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-14-21" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-networking.k8s.io/v1.NetworkPolicy.html">v1.NetworkPolicy</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-22">
+                <span id="sgSpan-14-22" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-14-22" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-storage.k8s.io/v1.StorageClass.html">v1.StorageClass</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-14-23">
+                <span id="sgSpan-14-23" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-14-23" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-storage.k8s.io/v1beta1.StorageClass.html">v1beta1.StorageClass</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+</ul>
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-9 main">
+        <div class="page-header">
+          <h1>Containers and Images</h1>
+        </div>
+        <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#containers">Containers</a>
+<ul class="sectlevel2">
+<li><a href="#init-containers">Init Containers</a></li>
+</ul>
+</li>
+<li><a href="#docker-images">Images</a></li>
+<li><a href="#docker-registries">Container Registries</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="containers"><a class="anchor" href="#containers"></a>Containers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The basic units of OpenShift Container Platform applications are called <em>containers</em>.
+<a href="https://access.redhat.com/articles/1353593">Linux container technologies</a>
+are lightweight mechanisms for isolating running processes so that they are
+limited to interacting with only their designated resources.</p>
+</div>
+<div class="paragraph">
+<p>Many application instances can be running in containers on a single host without
+visibility into each others' processes, files, network, and so on. Typically,
+each container provides a single service (often called a "micro-service"), such
+as a web server or a database, though containers can be used for arbitrary
+workloads.</p>
+</div>
+<div class="paragraph">
+<p>The Linux kernel has been incorporating capabilities for container technologies
+for years. More recently the Docker project has developed a convenient
+management interface for Linux containers on a host. OpenShift Container Platform and
+Kubernetes add the ability to orchestrate Docker-formatted containers across
+multi-host installations.</p>
+</div>
+<div class="paragraph">
+<p>Though you do not directly interact with the Docker CLI or service when using
+OpenShift Container Platform, understanding their capabilities and terminology is
+important for understanding their role in OpenShift Container Platform and how your
+applications function inside of containers. The <strong>docker</strong> RPM is available
+as part of RHEL 7, as well as CentOS and Fedora, so you can
+experiment with it separately from OpenShift Container Platform. Refer to the article
+<a href="https://access.redhat.com/articles/881893">Get Started with Docker Formatted Container Images on Red Hat Systems</a> for a guided introduction.</p>
+</div>
+<div class="sect2">
+<h3 id="init-containers"><a class="anchor" href="#init-containers"></a>Init Containers</h3>
+<div class="paragraph">
+<p>A pod can have init containers in addition to application containers. Init
+containers allow you to reorganize setup scripts and binding code. An init
+container differs from a regular container in that it always runs to completion.
+Each init container must complete successfully before the next one is started.</p>
+</div>
+<div class="paragraph">
+<p>For more information, see <a href="pods_and_services.html#pods-services-init-containers">Pods and Services</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="docker-images"><a class="anchor" href="#docker-images"></a>Images</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Containers in OpenShift Container Platform are based on Docker-formatted container <em>images</em>. An
+image is a binary that includes all of the requirements for running a single
+container, as well as metadata describing its needs and capabilities.</p>
+</div>
+<div class="paragraph">
+<p>You can think of it as a packaging technology. Containers only have access to
+resources defined in the image unless you give the container additional access
+when creating it. By deploying the same image in multiple containers across
+multiple hosts and load balancing between them, OpenShift Container Platform can provide
+redundancy and horizontal scaling for a service packaged into an image.</p>
+</div>
+<div class="paragraph">
+<p>You can use the Docker CLI directly to build images, but OpenShift Container Platform also
+supplies builder images that assist with creating new images by adding your code
+or configuration to existing images.</p>
+</div>
+<div class="paragraph">
+<p>Because applications develop over time, a single image name can actually
+refer to many different versions of the "same" image. Each different
+image is referred to uniquely by its hash (a long hexadecimal number
+e.g. <code>fd44297e2ddb050ec4f&#8230;&#8203;</code>) which is usually shortened to 12
+characters (e.g. <code>fd44297e2ddb</code>).</p>
+</div>
+<h3 id="architecture-images-tag-policy" class="discrete">Image Version Tag Policy</h3>
+<div class="paragraph">
+<p>Rather than version numbers, the Docker service allows applying tags (such as
+<code>v1</code>, <code>v2.1</code>, <code>GA</code>, or the default <code>latest</code>) in addition to the image name to
+further specify the image desired, so you may see the same image referred to as
+<code>centos</code> (implying the <code>latest</code> tag), <code>centos:centos7</code>, or <code>fd44297e2ddb</code>.</p>
+</div>
+<div id="WARNING" class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Do not use the <code>latest</code> tag for any official OpenShift Container Platform images. These are
+images that start with <code>openshift3/</code>. <code>latest</code> can refer to a number of
+versions, such as <code>3.4</code>, or <code>3.5</code>.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>How you tag the images dictates the updating policy. The more specific you are, the less frequently the image will be updated. Use the following to determine your chosen OpenShift Container Platform images policy:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">vX.Y</dt>
+<dd>
+<p>The vX.Y tag points to X.Y.Z-&lt;number&gt;. For example, if the <code>registry-console</code>
+image is updated to v3.4, it points to the newest 3.4.Z-&lt;number&gt; tag, such
+as 3.4.1-8.</p>
+</dd>
+<dt class="hdlist1">X.Y.Z</dt>
+<dd>
+<p>Similar to the vX.Y example above, the X.Y.Z tag points to the latest
+X.Y.Z-&lt;number&gt;. For example, 3.4.1 would point to 3.4.1-8</p>
+</dd>
+<dt class="hdlist1">X.Y.Z-&lt;number&gt;</dt>
+<dd>
+<p>The tag is unique and does not change. When using this tag, the image does not update if an image is updated. For example, the 3.4.1-8 will always point to 3.4.1-8, even if an image is updated.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="docker-registries"><a class="anchor" href="#docker-registries"></a>Container Registries</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A container registry is a service for storing and retrieving Docker-formatted
+container images. A registry contains a collection of one or more image
+repositories. Each image repository contains one or more tagged images. Docker
+provides its own registry, the <a href="https://registry.hub.docker.com/">Docker Hub</a>, and you can also use private or third-party registries. Red Hat provides a
+registry at <code>registry.access.redhat.com</code> for subscribers. OpenShift Container Platform can
+also supply its own internal registry for managing custom container images.</p>
+</div>
+<div class="paragraph">
+<p>The relationship between containers, images, and registries is depicted in the
+following diagram:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="data:image/png;base64,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" alt="docker diagram" width="830" height="616">
+</div>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    /*<![CDATA[*/
+    $(document).ready(function() {
+      $("[id^='topicGroup']").on('show.bs.collapse', function (event) {
+        if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+          $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+        }
+      });
+      $("[id^='topicGroup']").on('hide.bs.collapse', function (event) {
+        if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+          $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+        }
+      });
+      $("[id^='topicSubGroup']").on('show.bs.collapse', function () {
+        $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+      });
+      $("[id^='topicSubGroup']").on('hide.bs.collapse', function () {
+        $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+      });
+    });
+    /*]]>*/
+  </script>
+    <footer class="footer-openshift">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4 col-md-3 logo">
+        <a href="https://www.redhat.com/"></a>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-6 text-center">
+        <div class="row">
+          <div class="col-xs-12 col-md-4">
+            <a href="https://www.openshift.com/legal/privacy.html">
+              Privacy Policy
+            </a>
+          </div>
+          <div class="col-xs-12 col-md-4">
+          <a href="https://www.openshift.com/legal/terms.html">
+            Terms and Conditions
+          </a>
+          </div>
+          <div class="col-xs-12 col-md-4">
+          <a href="http://www.openshift.org/">
+            Open Source
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3 text-right">
+        <a id="built_with_asciibinder" href="http://asciibinder.org/">
+          <img src="../../../trello143-jenkins-memory-usage-tuning/_images/asciibinder_web_logo.svg" alt="AsciiBinder" />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Adobe DTM -->
+<script type="text/javascript">
+if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+   _satellite.pageBottom();
+}
+</script>
+<!-- End Adobe DTM -->
+</body>
+</html>

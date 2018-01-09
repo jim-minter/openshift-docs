@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Network Plug-ins - Networking | Architecture | OpenShift Online Branch Build</title>
+  <link href="https://assets.openshift.net/content/subdomain.css" rel="stylesheet" type="text/css">
+  <link href="../../../trello143-jenkins-memory-usage-tuning/_stylesheets/docs.css" rel="stylesheet" />
+  <link href="../../../trello143-jenkins-memory-usage-tuning/_stylesheets/search.css" rel="stylesheet" />
+  <link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png">
+  <link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="text/css">
+  <!--[if IE]><link rel="shortcut icon" href="https://assets.openshift.net/content/subdomain/favicon.ico"><![endif]-->
+  <!-- or, set /favicon.ico for IE10 win -->
+  <meta content="OpenShift" name="application-name">
+  <meta content="#000000" name="msapplication-TileColor">
+  <meta content="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" name="msapplication-TileImage">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://assets.openshift.net/content/html5shiv.js" type="text/javascript"></script>
+    <script src="https://assets.openshift.net/content/respond.js" type="text/javascript"></script>
+    <link href="https://assets.openshift.net/content/vendor/respond-js/respond-proxy.html" id="respond-proxy" rel="respond-proxy">
+    <link href="../../../trello143-jenkins-memory-usage-tuning/_images/respond.proxy.gif" id="respond-redirect" rel="respond-redirect">
+    <script src="../../../trello143-jenkins-memory-usage-tuning/_javascripts/respond.proxy.js" type="text/javascript"></script>
+  <![endif]-->
+  <script src="https://assets.openshift.net/content/modernizr.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/subdomain.js" type="text/javascript"></script>
+  <script src="../../../trello143-jenkins-memory-usage-tuning/_javascripts/bootstrap-offcanvas.js" type="text/javascript"></script>
+  <script src="../../../trello143-jenkins-memory-usage-tuning/_javascripts/reformat-html.js" type="text/javascript"></script>
+  <script src="../../../trello143-jenkins-memory-usage-tuning/_javascripts/hc-search.js" type="text/javascript"></script>
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PMDVKG');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Adobe DTM -->
+<script src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+<!-- End Adobe DTM -->
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PMDVKG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="navbar navbar-default navbar-openshift" role="navigation">
+  <div class="navbar-header">
+    <div class="dropdown">
+      <a href="#" class="dropdown-toggle navbar-menu-toggle" data-toggle="dropdown">
+        <span class="navbar-menu-title">MENU</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <ul class="dropdown-menu navbar-menu" role="menu">
+        <li class="submenu">
+          <a href="#">Overview</a>
+          <ul id="submenu-overview" class="dropdown-submenu">
+            <li class="submenu-heading">Introduction to OpenShift</li>
+            <li>
+              <a href="https://www.openshift.com/about/index.html">
+                What is OpenShift?
+                <span class="submenu-item-desc">Learn about Red Hat's next-generation cloud application platform.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/container-platform/customers.html">
+                Our Customers
+                <span class="submenu-item-desc">Discover what companies are using OpenShift to deliver a flexible, scalable cloud application environment.</span>
+              </a>
+            </li>
+            <li class="submenu-heading">News</li>
+            <li>
+              <a href="https://www.openshift.com/about/awards.html">
+                Awards
+                <span class="submenu-item-desc">Industry recognition and awards.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://blog.openshift.com/">
+                OpenShift Blog
+                <span class="submenu-item-desc">Keep your finger on the pulse of all things OpenShift.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://blog.openshift.com/category/events/">
+                Events
+                <span class="submenu-item-desc">OpenShift sponsors and attends a variety of in-person events around the globe.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/about/press.html">
+                In the Press
+                <span class="submenu-item-desc">The latest OpenShift news and press releases.</span>
+              </a>
+            </li>
+            <li class="submenu-divider"></li>
+            <li>
+              <a href="http://jobs.redhat.com/job-search-results/?keywords=openshift">
+                Careers <i class="fa fa-external-link pull-right"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/about/logos.html">
+                Logos &amp; Media
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#">Features</a>
+          <ul id="submenu-features" class="dropdown-submenu">
+            <li class="submenu-heading">OpenShift Online</li>
+            <li>
+              <a href="https://www.openshift.com/features/index.html">
+                Overview
+                <span class="submenu-item-desc">Quickly develop, host, and scale containerized apps in the public cloud with on-demand access.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/pricing/index.html">
+                Plans &amp; Pricing
+                <span class="submenu-item-desc">Deploy up to 4 services for free. Upgrade and power your apps with up to 48GiB of memory and 100GiB of storage.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://manage.openshift.com/">
+                Sign up for Free
+              </a>
+            </li>
+            <li class="submenu-heading">OpenShift Dedicated</li>
+            <li>
+              <a href="https://www.openshift.com/dedicated/index.html">
+                Overview
+                <span class="submenu-item-desc">Your own private OpenShift cluster, operated by Red Hat.</span>
+              </a>
+            </li>
+            <li class="submenu-heading">OpenShift Container Platform</li>
+            <li>
+              <a href="https://www.openshift.com/container-platform/index.html">
+                Overview
+                <span class="submenu-item-desc">Run OpenShift in your data center or private cloud.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/container-platform/resources.html">
+                Resources
+                <span class="submenu-item-desc">Webinars, datasheets, reference architectures, demo videos and more.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/container-platform/trial.html">
+                Try it for Free
+              </a>
+            </li>
+            <li class="submenu-divider"></li>
+            <li>
+              <a href="https://www.openshift.com/showcase/index.html">
+                Application Gallery
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#">Developers</a>
+          <ul id="submenu-developers" class="dropdown-submenu">
+            <li>
+              <a href="https://docs.openshift.com/online/getting_started/index.html">
+                Getting Started
+                <span class="submenu-item-desc">New to OpenShift? Get your first application up and running and learn the basics.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://hub.openshift.com/">
+                Hub
+                <span class="submenu-item-desc">Find languages, frameworks, databases, and add-on services for OpenShift.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://developers.openshift.com/">
+                Developer Portal
+                <span class="submenu-item-desc">Learn about building, deploying, and managing your applications.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.openshift.com/">
+                Documentation
+              </a>
+            </li>
+            <li class="submenu-divider"></li>
+            <li>
+              <a href="http://stackoverflow.com/questions/tagged/openshift">
+                Stack Overflow
+                <span class="submenu-item-desc">A Q&amp;A site for everything development related. Post a question or browse answers on the 'openshift' tag.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/container-platform/resources.html#training">
+                Training &amp; Certification
+                <span class="submenu-item-desc">Red Hat Training's hands-on, task-focused courses and certifications for IT professionals and developers.</span>
+              </a>
+            </li>
+            <li class="submenu-divider"></li>
+            <li>
+              <a href="https://www.openshift.com/showcase/index.html">
+                Application Gallery
+                <span class="submenu-item-desc">Our showcase of applications running on Red Hat OpenShift Online.</span>
+              </a>
+            </li>
+            <li>
+              <a href="http://www.openshift.org/#contribute">
+                Contribute to OpenShift <i class="fa fa-external-link pull-right"></i>
+                <span class="submenu-item-desc">Get in touch with our product team, or become a part of the OpenShift Origin open source project.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://openshift.uservoice.com/">
+                Vote on Features
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#">Partners</a>
+          <ul id="submenu-partners" class="dropdown-submenu">
+            <li>
+              <a href="https://www.openshift.com/partners/index.html">
+                Become a Partner
+                <span class="submenu-item-desc">Build on the strength of the world's leading open source company.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/partners/index.html">
+                Find OpenShift Partners
+                <span class="submenu-item-desc">Find qualified partners to help you with your OpenShift projects.</span>
+              </a>
+            </li>
+            <li class="submenu-divider"></li>
+            <li>
+              <a href="http://commons.openshift.org/">
+                OpenShift Commons <i class="fa fa-external-link pull-right"></i>
+                <span class="submenu-item-desc">Where users, partners, customers, and contributors come together to collaborate on OpenShift.</span>
+              </a>
+            </li>
+            <li class="submenu-divider"></li>
+            <li>
+              <a href="https://www.openshift.com/grants/index.html">
+                Resource Grants
+                <span class="submenu-item-desc">For non-profits, educational institutions, and open source initiatives.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/startups/index.html">
+                Startup Program
+                <span class="submenu-item-desc">Designed to help startups build and scale.</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#">Support</a>
+          <ul id="submenu-support" class="dropdown-submenu">
+            <li>
+              <a href="https://access.redhat.com/">
+                Red Hat Customer Portal <i class="fa fa-external-link pull-right"></i>
+                <span class="submenu-item-desc">Manage support cases, browse Knowledgebase articles, and more.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.openshift.com/">
+                Documentation
+                <span class="submenu-item-desc">Official product documentation from Red Hat.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://help.openshift.com/">
+                Help Center
+                <span class="submenu-item-desc">The fastest way to find your available support options.</span>
+              </a>
+            </li>
+            <li>
+              <a href="http://stackoverflow.com/questions/tagged/openshift">
+                Stack Overflow <i class="fa fa-external-link pull-right"></i>
+                <span class="submenu-item-desc">A Q&amp;A site for everything development related. Post a question or browse answers on the 'openshift' tag.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.openshift.com/about/contact.html">
+                Contact Us
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#">Connect</a>
+          <ul id="submenu-connect" class="dropdown-submenu">
+            <li>
+              <a href="https://blog.openshift.com/">
+                Blog
+              </a>
+            </li>
+            <li>
+              <a href="https://blog.openshift.com/category/events/">
+                Events &amp; Conferences
+              </a>
+            </li>
+            <li>
+              <a href="http://commons.openshift.org/">
+                OpenShift Commons <i class="fa fa-external-link pull-right"></i>
+                <span class="submenu-item-desc">Where users, partners, customers, and contributors come together to collaborate on OpenShift.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/openshift">
+                Twitter <i class="fa fa-external-link pull-right"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/openshift">
+                Facebook <i class="fa fa-external-link pull-right"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/grp/home?gid=4185734">
+                LinkedIn <i class="fa fa-external-link pull-right"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/openshift/">
+                GitHub <i class="fa fa-external-link pull-right"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://plus.google.com/+OpenShift">
+                Google+ <i class="fa fa-external-link pull-right"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/user/rhopenshift">
+                YouTube <i class="fa fa-external-link pull-right"></i>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu visible-xs-block">
+          <a href="#">My Account</a>
+          <ul id="submenu-account" class="dropdown-submenu">
+            <li><a href="https://manage.openshift.com/">OpenShift Online 3 (New!)</a></li>
+            <li><a href="https://openshift.redhat.com/app/console">OpenShift Online 2</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.openshift.com/about/contact.html">
+            Contact Us
+          </a>
+        </li>
+        <li>
+          <form action="https://help.openshift.com/hc/en-us/search" method="get" id="cse-search-form">
+            <input name="query" id="cse-search-input" class="navbar-search-query form-control" type="text" placeholder="Search" tabindex="1" autocomplete="off" autofocus>
+            <button type="submit" class="btn btn-default fa fa-search" value="Search"></button>
+          </form>
+        </li>
+      </ul>
+    </div>
+    <a class="navbar-brand" href="/"></a>
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="hidden-xs dropdown"> <a href="#" class="dropdown-toggle nav-log-in" data-toggle="dropdown"> My Account<span class="caret"></span> </a>
+        <ul class="dropdown-menu">
+          <li><a href="https://manage.openshift.com/">OpenShift Online 3 (New!)</a></li>
+          <li><a href="https://openshift.redhat.com/app/console">OpenShift Online 2</a></li>
+        </ul>
+      </li>
+      <li class="hidden-xs hidden-sm"><a class="nav-sign-up" href="https://manage.openshift.com/">Sign up for Free</a></li>
+    </ul>
+  </div>
+</div>
+  <div class="container">
+    <p class="toggle-nav visible-xs pull-left">
+      <button class="btn btn-default btn-sm" type="button" data-toggle="offcanvas">Toggle nav</button>
+    </p>
+    <ol class="breadcrumb">
+      <li class="sitename">
+        <a href="../../../index.html">Documentation</a>
+      </li>
+      <li class="hidden-xs active">
+        <a href="../../welcome/index.html">OpenShift Online Branch Build</a>
+      </li>
+      <li class="hidden-xs active">
+        <a href="../../architecture/index.html">Architecture</a>
+      </li>
+      <li class="hidden-xs active"><a href="../../architecture/networking/networking.html">Networking</a></li>
+      <li class="hidden-xs active">
+        Network Plug-ins
+      </li>
+    </ol>
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-8 col-sm-3 col-md-3 sidebar sidebar-offcanvas">
+        <div class="row-fluid">
+          <div id="hc-search">
+  <input id="hc-search-input" type="text">
+  <button id="hc-search-btn">Search</button>
+</div>
+
+<div id="hc-search-modal">
+  <div id="hc-modal-content">
+    <span id="hc-modal-close">&times;</span>
+    <div id="hc-search-results"></div>
+  </div>
+</div>
+
+<script>
+  hcSearchCategory("docs_online");
+</script>
+        </div>
+        <ul class="nav nav-sidebar">
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup0">
+        <span id="tgSpan0" class="fa fa-angle-right"></span>About
+      </a>
+      <ul id="topicGroup0" class="collapse  list-unstyled">
+            <li><a class="" href="../../welcome/index.html">Welcome</a></li>
+            <li><a class="" href="../../welcome/legal_notice.html">Legal Notice</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup1">
+        <span id="tgSpan1" class="fa fa-angle-right"></span>Release Notes
+      </a>
+      <ul id="topicGroup1" class="collapse  list-unstyled">
+            <li><a class="" href="../../release_notes/online_release_notes.html">OpenShift Online Starter Release Notes</a></li>
+            <li><a class="" href="../../release_notes/online_known_issues.html">Known Issues</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup2">
+        <span id="tgSpan2" class="fa fa-angle-right"></span>Getting Started
+      </a>
+      <ul id="topicGroup2" class="collapse  list-unstyled">
+            <li><a class="" href="../../getting_started/index.html">Overview</a></li>
+            <li><a class="" href="../../getting_started/choose_a_plan.html">Choose a Plan</a></li>
+            <li><a class="" href="../../getting_started/basic_walkthrough.html">Basic Walkthrough</a></li>
+            <li><a class="" href="../../getting_started/beyond_the_basics.html">Beyond the Basics</a></li>
+            <li><a class="" href="../../getting_started/online_v2_vs_v3.html">Comparing OpenShift 2 and 3</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup3">
+        <span id="tgSpan3" class="fa fa-angle-down"></span>Architecture
+      </a>
+      <ul id="topicGroup3" class="collapse in list-unstyled">
+            <li><a class="" href="../../architecture/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-1">
+                <span id="sgSpan-3-1" class="fa fa-caret-right"></span>&nbsp;Infrastructure Components
+              </a>
+              <ul id="topicSubGroup-3-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/infrastructure_components/kubernetes_infrastructure.html">Kubernetes Infrastructure</a></li>
+                  <li><a class="" href="../../architecture/infrastructure_components/image_registry.html">Container Registry</a></li>
+                  <li><a class="" href="../../architecture/infrastructure_components/web_console.html">Web Console</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-2">
+                <span id="sgSpan-3-2" class="fa fa-caret-right"></span>&nbsp;Core Concepts
+              </a>
+              <ul id="topicSubGroup-3-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/core_concepts/index.html">Overview</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/containers_and_images.html">Containers and Images</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/pods_and_services.html">Pods and Services</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/projects_and_users.html">Projects and Users</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/builds_and_image_streams.html">Builds and Image Streams</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/deployments.html">Deployments</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/templates.html">Templates</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-3">
+                <span id="sgSpan-3-3" class="fa fa-caret-right"></span>&nbsp;Additional Concepts
+              </a>
+              <ul id="topicSubGroup-3-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/additional_concepts/authentication.html">Authentication</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/authorization.html">Authorization</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/storage.html">Persistent Storage</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/scm.html">Source Control Management</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/other_api_objects.html">Other API Objects</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-4">
+                <span id="sgSpan-3-4" class="fa fa-caret-down"></span>&nbsp;Networking
+              </a>
+              <ul id="topicSubGroup-3-4" class="nav-tertiary list-unstyled collapse in">
+                  <li><a class="" href="../../architecture/networking/networking.html">Networking</a></li>
+                  <li><a class="" href="../../architecture/networking/sdn.html">OpenShift SDN</a></li>
+                  <li><a class=" active" href="../../architecture/networking/network_plugins.html">Network Plug-ins</a></li>
+                  <li><a class="" href="../../architecture/networking/port_forwarding.html">Port Forwarding</a></li>
+                  <li><a class="" href="../../architecture/networking/remote_commands.html">Remote Commands</a></li>
+                  <li><a class="" href="../../architecture/networking/haproxy-router.html">HAProxy Router Plug-in</a></li>
+                  <li><a class="" href="../../architecture/networking/routes.html">Routes</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup4">
+        <span id="tgSpan4" class="fa fa-angle-right"></span>CLI Reference
+      </a>
+      <ul id="topicGroup4" class="collapse  list-unstyled">
+            <li><a class="" href="../../cli_reference/index.html">Overview</a></li>
+            <li><a class="" href="../../cli_reference/get_started_cli.html">Get Started with the CLI</a></li>
+            <li><a class="" href="../../cli_reference/manage_cli_profiles.html">Managing CLI Profiles</a></li>
+            <li><a class="" href="../../cli_reference/basic_cli_operations.html">Developer CLI Operations</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup5">
+        <span id="tgSpan5" class="fa fa-angle-right"></span>Developer Guide
+      </a>
+      <ul id="topicGroup5" class="collapse  list-unstyled">
+            <li><a class="" href="../../dev_guide/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-1">
+                <span id="sgSpan-5-1" class="fa fa-caret-right"></span>&nbsp;Application Life Cycle Management
+              </a>
+              <ul id="topicSubGroup-5-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/application_lifecycle/development_process.html">Planning Your Development Process</a></li>
+                  <li><a class="" href="../../dev_guide/application_lifecycle/new_app.html">Creating New Applications</a></li>
+                  <li><a class="" href="../../dev_guide/application_lifecycle/promoting_applications.html">Promoting Applications Across Environments</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../dev_guide/authentication.html">Authentication</a></li>
+            <li><a class="" href="../../dev_guide/authorization.html">Authorization</a></li>
+            <li><a class="" href="../../dev_guide/projects.html">Projects</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-5">
+                <span id="sgSpan-5-5" class="fa fa-caret-right"></span>&nbsp;Migrating Applications
+              </a>
+              <ul id="topicSubGroup-5-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/migrating_applications/index.html">Overview</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/database_applications.html">Database Applications</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/web_framework_applications.html">Web Framework Applications</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/quickstart_examples.html">QuickStart Examples</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/continuous_integration_and_deployment.html">Continuous Integration and Deployment</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/web_hooks_action_hooks.html">Webhooks and Action Hooks</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/S2I_tool.html">S2I Tool</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/support_guide.html">Support Guide</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-6">
+                <span id="sgSpan-5-6" class="fa fa-caret-right"></span>&nbsp;Tutorials
+              </a>
+              <ul id="topicSubGroup-5-6" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/dev_tutorials/index.html">Overview</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/quickstarts.html">Quickstart Templates</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/ruby_on_rails.html">Ruby on Rails</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/maven_tutorial.html">Setting Up a Nexus Mirror</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/openshift_pipeline.html">OpenShift Pipeline Builds</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/binary_builds.html">Binary Builds</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-7">
+                <span id="sgSpan-5-7" class="fa fa-caret-right"></span>&nbsp;Builds
+              </a>
+              <ul id="topicSubGroup-5-7" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/builds/index.html">How Builds Work</a></li>
+                  <li><a class="" href="../../dev_guide/builds/basic_build_operations.html">Basic Build Operations</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_inputs.html">Build Inputs</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_output.html">Build Output</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_strategies.html">Build Strategy Options</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_environment.html">Build Environment</a></li>
+                  <li><a class="" href="../../dev_guide/builds/triggering_builds.html">Triggering Builds</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_hooks.html">Build Hooks</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_run_policy.html">Build Run Policy</a></li>
+                  <li><a class="" href="../../dev_guide/builds/advanced_build_operations.html">Advanced Build Operations</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_troubleshooting.html">Troubleshooting</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-8">
+                <span id="sgSpan-5-8" class="fa fa-caret-right"></span>&nbsp;Deployments
+              </a>
+              <ul id="topicSubGroup-5-8" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/deployments/how_deployments_work.html">How Deployments Work</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/basic_deployment_operations.html">Basic Deployment Operations</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/deployment_strategies.html">Deployment Strategies</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/advanced_deployment_strategies.html">Advanced Deployment Strategies</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../dev_guide/templates.html">Templates</a></li>
+            <li><a class="" href="../../dev_guide/ssh_environment.html">Opening a Remote Shell to Containers</a></li>
+            <li><a class="" href="../../dev_guide/service_accounts.html">Service Accounts</a></li>
+            <li><a class="" href="../../dev_guide/managing_images.html">Managing Images</a></li>
+            <li><a class="" href="../../dev_guide/compute_resources.html">Quotas and Limit Ranges</a></li>
+            <li><a class="" href="../../dev_guide/pod_preset.html">Injecting Information into Pods Using Pod Presets</a></li>
+            <li><a class="" href="../../dev_guide/routes.html">Routes</a></li>
+            <li><a class="" href="../../dev_guide/integrating_external_services.html">Integrating External Services</a></li>
+            <li><a class="" href="../../dev_guide/secrets.html">Secrets</a></li>
+            <li><a class="" href="../../dev_guide/configmaps.html">ConfigMaps</a></li>
+            <li><a class="" href="../../dev_guide/downward_api.html">Downward API</a></li>
+            <li><a class="" href="../../dev_guide/projected_volumes.html">Projected Volumes</a></li>
+            <li><a class="" href="../../dev_guide/pod_autoscaling.html">Pod Autoscaling</a></li>
+            <li><a class="" href="../../dev_guide/volumes.html">Managing Volumes</a></li>
+            <li><a class="" href="../../dev_guide/persistent_volumes.html">Using Persistent Volumes</a></li>
+            <li><a class="" href="../../dev_guide/storage_classes.html">Storage Classes</a></li>
+            <li><a class="" href="../../dev_guide/selector_label_volume_binding.html">Selector and Label Volume Binding</a></li>
+            <li><a class="" href="../../dev_guide/executing_remote_commands.html">Executing Remote Commands</a></li>
+            <li><a class="" href="../../dev_guide/copy_files_to_container.html">Copying Files</a></li>
+            <li><a class="" href="../../dev_guide/port_forwarding.html">Port Forwarding</a></li>
+            <li><a class="" href="../../dev_guide/shared_memory.html">Shared Memory</a></li>
+            <li><a class="" href="../../dev_guide/application_health.html">Application Health</a></li>
+            <li><a class="" href="../../dev_guide/events.html">Events</a></li>
+            <li><a class="" href="../../dev_guide/notifications.html">Notifications</a></li>
+            <li><a class="" href="../../dev_guide/environment_variables.html">Managing Environment Variables</a></li>
+            <li><a class="" href="../../dev_guide/jobs.html">Jobs</a></li>
+            <li><a class="" href="../../dev_guide/openshift_pipeline.html">OpenShift Pipeline</a></li>
+            <li><a class="" href="../../dev_guide/cron_jobs.html">Cron Jobs</a></li>
+            <li><a class="" href="../../dev_guide/create_from_url.html">Create from URL</a></li>
+            <li><a class="" href="../../dev_guide/application_memory_sizing.html">Application memory sizing</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup6">
+        <span id="tgSpan6" class="fa fa-angle-right"></span>Creating Images
+      </a>
+      <ul id="topicGroup6" class="collapse  list-unstyled">
+            <li><a class="" href="../../creating_images/index.html">Overview</a></li>
+            <li><a class="" href="../../creating_images/guidelines.html">Guidelines</a></li>
+            <li><a class="" href="../../creating_images/metadata.html">Image Metadata</a></li>
+            <li><a class="" href="../../creating_images/s2i.html">S2I Requirements</a></li>
+            <li><a class="" href="../../creating_images/s2i_testing.html">Testing S2I Images</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup7">
+        <span id="tgSpan7" class="fa fa-angle-right"></span>Using Images
+      </a>
+      <ul id="topicGroup7" class="collapse  list-unstyled">
+            <li><a class="" href="../../using_images/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-7-1">
+                <span id="sgSpan-7-1" class="fa fa-caret-right"></span>&nbsp;Source-to-Image (S2I)
+              </a>
+              <ul id="topicSubGroup-7-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/s2i_images/index.html">Overview</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/java.html">Java</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/dot_net_core.html">.NET Core</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/nodejs.html">Node.js</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/perl.html">Perl</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/php.html">PHP</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/python.html">Python</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/ruby.html">Ruby</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/customizing_s2i_images.html">Customizing S2I Images</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-7-2">
+                <span id="sgSpan-7-2" class="fa fa-caret-right"></span>&nbsp;Database Images
+              </a>
+              <ul id="topicSubGroup-7-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/db_images/index.html">Overview</a></li>
+                  <li><a class="" href="../../using_images/db_images/mysql.html">MySQL</a></li>
+                  <li><a class="" href="../../using_images/db_images/postgresql.html">PostgreSQL</a></li>
+                  <li><a class="" href="../../using_images/db_images/mongodb.html">MongoDB</a></li>
+                  <li><a class="" href="../../using_images/db_images/mariadb.html">MariaDB</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-7-3">
+                <span id="sgSpan-7-3" class="fa fa-caret-right"></span>&nbsp;Docker Images
+              </a>
+              <ul id="topicSubGroup-7-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/docker_images/index.html">Overview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-7-4">
+                <span id="sgSpan-7-4" class="fa fa-caret-right"></span>&nbsp;Other Images
+              </a>
+              <ul id="topicSubGroup-7-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/other_images/index.html">Overview</a></li>
+                  <li><a class="" href="../../using_images/other_images/jenkins.html">Jenkins</a></li>
+                  <li><a class="" href="../../using_images/other_images/jenkins_slaves.html">Jenkins Slaves</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-7-5">
+                <span id="sgSpan-7-5" class="fa fa-caret-right"></span>&nbsp;xPaaS Middleware Images
+              </a>
+              <ul id="topicSubGroup-7-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/xpaas_images/index.html">Overview</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup8">
+        <span id="tgSpan8" class="fa fa-angle-right"></span>REST API Reference
+      </a>
+      <ul id="topicGroup8" class="collapse  list-unstyled">
+            <li><a class="" href="../../rest_api/index.html">Overview</a></li>
+            <li><a class="" href="../../rest_api/examples.html">Examples</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-2">
+                <span id="sgSpan-8-2" class="fa fa-caret-right"></span>&nbsp;/api/v1
+              </a>
+              <ul id="topicSubGroup-8-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/api/v1.APIResourceList.html">v1.APIResourceList</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.APIVersions.html">v1.APIVersions</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Binding.html">v1.Binding</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ComponentStatus.html">v1.ComponentStatus</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ConfigMap.html">v1.ConfigMap</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Endpoints.html">v1.Endpoints</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Event.html">v1.Event</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.LimitRange.html">v1.LimitRange</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Namespace.html">v1.Namespace</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Node.html">v1.Node</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.PersistentVolume.html">v1.PersistentVolume</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.PersistentVolumeClaim.html">v1.PersistentVolumeClaim</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Pod.html">v1.Pod</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.PodTemplate.html">v1.PodTemplate</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ReplicationController.html">v1.ReplicationController</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ResourceQuota.html">v1.ResourceQuota</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Secret.html">v1.Secret</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.SecurityContextConstraints.html">v1.SecurityContextConstraints</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Service.html">v1.Service</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ServiceAccount.html">v1.ServiceAccount</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-3">
+                <span id="sgSpan-8-3" class="fa fa-caret-right"></span>&nbsp;/apis/v1
+              </a>
+              <ul id="topicSubGroup-8-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis/v1.APIGroup.html">v1.APIGroup</a></li>
+                  <li><a class="" href="../../rest_api/apis/v1.APIGroupList.html">v1.APIGroupList</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-4">
+                <span id="sgSpan-8-4" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta1
+              </a>
+              <ul id="topicSubGroup-8-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta1.ControllerRevision.html">v1beta1.ControllerRevision</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta1.Deployment.html">v1beta1.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta1.StatefulSet.html">v1beta1.StatefulSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-5">
+                <span id="sgSpan-8-5" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta2
+              </a>
+              <ul id="topicSubGroup-8-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.ControllerRevision.html">v1beta2.ControllerRevision</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.DaemonSet.html">v1beta2.DaemonSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.Deployment.html">v1beta2.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.ReplicaSet.html">v1beta2.ReplicaSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.StatefulSet.html">v1beta2.StatefulSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-6">
+                <span id="sgSpan-8-6" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v1
+              </a>
+              <ul id="topicSubGroup-8-6" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-autoscaling/v1.HorizontalPodAutoscaler.html">v1.HorizontalPodAutoscaler</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-7">
+                <span id="sgSpan-8-7" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v2beta1
+              </a>
+              <ul id="topicSubGroup-8-7" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-autoscaling/v2beta1.HorizontalPodAutoscaler.html">v2beta1.HorizontalPodAutoscaler</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-8">
+                <span id="sgSpan-8-8" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1
+              </a>
+              <ul id="topicSubGroup-8-8" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-batch/v1.Job.html">v1.Job</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-9">
+                <span id="sgSpan-8-9" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1beta1
+              </a>
+              <ul id="topicSubGroup-8-9" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-batch/v1beta1.CronJob.html">v1beta1.CronJob</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-10">
+                <span id="sgSpan-8-10" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v2alpha1
+              </a>
+              <ul id="topicSubGroup-8-10" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-batch/v2alpha1.CronJob.html">v2alpha1.CronJob</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-11">
+                <span id="sgSpan-8-11" class="fa fa-caret-right"></span>&nbsp;/apis/extensions/v1beta1
+              </a>
+              <ul id="topicSubGroup-8-11" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.DaemonSet.html">v1beta1.DaemonSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.Deployment.html">v1beta1.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.Ingress.html">v1beta1.Ingress</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.NetworkPolicy.html">v1beta1.NetworkPolicy</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.PodSecurityPolicy.html">v1beta1.PodSecurityPolicy</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.ReplicaSet.html">v1beta1.ReplicaSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-12">
+                <span id="sgSpan-8-12" class="fa fa-caret-right"></span>&nbsp;/apis/policy/v1beta1
+              </a>
+              <ul id="topicSubGroup-8-12" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-policy/v1beta1.PodDisruptionBudget.html">v1beta1.PodDisruptionBudget</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-13">
+                <span id="sgSpan-8-13" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-8-13" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authentication.k8s.io/v1.TokenReview.html">v1.TokenReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-14">
+                <span id="sgSpan-8-14" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-8-14" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authentication.k8s.io/v1beta1.TokenReview.html">v1beta1.TokenReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-15">
+                <span id="sgSpan-8-15" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-8-15" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.SelfSubjectAccessReview.html">v1.SelfSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.SelfSubjectRulesReview.html">v1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.SubjectAccessReview.html">v1.SubjectAccessReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-16">
+                <span id="sgSpan-8-16" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-8-16" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.LocalSubjectAccessReview.html">v1beta1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectAccessReview.html">v1beta1.SelfSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectRulesReview.html">v1beta1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SubjectAccessReview.html">v1beta1.SubjectAccessReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-17">
+                <span id="sgSpan-8-17" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-8-17" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.ClusterRole.html">v1.ClusterRole</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.ClusterRoleBinding.html">v1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.Role.html">v1.Role</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.RoleBinding.html">v1.RoleBinding</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-18">
+                <span id="sgSpan-8-18" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-8-18" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRole.html">v1beta1.ClusterRole</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRoleBinding.html">v1beta1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.Role.html">v1beta1.Role</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.RoleBinding.html">v1beta1.RoleBinding</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-19">
+                <span id="sgSpan-8-19" class="fa fa-caret-right"></span>&nbsp;/apis/certificates.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-8-19" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-certificates.k8s.io/v1beta1.CertificateSigningRequest.html">v1beta1.CertificateSigningRequest</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-20">
+                <span id="sgSpan-8-20" class="fa fa-caret-right"></span>&nbsp;/apis/networking.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-8-20" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-networking.k8s.io/v1.NetworkPolicy.html">v1.NetworkPolicy</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-21">
+                <span id="sgSpan-8-21" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-8-21" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-storage.k8s.io/v1.StorageClass.html">v1.StorageClass</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-8-22">
+                <span id="sgSpan-8-22" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-8-22" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-storage.k8s.io/v1beta1.StorageClass.html">v1beta1.StorageClass</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+</ul>
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-9 main">
+        <div class="page-header">
+          <h1>Network Plug-ins</h1>
+        </div>
+        <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#overview">Overview</a></li>
+<li><a href="#openshift-sdn">OpenShift SDN</a></li>
+<li><a href="#architecture-additional-concepts-f5-big-ip">F5 BIG-IP® Router Plug-in</a>
+<ul class="sectlevel2">
+<li><a href="#routing-traffic-to-pods-through-the-sdn">Routing Traffic to Pods Through the SDN</a></li>
+<li><a href="#f5-integration-details">F5 Integration Details</a></li>
+<li><a href="#architecture-f5-native-integration">F5 Native Integration</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="anchor" href="#overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift Online supports the Kubernetes
+<a href="https://kubernetes.io/docs/admin/network-plugins/#cni">Container Network
+Interface (CNI)</a> as the interface between the OpenShift Online and Kubernetes.
+Software defined network (SDN) plug-ins are a powerful and flexible way to match
+network capabilities to your networking needs. Additional plug-ins that support
+the CNI interface can be added as needed.</p>
+</div>
+<div class="paragraph">
+<p>The following network plug-ins are currently supported by OpenShift Online:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../../architecture/networking/sdn.html#architecture-additional-concepts-sdn">OpenShift SDN</a></p>
+</li>
+<li>
+<p><a href="../../architecture/networking/sdn.html#network-isolation-multitenant">OpenShift Network Isolation SDN</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="openshift-sdn"><a class="anchor" href="#openshift-sdn"></a>OpenShift SDN</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift Online deploys a software-defined networking (SDN) approach for
+connecting pods in an OpenShift Online cluster. The OpenShift SDN connects all
+pods across all node hosts, providing a unified cluster network.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift SDN is installed and configured by default as part of the
+Ansible-based installation procedure. See the
+<a href="../../architecture/networking/sdn.html#architecture-additional-concepts-sdn">OpenShift SDN</a> section
+for more information.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="architecture-additional-concepts-f5-big-ip"><a class="anchor" href="#architecture-additional-concepts-f5-big-ip"></a>F5 BIG-IP® Router Plug-in</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A router is one way to get traffic into the cluster.
+The F5 BIG-IP® Router plug-in is one of the available
+<a href="../../architecture/networking/network_plugins.html#architecture-additional-concepts-network-plugins">router plugins</a>.</p>
+</div>
+<div class="paragraph">
+<p>The F5 router plug-in integrates with an existing <strong>F5 BIG-IP®</strong> system in your
+environment. <strong>F5 BIG-IP®</strong> version 11.4 or newer is required in order to have the
+F5 iControl REST API. The F5 router supports <a href="../../architecture/networking/routes.html#route-types">unsecured</a>,
+<a href="../../architecture/networking/routes.html#edge-termination">edge terminated</a>,
+<a href="../../architecture/networking/routes.html#re-encryption-termination">re-encryption terminated</a>, and
+<a href="../../architecture/networking/routes.html#passthrough-termination">passthrough terminated</a> routes matching on HTTP
+vhost and request path.</p>
+</div>
+<div class="paragraph">
+<p>The F5 router has feature parity with the
+<a href="../../architecture/networking/routes.html#haproxy-template-router">HAProxy
+template router</a>, and has additional features over the <strong>F5 BIG-IP®</strong> support in
+Compared with the <strong>routing-daemon</strong> used in earlier
+versions, the F5 router additionally supports:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>path-based routing (using policy rules),</p>
+</li>
+<li>
+<p>re-encryption (implemented using client and server SSL profiles)</p>
+</li>
+<li>
+<p>passthrough of encrypted connections (implemented using an iRule that parses
+the SNI protocol and uses a data group that is maintained by the F5 router for
+the servername lookup).</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Passthrough routes are a special case: path-based routing is technically
+impossible with passthrough routes because <strong>F5 BIG-IP®</strong> itself does not see the
+HTTP request, so it cannot examine the path. The same restriction applies to the
+template router; it is a technical limitation of passthrough encryption, not a
+technical limitation of OpenShift Online.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="routing-traffic-to-pods-through-the-sdn"><a class="anchor" href="#routing-traffic-to-pods-through-the-sdn"></a>Routing Traffic to Pods Through the SDN</h3>
+<div class="paragraph">
+<p>Because <strong>F5 BIG-IP®</strong> is external to the
+<a href="../../architecture/networking/sdn.html#architecture-additional-concepts-sdn">OpenShift SDN</a>, a
+cluster administrator must create a peer-to-peer tunnel between <strong>F5 BIG-IP®</strong> and
+a host that is on the SDN, typically an OpenShift Online node host.
+It is also possible to configure multiple such hosts and use
+the OpenShift Online <strong>ipfailover</strong> feature for redundancy; the <strong>F5 BIG-IP®</strong> host would
+then need to be configured to use the <strong>ipfailover</strong> VIP for its tunnel&#8217;s remote
+endpoint.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="f5-integration-details"><a class="anchor" href="#f5-integration-details"></a>F5 Integration Details</h3>
+<div class="paragraph">
+<p>The operation of the F5 router is similar to that of the OpenShift Online
+<strong>routing-daemon</strong> used in earlier versions. Both use REST API calls to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>create and delete pools,</p>
+</li>
+<li>
+<p>add endpoints to and delete them from those pools, and</p>
+</li>
+<li>
+<p>configure policy rules to route to pools based on vhost.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Both also use <code>scp</code> and <code>ssh</code> commands to upload custom TLS/SSL certificates to
+<strong>F5 BIG-IP®</strong>.</p>
+</div>
+<div class="paragraph">
+<p>The F5 router configures pools and policy rules on virtual servers as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>When a user creates or deletes a route on OpenShift Online, the router creates a
+pool to <strong>F5 BIG-IP®</strong> for the route (if no pool already exists) and adds a rule to, or
+deletes a rule from, the policy of the appropriate vserver: the HTTP vserver for
+non-TLS routes, or the HTTPS vserver for edge or re-encrypt routes. In the case
+of edge and re-encrypt routes, the router also uploads and configures the TLS
+certificate and key. The router supports host- and path-based routes.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Passthrough routes are a special case: to support those, it is necessary to
+write an iRule that parses the SNI ClientHello handshake record and looks up the
+servername in an F5 data-group. The router creates this iRule, associates the
+iRule with the vserver, and updates the F5 data-group as passthrough routes are
+created and deleted. Other than this implementation detail, passthrough routes
+work the same way as other routes.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>When a user creates a service on OpenShift Online, the router adds a pool to <strong>F5
+BIG-IP®</strong> (if no pool already exists). As endpoints on that service are created
+and deleted, the router adds and removes corresponding pool members.</p>
+</li>
+<li>
+<p>When a user deletes the route and all endpoints associated with a particular
+pool, the router deletes that pool.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="architecture-f5-native-integration"><a class="anchor" href="#architecture-f5-native-integration"></a>F5 Native Integration</h3>
+<h4 id="architecture-f5-connection" class="discrete">Connection</h4>
+<div class="paragraph">
+<p>The F5 appliance can connect to the OpenShift Online cluster via an L3
+connection. An L2 switch connectivity is not required between OpenShift Online
+nodes. On the appliance, you can use multiple interfaces to manage the
+integration:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Management interface - Reaches the web console of the F5 appliance.</p>
+</li>
+<li>
+<p>External interface - Configures the virtual servers for inbound web traffic.</p>
+</li>
+<li>
+<p>Internal interface - Programs the appliance and reaches out to the pods.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="data:image/png;base64,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" alt="F5 and OpenShift Connection Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>An F5 controller pod has <code>admin</code> access to the appliance. The F5 image is
+launched within the OpenShift Online cluster (scheduled on any node) that uses
+iControl REST APIs to program the virtual servers with policies, and configure
+the VxLAN device.</p>
+</div>
+<h5 id="architecture-f5-data-flow-packets-to-pods" class="discrete">Data Flow: Packets to Pods</h5>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This section explains how the packets reach the pods, and vice versa. These
+actions are performed by the F5 controller pod and the F5 appliance, not the
+user.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When natively integrated, The F5 appliance reaches out to the pods directly
+using VxLAN encapsulation. This integration works only when OpenShift Online is
+using <strong>openshift-sdn</strong> as the network plug-in. The <strong>openshift-sdn</strong>  plug-in
+employs VxLAN encapsulation for the overlay network that it creates.</p>
+</div>
+<div class="paragraph">
+<p>To make a successful data path between a pod and the F5 appliance:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>F5 needs to encapsulate the VxLAN packet meant for the pods. This requires the
+<strong>sdn-services</strong> license add-on. A VxLAN device needs to be created and the pod
+overlay network needs to be routed through this device.</p>
+</li>
+<li>
+<p>F5 needs to know the VTEP IP address of the pod, which is the IP address of the
+node where the pod is located.</p>
+</li>
+<li>
+<p>F5 needs to know which <code>source-ip</code> to use for the overlay network when
+encapsulating the packets meant for the pods. This is known as the <em>gateway address</em>.</p>
+</li>
+<li>
+<p>OpenShift Online nodes need to know where the F5 gateway address is (the VTEP
+address for the return traffic). This needs to be the internal interface’s
+address. All nodes of the cluster must learn this automatically.</p>
+</li>
+<li>
+<p>Since the overlay network is multi-tenant aware, F5 must use a VxLAN ID that is
+representative of an <code>admin</code> domain, ensuring that all tenants are reachable by
+the F5. Ensure that F5 encapsulates all packets with a <code>vnid</code> of <code>0</code> (the
+default <code>vnid</code> for the <code>admin</code> namespace in OpenShift Online) by putting an
+annotation on the manually created <code>hostsubnet</code> -
+<code>pod.network.openshift.io/fixed-vnid-host: 0</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>A ghost <code>hostsubnet</code> is manually created as part of the setup, which fulfills
+the third and forth listed requirements. When the F5 controller pod is launched,
+this new ghost <code>hostsubnet</code> is provided so that the F5 appliance can be
+programmed suitably.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The term <em>ghost</em> <code>hostsubnet</code> is used because it suggests that a subnet has been
+given to a node of the cluster. However, in reality, it is not a real node of
+the cluster. It is hijacked by an external appliance.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The first requirement is fulfilled by the F5 controller pod once it is launched.
+The second requirement is also fulfilled by the F5 controller pod, but it is an
+ongoing process. For each new node that is added to the cluster, the controller
+pod creates an entry in the VxLAN device’s VTEP FDB. The controller pod needs
+access to the <code>nodes</code> resource in the cluster, which you can accomplish by
+giving the service account appropriate privileges. Use the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ oadm policy add-cluster-role-to-user system:sdn-reader system:serviceaccount:default:router</pre>
+</div>
+</div>
+<h3 id="architecture-f5-data-flow-from-the-f5-host" class="discrete">Data Flow from the F5 Host</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>These actions are performed by the F5 controller pod and the F5 appliance, not
+the user.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The destination pod is identified by the F5 virtual server for a packet.</p>
+</li>
+<li>
+<p>VxLAN dynamic FDB is looked up with pod’s IP address. If a MAC address is found, go to step 5.</p>
+</li>
+<li>
+<p>Flood all entries in the VTEP FDB with ARP requests seeking the pod’s MAC address.
+ocated. An entry is made into the VxLAN dynamic FDB with the pod’s MAC
+address and the VTEP to be used as the value.</p>
+</li>
+<li>
+<p>Encap an IP packet with VxLAN headers, where the MAC of the pod and the VTEP of
+the node is given as values from the VxLAN dynamic FDB.</p>
+</li>
+<li>
+<p>Calculate the VTEP&#8217;s MAC address by sending out an ARP or checking the host’s
+neighbor cache.</p>
+</li>
+<li>
+<p>Deliver the packet through the F5 host’s internal address.</p>
+</li>
+</ol>
+</div>
+<h3 id="architecture-f5-data-flow-return-traffic-to-the-f5-host" class="discrete">Data Flow: Return Traffic to the F5 Host</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>These actions are performed by the F5 controller pod and the F5 appliance, not
+the user.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The pod sends back a packet with the destination as the F5 host’s VxLAN gateway address.</p>
+</li>
+<li>
+<p>The <code>openvswitch</code> at the node determines that the VTEP for this packet is the
+F5 host’s internal interface address. This is learned from the ghost <code>hostsubnet</code>
+creation.</p>
+</li>
+<li>
+<p>A VxLAN packet is sent out to the internal interface of the F5 host.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>During the entire data flow, the VNID is pre-fixed to be <code>0</code> to bypass multi-tenancy.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    /*<![CDATA[*/
+    $(document).ready(function() {
+      $("[id^='topicGroup']").on('show.bs.collapse', function (event) {
+        if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+          $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+        }
+      });
+      $("[id^='topicGroup']").on('hide.bs.collapse', function (event) {
+        if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+          $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+        }
+      });
+      $("[id^='topicSubGroup']").on('show.bs.collapse', function () {
+        $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+      });
+      $("[id^='topicSubGroup']").on('hide.bs.collapse', function () {
+        $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+      });
+    });
+    /*]]>*/
+  </script>
+    <footer class="footer-openshift">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4 col-md-3 logo">
+        <a href="https://www.redhat.com/"></a>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-6 text-center">
+        <div class="row">
+          <div class="col-xs-12 col-md-4">
+            <a href="https://www.openshift.com/legal/privacy.html">
+              Privacy Policy
+            </a>
+          </div>
+          <div class="col-xs-12 col-md-4">
+          <a href="https://www.openshift.com/legal/terms.html">
+            Terms and Conditions
+          </a>
+          </div>
+          <div class="col-xs-12 col-md-4">
+          <a href="http://www.openshift.org/">
+            Open Source
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3 text-right">
+        <a id="built_with_asciibinder" href="http://asciibinder.org/">
+          <img src="../../../trello143-jenkins-memory-usage-tuning/_images/asciibinder_web_logo.svg" alt="AsciiBinder" />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Adobe DTM -->
+<script type="text/javascript">
+if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+   _satellite.pageBottom();
+}
+</script>
+<!-- End Adobe DTM -->
+</body>
+</html>

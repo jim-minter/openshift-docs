@@ -1,0 +1,2150 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en-us"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en-us"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if IE 9]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if lt IE 10]> <html class="no-js lt-ie10" lang="en-us"> <![endif]-->
+<!--[if !IE]> > <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<title>Atomic Registry Branch Build | Cluster Administration | Managing Networking</title>
+<meta charset='utf-8'>
+<meta content='' name='description'>
+<meta content='Project Atomic. Sponsored by Red Hat, Inc.' name='author'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width' name='viewport'>
+
+<link href='http://www.projectatomic.io/images/favicon.ico' rel='shortcut icon'>
+<link href='http://www.projectatomic.io/images/apple-touch-icon-precomposed.png' rel='apple-touch-icon-precomposed'>
+<link href='http://www.projectatomic.io/images/apple-touch-icon-57x57-precomposed.png' rel='apple-touch-icon-precomposed' sizes='57x57'>
+<link href='http://www.projectatomic.io/images/apple-touch-icon-72x72-precomposed.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
+<link href='http://www.projectatomic.io/images/apple-touch-icon-114x114-precomposed.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
+<link href='http://www.projectatomic.io/blog/feed.xml' rel='alternate' title='Project Atomic' type='application/atom+xml'>
+<link href="http://www.projectatomic.io/stylesheets/application.css" rel="stylesheet" type="text/css" />
+<link href="http://www.projectatomic.io/stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+</head>
+<body class=' docs docs_introduction docs_introduction_index source-md'>
+<section class='container' id='page-wrap'>
+  <div class='row'>
+  <div class='col-md-3 col-lg-2' id='sidebar'>
+    <div id='nav-primary'>
+      <nav class='navbar navbar-default' role='navigation'>
+        <div class='navbar-header'>
+          <button class='navbar-toggle' data-target='.navbar-ex1-collapse' data-toggle='collapse'>
+            <span class='sr-only'>
+              Toggle navigation
+            </span>
+            <span class='icon-bar'></span>
+            <span class='icon-bar'></span>
+            <span class='icon-bar'></span>
+          </button>
+          <a class='navbar-brand' href='http://www.projectatomic.io/'>
+            Project Atomic
+          </a>
+        </div>
+        <div class='collapse navbar-collapse navbar-ex1-collapse'>
+          <ul class='nav navbar-nav'>
+            <li><a class="get-started" href="http://www.projectatomic.io/download">Get Started</a></li>
+            <li><a class="documentation" href="http://www.projectatomic.io/docs">Documentation</a></li>
+            <li><a class="developer-community" href="http://www.projectatomic.io/community">Developer Community</a></li>
+            <li><a class="on-github" href="https://github.com/projectatomic/">On GitHub</a></li>
+            <li><a class="ask" href="http://ask.projectatomic.io/">Ask</a></li>
+            <li><a class="blog" href="http://www.projectatomic.io/blog">Blog</a></li>
+            <li><a class="twitter" href="http://www.twitter.com/projectatomic">Twitter</a></li>
+            <li><a class="facebook" href="https://www.facebook.com/projectatomic">Facebook</a></li>
+            <li><a class="google" href="https://plus.google.com/108727025270662383247/posts">Google+</a></li>
+            <li><a class="rss" href="http://www.projectatomic.io/blog/feed.xml">RSS</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+<section class='col-lg-10 col-md-9 container-fluid' id='content'>
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an outdated browser.
+<a href="http://browsehappy.com/">Upgrade your browser today</a> or
+<a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+<![endif]-->
+<div class='row'>
+  <div class='col-sm-9'>
+    <h2>Managing Networking</h2>
+    <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#overview">Overview</a></li>
+<li><a href="#admin-guide-pod-network">Managing Pod Networks</a>
+<ul class="sectlevel2">
+<li><a href="#joining-project-networks">Joining Project Networks</a></li>
+</ul>
+</li>
+<li><a href="#isolating-project-networks">Isolating Project Networks</a>
+<ul class="sectlevel2">
+<li><a href="#making-project-networks-global">Making Project Networks Global</a></li>
+</ul>
+</li>
+<li><a href="#admin-guide-disabling-hostname-collision">Disabling Host Name Collision Prevention For Ingress Objects</a></li>
+<li><a href="#admin-guide-controlling-egress-traffic">Controlling Egress Traffic</a>
+<ul class="sectlevel2">
+<li><a href="#admin-guide-limit-pod-access-egress">Using an Egress Firewall to Limit Access to External Resources</a></li>
+<li><a href="#admin-guide-limit-pod-access-egress-router">Using an Egress Router to Allow External Resources to Recognize Pod Traffic</a></li>
+<li><a href="#admin-guide-limit-pod-access-iptables">Using iptables Rules to Limit Access to External Resources</a></li>
+</ul>
+</li>
+<li><a href="#enabling-static-ips-for-external-project-traffic">Enabling Static IPs for External Project Traffic</a></li>
+<li><a href="#admin-guide-networking-multicast">Enabling Multicast</a></li>
+<li><a href="#admin-guide-networking-networkpolicy">Enabling NetworkPolicy</a>
+<ul class="sectlevel2">
+<li><a href="#admin-guide-networking-networkpolicy-routers">NetworkPolicy and Routers</a></li>
+<li><a href="#admin-guide-networking-networkpolicy-setting-default">Setting a Default NetworkPolicy for New Projects</a></li>
+</ul>
+</li>
+<li><a href="#admin-guide-enabling-hsts">Enabling HTTP Strict Transport Security</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="anchor" href="#overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This topic describes the management of the overall
+<a href="../architecture/networking/networking.html#architecture-additional-concepts-networking">cluster
+network</a>, including project isolation and outbound traffic control.</p>
+</div>
+<div class="paragraph">
+<p>Pod-level networking features, such as per-pod bandwidth limits, are discussed
+in <a href="../admin_guide/managing_pods.html#admin-guide-manage-pods">Managing
+Pods</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="admin-guide-pod-network"><a class="anchor" href="#admin-guide-pod-network"></a>Managing Pod Networks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When your cluster is configured to use
+<a href="../architecture/networking/sdn.html#architecture-additional-concepts-sdn">the <strong>ovs-multitenant</strong> SDN
+plugin</a>, you can manage the separate pod overlay networks for projects using
+the administrator CLI.</p>
+</div>
+<div class="sect2">
+<h3 id="joining-project-networks"><a class="anchor" href="#joining-project-networks"></a>Joining Project Networks</h3>
+<div class="paragraph">
+<p>To join projects to an existing project network:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oadm pod-network join-projects --to=&lt;project1&gt; &lt;project2&gt; &lt;project3&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the above example, all the pods and services in <code>&lt;project2&gt;</code> and <code>&lt;project3&gt;</code>
+can now access any pods and services in <code>&lt;project1&gt;</code> and vice versa. Services
+can be accessed either by IP or fully-qualified DNS name
+(<code>&lt;service&gt;.&lt;pod_namespace&gt;.svc.cluster.local</code>). For example, to access a
+service named <code>db</code> in a project <code>myproject</code>, use <code>db.myproject.svc.cluster.local</code>.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, instead of specifying specific project names, you can use the
+<code>--selector=&lt;project_selector&gt;</code> option.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="isolating-project-networks"><a class="anchor" href="#isolating-project-networks"></a>Isolating Project Networks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To isolate the project network in the cluster and vice versa, run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oadm pod-network isolate-projects &lt;project1&gt; &lt;project2&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the above example, all of the pods and services in <code>&lt;project1&gt;</code> and
+<code>&lt;project2&gt;</code> can <em>not</em> access any pods and services from other non-global
+projects in the cluster and vice versa.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, instead of specifying specific project names, you can use the
+<code>--selector=&lt;project_selector&gt;</code> option.</p>
+</div>
+<div class="sect2">
+<h3 id="making-project-networks-global"><a class="anchor" href="#making-project-networks-global"></a>Making Project Networks Global</h3>
+<div class="paragraph">
+<p>To allow projects to access all pods and services in the cluster and vice versa:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oadm pod-network make-projects-global &lt;project1&gt; &lt;project2&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the above example, all the pods and services in <code>&lt;project1&gt;</code> and <code>&lt;project2&gt;</code>
+can now access any pods and services in the cluster and vice versa.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, instead of specifying specific project names, you can use the
+<code>--selector=&lt;project_selector&gt;</code> option.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="admin-guide-disabling-hostname-collision"><a class="anchor" href="#admin-guide-disabling-hostname-collision"></a>Disabling Host Name Collision Prevention For Ingress Objects</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In Atomic Registry, host name collision prevention for routes and ingress
+objects is enabled by default. This means that the host name in a route or
+ingress object can only be set on creation and not edited afterwards. Disabling
+host name collision prevention lets you edit a host name for ingress objects after creation.
+However, because Atomic Registry uses the object creation timestamp to determine
+the oldest route or ingress object for a given host name, the route or ingress
+object can hijack a host name with a newer route. This can happen if an older
+route changes its host name, or if an ingress object is introduced.</p>
+</div>
+<div class="paragraph">
+<p>This is relevant to Atomic Registry installations that depend upon Kubernetes
+behavior, including allowing the host names in ingress objects be edited.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add the following to the <code>master.yaml</code> file:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">admissionConfig</span>:
+  <span style="color:#606">pluginConfig</span>:
+    <span style="color:#606">openshift.io/IngressAdmission</span>:
+      <span style="color:#606">configuration</span>:
+        <span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">v1</span></span>
+        <span style="color:#606">allowHostnameChanges</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span>
+        <span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">IngressAdmissionConfig</span></span>
+      <span style="color:#606">location</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Restart the master service for the changes to take effect:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ systemctl restart atomic-openshift-master</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="admin-guide-controlling-egress-traffic"><a class="anchor" href="#admin-guide-controlling-egress-traffic"></a>Controlling Egress Traffic</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As a cluster administrator you can allocate a number of static IP addresses to a
+specific node at the host level. If an application developer needs a dedicated
+IP address for their application service, they can request one during the
+process they use to ask for firewall access. They can then deploy an egress
+router from the developer&#8217;s project, using a <code><strong>nodeSelector</strong></code> in the deployment
+configuration to ensure that the pod lands on the host with the pre-allocated
+static IP address.</p>
+</div>
+<div class="paragraph">
+<p>The egress pod&#8217;s deployment declares one of the source IPs, the destination IP
+of the protected service, and a gateway IP to reach the destination. After the
+pod is deployed, you can
+<a href="../dev_guide/integrating_external_services.html#dev-guide-integrating-external-services">create
+a service</a> to access the egress router pod, then add that source IP to the
+corporate firewall. The developer then has access information to the egress
+router service that was created in their project, for example,
+<code>service.project.cluster.domainname.com</code>.</p>
+</div>
+<div class="paragraph">
+<p>When the developer needs to access the external, firewalled service, they can
+call out to the egress router pod&#8217;s service
+(<code>service.project.cluster.domainname.com</code>) in their application (for example,
+the JDBC connection information) rather than the actual protected service URL.</p>
+</div>
+<div class="paragraph">
+<p>You can also assign static IP addresses to projects, ensuring that all
+outgoing external connections from the specified project have recognizable
+origins. This is different from the default egress router, which is used to send
+traffic to specific destinations. See the
+<a href="#enabling-static-ips-for-external-project-traffic">Enabling Fixed IPs for
+External Project Traffic</a> section for more information.</p>
+</div>
+<div class="paragraph">
+<p>As an Atomic Registry cluster administrator, you can control egress traffic in three ways:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#admin-guide-limit-pod-access-egress">Firewall</a></dt>
+<dd>
+<p>Using an egress firewall allows you to enforce the acceptable outbound traffic
+policies, so that specific endpoints or IP ranges (subnets) are the only
+acceptable targets for the dynamic endpoints (pods within Atomic Registry) to
+talk to.</p>
+</dd>
+<dt class="hdlist1"><a href="#admin-guide-limit-pod-access-egress-router">Router</a></dt>
+<dd>
+<p>Using an egress router allows you to create identifiable services to send
+traffic to certain destinations, ensuring those external destinations treat
+traffic as though it were coming from a known source. This helps with security,
+because it allows you to secure an external database so that only specific pods
+in a namespace can talk to a service (the egress router), which proxies the
+traffic to your database.</p>
+</dd>
+<dt class="hdlist1"><a href="#admin-guide-limit-pod-access-iptables">iptables</a></dt>
+<dd>
+<p>In addition to the above Atomic Registry-internal solutions, it is also
+possible to create iptables rules that will be applied to outgoing
+traffic. These rules allow for more possibilities than the egress
+firewall, but cannot be limited to particular projects.</p>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="admin-guide-limit-pod-access-egress"><a class="anchor" href="#admin-guide-limit-pod-access-egress"></a>Using an Egress Firewall to Limit Access to External Resources</h3>
+<div class="paragraph">
+<p>As an Atomic Registry cluster administrator, you can use egress firewall policy
+to limit the external addresses that some or all pods can access from within the
+cluster, so that:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A pod can only talk to internal hosts, and cannot initiate connections to the
+public Internet.</p>
+<div class="paragraph">
+<p>Or,</p>
+</div>
+</li>
+<li>
+<p>A pod can only talk to the public Internet, and cannot initiate connections to
+internal hosts (outside the cluster).</p>
+<div class="paragraph">
+<p>Or,</p>
+</div>
+</li>
+<li>
+<p>A pod cannot reach specified internal subnets/hosts that it should have no
+reason to contact.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can configure projects to have different egress policies. For example,
+allowing <code>&lt;project A&gt;</code> access to a specified IP range, but denying the same
+access to <code>&lt;project B&gt;</code>. Or restrict application developers from updating from
+(Python) pip mirrors, and forcing updates to only come from desired sources.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You must have the
+<a href="../install_config/configuring_sdn.html#install-config-configuring-sdn"><strong>ovs-multitenant</strong> plugin</a> enabled in order to limit pod access via egress policy.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Project administrators can neither create <code>EgressNetworkPolicy</code> objects, nor
+edit the ones you create in their project. There are also several other
+restrictions on where <code>EgressNetworkPolicy</code> can be created:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>default</code> project (and any other project that has been made global via
+<code>oadm pod-network make-projects-global</code>) cannot have egress policy.</p>
+</li>
+<li>
+<p>If you merge two projects together (via <code>oadm pod-network join-projects</code>),
+then you cannot use egress policy in <em>any</em> of the joined projects.</p>
+</li>
+<li>
+<p>No project may have more than one egress policy object.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Violating any of these restrictions results in broken egress policy for the
+project, and may cause all external network traffic to be dropped.</p>
+</div>
+<div class="paragraph">
+<p>Use the <code>oc</code> command or the REST API to configure egress policy. You can use
+<code>oc [create|replace|delete]</code> to manipulate <code>EgressNetworkPolicy</code> objects. The
+<strong><em>api/swagger-spec/oapi-v1.json</em></strong> file has API-level details on how the objects
+actually work.</p>
+</div>
+<div class="paragraph">
+<p>To configure egress policy:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to the project you want to affect.</p>
+</li>
+<li>
+<p>Create a JSON file with the desired policy details. For example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="json">{
+    <span style="color:#606"><span style="color:#404">&quot;</span><span>kind</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">EgressNetworkPolicy</span><span style="color:#710">&quot;</span></span>,
+    <span style="color:#606"><span style="color:#404">&quot;</span><span>apiVersion</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">v1</span><span style="color:#710">&quot;</span></span>,
+    <span style="color:#606"><span style="color:#404">&quot;</span><span>metadata</span><span style="color:#404">&quot;</span></span>: {
+        <span style="color:#606"><span style="color:#404">&quot;</span><span>name</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">default</span><span style="color:#710">&quot;</span></span>
+    },
+    <span style="color:#606"><span style="color:#404">&quot;</span><span>spec</span><span style="color:#404">&quot;</span></span>: {
+        <span style="color:#606"><span style="color:#404">&quot;</span><span>egress</span><span style="color:#404">&quot;</span></span>: [
+            {
+                <span style="color:#606"><span style="color:#404">&quot;</span><span>type</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Allow</span><span style="color:#710">&quot;</span></span>,
+                <span style="color:#606"><span style="color:#404">&quot;</span><span>to</span><span style="color:#404">&quot;</span></span>: {
+                    <span style="color:#606"><span style="color:#404">&quot;</span><span>cidrSelector</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1.2.3.0/24</span><span style="color:#710">&quot;</span></span>
+                }
+            },
+            {
+                <span style="color:#606"><span style="color:#404">&quot;</span><span>type</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Allow</span><span style="color:#710">&quot;</span></span>,
+                <span style="color:#606"><span style="color:#404">&quot;</span><span>to</span><span style="color:#404">&quot;</span></span>: {
+                    <span style="color:#606"><span style="color:#404">&quot;</span><span>dnsName</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">www.foo.com</span><span style="color:#710">&quot;</span></span>
+                }
+            },
+            {
+                <span style="color:#606"><span style="color:#404">&quot;</span><span>type</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Deny</span><span style="color:#710">&quot;</span></span>,
+                <span style="color:#606"><span style="color:#404">&quot;</span><span>to</span><span style="color:#404">&quot;</span></span>: {
+                    <span style="color:#606"><span style="color:#404">&quot;</span><span>cidrSelector</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">0.0.0.0/0</span><span style="color:#710">&quot;</span></span>
+                }
+            }
+        ]
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the example above is added to a project, it allows traffic to IP range
+<code>1.2.3.0/24</code> and domain name <code>www.foo.com</code>, but denies access to all other
+external IP addresses. Traffic to other pods is not affected because the policy
+only applies to <em>external</em> traffic.</p>
+</div>
+<div class="paragraph">
+<p>The rules in an <code>EgressNetworkPolicy</code> are checked in order, and the first one
+that matches takes effect. If the three rules in the above example were
+reversed, then traffic would not be allowed to <code>1.2.3.0/24</code> and <code>www.foo.com</code>
+because the <code>0.0.0.0/0</code> rule would be checked first, and it would match and deny
+all traffic.</p>
+</div>
+<div class="paragraph">
+<p>Domain name updates are polled based on the TTL (time to live) value of the
+domain of the local non-authoritative server, or 30 minutes if the TTL is unable
+to be fetched. The pod should also resolve the domain from the same local
+non-authoritative server when necessary, otherwise the IP addresses for the
+domain perceived by the egress network policy controller and the pod will be
+different, and the egress network policy may not be enforced as expected. In the
+above example, suppose <code>www.foo.com</code> resolved to <code>10.11.12.13</code> and has a DNS TTL
+of one minute, but was later changed to <code>20.21.22.23</code>. Atomic Registry will then
+take up to one minute to adapt to these changes.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The egress firewall always allows pods access to the external interface of the
+node the pod is on for DNS resolution. If your DNS resolution is not handled by
+something on the local node, then you will need to add egress firewall rules
+allowing access to the DNS server&#8217;s IP addresses if you are using domain names
+in your pods. The <a href="../install_config/install/quick_install.html#install-config-install-quick-install">default installer</a>
+sets up a local dnsmasq, so if you are using that setup you will not need to add extra rules.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Use the JSON file to create an EgressNetworkPolicy object:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oc create -f &lt;policy&gt;.json</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Exposing services by creating
+<a href="../dev_guide/routes.html#creating-routes">routes</a> will ignore
+<code>EgressNetworkPolicy</code>. Egress network policy service endpoint filtering is done
+at the node <code>kubeproxy</code>. When the router is involved, <code>kubeproxy</code> is bypassed
+and egress network policy enforcement is not applied. Administrators can prevent
+this bypass by limiting access to create routes.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="admin-guide-limit-pod-access-egress-router"><a class="anchor" href="#admin-guide-limit-pod-access-egress-router"></a>Using an Egress Router to Allow External Resources to Recognize Pod Traffic</h3>
+<div class="paragraph">
+<p>The Atomic Registry egress router runs a service that redirects traffic to a
+specified remote server, using a private source IP address that is not used for
+anything else. The service allows pods to talk to servers that are set up
+to only allow access from whitelisted IP addresses.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The egress router is not intended for every outgoing connection. Creating large
+numbers of egress routers can push the limits of your network hardware. For
+example, creating an egress router for every project or application could exceed
+the number of local MAC addresses that the network interface can handle before
+falling back to filtering MAC addresses in software.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Currently, the egress router is not compatible with Amazon AWS due to AWS not
+being compatible with macvlan traffic.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="admin-guide-limit-pod-access-important-deployment-considerations" class="paragraph">
+<p><strong>Deployment Considerations</strong></p>
+</div>
+<div class="paragraph">
+<p>The Egress router adds a second IP address and MAC address to the node&#8217;s primary
+network interface. If you are not running Atomic Registry on bare metal, you may
+need to configure your hypervisor or cloud provider to allow the additional
+address.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Red Hat OpenStack Platform</dt>
+<dd>
+<p>If you are deploying Atomic Registry on Red Hat OpenStack Platform, you need to
+whitelist the IP and MAC addresses on your OpenStack environment, otherwise
+<a href="https://access.redhat.com/solutions/2803331">communication will fail</a>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">neutron port-update $neutron_port_uuid \
+  --allowed_address_pairs list=true \
+  type=dict mac_address=&lt;mac_address&gt;,ip_address=&lt;ip_address&gt;</pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">Red Hat Enterprise Virtualization</dt>
+<dd>
+<p>If you are using
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.2/html/Administration_Guide/Red_Hat_Enterprise_Virtualization_Manager_configuration_options_explanations_limitations_and_best_practices.html">Red
+Hat Enterprise Virtualization</a>, you should set
+<code>EnableMACAntiSpoofingFilterRules</code> to <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">VMware vSphere</dt>
+<dd>
+<p>If you are using VMware vSphere, see the <a href="https://docs.vmware.com/en/VMware-vSphere/6.0/com.vmware.vsphere.security.doc/GUID-3507432E-AFEA-4B6B-B404-17A020575358.html">VMWare documentation for securing vSphere standard switches</a>. View and change VMWare vSphere default settings by selecting the host&#8217;s virtual switch from the vSphere Web Client.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Specifically, ensure that the following are enabled:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.vmware.com/en/VMware-vSphere/6.0/com.vmware.vsphere.security.doc/GUID-942BD3AA-731B-4A05-8196-66F2B4BF1ACB.html">MAC Address Changes</a></p>
+</li>
+<li>
+<p><a href="https://docs.vmware.com/en/VMware-vSphere/6.0/com.vmware.vsphere.security.doc/GUID-7DC6486F-5400-44DF-8A62-6273798A2F80.html">Forged Transits</a></p>
+</li>
+<li>
+<p><a href="https://docs.vmware.com/en/VMware-vSphere/6.0/com.vmware.vsphere.security.doc/GUID-92F3AB1F-B4C5-4F25-A010-8820D7250350.html">Promiscuous Mode Operation</a></p>
+</li>
+</ul>
+</div>
+<div id="admin-guide-egress-router-modes" class="paragraph">
+<p><strong>Egress Router Modes</strong></p>
+</div>
+<div class="paragraph">
+<p>The egress router can run in two different modes:
+<a href="#admin-guide-deploying-an-egress-router-pod">redirect mode</a> and
+<a href="#admin-guide-deploying-an-egress-router-http-proxy-pod">HTTP proxy mode</a>.
+Redirect mode works for all services except for HTTP and HTTPS. For HTTP and
+HTTPS services, use HTTP proxy mode.</p>
+</div>
+<div class="sect3">
+<h4 id="admin-guide-deploying-an-egress-router-pod"><a class="anchor" href="#admin-guide-deploying-an-egress-router-pod"></a>Deploying an Egress Router Pod in Redirect Mode</h4>
+<div class="paragraph">
+<p>In <em>redirect mode</em>, the egress router sets up iptables rules to redirect traffic
+from its own IP address to one or more destination IP addresses. Client pods
+that want to make use of the reserved source IP address must be modified to
+connect to the egress router rather than connecting directly to the destination
+IP.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a pod configuration using the following:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">v1</span></span>
+<span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">Pod</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">egress-1</span></span>
+  <span style="color:#606">labels</span>:
+    <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">egress-1</span></span>
+  <span style="color:#606">annotations</span>:
+    <span style="color:#606">pod.network.openshift.io/assign-macvlan</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">true</span><span style="color:#710">&quot;</span></span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span style="color:#606">spec</span>:
+  <span style="color:#606">initContainers</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: egress-router</span></span>
+    <span style="color:#606">securityContext</span>:
+      <span style="color:#606">privileged</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span>
+    <span style="color:#606">env</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_SOURCE </span></span><i class="conum" data-value="2"></i><b>(2)</b>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">192.168.12.99</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_GATEWAY </span></span><i class="conum" data-value="3"></i><b>(3)</b>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">192.168.12.1</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_DESTINATION </span></span><i class="conum" data-value="4"></i><b>(4)</b>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">203.0.113.25</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_ROUTER_MODE </span></span><i class="conum" data-value="5"></i><b>(5)</b>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">init</span></span>
+  <span style="color:#606">containers</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: egress-router-wait</span></span>
+  <span style="color:#606">nodeSelector</span>:
+    <span style="color:#606">site</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">springfield-1 </span></span><i class="conum" data-value="6"></i><b>(6)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code>pod.network.openshift.io/assign-macvlan annotation</code> creates a Macvlan
+network interface on the primary network interface, and then moves it into the
+pod&#8217;s network name space before starting the <strong>egress-router</strong> container. Preserve
+the quotation marks around <code>"true"</code>. Omitting them results in errors.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>IP address from the physical network that the node is on and is
+reserved by the cluster administrator for use by this pod.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Same value as the default gateway used by the node.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The external server to direct traffic to. Using this example,
+connections to the pod are redirected to 203.0.113.25, with a source IP address
+of 192.168.12.99.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>This tells the egress router image that it is being deployed as an
+"init container". Previous versions of Atomic Registry (and the egress
+router image) did not support this mode and had to be run as an
+ordinary container.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The pod is only deployed to nodes with the label <code>site=springfield-1</code>.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Create the pod using the above definition:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oc create -f &lt;pod_name&gt;.json</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To check to see if the pod has been created:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oc get pod &lt;pod_name&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Ensure other pods can find the pod&#8217;s IP address by creating a service to point to the egress router:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">v1</span></span>
+<span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">Service</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">egress-1</span></span>
+<span style="color:#606">spec</span>:
+  <span style="color:#606">ports</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: http</span></span>
+    <span style="color:#606">port</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">80</span></span>
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: https</span></span>
+    <span style="color:#606">port</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">443</span></span>
+  <span style="color:#606">type</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ClusterIP</span></span>
+  <span style="color:#606">selector</span>:
+    <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">egress-1</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Your pods can now connect to this service. Their connections are redirected to
+the corresponding ports on the external server, using the reserved egress IP
+address.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The egress router setup is performed by an "init container" created from the
+image, and that container is run privileged so that it can configure the Macvlan
+interface and set up <code>iptables</code> rules. After it finishes setting up
+the <code>iptables</code> rules, it exits and the
+container will run (doing nothing) until the pod is killed.</p>
+</div>
+<div class="paragraph">
+<p>The environment variables tell the <strong>egress-router</strong> image what addresses to use; it
+will configure the Macvlan interface to use <code>EGRESS_SOURCE</code> as its IP address,
+with <code>EGRESS_GATEWAY</code> as its gateway.</p>
+</div>
+<div class="paragraph">
+<p>NAT rules are set up so that connections to any TCP or UDP port on the
+pod&#8217;s cluster IP address are redirected to the same port on
+<code>EGRESS_DESTINATION</code>.</p>
+</div>
+<div class="paragraph">
+<p>If only some of the nodes in your cluster are capable of claiming the specified
+source IP address and using the specified gateway, you can specify a
+<code>nodeName</code> or <code>nodeSelector</code> indicating which nodes are acceptable.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="admin-guide-manage-pods-egress-router-multi-destination"><a class="anchor" href="#admin-guide-manage-pods-egress-router-multi-destination"></a>Redirecting to Multiple Destinations</h4>
+<div class="paragraph">
+<p>In the previous example, connections to the egress pod (or its corresponding
+service) on any port are redirected to a single destination IP. You can also
+configure different destination IPs depending on the port:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">v1</span></span>
+<span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">Pod</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">egress-multi</span></span>
+  <span style="color:#606">labels</span>:
+    <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">egress-multi</span></span>
+  <span style="color:#606">annotations</span>:
+    <span style="color:#606">pod.network.openshift.io/assign-macvlan</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">true</span><span style="color:#710">&quot;</span></span>
+<span style="color:#606">spec</span>:
+  <span style="color:#606">initContainers</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: egress-router</span></span>
+    <span style="color:#606">securityContext</span>:
+      <span style="color:#606">privileged</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span>
+    <span style="color:#606">env</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_SOURCE</span></span>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">192.168.12.99</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_GATEWAY</span></span>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">192.168.12.1</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_DESTINATION</span></span>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">|</span></span> <i class="conum" data-value="1"></i><b>(1)</b>
+        <span style="color:#F00;background-color:#FAA">80   tcp 203.0.113.25</span>
+        <span style="color:#F00;background-color:#FAA">8080 tcp 203.0.113.26 80</span>
+        <span style="color:#F00;background-color:#FAA">8443 tcp 203.0.113.26 443</span>
+        <span style="color:#F00;background-color:#FAA">203.0.113.27</span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_ROUTER_MODE</span></span>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">init</span></span>
+  <span style="color:#606">containers</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: egress-router-wait</span></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This uses the YAML syntax for a multi-line string; see below for
+details.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Each line of <code>EGRESS_DESTINATION</code> can be one of three types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;port&gt; &lt;protocol&gt; &lt;IP address&gt;</code> - This says that incoming
+connections to the given <code>&lt;port&gt;</code> should be redirected to the same
+port on the given <code>&lt;IP address&gt;</code>. <code>&lt;protocol&gt;</code> is either <code>tcp</code> or
+<code>udp</code>. In the example above, the first line redirects traffic from
+local port 80 to port 80 on 203.0.113.25.</p>
+</li>
+<li>
+<p><code>&lt;port&gt; &lt;protocol&gt; &lt;IP address&gt; &lt;remote port&gt;</code> - As above, except
+that the connection is redirected to a different <code>&lt;remote port&gt;</code> on
+<code>&lt;IP address&gt;</code>. In the example above, the second and third lines
+redirect local ports 8080 and 8443 to remote ports 80 and 443 on
+203.0.113.26.</p>
+</li>
+<li>
+<p><code>&lt;fallback IP address&gt;</code> - If the last line of <code>EGRESS_DESTINATION</code>
+is a single IP address, then any connections on any other port will be
+redirected to the corresponding port on that IP address (eg,
+203.0.113.27 in the example above). If there is no fallback IP address
+then connections on other ports would simply be rejected.)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="admin-guide-manage-pods-egress-router-configmap"><a class="anchor" href="#admin-guide-manage-pods-egress-router-configmap"></a>Using a ConfigMap to specify EGRESS_DESTINATION</h4>
+<div class="paragraph">
+<p>For a large or frequently-changing set of destination mappings, you
+can use a ConfigMap to externally maintain the list, and have the egress router
+pod read it from there. This comes with the advantage of project administrators
+being able to edit the ConfigMap, whereas they may not be able to edit the Pod
+definition directly, because it contains a privileged container.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a file containing the <code>EGRESS_DESTINATION</code> data:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ cat my-egress-destination.txt
+# Egress routes for Project &quot;Test&quot;, version 3
+
+80   tcp 203.0.113.25
+
+8080 tcp 203.0.113.26 80
+8443 tcp 203.0.113.26 443
+
+# Fallback
+203.0.113.27</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that you can put blank lines and comments into this file</p>
+</div>
+</li>
+<li>
+<p>Create a ConfigMap object from the file:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oc delete configmap egress-routes --ignore-not-found
+$ oc create configmap egress-routes \
+  --from-file=destination=my-egress-destination.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here <code>egress-routes</code> is the name of the ConfigMap object being
+created and <code>my-egress-destination.txt</code> is the name of the file the
+data is being read from.</p>
+</div>
+</li>
+<li>
+<p>Create a egress router pod definition as above, but specifying the
+ConfigMap for <code>EGRESS_DESTINATION</code> in the environment section:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml">    <span style="color:#F00;background-color:#FAA">...</span>
+    <span style="color:#606">env</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_SOURCE</span></span>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">192.168.12.99</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_GATEWAY</span></span>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">192.168.12.1</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_DESTINATION</span></span>
+      <span style="color:#606">valueFrom</span>:
+        <span style="color:#606">configMapKeyRef</span>:
+          <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">egress-routes</span></span>
+          <span style="color:#606">key</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">destination</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_ROUTER_MODE</span></span>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">init</span></span>
+    <span style="color:#F00;background-color:#FAA">...</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The egress router does not automatically update when the ConfigMap changes.
+Restart the pod to get updates.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="admin-guide-deploying-an-egress-router-http-proxy-pod"><a class="anchor" href="#admin-guide-deploying-an-egress-router-http-proxy-pod"></a>Deploying an Egress Router HTTP Proxy Pod</h4>
+<div class="paragraph">
+<p>In <em>HTTP proxy mode</em>, the egress router runs as an HTTP proxy on port <code>8080</code>.
+This only works for clients talking to HTTP or HTTPS-based services, but usually
+requires fewer changes to the client pods to get them to work. Programs can be
+told to use an HTTP proxy by setting an environment variable.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create the pod using the following as an example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">v1</span></span>
+<span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">Pod</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">egress-http-proxy</span></span>
+  <span style="color:#606">labels</span>:
+    <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">egress-http-proxy</span></span>
+  <span style="color:#606">annotations</span>:
+    <span style="color:#606">pod.network.openshift.io/assign-macvlan</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">true</span><span style="color:#710">&quot;</span></span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span style="color:#606">spec</span>:
+  <span style="color:#606">initContainers</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: egress-router-setup</span></span>
+    <span style="color:#606">securityContext</span>:
+      <span style="color:#606">privileged</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span>
+    <span style="color:#606">env</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_SOURCE </span></span><i class="conum" data-value="2"></i><b>(2)</b>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">192.168.12.99</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_GATEWAY </span></span><i class="conum" data-value="3"></i><b>(3)</b>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">192.168.12.1</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_ROUTER_MODE </span></span><i class="conum" data-value="4"></i><b>(4)</b>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">http-proxy</span></span>
+  <span style="color:#606">containers</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: egress-router-proxy</span></span>
+    <span style="color:#606">env</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_HTTP_PROXY_DESTINATION </span></span><i class="conum" data-value="5"></i><b>(5)</b>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">|</span><span style="color:#D20">
+        !*.example.com
+        !192.168.1.0/24
+        *</span></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code>pod.network.openshift.io/assign-macvlan annotation</code> creates a Macvlan
+network interface on the primary network interface, then moves it into the
+pod&#8217;s network name space before starting the <strong>egress-router</strong> container. Preserve
+the quotation marks around <code>"true"</code>. Omitting them results in errors.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>An IP address from the physical network that the node itself is on and is
+reserved by the cluster administrator for use by this pod.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Same value as the default gateway used by the node itself.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>This tells the egress router image that it is being deployed as
+part of an HTTP proxy, and so it should not set up iptables
+redirecting rules.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>A string or YAML multi-line string specifying how to configure the
+proxy. Note that this is specified as an environment variable in the
+HTTP proxy container, not with the other environment variables in the
+init container.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can specify any of the following for the <code>EGRESS_HTTP_PROXY_DESTINATION</code>
+value. You can also use <code>*</code>, meaning "allow connections to all remote
+destinations". Each line in the configuration specifies one group of connections
+to allow or deny:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An IP address (eg, <code>192.168.1.1</code>) allows connections to that IP address.</p>
+</li>
+<li>
+<p>A CIDR range (eg, <code>192.168.1.0/24</code>) allows connections to that CIDR range.</p>
+</li>
+<li>
+<p>A host name (eg, <code>www.example.com</code>) allows proxying to that host.</p>
+</li>
+<li>
+<p>A domain name preceded by <code>*.</code> (eg, <code>*.example.com</code>) allows proxying to that domain and all of its subdomains.</p>
+</li>
+<li>
+<p>A <code>!</code> followed by any of the above denies connections rather than allowing them</p>
+</li>
+<li>
+<p>If the last line is <code>*</code>, then anything that hasn&#8217;t been denied will be allowed. Otherwise, anything that hasn&#8217;t been allowed will be denied.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ensure other pods can find the pod&#8217;s IP address by creating a service to point
+to the egress router:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">v1</span></span>
+<span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">Service</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">egress-1</span></span>
+<span style="color:#606">spec</span>:
+  <span style="color:#606">ports</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: http-proxy</span></span>
+    <span style="color:#606">port</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">8080 </span></span><i class="conum" data-value="1"></i><b>(1)</b>
+  <span style="color:#606">type</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ClusterIP</span></span>
+  <span style="color:#606">selector</span>:
+    <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">egress-1</span></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Ensure the <code>http</code> port is always set to <code>8080</code>.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Configure the client pod (not the egress proxy pod) to use the HTTP proxy by setting the <code>http_proxy</code> or <code>https_proxy</code> variables:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml">    <span style="color:#F00;background-color:#FAA">...</span>
+    <span style="color:#606">env</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: http_proxy</span></span>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">http://egress-1:8080/ </span></span><i class="conum" data-value="1"></i><b>(1)</b>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: https_proxy</span></span>
+      <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">http://egress-1:8080/</span></span>
+    <span style="color:#F00;background-color:#FAA">...</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The service created in step 2.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Using the <code>http_proxy</code> and <code>https_proxy</code> environment variables is not necessary
+for all setups. If the above does not create a working setup, then consult the
+documentation for the tool or software you are running in the pod.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>You can also specify the <code>EGRESS_HTTP_PROXY_DESTINATION</code> using a
+ConfigMap, similarly to
+<a href="#admin-guide-manage-pods-egress-router-configmap">the redirecting egress router example above</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="admin-guide-manage-pods-egress-router-failover"><a class="anchor" href="#admin-guide-manage-pods-egress-router-failover"></a>Enabling Failover for Egress Router Pods</h4>
+<div class="paragraph">
+<p>Using a replication controller, you can ensure that there is always one copy of the egress router pod in order to prevent downtime.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a replication controller configuration file using the following:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">v1</span></span>
+<span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ReplicationController</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">egress-demo-controller</span></span>
+<span style="color:#606">spec</span>:
+  <span style="color:#606">replicas</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">1 </span></span><i class="conum" data-value="1"></i><b>(1)</b>
+  <span style="color:#606">selector</span>:
+    <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">egress-demo</span></span>
+  <span style="color:#606">template</span>:
+    <span style="color:#606">metadata</span>:
+      <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">egress-demo</span></span>
+      <span style="color:#606">labels</span>:
+        <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">egress-demo</span></span>
+      <span style="color:#606">annotations</span>:
+        <span style="color:#606">pod.network.openshift.io/assign-macvlan</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">true</span><span style="color:#710">&quot;</span></span>
+    <span style="color:#606">spec</span>:
+      <span style="color:#606">initContainers</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: egress-demo-init</span></span>
+        <span style="color:#606">env</span>:
+        - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_SOURCE</span></span>
+          <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">192.168.12.99</span></span>
+        - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_GATEWAY</span></span>
+          <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">192.168.12.1</span></span>
+        - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_DESTINATION</span></span>
+          <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">203.0.113.25</span></span>
+        - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: EGRESS_ROUTER_MODE</span></span>
+          <span style="color:#606">value</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">init</span></span>
+        <span style="color:#606">securityContext</span>:
+          <span style="color:#606">privileged</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span>
+      <span style="color:#606">containers</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: egress-demo-wait</span></span>
+      <span style="color:#606">nodeSelector</span>:
+        <span style="color:#606">site</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">springfield-1</span></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Ensure <code>replicas</code> is set to <code>1</code>, because only one pod can be using a given
+<code>EGRESS_SOURCE</code> value at any time. This means that only a single copy of the
+router will be running, on a node with the label <code>site=springfield-1</code>.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Create the pod using the definition:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oc create -f &lt;replication_controller&gt;.json</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>To verify, check to see if the replication controller pod has been created:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oc describe rc &lt;replication_controller&gt;</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="admin-guide-limit-pod-access-iptables"><a class="anchor" href="#admin-guide-limit-pod-access-iptables"></a>Using iptables Rules to Limit Access to External Resources</h3>
+<div class="paragraph">
+<p>Some cluster administrators may want to perform actions on outgoing
+traffic that do not fit within the model of <code>EgressNetworkPolicy</code> or the
+egress router. In some cases, this can be done by creating iptables
+rules directly.</p>
+</div>
+<div class="paragraph">
+<p>For example, you could create rules that log traffic to particular
+destinations, or to prevent more than a certain number of outgoing
+connections per second.</p>
+</div>
+<div class="paragraph">
+<p>Atomic Registry does not provide a way to add custom iptables rules
+automatically, but it does provide a place where such rules can be
+added manually by the administrator. Each node, on startup, will
+create an empty chain called <code>OPENSHIFT-ADMIN-OUTPUT-RULES</code> in the
+<code>filter</code> table (assuming that the chain does not already exist). Any
+rules added to that chain by an administrator will be applied to all
+traffic going from a pod to a destination outside the cluster (and not
+to any other traffic).</p>
+</div>
+<div class="paragraph">
+<p>There are a few things to watch out for when using this functionality:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>It is up to you to ensure that rules get created on each node;
+Atomic Registry does not provide any way to make that happen
+automatically.</p>
+</li>
+<li>
+<p>The rules are not applied to traffic that exits the cluster via an
+egress router, and they run after <code>EgressNetworkPolicy</code> rules are applied
+(and so will not see traffic that is denied by an
+<code>EgressNetworkPolicy</code>).</p>
+</li>
+<li>
+<p>The handling of connections from pods to nodes or pods to the master
+is complicated, because nodes have both "external" IP addresses and
+"internal" SDN IP addresses. Thus, some pod-to-node/master traffic may
+pass through this chain, but other pod-to-node/master traffic may
+bypass it.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enabling-static-ips-for-external-project-traffic"><a class="anchor" href="#enabling-static-ips-for-external-project-traffic"></a>Enabling Static IPs for External Project Traffic</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As a cluster administrator, you can assign specific, static IP addresses to
+projects, so that traffic is externally easily recognizable. This is different
+from the default egress router, which is used to send traffic to specific
+destinations.</p>
+</div>
+<div class="paragraph">
+<p>Recognizable IP traffic increases cluster security by ensuring the origins
+visible. Once enabled, all outgoing external connections from the specified
+project will share the same, fixed source IP, meaning that any external
+resources can recognize the traffic.</p>
+</div>
+<div class="paragraph">
+<p>Unlike the egress router, this is subject to <code>EgressNetworkPolicy</code> firewall
+rules.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Enabling static IPs for external project traffic is a Technology Preview feature
+only.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To enable static source IPs:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Update the <code>NetNamespace</code> with the desired IP:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oc patch netnamespace &lt;project_name&gt; -p '{&quot;egressIPs&quot;: [&quot;&lt;IP_address&gt;&quot;]}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example, to assign the <code>MyProject</code> project to an IP address of
+192.168.1.100:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oc patch netnamespace MyProject -p '{&quot;egressIPs&quot;: [&quot;192.168.1.100&quot;]}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>egressIPs</code> field is an array, but must be set to a single IP address. If
+setting multiple IPs, the other IPs will be ignored.</p>
+</div>
+</li>
+<li>
+<p>Manually assign the egress IP to the desired node hosts. Set the <code>egressIPs</code>
+field on the <code>HostSubnet</code> object on the node host. Include as many IPs as you
+want to assign to that node host:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oc patch hostsubnet &lt;node_name&gt; -p \
+  '{&quot;egressIPs&quot;: [&quot;&lt;IP_address_1&gt;&quot;, &quot;&lt;IP_address_2&gt;&quot;]}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example, to say that <code>node1</code> should have the egress IPs 192.168.1.100,
+192.168.1.101, and 192.168.1.102:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oc patch hostsubnet node1 -p \
+  '{&quot;egressIPs&quot;: [&quot;192.168.1.100&quot;, &quot;192.168.1.101&quot;, &quot;192.168.1.102&quot;]}'</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Egress IPs are implemented as additional IP addresses on the primary network
+interface, and must be in the same subnet as the node&#8217;s primary IP. Allowing
+additional IP addresses on the primary network interface might require extra
+configuration when using some cloud or VM solutions.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If the above is enabled for a project, all egress traffic from that project will
+be routed to the node hosting that egress IP, then connected (using NAT) to that
+IP address. If <code>egressIPs</code> is set on a <code>NetNamespace</code>, but there is no node
+hosting that egress IP, then egress traffic from the namespace will be dropped.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="admin-guide-networking-multicast"><a class="anchor" href="#admin-guide-networking-multicast"></a>Enabling Multicast</h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>At this time, multicast is best used for low bandwidth coordination or service
+discovery and not a high-bandwidth solution.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Multicast traffic between Atomic Registry pods is disabled by default. You can
+enable Multicast on a per-project basis by setting an annotation on the
+project&#8217;s corresponding <code>netnamespace</code> object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oc annotate netnamespace &lt;namespace&gt; \
+    netnamespace.network.openshift.io/multicast-enabled=true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Disable multicast by removing the annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oc annotate netnamespace &lt;namespace&gt; \
+    netnamespace.network.openshift.io/multicast-enabled-</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you have
+<a href="../admin_guide/managing_networking.html#joining-project-networks">joined
+networks together</a>, you will need to enable Multicast in each projects'
+<code>netnamespace</code> in order for it to take effect in any of the projects. To enable
+Multicast in the <code>default</code> project, you must also enable it in the <code>kube-service-catalog</code>
+project and all other projects that have been
+<a href="../admin_guide/managing_networking.html#making-project-networks-global">made
+global</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Multicast global projects are not "global", but instead communicate with only
+other global projects via Multicast, not with all projects in the cluster, as is
+the case with unicast.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="admin-guide-networking-networkpolicy"><a class="anchor" href="#admin-guide-networking-networkpolicy"></a>Enabling NetworkPolicy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong>ovs-subnet</strong> and <strong>ovs-multitenant</strong> plugins have their own legacy models of network
+isolation, and don&#8217;t support Kubernetes <code>NetworkPolicy</code>. However, <code>NetworkPolicy</code> support
+is available by using the <strong>ovs-networkpolicy</strong> plug-in.</p>
+</div>
+<div class="paragraph">
+<p>In a cluster
+<a href="../install_config/configuring_sdn.html#install-config-configuring-sdn">configured
+to use the <strong>ovs-networkpolicy</strong> plugin</a>, network isolation is controlled
+entirely by
+<a href="https://github.com/kubernetes/community/blob/master/contributors/design-proposals/network/network-policy.md"><code>NetworkPolicy</code> objects</a>. By default, all pods in a project are accessible from other pods and network endpoints. To isolate
+one or more pods in a project, you can create <code>NetworkPolicy</code> objects in that
+project to indicate the allowed incoming connections. Project administrators can
+create and delete <code>NetworkPolicy</code> objects within their own project.</p>
+</div>
+<div class="paragraph">
+<p>Pods that do not have <code>NetworkPolicy</code> objects pointing to them are fully
+accessible, whereas, pods that have one or more <code>NetworkPolicy</code> objects pointing
+to them are isolated. These isolated pods only accept connections that are
+accepted by at least one of their <code>NetworkPolicy</code> objects.</p>
+</div>
+<div class="paragraph">
+<p>Following are a few sample <code>NetworkPolicy</code> object definitions supporting
+different scenrios:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Deny All Traffic</strong></p>
+<div class="paragraph">
+<p>To make a project "deny by default" add a <code>NetworkPolicy</code> object that
+matches all pods but accepts no traffic.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">NetworkPolicy</span></span>
+<span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">networking.k8s.io/v1</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">deny-by-default</span></span>
+<span style="color:#606">spec</span>:
+  <span style="color:#606">podSelector</span>:
+  <span style="color:#606">ingress</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">[]</span></span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Only Accept connections from pods within project</strong></p>
+<div class="paragraph">
+<p>To make pods accept connections from other pods in the same project,
+but reject all other connections from pods in other projects:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">NetworkPolicy</span></span>
+<span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">networking.k8s.io/v1</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">allow-same-namespace</span></span>
+<span style="color:#606">spec</span>:
+  <span style="color:#606">podSelector</span>:
+  <span style="color:#606">ingress</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">from:</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">podSelector: {}</span></span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Only allow HTTP and HTTPS traffic based on pod labels</strong></p>
+<div class="paragraph">
+<p>To enable only HTTP and HTTPS access to the pods with a specific label
+(<code>role=frontend</code> in following example), add a <code>NetworkPolicy</code> object similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">NetworkPolicy</span></span>
+<span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">networking.k8s.io/v1</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">allow-http-and-https</span></span>
+<span style="color:#606">spec</span>:
+  <span style="color:#606">podSelector</span>:
+    <span style="color:#606">matchLabels</span>:
+      <span style="color:#606">role</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">frontend</span></span>
+  <span style="color:#606">ingress</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ports:</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">protocol: TCP</span></span>
+      <span style="color:#606">port</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">80</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">protocol: TCP</span></span>
+      <span style="color:#606">port</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">443</span></span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>NetworkPolicy</code> objects are additive, which means you can combine multiple
+<code>NetworkPolicy</code> objects together to satisfy complex network requirements.</p>
+</div>
+<div class="paragraph">
+<p>For example, for the <code>NetworkPolicy</code> objects defined in previous samples, you
+can define both <code>allow-same-namespace</code> and <code>allow-http-and-https</code> policies
+within the same project. Thus allowing the pods with the label <code>role=frontend</code>,
+to accept any connection allowed by each policy. That is,  connections on any
+port from pods in the <strong><em>same</em></strong> namespace, and connections on ports <code>80</code> and
+<code>443</code> from pods in <strong><em>any</em></strong> namespace.</p>
+</div>
+<div class="sect2">
+<h3 id="admin-guide-networking-networkpolicy-routers"><a class="anchor" href="#admin-guide-networking-networkpolicy-routers"></a>NetworkPolicy and Routers</h3>
+<div class="paragraph">
+<p>When using the <strong>ovs-multitenant</strong> plugin, traffic from the routers is automatically allowed into all namespaces. This is because the routers are
+usually in the <em>default</em> namespace, and all namespaces allow connections from
+pods in that namespace. With the <strong>ovs-networkpolicy</strong> plugin, this does not
+happen automatically. Therefore, if you have a policy that isolates a namespace
+by default, you need to take additional steps to allow routers to access it.</p>
+</div>
+<div class="paragraph">
+<p>One option is to create a policy for each service, allowing access from all sources. for example,</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">NetworkPolicy</span></span>
+<span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">networking.k8s.io/v1</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">allow-to-database-service</span></span>
+<span style="color:#606">spec</span>:
+  <span style="color:#606">podSelector</span>:
+    <span style="color:#606">matchLabels</span>:
+      <span style="color:#606">role</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">database</span></span>
+  <span style="color:#606">ingress</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ports:</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">protocol: TCP</span></span>
+      <span style="color:#606">port</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">5432</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This allows routers to access the service, but will also allow pods in other
+users' namespaces to access it as well. This should not cause any issues, as
+those pods can normally access the service by using the public router.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can create a policy allowing full access from the default namespace, as in the <strong>ovs-multitenant</strong> plugin:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add a label to the default namespace.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You only need to do this once for the entire cluster. The cluster administrator role is required to add labels to namesapces.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oc label namespace default name=default</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create policies allowing connections from that namespace.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Perform this step for each namespace you want to allow conntections into. Users with the Project Administrator role can create policies.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">NetworkPolicy</span></span>
+<span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">networking.k8s.io/v1</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">allow-from-default-namespace</span></span>
+<span style="color:#606">spec</span>:
+  <span style="color:#606">podSelector</span>:
+  <span style="color:#606">ingress</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">from:</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">namespaceSelector:</span><span style="color:#D20">
+        matchLabels:
+          name: default</span></span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="admin-guide-networking-networkpolicy-setting-default"><a class="anchor" href="#admin-guide-networking-networkpolicy-setting-default"></a>Setting a Default NetworkPolicy for New Projects</h3>
+<div class="paragraph">
+<p>The cluster administrators can modify the default project template to enable
+automatic creation of default <code>NetworkPolicy</code> objects (one or more), whenever a
+new project is created. To do this:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a custom project template and configure the master to use it, as
+described in
+<a href="../admin_guide/managing_projects.html#modifying-the-template-for-new-projects">Modifying the Template for New Projects</a>.</p>
+</li>
+<li>
+<p>Edit the template to include the desired <code>NetworkPolicy</code> objects:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="bash">$ oc edit template project-request -n default</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To include <code>NetworkPolicy</code> objects into existing template, use the <code>oc edit</code>
+command. Currently, it is not possible to use <code>oc patch</code> to add objects to a
+<code>Template</code> resource.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Add each default policy as an element in the <code>objects</code> array:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">objects</span>:
+<span style="color:#f8f;background:#505"><span style="color:#f4f">...</span></span>
+- <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">apiVersion: networking.k8s.io/v1</span></span>
+  <span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">NetworkPolicy</span></span>
+  <span style="color:#606">metadata</span>:
+    <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">allow-from-same-namespace</span></span>
+  <span style="color:#606">spec</span>:
+    <span style="color:#606">podSelector</span>:
+    <span style="color:#606">ingress</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">from:</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">podSelector: {}</span></span>
+- <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">apiVersion: networking.k8s.io/v1</span></span>
+  <span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">NetworkPolicy</span></span>
+  <span style="color:#606">metadata</span>:
+    <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">allow-from-default-namespace</span></span>
+  <span style="color:#606">spec</span>:
+    <span style="color:#606">podSelector</span>:
+    <span style="color:#606">ingress</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">from:</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">namespaceSelector:</span><span style="color:#D20">
+          matchLabels:
+            name: default</span></span>
+<span style="color:#f8f;background:#505"><span style="color:#f4f">...</span></span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="admin-guide-enabling-hsts"><a class="anchor" href="#admin-guide-enabling-hsts"></a>Enabling HTTP Strict Transport Security</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>HTTP Strict Transport Security (HSTS) policy is a security enhancement, which
+ensures that only HTTPS traffic is allowed on the host. Any HTTP requests are
+dropped by default. This is useful for ensuring secure interactions with
+websites, or to offer a secure application for the user&#8217;s benefit.</p>
+</div>
+<div class="paragraph">
+<p>When HSTS is enabled, HSTS adds a Strict Transport Security header to HTTPS
+responses from the site. You can use the <code>insecureEdgeTerminationPolicy</code> value
+in a route to redirect to send HTTP to HTTPS. However, when HSTS is enabled, the
+client changes all requests from the HTTP URL to HTTPS before the request is
+sent, eliminating the need for a redirect. This is not required to be supported
+by the client, and can be disabled by setting <code>max-age=0</code>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>HSTS works only with secure routes (either edge terminated or re-encrypt). The
+configuration is ineffective on HTTP or passthrough routes.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To enable HSTS to a route, add the <code>haproxy.router.openshift.io/hsts_header</code>
+value to the edge terminated or re-encrypt route:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">v1</span></span>
+<span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">Route</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">annotations</span>:
+    <span style="color:#606">haproxy.router.openshift.io/hsts_header</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">max-age=31536000;includeSubDomains;preload</span></span></code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Ensure there are no spaces and no other values in the parameters in the <code>haproxy.router.openshift.io/hsts_header</code> value. Only <code>max-age</code> is required.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The required <code>max-age</code> parameter indicates the length of time, in seconds, the
+HSTS policy is in effect for. The client updates <code>max-age</code> whenever a response
+with a HSTS header is received from the host. When <code>max-age</code> times out, the
+client discards the policy.</p>
+</div>
+<div class="paragraph">
+<p>The optional <code>includeSubDomains</code> parameter tells the client that all subdomains
+of the host are to be treated the same as the host.</p>
+</div>
+<div class="paragraph">
+<p>If <code>max-age</code> is greater than 0, the optional <code>preload</code> parameter allows external
+services to include this site in their HSTS preload lists. For example, sites
+such as Google can construct a list of sites that have <code>preload</code> set. Browsers
+can then use these lists to determine which sites to only talk to over HTTPS,
+even before they have interacted with the site. Without <code>preload</code> set, they need
+to have talked to the site over HTTPS to get the header.</p>
+</div>
+</div>
+</div>
+  </div>
+
+  <div class='col-sm-3 hidden-print'>
+    <h2>Atomic Registry</h2>
+    <nav role='navigation'>
+      <ul class='docbrowser nav nav-vertical'>
+        <li class='disabled'>
+          <h3>Quickstart</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../registry_quickstart/index.html">Overview</a></li>
+              <li role="menuitem" class=""><a href="../registry_quickstart/developers.html">Developers</a></li>
+            <!-- <li role="menuitem"><a>Administrators</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-0-2">
+                <span id="sgSpan-0-2" class="fa fa-caret-right"></span>&nbsp;Administrators
+              </a>
+              <ul id="topicSubGroup-0-2" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../registry_quickstart/administrators/index.html">Overview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../registry_quickstart/administrators/system_configuration.html">System Configuration</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../registry_quickstart/administrators/uninstall.html">Uninstall</strong></a><li>
+              </ul>
+            </li>
+        <li class='disabled'>
+          <h3>Architecture</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../architecture/index.html">Overview</a></li>
+            <!-- <li role="menuitem"><a>Infrastructure Components</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-1-1">
+                <span id="sgSpan-1-1" class="fa fa-caret-right"></span>&nbsp;Infrastructure Components
+              </a>
+              <ul id="topicSubGroup-1-1" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/infrastructure_components/kubernetes_infrastructure.html">Kubernetes Infrastructure</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/infrastructure_components/image_registry.html">Container Registry</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/infrastructure_components/web_console.html">Web Console</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>Core Concepts</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-1-2">
+                <span id="sgSpan-1-2" class="fa fa-caret-right"></span>&nbsp;Core Concepts
+              </a>
+              <ul id="topicSubGroup-1-2" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/core_concepts/containers_and_images.html">Images</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/core_concepts/projects_and_users.html">Projects and Users</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/core_concepts/builds_and_image_streams.html">Image Streams</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>Additional Concepts</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-1-3">
+                <span id="sgSpan-1-3" class="fa fa-caret-right"></span>&nbsp;Additional Concepts
+              </a>
+              <ul id="topicSubGroup-1-3" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/additional_concepts/authentication.html">Authentication</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/additional_concepts/authorization.html">Authorization</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/additional_concepts/other_api_objects.html">Other API Objects</strong></a><li>
+              </ul>
+            </li>
+        <li class='disabled'>
+          <h3>Installation and Configuration</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../install_config/adding_hosts_to_existing_cluster.html">Adding Hosts to an Existing Cluster</a></li>
+              <li role="menuitem" class=""><a href="../install_config/certificate_customization.html">Configuring Custom Certificates</a></li>
+              <li role="menuitem" class=""><a href="../install_config/redeploying_certificates.html">Redeploying Certificates</a></li>
+              <li role="menuitem" class=""><a href="../install_config/configuring_authentication.html">Configuring Authentication and User Agent</a></li>
+              <li role="menuitem" class=""><a href="../install_config/syncing_groups_with_ldap.html">Syncing Groups With LDAP</a></li>
+            <!-- <li role="menuitem"><a>Advanced LDAP Configuration</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-2-5">
+                <span id="sgSpan-2-5" class="fa fa-caret-right"></span>&nbsp;Advanced LDAP Configuration
+              </a>
+              <ul id="topicSubGroup-2-5" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../install_config/advanced_ldap_configuration/index.html">Overview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../install_config/advanced_ldap_configuration/sssd_for_ldap_failover.html">Setting up SSSD for LDAP Failover</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../install_config/advanced_ldap_configuration/configuring_form_based_authentication.html">Configuring Form-Based Authentication</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../install_config/advanced_ldap_configuration/configuring_extended_ldap_attributes.html">Configuring Extended LDAP Attributes</strong></a><li>
+              </ul>
+            </li>
+              <li role="menuitem" class=""><a href="../install_config/configuring_vsphere.html">Configuring for VMWare vSphere</a></li>
+              <li role="menuitem" class=""><a href="../install_config/configuring_local.html">Configuring for local Volume</a></li>
+              <li role="menuitem" class=""><a href="../install_config/web_console_customization.html">Customizing the Web Console</a></li>
+        <li class='disabled'>
+          <h3>Cluster Administration</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../admin_guide/index.html">Overview</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/manage_users.html">Managing Users</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/managing_projects.html">Managing Projects</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/managing_pods.html">Managing Pods</a></li>
+              <li role="menuitem" class=" active"><a href="../admin_guide/managing_networking.html">Managing Networking</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/service_accounts.html">Configuring Service Accounts</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/manage_rbac.html">Managing Role-based Access Control</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/image_policy.html">Image Policy</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/scoped_tokens.html">Scoped Tokens</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/quota.html">Setting Quotas</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/multiproject_quota.html">Setting Multi-Project Quotas</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/limits.html">Setting Limit Ranges</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/allocating_node_resources.html">Allocating Node Resources</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/seccomp.html">Restricting Application Capabilities Using Seccomp</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/backup_restore.html">Backup and Restore</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/idling_applications.html">Idling Applications</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/cluster_capacity.html">Analyzing Cluster Capacity</a></li>
+        <li class='disabled'>
+          <h3>User Guide</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../dev_guide/index.html">Overview</a></li>
+              <li role="menuitem" class=""><a href="../dev_guide/authentication.html">Authentication</a></li>
+              <li role="menuitem" class=""><a href="../dev_guide/managing_images.html">Managing Images</a></li>
+              <li role="menuitem" class=""><a href="../dev_guide/service_accounts.html">Service Accounts</a></li>
+        <li class='disabled'>
+          <h3>CLI Reference</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../cli_reference/index.html">Overview</a></li>
+              <li role="menuitem" class=""><a href="../cli_reference/get_started_cli.html">Get Started with the CLI</a></li>
+              <li role="menuitem" class=""><a href="../cli_reference/manage_cli_profiles.html">Managing CLI Profiles</a></li>
+        <li class='disabled'>
+          <h3>REST API Reference</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../rest_api/index.html">Overview</a></li>
+              <li role="menuitem" class=""><a href="../rest_api/examples.html">Examples</a></li>
+            <!-- <li role="menuitem"><a>/api/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-2">
+                <span id="sgSpan-6-2" class="fa fa-caret-right"></span>&nbsp;/api/v1
+              </a>
+              <ul id="topicSubGroup-6-2" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.APIResourceList.html">v1.APIResourceList</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.APIVersions.html">v1.APIVersions</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Binding.html">v1.Binding</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.ComponentStatus.html">v1.ComponentStatus</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.ConfigMap.html">v1.ConfigMap</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Endpoints.html">v1.Endpoints</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Event.html">v1.Event</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.LimitRange.html">v1.LimitRange</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Namespace.html">v1.Namespace</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Node.html">v1.Node</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.PersistentVolume.html">v1.PersistentVolume</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.PersistentVolumeClaim.html">v1.PersistentVolumeClaim</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Pod.html">v1.Pod</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.PodTemplate.html">v1.PodTemplate</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.ReplicationController.html">v1.ReplicationController</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.ResourceQuota.html">v1.ResourceQuota</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Secret.html">v1.Secret</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.SecurityContextConstraints.html">v1.SecurityContextConstraints</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Service.html">v1.Service</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.ServiceAccount.html">v1.ServiceAccount</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-3">
+                <span id="sgSpan-6-3" class="fa fa-caret-right"></span>&nbsp;/apis/v1
+              </a>
+              <ul id="topicSubGroup-6-3" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis/v1.APIGroup.html">v1.APIGroup</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis/v1.APIGroupList.html">v1.APIGroupList</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/apps/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-4">
+                <span id="sgSpan-6-4" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-4" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta1.ControllerRevision.html">v1beta1.ControllerRevision</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta1.Deployment.html">v1beta1.Deployment</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta1.StatefulSet.html">v1beta1.StatefulSet</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/apps/v1beta2</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-5">
+                <span id="sgSpan-6-5" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta2
+              </a>
+              <ul id="topicSubGroup-6-5" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta2.ControllerRevision.html">v1beta2.ControllerRevision</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta2.DaemonSet.html">v1beta2.DaemonSet</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta2.Deployment.html">v1beta2.Deployment</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta2.ReplicaSet.html">v1beta2.ReplicaSet</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta2.StatefulSet.html">v1beta2.StatefulSet</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/autoscaling/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-6">
+                <span id="sgSpan-6-6" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v1
+              </a>
+              <ul id="topicSubGroup-6-6" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-autoscaling/v1.HorizontalPodAutoscaler.html">v1.HorizontalPodAutoscaler</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/autoscaling/v2beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-7">
+                <span id="sgSpan-6-7" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v2beta1
+              </a>
+              <ul id="topicSubGroup-6-7" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-autoscaling/v2beta1.HorizontalPodAutoscaler.html">v2beta1.HorizontalPodAutoscaler</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/batch/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-8">
+                <span id="sgSpan-6-8" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1
+              </a>
+              <ul id="topicSubGroup-6-8" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-batch/v1.Job.html">v1.Job</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/batch/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-9">
+                <span id="sgSpan-6-9" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-9" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-batch/v1beta1.CronJob.html">v1beta1.CronJob</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/batch/v2alpha1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-10">
+                <span id="sgSpan-6-10" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v2alpha1
+              </a>
+              <ul id="topicSubGroup-6-10" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-batch/v2alpha1.CronJob.html">v2alpha1.CronJob</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/extensions/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-11">
+                <span id="sgSpan-6-11" class="fa fa-caret-right"></span>&nbsp;/apis/extensions/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-11" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-extensions/v1beta1.DaemonSet.html">v1beta1.DaemonSet</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-extensions/v1beta1.Deployment.html">v1beta1.Deployment</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-extensions/v1beta1.Ingress.html">v1beta1.Ingress</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-extensions/v1beta1.NetworkPolicy.html">v1beta1.NetworkPolicy</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-extensions/v1beta1.PodSecurityPolicy.html">v1beta1.PodSecurityPolicy</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-extensions/v1beta1.ReplicaSet.html">v1beta1.ReplicaSet</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/policy/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-12">
+                <span id="sgSpan-6-12" class="fa fa-caret-right"></span>&nbsp;/apis/policy/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-12" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-policy/v1beta1.PodDisruptionBudget.html">v1beta1.PodDisruptionBudget</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/authentication.k8s.io/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-13">
+                <span id="sgSpan-6-13" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-6-13" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authentication.k8s.io/v1.TokenReview.html">v1.TokenReview</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/authentication.k8s.io/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-14">
+                <span id="sgSpan-6-14" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-14" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authentication.k8s.io/v1beta1.TokenReview.html">v1beta1.TokenReview</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/authorization.k8s.io/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-15">
+                <span id="sgSpan-6-15" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-6-15" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1.SelfSubjectAccessReview.html">v1.SelfSubjectAccessReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1.SelfSubjectRulesReview.html">v1.SelfSubjectRulesReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1.SubjectAccessReview.html">v1.SubjectAccessReview</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/authorization.k8s.io/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-16">
+                <span id="sgSpan-6-16" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-16" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1beta1.LocalSubjectAccessReview.html">v1beta1.LocalSubjectAccessReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectAccessReview.html">v1beta1.SelfSubjectAccessReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectRulesReview.html">v1beta1.SelfSubjectRulesReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1beta1.SubjectAccessReview.html">v1beta1.SubjectAccessReview</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/rbac.authorization.k8s.io/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-17">
+                <span id="sgSpan-6-17" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-6-17" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1.ClusterRole.html">v1.ClusterRole</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1.ClusterRoleBinding.html">v1.ClusterRoleBinding</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1.Role.html">v1.Role</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1.RoleBinding.html">v1.RoleBinding</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/rbac.authorization.k8s.io/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-18">
+                <span id="sgSpan-6-18" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-18" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRole.html">v1beta1.ClusterRole</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRoleBinding.html">v1beta1.ClusterRoleBinding</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1beta1.Role.html">v1beta1.Role</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1beta1.RoleBinding.html">v1beta1.RoleBinding</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/certificates.k8s.io/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-19">
+                <span id="sgSpan-6-19" class="fa fa-caret-right"></span>&nbsp;/apis/certificates.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-19" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-certificates.k8s.io/v1beta1.CertificateSigningRequest.html">v1beta1.CertificateSigningRequest</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/networking.k8s.io/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-20">
+                <span id="sgSpan-6-20" class="fa fa-caret-right"></span>&nbsp;/apis/networking.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-6-20" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-networking.k8s.io/v1.NetworkPolicy.html">v1.NetworkPolicy</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/storage.k8s.io/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-21">
+                <span id="sgSpan-6-21" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-6-21" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-storage.k8s.io/v1.StorageClass.html">v1.StorageClass</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/storage.k8s.io/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-22">
+                <span id="sgSpan-6-22" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-22" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-storage.k8s.io/v1beta1.StorageClass.html">v1beta1.StorageClass</strong></a><li>
+              </ul>
+            </li>
+</ul>
+    </nav>
+  </div>
+</div>
+</section>
+</div>
+<div class='row'>
+<div class='col-md-offset-3 col-md-9 col-lg-offset-2 col-lg-10' id='footer'>
+  <footer>
+<hr class='visible-print'>
+
+&copy; 2014&ndash;2016 Project Atomic. Sponsored by Red Hat, Inc.
+<div class='edit-this-page pull-right'>
+<a href="https://github.com/openshift/openshift-docs#contributing-to-openshift-documentation"><i class="icon fa fa-fw fa-github"></i>Edit this page on GitHub</a>
+</div>
+        <script type="text/javascript">
+        var _paq = _paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u=(("https:" == document.location.protocol) ? "https" : "http") + "://piwik-osasteam.rhcloud.com/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 4]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+        g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+<noscript><p><img src="https://piwik-osasteam.rhcloud.com/piwik/piwik.php?idsite=4" style="border:0;" alt="" /></p></noscript>
+</footer>
+</div>
+</div>
+
+</section>
+
+<script src="http://www.projectatomic.io/javascripts/application.js" type="text/javascript"></script>
+
+
+</body>
+</html>

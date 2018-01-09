@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en-us"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en-us"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if IE 9]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if lt IE 10]> <html class="no-js lt-ie10" lang="en-us"> <![endif]-->
+<!--[if !IE]> > <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<title>Atomic Registry Branch Build | Installation and Configuration | Configuring for local Volume</title>
+<meta charset='utf-8'>
+<meta content='' name='description'>
+<meta content='Project Atomic. Sponsored by Red Hat, Inc.' name='author'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width' name='viewport'>
+
+<link href='http://www.projectatomic.io/images/favicon.ico' rel='shortcut icon'>
+<link href='http://www.projectatomic.io/images/apple-touch-icon-precomposed.png' rel='apple-touch-icon-precomposed'>
+<link href='http://www.projectatomic.io/images/apple-touch-icon-57x57-precomposed.png' rel='apple-touch-icon-precomposed' sizes='57x57'>
+<link href='http://www.projectatomic.io/images/apple-touch-icon-72x72-precomposed.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
+<link href='http://www.projectatomic.io/images/apple-touch-icon-114x114-precomposed.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
+<link href='http://www.projectatomic.io/blog/feed.xml' rel='alternate' title='Project Atomic' type='application/atom+xml'>
+<link href="http://www.projectatomic.io/stylesheets/application.css" rel="stylesheet" type="text/css" />
+<link href="http://www.projectatomic.io/stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+</head>
+<body class=' docs docs_introduction docs_introduction_index source-md'>
+<section class='container' id='page-wrap'>
+  <div class='row'>
+  <div class='col-md-3 col-lg-2' id='sidebar'>
+    <div id='nav-primary'>
+      <nav class='navbar navbar-default' role='navigation'>
+        <div class='navbar-header'>
+          <button class='navbar-toggle' data-target='.navbar-ex1-collapse' data-toggle='collapse'>
+            <span class='sr-only'>
+              Toggle navigation
+            </span>
+            <span class='icon-bar'></span>
+            <span class='icon-bar'></span>
+            <span class='icon-bar'></span>
+          </button>
+          <a class='navbar-brand' href='http://www.projectatomic.io/'>
+            Project Atomic
+          </a>
+        </div>
+        <div class='collapse navbar-collapse navbar-ex1-collapse'>
+          <ul class='nav navbar-nav'>
+            <li><a class="get-started" href="http://www.projectatomic.io/download">Get Started</a></li>
+            <li><a class="documentation" href="http://www.projectatomic.io/docs">Documentation</a></li>
+            <li><a class="developer-community" href="http://www.projectatomic.io/community">Developer Community</a></li>
+            <li><a class="on-github" href="https://github.com/projectatomic/">On GitHub</a></li>
+            <li><a class="ask" href="http://ask.projectatomic.io/">Ask</a></li>
+            <li><a class="blog" href="http://www.projectatomic.io/blog">Blog</a></li>
+            <li><a class="twitter" href="http://www.twitter.com/projectatomic">Twitter</a></li>
+            <li><a class="facebook" href="https://www.facebook.com/projectatomic">Facebook</a></li>
+            <li><a class="google" href="https://plus.google.com/108727025270662383247/posts">Google+</a></li>
+            <li><a class="rss" href="http://www.projectatomic.io/blog/feed.xml">RSS</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+<section class='col-lg-10 col-md-9 container-fluid' id='content'>
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an outdated browser.
+<a href="http://browsehappy.com/">Upgrade your browser today</a> or
+<a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+<![endif]-->
+<div class='row'>
+  <div class='col-sm-9'>
+    <h2>Configuring for Local Volume</h2>
+    <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#overview">Overview</a>
+<ul class="sectlevel2">
+<li><a href="#local-volume-enabling-local-volumes">Enable Local Volumes</a></li>
+<li><a href="#local-volume-mounting-local-volumes">Mount Local Volumes</a></li>
+<li><a href="#local-volume-configure-local-provisioner">Configure Local Provisioner</a></li>
+<li><a href="#local-volume-deployment-local-provisioner">Deploy Local Provisioner</a></li>
+<li><a href="#local-volume-adding-new-devices">Adding New Devices</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="anchor" href="#overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Atomic Registry can be configured to access
+<a href="../install_config/persistent_storage/persistent_storage_local.html#install-config-persistent-storage-persistent-storage-local">Local
+Volumes</a> for application data.</p>
+</div>
+<div class="paragraph">
+<p>Local volumes are PersistentVolumes(PV) representing locally-mounted filesystems. In the future, they may be extended to raw block devices.</p>
+</div>
+<div class="paragraph">
+<p>Local volumes are different from HostPath. They have a special annotation that makes any Pod that uses the PV to be scheduled on the same node where the local volume is mounted.</p>
+</div>
+<div class="paragraph">
+<p>In addition, Local volume includes a provisioner that automatically creates PVs for locally mounted devices. This provisioner is currently limited and it only scans pre-configured directories. It cannot dynamically provision volumes, which may be implemented in a future release.</p>
+</div>
+<div class="paragraph">
+<p>The local volume provisioner allows using local storage within Atomic Registry and supports:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Volumes</p>
+</li>
+<li>
+<p>Persistent Volumes</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Local volumes is an alpha feature and may change in a future release of Atomic Registry.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="local-volume-enabling-local-volumes"><a class="anchor" href="#local-volume-enabling-local-volumes"></a>Enable Local Volumes</h3>
+<div class="paragraph">
+<p>Enable the <code>PersistentLocalVolumes</code> feature gate on all masters and nodes.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Edit or create the master configuration file on all masters (<strong><em>/etc/origin/master/master-config.yaml</em></strong> by default) and add  <code>PersistentLocalVolumes=true</code> under the <code>apiServerArguments</code> and <code>controllerArguments</code> sections:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yaml"><span style="color:#606">apiServerArguments</span>:
+   <span style="color:#606">feature-gates</span>:
+   - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">PersistentLocalVolumes=true</span></span>
+<span style="color:#f8f;background:#505"><span style="color:#f4f">...</span></span>
+
+ <span style="color:#606">controllerArguments</span>:
+   <span style="color:#606">feature-gates</span>:
+   - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">PersistentLocalVolumes=true</span></span>
+<span style="color:#f8f;background:#505"><span style="color:#f4f">...</span></span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>On all nodes, edit or create the node configuration file (<strong><em>/etc/origin/node/node-config.yaml</em></strong> by default)  and add <code>PersistentLocalVolumes=true</code> fetaure gate under <code>kubeletArguments</code>.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yaml"><span style="color:#606">kubeletArguments</span>:
+   <span style="color:#606">feature-gates</span>:
+     - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">PersistentLocalVolumes=true</span></span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="local-volume-mounting-local-volumes"><a class="anchor" href="#local-volume-mounting-local-volumes"></a>Mount Local Volumes</h3>
+<div class="paragraph">
+<p>All local volumes must be manually mounted before they can be consumed by Atomic Registry as persistent volumes.</p>
+</div>
+<div class="paragraph">
+<p>All volumes must be mounted into the
+<strong><em>/mnt/local-storage/&lt;storage-class-name&gt;/&lt;volume&gt;</em></strong> path. The administrators are required to create the local devices as needed (by using any method such as
+a disk partition or an LVM), create suitable filesystems on these devices, and mount them by a script or by <code>/etc/fstab</code> entries.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example <code>/etc/fstab</code> entries:</div>
+<div class="content">
+<pre class="CodeRay highlight"><code># device name   # mount point                  # FS    # options # extra
+/dev/sdb1       /mount/local-storage/ssd/disk1 ext4     defaults 1 2
+/dev/sdb2       /mount/local-storage/ssd/disk2 ext4     defaults 1 2
+/dev/sdb3       /mount/local-storage/ssd/disk3 ext4     defaults 1 2
+/dev/sdc1       /mount/local-storage/hdd/disk1 ext4     defaults 1 2
+/dev/sdc2       /mount/local-storage/hdd/disk2 ext4     defaults 1 2</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="local-volume-configure-local-provisioner"><a class="anchor" href="#local-volume-configure-local-provisioner"></a>Configure Local Provisioner</h3>
+<div class="paragraph">
+<p>Atomic Registry depends on an external provisioner to create persistent volumes for local devices and to clean them up when they are not needed (to enable reuse).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The local volume provisioner is different from most provisioners and does not support dynamic provisioning.</p>
+</li>
+<li>
+<p>The local volume provisioner requires that the administrators preconfigure the local volumes on each node and mount them under discovery directories. The provisioner then manages the volumes by creating and cleaning up PersistentVolumes for each volume.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This external provisioner needs to be configured by using a <code>ConfigMap</code> to relate directores with StorageClasses. This configuration must be created before the provisioner is deployed.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><em>(Optional)</em> Create a standalone namespace for local volume provisioner and its configuration, for example:
+<code>oc new-project local-storage</code></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yaml"><span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ConfigMap</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">local-volume-config</span></span>
+<span style="color:#606">data</span>:
+    <span style="color:#606"><span style="color:#404">&quot;</span><span>local-ssd</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">|</span></span> <i class="conum" data-value="1"></i><b>(1)</b>
+      {
+        <span style="color:#606"><span style="color:#404">&quot;</span><span>hostDir</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">/mnt/local-storage/ssd</span><span style="color:#710">&quot;</span></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">, </span></span><i class="conum" data-value="2"></i><b>(2)</b>
+        <span style="color:#606"><span style="color:#404">&quot;</span><span>mountDir</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">/mnt/local-storage/ssd</span><span style="color:#710">&quot;</span></span> <i class="conum" data-value="3"></i><b>(3)</b>
+      }
+    <span style="color:#606"><span style="color:#404">&quot;</span><span>local-hdd</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">|</span><span style="color:#D20">
+      {
+        &quot;hostDir&quot;: &quot;/mnt/local-storage/hdd&quot;,
+        &quot;mountDir&quot;: &quot;/mnt/local-storage/hdd&quot;
+      }</span></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Name of the StorageClass.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Path to the directory on the host. It must be a subdirectory of <strong><em>/mnt/local-storage</em></strong>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Path to the directory in the provisioner pod. We recommend using the same directory structure as used on the host.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>With this configuration the provisioner creates:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>One PV with StorageClass <code>local-ssd</code> for every subdirectory in <strong><em>/mnt/local-storage/ssd</em></strong>.</p>
+</li>
+<li>
+<p>One PV with StorageClass <code>local-hdd</code> for every subdirectory in <strong><em>/mnt/local-storage/hdd</em></strong>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="local-volume-deployment-local-provisioner"><a class="anchor" href="#local-volume-deployment-local-provisioner"></a>Deploy Local Provisioner</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Before starting the provisioner, mount all local devices and create a ConfigMap
+with storage classes and their directories.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Install the local provisioner from the <a href="https://raw.githubusercontent.com/jsafrane/origin/local-storage/examples/storage-examples/local-examples/local-storage-provisioner-template.yaml"><strong><em>local-storage-provisioner-template.yaml</em></strong></a> file.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a service account that allows running pods as a root user and use HostPath volumes:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">$ oc create serviceaccount local-storage-admin
+$ oc adm policy add-scc-to-user hostmount-anyuid -z local-storage-admin</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Root privileges are required for the provisioner pod for allowing it to delete
+content on local volumes. HostPath is required to access the
+<strong><em>/mnt/local-storage</em></strong> path on the host.</p>
+</div>
+</li>
+<li>
+<p>Install the template:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">$ oc create -f https://raw.githubusercontent.com/jsafrane/origin/local-storage/examples/storage-examples/local-examples/local-storage-provisioner-template.yaml</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Instantiate the template by specifying values for <code>configmap</code> and <code>account</code> parameters:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">$ oc new-app -p CONFIGMAP=local-volume-config \
+  -p SERVICE_ACCOUNT=local-storage-admin \
+  -p NAMESPACE=local-storage local-storage-provisioner</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See the <a href="https://raw.githubusercontent.com/jsafrane/origin/local-storage/examples/storage-examples/local-examples/local-storage-provisioner-template.yaml">template</a> for other configurable options. This template creates a DaemonSet that runs a
+Pod on every node. The Pod watches directories specified in the <code>ConfigMap</code> and
+creates PVs for them automatically.</p>
+</div>
+<div class="paragraph">
+<p>The provisioner runs as root to be able to clean up the directories when a PV is released and all data need to be removed.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="local-volume-adding-new-devices"><a class="anchor" href="#local-volume-adding-new-devices"></a>Adding New Devices</h3>
+<div class="paragraph">
+<p>Adding a new device requires several manual steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Stop DaemonSet with the provisioner.</p>
+</li>
+<li>
+<p>Create a subdirectory in the right directory on the node with the new device and mount it there.</p>
+</li>
+<li>
+<p>Start the DaemonSet with the provisioner.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Omitting any of these steps may result in a wrong PV being created.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+  </div>
+
+  <div class='col-sm-3 hidden-print'>
+    <h2>Atomic Registry</h2>
+    <nav role='navigation'>
+      <ul class='docbrowser nav nav-vertical'>
+        <li class='disabled'>
+          <h3>Quickstart</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../registry_quickstart/index.html">Overview</a></li>
+              <li role="menuitem" class=""><a href="../registry_quickstart/developers.html">Developers</a></li>
+            <!-- <li role="menuitem"><a>Administrators</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-0-2">
+                <span id="sgSpan-0-2" class="fa fa-caret-right"></span>&nbsp;Administrators
+              </a>
+              <ul id="topicSubGroup-0-2" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../registry_quickstart/administrators/index.html">Overview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../registry_quickstart/administrators/system_configuration.html">System Configuration</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../registry_quickstart/administrators/uninstall.html">Uninstall</strong></a><li>
+              </ul>
+            </li>
+        <li class='disabled'>
+          <h3>Architecture</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../architecture/index.html">Overview</a></li>
+            <!-- <li role="menuitem"><a>Infrastructure Components</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-1-1">
+                <span id="sgSpan-1-1" class="fa fa-caret-right"></span>&nbsp;Infrastructure Components
+              </a>
+              <ul id="topicSubGroup-1-1" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/infrastructure_components/kubernetes_infrastructure.html">Kubernetes Infrastructure</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/infrastructure_components/image_registry.html">Container Registry</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/infrastructure_components/web_console.html">Web Console</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>Core Concepts</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-1-2">
+                <span id="sgSpan-1-2" class="fa fa-caret-right"></span>&nbsp;Core Concepts
+              </a>
+              <ul id="topicSubGroup-1-2" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/core_concepts/containers_and_images.html">Images</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/core_concepts/projects_and_users.html">Projects and Users</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/core_concepts/builds_and_image_streams.html">Image Streams</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>Additional Concepts</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-1-3">
+                <span id="sgSpan-1-3" class="fa fa-caret-right"></span>&nbsp;Additional Concepts
+              </a>
+              <ul id="topicSubGroup-1-3" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/additional_concepts/authentication.html">Authentication</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/additional_concepts/authorization.html">Authorization</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../architecture/additional_concepts/other_api_objects.html">Other API Objects</strong></a><li>
+              </ul>
+            </li>
+        <li class='disabled'>
+          <h3>Installation and Configuration</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../install_config/adding_hosts_to_existing_cluster.html">Adding Hosts to an Existing Cluster</a></li>
+              <li role="menuitem" class=""><a href="../install_config/certificate_customization.html">Configuring Custom Certificates</a></li>
+              <li role="menuitem" class=""><a href="../install_config/redeploying_certificates.html">Redeploying Certificates</a></li>
+              <li role="menuitem" class=""><a href="../install_config/configuring_authentication.html">Configuring Authentication and User Agent</a></li>
+              <li role="menuitem" class=""><a href="../install_config/syncing_groups_with_ldap.html">Syncing Groups With LDAP</a></li>
+            <!-- <li role="menuitem"><a>Advanced LDAP Configuration</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-2-5">
+                <span id="sgSpan-2-5" class="fa fa-caret-right"></span>&nbsp;Advanced LDAP Configuration
+              </a>
+              <ul id="topicSubGroup-2-5" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../install_config/advanced_ldap_configuration/index.html">Overview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../install_config/advanced_ldap_configuration/sssd_for_ldap_failover.html">Setting up SSSD for LDAP Failover</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../install_config/advanced_ldap_configuration/configuring_form_based_authentication.html">Configuring Form-Based Authentication</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../install_config/advanced_ldap_configuration/configuring_extended_ldap_attributes.html">Configuring Extended LDAP Attributes</strong></a><li>
+              </ul>
+            </li>
+              <li role="menuitem" class=""><a href="../install_config/configuring_vsphere.html">Configuring for VMWare vSphere</a></li>
+              <li role="menuitem" class=" active"><a href="../install_config/configuring_local.html">Configuring for local Volume</a></li>
+              <li role="menuitem" class=""><a href="../install_config/web_console_customization.html">Customizing the Web Console</a></li>
+        <li class='disabled'>
+          <h3>Cluster Administration</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../admin_guide/index.html">Overview</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/manage_users.html">Managing Users</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/managing_projects.html">Managing Projects</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/managing_pods.html">Managing Pods</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/managing_networking.html">Managing Networking</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/service_accounts.html">Configuring Service Accounts</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/manage_rbac.html">Managing Role-based Access Control</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/image_policy.html">Image Policy</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/scoped_tokens.html">Scoped Tokens</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/quota.html">Setting Quotas</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/multiproject_quota.html">Setting Multi-Project Quotas</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/limits.html">Setting Limit Ranges</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/allocating_node_resources.html">Allocating Node Resources</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/seccomp.html">Restricting Application Capabilities Using Seccomp</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/backup_restore.html">Backup and Restore</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/idling_applications.html">Idling Applications</a></li>
+              <li role="menuitem" class=""><a href="../admin_guide/cluster_capacity.html">Analyzing Cluster Capacity</a></li>
+        <li class='disabled'>
+          <h3>User Guide</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../dev_guide/index.html">Overview</a></li>
+              <li role="menuitem" class=""><a href="../dev_guide/authentication.html">Authentication</a></li>
+              <li role="menuitem" class=""><a href="../dev_guide/managing_images.html">Managing Images</a></li>
+              <li role="menuitem" class=""><a href="../dev_guide/service_accounts.html">Service Accounts</a></li>
+        <li class='disabled'>
+          <h3>CLI Reference</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../cli_reference/index.html">Overview</a></li>
+              <li role="menuitem" class=""><a href="../cli_reference/get_started_cli.html">Get Started with the CLI</a></li>
+              <li role="menuitem" class=""><a href="../cli_reference/manage_cli_profiles.html">Managing CLI Profiles</a></li>
+        <li class='disabled'>
+          <h3>REST API Reference</h3>
+        </li>
+              <li role="menuitem" class=""><a href="../rest_api/index.html">Overview</a></li>
+              <li role="menuitem" class=""><a href="../rest_api/examples.html">Examples</a></li>
+            <!-- <li role="menuitem"><a>/api/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-2">
+                <span id="sgSpan-6-2" class="fa fa-caret-right"></span>&nbsp;/api/v1
+              </a>
+              <ul id="topicSubGroup-6-2" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.APIResourceList.html">v1.APIResourceList</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.APIVersions.html">v1.APIVersions</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Binding.html">v1.Binding</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.ComponentStatus.html">v1.ComponentStatus</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.ConfigMap.html">v1.ConfigMap</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Endpoints.html">v1.Endpoints</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Event.html">v1.Event</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.LimitRange.html">v1.LimitRange</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Namespace.html">v1.Namespace</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Node.html">v1.Node</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.PersistentVolume.html">v1.PersistentVolume</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.PersistentVolumeClaim.html">v1.PersistentVolumeClaim</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Pod.html">v1.Pod</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.PodTemplate.html">v1.PodTemplate</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.ReplicationController.html">v1.ReplicationController</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.ResourceQuota.html">v1.ResourceQuota</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Secret.html">v1.Secret</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.SecurityContextConstraints.html">v1.SecurityContextConstraints</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.Service.html">v1.Service</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/api/v1.ServiceAccount.html">v1.ServiceAccount</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-3">
+                <span id="sgSpan-6-3" class="fa fa-caret-right"></span>&nbsp;/apis/v1
+              </a>
+              <ul id="topicSubGroup-6-3" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis/v1.APIGroup.html">v1.APIGroup</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis/v1.APIGroupList.html">v1.APIGroupList</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/apps/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-4">
+                <span id="sgSpan-6-4" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-4" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta1.ControllerRevision.html">v1beta1.ControllerRevision</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta1.Deployment.html">v1beta1.Deployment</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta1.StatefulSet.html">v1beta1.StatefulSet</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/apps/v1beta2</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-5">
+                <span id="sgSpan-6-5" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta2
+              </a>
+              <ul id="topicSubGroup-6-5" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta2.ControllerRevision.html">v1beta2.ControllerRevision</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta2.DaemonSet.html">v1beta2.DaemonSet</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta2.Deployment.html">v1beta2.Deployment</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta2.ReplicaSet.html">v1beta2.ReplicaSet</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-apps/v1beta2.StatefulSet.html">v1beta2.StatefulSet</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/autoscaling/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-6">
+                <span id="sgSpan-6-6" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v1
+              </a>
+              <ul id="topicSubGroup-6-6" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-autoscaling/v1.HorizontalPodAutoscaler.html">v1.HorizontalPodAutoscaler</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/autoscaling/v2beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-7">
+                <span id="sgSpan-6-7" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v2beta1
+              </a>
+              <ul id="topicSubGroup-6-7" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-autoscaling/v2beta1.HorizontalPodAutoscaler.html">v2beta1.HorizontalPodAutoscaler</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/batch/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-8">
+                <span id="sgSpan-6-8" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1
+              </a>
+              <ul id="topicSubGroup-6-8" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-batch/v1.Job.html">v1.Job</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/batch/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-9">
+                <span id="sgSpan-6-9" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-9" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-batch/v1beta1.CronJob.html">v1beta1.CronJob</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/batch/v2alpha1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-10">
+                <span id="sgSpan-6-10" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v2alpha1
+              </a>
+              <ul id="topicSubGroup-6-10" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-batch/v2alpha1.CronJob.html">v2alpha1.CronJob</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/extensions/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-11">
+                <span id="sgSpan-6-11" class="fa fa-caret-right"></span>&nbsp;/apis/extensions/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-11" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-extensions/v1beta1.DaemonSet.html">v1beta1.DaemonSet</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-extensions/v1beta1.Deployment.html">v1beta1.Deployment</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-extensions/v1beta1.Ingress.html">v1beta1.Ingress</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-extensions/v1beta1.NetworkPolicy.html">v1beta1.NetworkPolicy</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-extensions/v1beta1.PodSecurityPolicy.html">v1beta1.PodSecurityPolicy</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-extensions/v1beta1.ReplicaSet.html">v1beta1.ReplicaSet</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/policy/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-12">
+                <span id="sgSpan-6-12" class="fa fa-caret-right"></span>&nbsp;/apis/policy/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-12" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-policy/v1beta1.PodDisruptionBudget.html">v1beta1.PodDisruptionBudget</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/authentication.k8s.io/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-13">
+                <span id="sgSpan-6-13" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-6-13" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authentication.k8s.io/v1.TokenReview.html">v1.TokenReview</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/authentication.k8s.io/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-14">
+                <span id="sgSpan-6-14" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-14" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authentication.k8s.io/v1beta1.TokenReview.html">v1beta1.TokenReview</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/authorization.k8s.io/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-15">
+                <span id="sgSpan-6-15" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-6-15" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1.SelfSubjectAccessReview.html">v1.SelfSubjectAccessReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1.SelfSubjectRulesReview.html">v1.SelfSubjectRulesReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1.SubjectAccessReview.html">v1.SubjectAccessReview</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/authorization.k8s.io/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-16">
+                <span id="sgSpan-6-16" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-16" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1beta1.LocalSubjectAccessReview.html">v1beta1.LocalSubjectAccessReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectAccessReview.html">v1beta1.SelfSubjectAccessReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectRulesReview.html">v1beta1.SelfSubjectRulesReview</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-authorization.k8s.io/v1beta1.SubjectAccessReview.html">v1beta1.SubjectAccessReview</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/rbac.authorization.k8s.io/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-17">
+                <span id="sgSpan-6-17" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-6-17" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1.ClusterRole.html">v1.ClusterRole</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1.ClusterRoleBinding.html">v1.ClusterRoleBinding</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1.Role.html">v1.Role</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1.RoleBinding.html">v1.RoleBinding</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/rbac.authorization.k8s.io/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-18">
+                <span id="sgSpan-6-18" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-18" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRole.html">v1beta1.ClusterRole</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRoleBinding.html">v1beta1.ClusterRoleBinding</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1beta1.Role.html">v1beta1.Role</strong></a><li>
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-rbac.authorization.k8s.io/v1beta1.RoleBinding.html">v1beta1.RoleBinding</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/certificates.k8s.io/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-19">
+                <span id="sgSpan-6-19" class="fa fa-caret-right"></span>&nbsp;/apis/certificates.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-19" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-certificates.k8s.io/v1beta1.CertificateSigningRequest.html">v1beta1.CertificateSigningRequest</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/networking.k8s.io/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-20">
+                <span id="sgSpan-6-20" class="fa fa-caret-right"></span>&nbsp;/apis/networking.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-6-20" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-networking.k8s.io/v1.NetworkPolicy.html">v1.NetworkPolicy</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/storage.k8s.io/v1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-21">
+                <span id="sgSpan-6-21" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-6-21" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-storage.k8s.io/v1.StorageClass.html">v1.StorageClass</strong></a><li>
+              </ul>
+            </li>
+            <!-- <li role="menuitem"><a>/apis/storage.k8s.io/v1beta1</a></li> -->
+            <li role="menuitem" class="">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-6-22">
+                <span id="sgSpan-6-22" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-6-22" class="nav-tertiary list-unstyled collapse">
+                  <li class="">&nbsp;<a role="menuitem" href="../rest_api/apis-storage.k8s.io/v1beta1.StorageClass.html">v1beta1.StorageClass</strong></a><li>
+              </ul>
+            </li>
+</ul>
+    </nav>
+  </div>
+</div>
+</section>
+</div>
+<div class='row'>
+<div class='col-md-offset-3 col-md-9 col-lg-offset-2 col-lg-10' id='footer'>
+  <footer>
+<hr class='visible-print'>
+
+&copy; 2014&ndash;2016 Project Atomic. Sponsored by Red Hat, Inc.
+<div class='edit-this-page pull-right'>
+<a href="https://github.com/openshift/openshift-docs#contributing-to-openshift-documentation"><i class="icon fa fa-fw fa-github"></i>Edit this page on GitHub</a>
+</div>
+        <script type="text/javascript">
+        var _paq = _paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u=(("https:" == document.location.protocol) ? "https" : "http") + "://piwik-osasteam.rhcloud.com/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 4]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+        g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+<noscript><p><img src="https://piwik-osasteam.rhcloud.com/piwik/piwik.php?idsite=4" style="border:0;" alt="" /></p></noscript>
+</footer>
+</div>
+</div>
+
+</section>
+
+<script src="http://www.projectatomic.io/javascripts/application.js" type="text/javascript"></script>
+
+
+</body>
+</html>
