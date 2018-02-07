@@ -1,0 +1,2315 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Extended Registry Configuration - Setting up the Registry | Installation and Configuration | OpenShift Origin Branch Build</title>
+  <link href="https://assets.openshift.net/content/subdomain.css" rel="stylesheet" type="text/css">
+  <link href="../../../go-client-preview/_stylesheets/docs.css" rel="stylesheet" />
+  <link href="../../../go-client-preview/_stylesheets/search.css" rel="stylesheet" />
+  <link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png">
+  <link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="text/css">
+  <!--[if IE]><link rel="shortcut icon" href="https://assets.openshift.net/content/subdomain/favicon.ico"><![endif]-->
+  <!-- or, set /favicon.ico for IE10 win -->
+  <meta content="OpenShift" name="application-name">
+  <meta content="#000000" name="msapplication-TileColor">
+  <meta content="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" name="msapplication-TileImage">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://assets.openshift.net/content/html5shiv.js" type="text/javascript"></script>
+    <script src="https://assets.openshift.net/content/respond.js" type="text/javascript"></script>
+    <link href="https://assets.openshift.net/content/vendor/respond-js/respond-proxy.html" id="respond-proxy" rel="respond-proxy">
+    <link href="../../../go-client-preview/_images/respond.proxy.gif" id="respond-redirect" rel="respond-redirect">
+    <script src="../../../go-client-preview/_javascripts/respond.proxy.js" type="text/javascript"></script>
+  <![endif]-->
+  <script src="https://assets.openshift.net/content/modernizr.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/subdomain.js" type="text/javascript"></script>
+  <script src="../../../go-client-preview/_javascripts/bootstrap-offcanvas.js" type="text/javascript"></script>
+  <script src="../../../go-client-preview/_javascripts/reformat-html.js" type="text/javascript"></script>
+  <script src="../../../go-client-preview/_javascripts/hc-search.js" type="text/javascript"></script>
+  <script async src="//www.google-analytics.com/analytics.js" type="text/javascript"></script>
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-40375612-1', 'openshift.org');
+  ga('set', 'forceSSL', true);
+  ga('send', 'pageview');
+</script>
+</head>
+<body>
+  <div class="navbar navbar-default navbar-openshift navbar-origin" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand origin" href="/"></a>
+  </div>
+</div>
+  <div class="container">
+    <p class="toggle-nav visible-xs pull-left">
+      <button class="btn btn-default btn-sm" type="button" data-toggle="offcanvas">Toggle nav</button>
+    </p>
+    <ol class="breadcrumb">
+      <li class="sitename">
+        <a href="../../../index.html">Documentation</a>
+      </li>
+      <li class="hidden-xs active">
+        <a href="../../welcome/index.html">OpenShift Origin Branch Build</a>
+      </li>
+      <li class="hidden-xs active">
+        <a href="../../install_config/index.html">Installation and Configuration</a>
+      </li>
+      <li class="hidden-xs active"><a href="../../install_config/registry/index.html">Setting up the Registry</a></li>
+      <li class="hidden-xs active">
+        Extended Registry Configuration
+      </li>
+    </ol>
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-8 col-sm-3 col-md-3 sidebar sidebar-offcanvas">
+        <div class="row-fluid">
+          <div id="hc-search">
+  <input id="hc-search-input" type="text">
+  <button id="hc-search-btn">Search</button>
+</div>
+
+<div id="hc-search-modal">
+  <div id="hc-modal-content">
+    <span id="hc-modal-close">&times;</span>
+    <div id="hc-search-results"></div>
+  </div>
+</div>
+
+<script>
+  hcSearchCategory("docs_origin", "Branch Build");
+</script>
+        </div>
+        <ul class="nav nav-sidebar">
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup0">
+        <span id="tgSpan0" class="fa fa-angle-right"></span>About
+      </a>
+      <ul id="topicGroup0" class="collapse  list-unstyled">
+            <li><a class="" href="../../welcome/index.html">Welcome</a></li>
+            <li><a class="" href="../../welcome/legal_notice.html">Legal Notice</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup1">
+        <span id="tgSpan1" class="fa fa-angle-right"></span>What's New?
+      </a>
+      <ul id="topicGroup1" class="collapse  list-unstyled">
+            <li><a class="" href="../../whats_new/index.html">Overview</a></li>
+            <li><a class="" href="../../whats_new/applications.html">Applications</a></li>
+            <li><a class="" href="../../whats_new/carts_vs_images.html">Cartridges vs Images</a></li>
+            <li><a class="" href="../../whats_new/terminology.html">Terminology</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup2">
+        <span id="tgSpan2" class="fa fa-angle-right"></span>Getting Started
+      </a>
+      <ul id="topicGroup2" class="collapse  list-unstyled">
+            <li><a class="" href="../../getting_started/index.html">Overview</a></li>
+            <li><a class="" href="../../getting_started/developers_console.html">Web Console Walkthrough</a></li>
+            <li><a class="" href="../../getting_started/developers_cli.html">Command-Line Walkthrough</a></li>
+            <li><a class="" href="../../getting_started/administrators.html">Setting Up a Cluster</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup3">
+        <span id="tgSpan3" class="fa fa-angle-right"></span>Architecture
+      </a>
+      <ul id="topicGroup3" class="collapse  list-unstyled">
+            <li><a class="" href="../../architecture/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-1">
+                <span id="sgSpan-3-1" class="fa fa-caret-right"></span>&nbsp;Infrastructure Components
+              </a>
+              <ul id="topicSubGroup-3-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/infrastructure_components/kubernetes_infrastructure.html">Kubernetes Infrastructure</a></li>
+                  <li><a class="" href="../../architecture/infrastructure_components/image_registry.html">Container Registry</a></li>
+                  <li><a class="" href="../../architecture/infrastructure_components/web_console.html">Web Console</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-2">
+                <span id="sgSpan-3-2" class="fa fa-caret-right"></span>&nbsp;Core Concepts
+              </a>
+              <ul id="topicSubGroup-3-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/core_concepts/index.html">Overview</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/containers_and_images.html">Containers and Images</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/pods_and_services.html">Pods and Services</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/projects_and_users.html">Projects and Users</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/builds_and_image_streams.html">Builds and Image Streams</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/deployments.html">Deployments</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/templates.html">Templates</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-3">
+                <span id="sgSpan-3-3" class="fa fa-caret-right"></span>&nbsp;Additional Concepts
+              </a>
+              <ul id="topicSubGroup-3-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/additional_concepts/authentication.html">Authentication</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/authorization.html">Authorization</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/storage.html">Persistent Storage</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/scm.html">Source Control Management</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/admission_controllers.html">Admission Controllers</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/other_api_objects.html">Other API Objects</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-4">
+                <span id="sgSpan-3-4" class="fa fa-caret-right"></span>&nbsp;Networking
+              </a>
+              <ul id="topicSubGroup-3-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/networking/networking.html">Networking</a></li>
+                  <li><a class="" href="../../architecture/networking/sdn.html">OpenShift SDN</a></li>
+                  <li><a class="" href="../../architecture/networking/network_plugins.html">Network Plug-ins</a></li>
+                  <li><a class="" href="../../architecture/networking/port_forwarding.html">Port Forwarding</a></li>
+                  <li><a class="" href="../../architecture/networking/remote_commands.html">Remote Commands</a></li>
+                  <li><a class="" href="../../architecture/networking/haproxy-router.html">HAProxy Router Plug-in</a></li>
+                  <li><a class="" href="../../architecture/networking/routes.html">Routes</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-5">
+                <span id="sgSpan-3-5" class="fa fa-caret-right"></span>&nbsp;Service Catalog Components
+              </a>
+              <ul id="topicSubGroup-3-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/service_catalog/index.html">Service Catalog</a></li>
+                  <li><a class="" href="../../architecture/service_catalog/template_service_broker.html">Template Service Broker</a></li>
+                  <li><a class="" href="../../architecture/service_catalog/ansible_service_broker.html">OpenShift Ansible Broker</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup4">
+        <span id="tgSpan4" class="fa fa-angle-right"></span>Container Security Guide
+      </a>
+      <ul id="topicGroup4" class="collapse  list-unstyled">
+            <li><a class="" href="../../security/index.html">Introduction</a></li>
+            <li><a class="" href="../../security/hosts_multitenancy.html">Container Hosts and Multi-tenancy</a></li>
+            <li><a class="" href="../../security/container_content.html">Container Content</a></li>
+            <li><a class="" href="../../security/registries.html">Registries</a></li>
+            <li><a class="" href="../../security/build_process.html">Build Process</a></li>
+            <li><a class="" href="../../security/deployment.html">Deployment</a></li>
+            <li><a class="" href="../../security/securing_container_platform.html">Securing the Container Platform</a></li>
+            <li><a class="" href="../../security/network_security.html">Network Security</a></li>
+            <li><a class="" href="../../security/storage.html">Attached Storage</a></li>
+            <li><a class="" href="../../security/monitoring.html">Monitoring Events and Logs</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup5">
+        <span id="tgSpan5" class="fa fa-angle-down"></span>Installation and Configuration
+      </a>
+      <ul id="topicGroup5" class="collapse in list-unstyled">
+            <li><a class="" href="../../install_config/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-1">
+                <span id="sgSpan-5-1" class="fa fa-caret-right"></span>&nbsp;Installing a Cluster
+              </a>
+              <ul id="topicSubGroup-5-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/install/planning.html">Planning</a></li>
+                  <li><a class="" href="../../install_config/install/prerequisites.html">Prerequisites</a></li>
+                  <li><a class="" href="../../install_config/install/host_preparation.html">Host Preparation</a></li>
+                  <li><a class="" href="../../install_config/install/rpm_vs_containerized.html">Installing on Containerized Hosts</a></li>
+                  <li><a class="" href="../../install_config/install/quick_install.html">Quick Installation</a></li>
+                  <li><a class="" href="../../install_config/install/advanced_install.html">Advanced Installation</a></li>
+                  <li><a class="" href="../../install_config/install/stand_alone_registry.html">Installing a Stand-alone Deployment of OpenShift Container Registry</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-2">
+                <span id="sgSpan-5-2" class="fa fa-caret-down"></span>&nbsp;Setting up the Registry
+              </a>
+              <ul id="topicSubGroup-5-2" class="nav-tertiary list-unstyled collapse in">
+                  <li><a class="" href="../../install_config/registry/index.html">Registry Overview</a></li>
+                  <li><a class="" href="../../install_config/registry/deploy_registry_existing_clusters.html">Deploying a Registry on Existing Clusters</a></li>
+                  <li><a class="" href="../../install_config/registry/accessing_registry.html">Accessing the Registry</a></li>
+                  <li><a class="" href="../../install_config/registry/securing_and_exposing_registry.html">Securing and Exposing the Registry</a></li>
+                  <li><a class=" active" href="../../install_config/registry/extended_registry_configuration.html">Extended Registry Configuration</a></li>
+                  <li><a class="" href="../../install_config/registry/registry_known_issues.html">Known Issues</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-3">
+                <span id="sgSpan-5-3" class="fa fa-caret-right"></span>&nbsp;Setting up a Router
+              </a>
+              <ul id="topicSubGroup-5-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/router/index.html">Router Overview</a></li>
+                  <li><a class="" href="../../install_config/router/default_haproxy_router.html">Using the Default HAProxy Router</a></li>
+                  <li><a class="" href="../../install_config/router/customized_haproxy_router.html">Deploying a Customized HAProxy Router</a></li>
+                  <li><a class="" href="../../install_config/router/proxy_protocol.html">Configuring the HAProxy Router to Use the PROXY Protocol</a></li>
+                  <li><a class="" href="../../install_config/router/f5_router.html">Using the F5 Router Plug-in</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-4">
+                <span id="sgSpan-5-4" class="fa fa-caret-right"></span>&nbsp;Upgrading a Cluster
+              </a>
+              <ul id="topicSubGroup-5-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/upgrading/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/upgrading/automated_upgrades.html">Automated In-place Upgrades</a></li>
+                  <li><a class="" href="../../install_config/upgrading/manual_upgrades.html">Manual In-place Upgrades</a></li>
+                  <li><a class="" href="../../install_config/upgrading/blue_green_deployments.html">Blue-Green Deployments</a></li>
+                  <li><a class="" href="../../install_config/upgrading/os_upgrades.html">Operating System Updates and Upgrades</a></li>
+                  <li><a class="" href="../../install_config/upgrading/migrating_embedded_etcd.html">Migrating Embedded etcd to External etcd</a></li>
+                  <li><a class="" href="../../install_config/upgrading/migrating_etcd.html">Migrating etcd Data (v2 to v3)</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../install_config/master_node_configuration.html">Master and Node Configuration</a></li>
+            <li><a class="" href="../../install_config/oab_broker_configuration.html">OpenShift Ansible Broker Configuration</a></li>
+            <li><a class="" href="../../install_config/adding_hosts_to_existing_cluster.html">Adding Hosts to an Existing Cluster</a></li>
+            <li><a class="" href="../../install_config/imagestreams_templates.html">Loading the Default Image Streams and Templates</a></li>
+            <li><a class="" href="../../install_config/certificate_customization.html">Configuring Custom Certificates</a></li>
+            <li><a class="" href="../../install_config/redeploying_certificates.html">Redeploying Certificates</a></li>
+            <li><a class="" href="../../install_config/configuring_authentication.html">Configuring Authentication and User Agent</a></li>
+            <li><a class="" href="../../install_config/syncing_groups_with_ldap.html">Syncing Groups With LDAP</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-13">
+                <span id="sgSpan-5-13" class="fa fa-caret-right"></span>&nbsp;Advanced LDAP Configuration
+              </a>
+              <ul id="topicSubGroup-5-13" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/sssd_for_ldap_failover.html">Setting up SSSD for LDAP Failover</a></li>
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/configuring_form_based_authentication.html">Configuring Form-Based Authentication</a></li>
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/configuring_extended_ldap_attributes.html">Configuring Extended LDAP Attributes</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../install_config/configuring_sdn.html">Configuring the SDN</a></li>
+            <li><a class="" href="../../install_config/configuring_nuagesdn.html">Configuring Nuage SDN</a></li>
+            <li><a class="" href="../../install_config/configuring_kuryrsdn.html">Configuring Kuryr SDN</a></li>
+            <li><a class="" href="../../install_config/configuring_aws.html">Configuring for AWS</a></li>
+            <li><a class="" href="../../install_config/configuring_openstack.html">Configuring for OpenStack</a></li>
+            <li><a class="" href="../../install_config/configuring_gce.html">Configuring for GCE</a></li>
+            <li><a class="" href="../../install_config/configuring_azure.html">Configuring for Azure</a></li>
+            <li><a class="" href="../../install_config/configuring_vsphere.html">Configuring for VMWare vSphere</a></li>
+            <li><a class="" href="../../install_config/configuring_local.html">Configuring for local Volume</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-23">
+                <span id="sgSpan-5-23" class="fa fa-caret-right"></span>&nbsp;Configuring Persistent Storage
+              </a>
+              <ul id="topicSubGroup-5-23" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/persistent_storage/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_nfs.html">Using NFS</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_glusterfs.html">Using GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_cinder.html">Using OpenStack Cinder</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_ceph_rbd.html">Using Ceph RBD</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_aws.html">Using AWS Elastic Block Store</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_gce.html">Using GCE Persistent Disk</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_iscsi.html">Using iSCSI</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_fibre_channel.html">Using Fibre Channel</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_azure.html">Using Azure Disk</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_azure_file.html">Using Azure File</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_flex_volume.html">Using FlexVolume</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_vsphere.html">Using VMWare vSphere</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_local.html">Using Local Volume</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/dynamically_provisioning_pvs.html">Dynamic Provisioning and Creating Storage Classes</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/pod_security_context.html">Volume Security</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/selector_label_binding.html">Selector-Label Volume Binding</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/enabling_controller_attach_detach.html">Enabling Controller-managed Attachment and Detachment</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-24">
+                <span id="sgSpan-5-24" class="fa fa-caret-right"></span>&nbsp;Persistent Storage Examples
+              </a>
+              <ul id="topicSubGroup-5-24" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/storage_examples/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/shared_storage.html">Sharing an NFS PV Across Two Pods</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/ceph_example.html">Complete Example Using Ceph RBD</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/ceph_rbd_dynamic_example.html">Complete Example Using Ceph RBD for Dynamic Provisioning</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/gluster_example.html">Complete Example Using GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/gluster_dynamic_example.html">Dynamic Provisioning Example Using Containerized GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/dedicated_gluster_dynamic_example.html">Dynamic Provisioning Example Using Dedicated GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/containerized_heketi_with_dedicated_gluster.html">Containerized Heketi for Managing Dedicated GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/privileged_pod_storage.html">Mounting Volumes To Privileged Pods</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/gluster_backed_registry.html">Backing Docker Registry with GlusterFS Storage</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/binding_pv_by_label.html">Binding Persistent Volumes by Label</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/storage_classes_dynamic_provisioning.html">Using StorageClasses for Dynamic Provisioning</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/storage_classes_legacy.html">Using StorageClasses for Existing Legacy Storage</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/azure_blob_docker_registry_example.html">Configuring Azure Blob Storage for Integrated Docker Registry</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../install_config/http_proxies.html">Working with HTTP Proxies</a></li>
+            <li><a class="" href="../../install_config/build_defaults_overrides.html">Configuring Global Build Defaults and Overrides</a></li>
+            <li><a class="" href="../../install_config/configuring_pipeline_execution.html">Configuring Pipeline Execution</a></li>
+            <li><a class="" href="../../install_config/configuring_routing.html">Configuring Route Timeouts</a></li>
+            <li><a class="" href="../../install_config/configuring_native_container_routing.html">Configuring Native Container Routing</a></li>
+            <li><a class="" href="../../install_config/routing_from_edge_lb.html">Routing from Edge Load Balancers</a></li>
+            <li><a class="" href="../../install_config/aggregate_logging.html">Aggregating Container Logs</a></li>
+            <li><a class="" href="../../install_config/aggregate_logging_sizing.html">Aggregate Logging Sizing Guidelines</a></li>
+            <li><a class="" href="../../install_config/cluster_metrics.html">Enabling Cluster Metrics</a></li>
+            <li><a class="" href="../../install_config/web_console_customization.html">Customizing the Web Console</a></li>
+            <li><a class="" href="../../install_config/provisioners.html">Deploying External Persistent Volume Provisioners</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup6">
+        <span id="tgSpan6" class="fa fa-angle-right"></span>Day Two Operations Guide
+      </a>
+      <ul id="topicGroup6" class="collapse  list-unstyled">
+            <li><a class="" href="../../day_two_guide/index.html">Overview</a></li>
+            <li><a class="" href="../../day_two_guide/run_once_tasks.html">Run-once tasks</a></li>
+            <li><a class="" href="../../day_two_guide/environment_health_checks.html">Environment health checks</a></li>
+            <li><a class="" href="../../day_two_guide/host_level_tasks.html">Host-level tasks</a></li>
+            <li><a class="" href="../../day_two_guide/project_level_tasks.html">Project-level tasks</a></li>
+            <li><a class="" href="../../day_two_guide/docker_tasks.html">Docker tasks</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup7">
+        <span id="tgSpan7" class="fa fa-angle-right"></span>Cluster Administration
+      </a>
+      <ul id="topicGroup7" class="collapse  list-unstyled">
+            <li><a class="" href="../../admin_guide/index.html">Overview</a></li>
+            <li><a class="" href="../../admin_guide/manage_nodes.html">Managing Nodes</a></li>
+            <li><a class="" href="../../admin_guide/manage_users.html">Managing Users</a></li>
+            <li><a class="" href="../../admin_guide/managing_projects.html">Managing Projects</a></li>
+            <li><a class="" href="../../admin_guide/managing_pods.html">Managing Pods</a></li>
+            <li><a class="" href="../../admin_guide/managing_networking.html">Managing Networking</a></li>
+            <li><a class="" href="../../admin_guide/service_accounts.html">Configuring Service Accounts</a></li>
+            <li><a class="" href="../../admin_guide/manage_rbac.html">Managing Role-based Access Control</a></li>
+            <li><a class="" href="../../admin_guide/image_policy.html">Image Policy</a></li>
+            <li><a class="" href="../../admin_guide/image_signatures.html">Image Signatures</a></li>
+            <li><a class="" href="../../admin_guide/scoped_tokens.html">Scoped Tokens</a></li>
+            <li><a class="" href="../../admin_guide/monitoring_images.html">Monitoring Images</a></li>
+            <li><a class="" href="../../admin_guide/manage_scc.html">Managing Security Context Constraints</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-7-13">
+                <span id="sgSpan-7-13" class="fa fa-caret-right"></span>&nbsp;Scheduling
+              </a>
+              <ul id="topicSubGroup-7-13" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../admin_guide/scheduling/index.html">Overview</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/scheduler.html">Default Scheduling</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/custom_scheduler.html">Custom Scheduling</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/scheduler-advanced.html">Advanced Scheduling</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/node_affinity.html">Advanced Scheduling and Node Affinity</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/pod_affinity.html">Advanced Scheduling and Pod Affinity/Anti-affinity</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/node_selector.html">Advanced Scheduling and Node Selectors</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/taints_tolerations.html">Advanced Scheduling and Taints and Tolerations</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../admin_guide/quota.html">Setting Quotas</a></li>
+            <li><a class="" href="../../admin_guide/multiproject_quota.html">Setting Multi-Project Quotas</a></li>
+            <li><a class="" href="../../admin_guide/limits.html">Setting Limit Ranges</a></li>
+            <li><a class="" href="../../admin_guide/pruning_resources.html">Pruning Objects</a></li>
+            <li><a class="" href="../../admin_guide/custom_resource_definitions.html">Extending the Kubernetes API with Custom Resources</a></li>
+            <li><a class="" href="../../admin_guide/garbage_collection.html">Garbage Collection</a></li>
+            <li><a class="" href="../../admin_guide/allocating_node_resources.html">Allocating Node Resources</a></li>
+            <li><a class="" href="../../admin_guide/opaque_integer_resources.html">Opaque Integer Resources</a></li>
+            <li><a class="" href="../../admin_guide/overcommit.html">Overcommitting</a></li>
+            <li><a class="" href="../../admin_guide/tcp_ingress_external_ports.html">Assigning Unique External IPs for Ingress Traffic</a></li>
+            <li><a class="" href="../../admin_guide/out_of_resource_handling.html">Out of Resource Handling</a></li>
+            <li><a class="" href="../../admin_guide/router.html">Monitoring and Debugging Routers</a></li>
+            <li><a class="" href="../../admin_guide/high_availability.html">High Availability</a></li>
+            <li><a class="" href="../../admin_guide/iptables.html">IPtables</a></li>
+            <li><a class="" href="../../admin_guide/securing_builds.html">Securing Builds by Strategy</a></li>
+            <li><a class="" href="../../admin_guide/seccomp.html">Restricting Application Capabilities Using Seccomp</a></li>
+            <li><a class="" href="../../admin_guide/sysctls.html">Sysctls</a></li>
+            <li><a class="" href="../../admin_guide/encrypting_data.html">Encrypting Data at Datastore Layer</a></li>
+            <li><a class="" href="../../admin_guide/ipsec.html">Encrypting Hosts with IPsec</a></li>
+            <li><a class="" href="../../admin_guide/building_dependency_trees.html">Building Dependency Trees</a></li>
+            <li><a class="" href="../../admin_guide/backup_restore.html">Backup and Restore</a></li>
+            <li><a class="" href="../../admin_guide/sdn_troubleshooting.html">Troubleshooting Networking</a></li>
+            <li><a class="" href="../../admin_guide/diagnostics_tool.html">Diagnostics Tool</a></li>
+            <li><a class="" href="../../admin_guide/idling_applications.html">Idling Applications</a></li>
+            <li><a class="" href="../../admin_guide/cluster_capacity.html">Analyzing Cluster Capacity</a></li>
+            <li><a class="" href="../../admin_guide/kuryr.html">Kuryr SDN Administration</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup8">
+        <span id="tgSpan8" class="fa fa-angle-right"></span>Scaling and Performance Guide
+      </a>
+      <ul id="topicGroup8" class="collapse  list-unstyled">
+            <li><a class="" href="../../scaling_performance/index.html">Overview</a></li>
+            <li><a class="" href="../../scaling_performance/install_practices.html">Recommended Installation Practices</a></li>
+            <li><a class="" href="../../scaling_performance/host_practices.html">Recommended Host Practices</a></li>
+            <li><a class="" href="../../scaling_performance/optimizing_compute_resources.html">Optimizing Compute Resources</a></li>
+            <li><a class="" href="../../scaling_performance/optimizing_storage.html">Optimizing Storage</a></li>
+            <li><a class="" href="../../scaling_performance/network_optimization.html">Network Optimization</a></li>
+            <li><a class="" href="../../scaling_performance/routing_optimization.html">Routing Optimization</a></li>
+            <li><a class="" href="../../scaling_performance/scaling_cluster_metrics.html">Scaling Cluster Metrics</a></li>
+            <li><a class="" href="../../scaling_performance/cluster_limits.html">Cluster Limits</a></li>
+            <li><a class="" href="../../scaling_performance/using_cluster_loader.html">Using Cluster Loader</a></li>
+            <li><a class="" href="../../scaling_performance/using_cpu_manager.html">Using CPU Manager</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup9">
+        <span id="tgSpan9" class="fa fa-angle-right"></span>CLI Reference
+      </a>
+      <ul id="topicGroup9" class="collapse  list-unstyled">
+            <li><a class="" href="../../cli_reference/index.html">Overview</a></li>
+            <li><a class="" href="../../cli_reference/get_started_cli.html">Get Started with the CLI</a></li>
+            <li><a class="" href="../../cli_reference/manage_cli_profiles.html">Managing CLI Profiles</a></li>
+            <li><a class="" href="../../cli_reference/basic_cli_operations.html">Developer CLI Operations</a></li>
+            <li><a class="" href="../../cli_reference/admin_cli_operations.html">Administrator CLI Operations</a></li>
+            <li><a class="" href="../../cli_reference/extend_cli.html">Extending the CLI</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup10">
+        <span id="tgSpan10" class="fa fa-angle-right"></span>Developer Guide
+      </a>
+      <ul id="topicGroup10" class="collapse  list-unstyled">
+            <li><a class="" href="../../dev_guide/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-1">
+                <span id="sgSpan-10-1" class="fa fa-caret-right"></span>&nbsp;Application Life Cycle Management
+              </a>
+              <ul id="topicSubGroup-10-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/application_lifecycle/development_process.html">Planning Your Development Process</a></li>
+                  <li><a class="" href="../../dev_guide/application_lifecycle/new_app.html">Creating New Applications</a></li>
+                  <li><a class="" href="../../dev_guide/application_lifecycle/promoting_applications.html">Promoting Applications Across Environments</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../dev_guide/authentication.html">Authentication</a></li>
+            <li><a class="" href="../../dev_guide/authorization.html">Authorization</a></li>
+            <li><a class="" href="../../dev_guide/projects.html">Projects</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-5">
+                <span id="sgSpan-10-5" class="fa fa-caret-right"></span>&nbsp;Migrating Applications
+              </a>
+              <ul id="topicSubGroup-10-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/migrating_applications/index.html">Overview</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/database_applications.html">Database Applications</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/web_framework_applications.html">Web Framework Applications</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/quickstart_examples.html">QuickStart Examples</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/continuous_integration_and_deployment.html">Continuous Integration and Deployment</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/web_hooks_action_hooks.html">Webhooks and Action Hooks</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/S2I_tool.html">S2I Tool</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/support_guide.html">Support Guide</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-6">
+                <span id="sgSpan-10-6" class="fa fa-caret-right"></span>&nbsp;Tutorials
+              </a>
+              <ul id="topicSubGroup-10-6" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/dev_tutorials/index.html">Overview</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/quickstarts.html">Quickstart Templates</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/ruby_on_rails.html">Ruby on Rails</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/maven_tutorial.html">Setting Up a Nexus Mirror</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/openshift_pipeline.html">OpenShift Pipeline Builds</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/binary_builds.html">Binary Builds</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-7">
+                <span id="sgSpan-10-7" class="fa fa-caret-right"></span>&nbsp;Builds
+              </a>
+              <ul id="topicSubGroup-10-7" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/builds/index.html">How Builds Work</a></li>
+                  <li><a class="" href="../../dev_guide/builds/basic_build_operations.html">Basic Build Operations</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_inputs.html">Build Inputs</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_output.html">Build Output</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_strategies.html">Build Strategy Options</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_environment.html">Build Environment</a></li>
+                  <li><a class="" href="../../dev_guide/builds/triggering_builds.html">Triggering Builds</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_hooks.html">Build Hooks</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_run_policy.html">Build Run Policy</a></li>
+                  <li><a class="" href="../../dev_guide/builds/advanced_build_operations.html">Advanced Build Operations</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_troubleshooting.html">Troubleshooting</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-8">
+                <span id="sgSpan-10-8" class="fa fa-caret-right"></span>&nbsp;Deployments
+              </a>
+              <ul id="topicSubGroup-10-8" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/deployments/how_deployments_work.html">How Deployments Work</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/basic_deployment_operations.html">Basic Deployment Operations</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/deployment_strategies.html">Deployment Strategies</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/advanced_deployment_strategies.html">Advanced Deployment Strategies</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/kubernetes_deployments.html">Kubernetes Deployments Support</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../dev_guide/templates.html">Templates</a></li>
+            <li><a class="" href="../../dev_guide/ssh_environment.html">Opening a Remote Shell to Containers</a></li>
+            <li><a class="" href="../../dev_guide/service_accounts.html">Service Accounts</a></li>
+            <li><a class="" href="../../dev_guide/managing_images.html">Managing Images</a></li>
+            <li><a class="" href="../../dev_guide/compute_resources.html">Quotas and Limit Ranges</a></li>
+            <li><a class="" href="../../dev_guide/pod_preset.html">Injecting Information into Pods Using Pod Presets</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-15">
+                <span id="sgSpan-10-15" class="fa fa-caret-right"></span>&nbsp;Getting Traffic into a Cluster over Non-Standard Ports
+              </a>
+              <ul id="topicSubGroup-10-15" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/expose_service/index.html">Overview</a></li>
+                  <li><a class="" href="../../dev_guide/expose_service/expose_internal_ip_router.html">Using a Router</a></li>
+                  <li><a class="" href="../../dev_guide/expose_service/expose_internal_ip_load_balancer.html">Using a Load Balancer</a></li>
+                  <li><a class="" href="../../dev_guide/expose_service/expose_internal_ip_service.html">Using a Service ExternalIP</a></li>
+                  <li><a class="" href="../../dev_guide/expose_service/expose_internal_ip_nodeport.html">Using a NodePort</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../dev_guide/routes.html">Routes</a></li>
+            <li><a class="" href="../../dev_guide/integrating_external_services.html">Integrating External Services</a></li>
+            <li><a class="" href="../../dev_guide/secrets.html">Secrets</a></li>
+            <li><a class="" href="../../dev_guide/configmaps.html">ConfigMaps</a></li>
+            <li><a class="" href="../../dev_guide/downward_api.html">Downward API</a></li>
+            <li><a class="" href="../../dev_guide/projected_volumes.html">Projected Volumes</a></li>
+            <li><a class="" href="../../dev_guide/daemonsets.html">Using Daemonsets</a></li>
+            <li><a class="" href="../../dev_guide/pod_autoscaling.html">Pod Autoscaling</a></li>
+            <li><a class="" href="../../dev_guide/volumes.html">Managing Volumes</a></li>
+            <li><a class="" href="../../dev_guide/persistent_volumes.html">Using Persistent Volumes</a></li>
+            <li><a class="" href="../../dev_guide/executing_remote_commands.html">Executing Remote Commands</a></li>
+            <li><a class="" href="../../dev_guide/copy_files_to_container.html">Copying Files</a></li>
+            <li><a class="" href="../../dev_guide/port_forwarding.html">Port Forwarding</a></li>
+            <li><a class="" href="../../dev_guide/shared_memory.html">Shared Memory</a></li>
+            <li><a class="" href="../../dev_guide/application_health.html">Application Health</a></li>
+            <li><a class="" href="../../dev_guide/events.html">Events</a></li>
+            <li><a class="" href="../../dev_guide/environment_variables.html">Managing Environment Variables</a></li>
+            <li><a class="" href="../../dev_guide/jobs.html">Jobs</a></li>
+            <li><a class="" href="../../dev_guide/openshift_pipeline.html">OpenShift Pipeline</a></li>
+            <li><a class="" href="../../dev_guide/cron_jobs.html">Cron Jobs</a></li>
+            <li><a class="" href="../../dev_guide/create_from_url.html">Create from URL</a></li>
+            <li><a class="" href="../../dev_guide/application_memory_sizing.html">Application memory sizing</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup11">
+        <span id="tgSpan11" class="fa fa-angle-right"></span>Creating Images
+      </a>
+      <ul id="topicGroup11" class="collapse  list-unstyled">
+            <li><a class="" href="../../creating_images/index.html">Overview</a></li>
+            <li><a class="" href="../../creating_images/guidelines.html">Guidelines</a></li>
+            <li><a class="" href="../../creating_images/metadata.html">Image Metadata</a></li>
+            <li><a class="" href="../../creating_images/s2i.html">S2I Requirements</a></li>
+            <li><a class="" href="../../creating_images/s2i_testing.html">Testing S2I Images</a></li>
+            <li><a class="" href="../../creating_images/custom.html">Custom Builder</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup12">
+        <span id="tgSpan12" class="fa fa-angle-right"></span>Using Images
+      </a>
+      <ul id="topicGroup12" class="collapse  list-unstyled">
+            <li><a class="" href="../../using_images/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-1">
+                <span id="sgSpan-12-1" class="fa fa-caret-right"></span>&nbsp;Source-to-Image (S2I)
+              </a>
+              <ul id="topicSubGroup-12-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/s2i_images/index.html">Overview</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/nodejs.html">Node.js</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/perl.html">Perl</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/php.html">PHP</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/python.html">Python</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/ruby.html">Ruby</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/wildfly.html">Wildfly</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/customizing_s2i_images.html">Customizing S2I Images</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-2">
+                <span id="sgSpan-12-2" class="fa fa-caret-right"></span>&nbsp;Database Images
+              </a>
+              <ul id="topicSubGroup-12-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/db_images/index.html">Overview</a></li>
+                  <li><a class="" href="../../using_images/db_images/mysql.html">MySQL</a></li>
+                  <li><a class="" href="../../using_images/db_images/postgresql.html">PostgreSQL</a></li>
+                  <li><a class="" href="../../using_images/db_images/mongodb.html">MongoDB</a></li>
+                  <li><a class="" href="../../using_images/db_images/mariadb.html">MariaDB</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-3">
+                <span id="sgSpan-12-3" class="fa fa-caret-right"></span>&nbsp;Docker Images
+              </a>
+              <ul id="topicSubGroup-12-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/docker_images/index.html">Overview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-4">
+                <span id="sgSpan-12-4" class="fa fa-caret-right"></span>&nbsp;Other Images
+              </a>
+              <ul id="topicSubGroup-12-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/other_images/index.html">Overview</a></li>
+                  <li><a class="" href="../../using_images/other_images/jenkins.html">Jenkins</a></li>
+                  <li><a class="" href="../../using_images/other_images/jenkins_slaves.html">Jenkins Slaves</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup13">
+        <span id="tgSpan13" class="fa fa-angle-right"></span>Ansible Playbook Bundle Development Guide
+      </a>
+      <ul id="topicGroup13" class="collapse  list-unstyled">
+            <li><a class="" href="../../apb_devel/index.html">Introduction</a></li>
+            <li><a class="" href="../../apb_devel/cli_tooling.html">CLI Tooling</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-13-2">
+                <span id="sgSpan-13-2" class="fa fa-caret-right"></span>&nbsp;Writing APBs
+              </a>
+              <ul id="topicSubGroup-13-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../apb_devel/writing/getting_started.html">Getting Started</a></li>
+                  <li><a class="" href="../../apb_devel/writing/reference.html">Reference</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup14">
+        <span id="tgSpan14" class="fa fa-angle-right"></span>Go Client Library Reference
+      </a>
+      <ul id="topicGroup14" class="collapse  list-unstyled">
+            <li><a class="" href="../../go_client/getting_started.html">Getting Started</a></li>
+            <li><a class="" href="../../go_client/connecting_to_the_cluster.html">Connecting to the Cluster</a></li>
+            <li><a class="" href="../../go_client/tracing_api_requests_and_responses.html">Tracing API Requests and Responses</a></li>
+            <li><a class="" href="../../go_client/standard_api_operations.html">Standard API Operations</a></li>
+            <li><a class="" href="../../go_client/serializing_and_deserializing.html">Serializing and Deserializing</a></li>
+            <li><a class="" href="../../go_client/instantiating_templates.html">Instantiating Templates</a></li>
+            <li><a class="" href="../../go_client/executing_remote_processes.html">Executing Remote Processes</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup15">
+        <span id="tgSpan15" class="fa fa-angle-right"></span>REST API Reference
+      </a>
+      <ul id="topicGroup15" class="collapse  list-unstyled">
+            <li><a class="" href="../../rest_api/index.html">Overview</a></li>
+            <li><a class="" href="../../rest_api/examples.html">Examples</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-2">
+                <span id="sgSpan-15-2" class="fa fa-caret-right"></span>&nbsp;/api/v1
+              </a>
+              <ul id="topicSubGroup-15-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/api/v1.APIResourceList.html">v1.APIResourceList</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.APIVersions.html">v1.APIVersions</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Binding.html">v1.Binding</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ComponentStatus.html">v1.ComponentStatus</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ConfigMap.html">v1.ConfigMap</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Endpoints.html">v1.Endpoints</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Event.html">v1.Event</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.LimitRange.html">v1.LimitRange</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Namespace.html">v1.Namespace</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Node.html">v1.Node</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.PersistentVolume.html">v1.PersistentVolume</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.PersistentVolumeClaim.html">v1.PersistentVolumeClaim</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Pod.html">v1.Pod</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.PodTemplate.html">v1.PodTemplate</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ReplicationController.html">v1.ReplicationController</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ResourceQuota.html">v1.ResourceQuota</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Secret.html">v1.Secret</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.SecurityContextConstraints.html">v1.SecurityContextConstraints</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Service.html">v1.Service</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ServiceAccount.html">v1.ServiceAccount</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-3">
+                <span id="sgSpan-15-3" class="fa fa-caret-right"></span>&nbsp;/apis/v1
+              </a>
+              <ul id="topicSubGroup-15-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis/v1.APIGroup.html">v1.APIGroup</a></li>
+                  <li><a class="" href="../../rest_api/apis/v1.APIGroupList.html">v1.APIGroupList</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-4">
+                <span id="sgSpan-15-4" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1
+              </a>
+              <ul id="topicSubGroup-15-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apps/v1.ControllerRevision.html">v1.ControllerRevision</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1.DaemonSet.html">v1.DaemonSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1.Deployment.html">v1.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1.ReplicaSet.html">v1.ReplicaSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1.StatefulSet.html">v1.StatefulSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-5">
+                <span id="sgSpan-15-5" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta1.ControllerRevision.html">v1beta1.ControllerRevision</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta1.Deployment.html">v1beta1.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta1.StatefulSet.html">v1beta1.StatefulSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-6">
+                <span id="sgSpan-15-6" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta2
+              </a>
+              <ul id="topicSubGroup-15-6" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.ControllerRevision.html">v1beta2.ControllerRevision</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.DaemonSet.html">v1beta2.DaemonSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.Deployment.html">v1beta2.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.ReplicaSet.html">v1beta2.ReplicaSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.StatefulSet.html">v1beta2.StatefulSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-7">
+                <span id="sgSpan-15-7" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v1
+              </a>
+              <ul id="topicSubGroup-15-7" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-autoscaling/v1.HorizontalPodAutoscaler.html">v1.HorizontalPodAutoscaler</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-8">
+                <span id="sgSpan-15-8" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v2beta1
+              </a>
+              <ul id="topicSubGroup-15-8" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-autoscaling/v2beta1.HorizontalPodAutoscaler.html">v2beta1.HorizontalPodAutoscaler</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-9">
+                <span id="sgSpan-15-9" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1
+              </a>
+              <ul id="topicSubGroup-15-9" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-batch/v1.Job.html">v1.Job</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-10">
+                <span id="sgSpan-15-10" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-10" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-batch/v1beta1.CronJob.html">v1beta1.CronJob</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-11">
+                <span id="sgSpan-15-11" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v2alpha1
+              </a>
+              <ul id="topicSubGroup-15-11" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-batch/v2alpha1.CronJob.html">v2alpha1.CronJob</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-12">
+                <span id="sgSpan-15-12" class="fa fa-caret-right"></span>&nbsp;/apis/extensions/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-12" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.DaemonSet.html">v1beta1.DaemonSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.Deployment.html">v1beta1.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.Ingress.html">v1beta1.Ingress</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.NetworkPolicy.html">v1beta1.NetworkPolicy</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.PodSecurityPolicy.html">v1beta1.PodSecurityPolicy</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.ReplicaSet.html">v1beta1.ReplicaSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-13">
+                <span id="sgSpan-15-13" class="fa fa-caret-right"></span>&nbsp;/apis/policy/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-13" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-policy/v1beta1.PodDisruptionBudget.html">v1beta1.PodDisruptionBudget</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-14">
+                <span id="sgSpan-15-14" class="fa fa-caret-right"></span>&nbsp;/apis/admissionregistration.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-14" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-admissionregistration.k8s.io/v1beta1.MutatingWebhookConfiguration.html">v1beta1.MutatingWebhookConfiguration</a></li>
+                  <li><a class="" href="../../rest_api/apis-admissionregistration.k8s.io/v1beta1.ValidatingWebhookConfiguration.html">v1beta1.ValidatingWebhookConfiguration</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-15">
+                <span id="sgSpan-15-15" class="fa fa-caret-right"></span>&nbsp;/apis/apiregistration.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-15" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apiregistration.k8s.io/v1beta1.APIService.html">v1beta1.APIService</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-16">
+                <span id="sgSpan-15-16" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-15-16" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authentication.k8s.io/v1.TokenReview.html">v1.TokenReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-17">
+                <span id="sgSpan-15-17" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-17" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authentication.k8s.io/v1beta1.TokenReview.html">v1beta1.TokenReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-18">
+                <span id="sgSpan-15-18" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-15-18" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.SelfSubjectAccessReview.html">v1.SelfSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.SelfSubjectRulesReview.html">v1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.SubjectAccessReview.html">v1.SubjectAccessReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-19">
+                <span id="sgSpan-15-19" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-19" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.LocalSubjectAccessReview.html">v1beta1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectAccessReview.html">v1beta1.SelfSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectRulesReview.html">v1beta1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SubjectAccessReview.html">v1beta1.SubjectAccessReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-20">
+                <span id="sgSpan-15-20" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-15-20" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.ClusterRole.html">v1.ClusterRole</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.ClusterRoleBinding.html">v1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.Role.html">v1.Role</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.RoleBinding.html">v1.RoleBinding</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-21">
+                <span id="sgSpan-15-21" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-21" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRole.html">v1beta1.ClusterRole</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRoleBinding.html">v1beta1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.Role.html">v1beta1.Role</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.RoleBinding.html">v1beta1.RoleBinding</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-22">
+                <span id="sgSpan-15-22" class="fa fa-caret-right"></span>&nbsp;/apis/certificates.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-22" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-certificates.k8s.io/v1beta1.CertificateSigningRequest.html">v1beta1.CertificateSigningRequest</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-23">
+                <span id="sgSpan-15-23" class="fa fa-caret-right"></span>&nbsp;/apis/events.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-23" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-events.k8s.io/v1beta1.Event.html">v1beta1.Event</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-24">
+                <span id="sgSpan-15-24" class="fa fa-caret-right"></span>&nbsp;/apis/networking.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-15-24" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-networking.k8s.io/v1.NetworkPolicy.html">v1.NetworkPolicy</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-25">
+                <span id="sgSpan-15-25" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-15-25" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-storage.k8s.io/v1.StorageClass.html">v1.StorageClass</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-26">
+                <span id="sgSpan-15-26" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-26" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-storage.k8s.io/v1beta1.StorageClass.html">v1beta1.StorageClass</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-27">
+                <span id="sgSpan-15-27" class="fa fa-caret-right"></span>&nbsp;/apis/apps.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-27" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apps.openshift.io/v1.DeploymentConfig.html">v1.DeploymentConfig</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-28">
+                <span id="sgSpan-15-28" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-28" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.ClusterRole.html">v1.ClusterRole</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.ClusterRoleBinding.html">v1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.LocalResourceAccessReview.html">v1.LocalResourceAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.ResourceAccessReview.html">v1.ResourceAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.Role.html">v1.Role</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.RoleBinding.html">v1.RoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.RoleBindingRestriction.html">v1.RoleBindingRestriction</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.SelfSubjectRulesReview.html">v1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.SubjectAccessReview.html">v1.SubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.SubjectRulesReview.html">v1.SubjectRulesReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-29">
+                <span id="sgSpan-15-29" class="fa fa-caret-right"></span>&nbsp;/apis/build.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-29" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-build.openshift.io/v1.Build.html">v1.Build</a></li>
+                  <li><a class="" href="../../rest_api/apis-build.openshift.io/v1.BuildConfig.html">v1.BuildConfig</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-30">
+                <span id="sgSpan-15-30" class="fa fa-caret-right"></span>&nbsp;/apis/image.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-30" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.Image.html">v1.Image</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageSignature.html">v1.ImageSignature</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageStream.html">v1.ImageStream</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageStreamImage.html">v1.ImageStreamImage</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageStreamImport.html">v1.ImageStreamImport</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageStreamMapping.html">v1.ImageStreamMapping</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageStreamTag.html">v1.ImageStreamTag</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-31">
+                <span id="sgSpan-15-31" class="fa fa-caret-right"></span>&nbsp;/apis/network.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-31" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-network.openshift.io/v1.ClusterNetwork.html">v1.ClusterNetwork</a></li>
+                  <li><a class="" href="../../rest_api/apis-network.openshift.io/v1.EgressNetworkPolicy.html">v1.EgressNetworkPolicy</a></li>
+                  <li><a class="" href="../../rest_api/apis-network.openshift.io/v1.HostSubnet.html">v1.HostSubnet</a></li>
+                  <li><a class="" href="../../rest_api/apis-network.openshift.io/v1.NetNamespace.html">v1.NetNamespace</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-32">
+                <span id="sgSpan-15-32" class="fa fa-caret-right"></span>&nbsp;/apis/oauth.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-32" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-oauth.openshift.io/v1.OAuthAccessToken.html">v1.OAuthAccessToken</a></li>
+                  <li><a class="" href="../../rest_api/apis-oauth.openshift.io/v1.OAuthAuthorizeToken.html">v1.OAuthAuthorizeToken</a></li>
+                  <li><a class="" href="../../rest_api/apis-oauth.openshift.io/v1.OAuthClient.html">v1.OAuthClient</a></li>
+                  <li><a class="" href="../../rest_api/apis-oauth.openshift.io/v1.OAuthClientAuthorization.html">v1.OAuthClientAuthorization</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-33">
+                <span id="sgSpan-15-33" class="fa fa-caret-right"></span>&nbsp;/apis/project.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-33" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-project.openshift.io/v1.Project.html">v1.Project</a></li>
+                  <li><a class="" href="../../rest_api/apis-project.openshift.io/v1.ProjectRequest.html">v1.ProjectRequest</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-34">
+                <span id="sgSpan-15-34" class="fa fa-caret-right"></span>&nbsp;/apis/quota.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-34" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-quota.openshift.io/v1.AppliedClusterResourceQuota.html">v1.AppliedClusterResourceQuota</a></li>
+                  <li><a class="" href="../../rest_api/apis-quota.openshift.io/v1.ClusterResourceQuota.html">v1.ClusterResourceQuota</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-35">
+                <span id="sgSpan-15-35" class="fa fa-caret-right"></span>&nbsp;/apis/route.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-35" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-route.openshift.io/v1.Route.html">v1.Route</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-36">
+                <span id="sgSpan-15-36" class="fa fa-caret-right"></span>&nbsp;/apis/security.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-36" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-security.openshift.io/v1.PodSecurityPolicyReview.html">v1.PodSecurityPolicyReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-security.openshift.io/v1.PodSecurityPolicySelfSubjectReview.html">v1.PodSecurityPolicySelfSubjectReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-security.openshift.io/v1.PodSecurityPolicySubjectReview.html">v1.PodSecurityPolicySubjectReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-security.openshift.io/v1.SecurityContextConstraints.html">v1.SecurityContextConstraints</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-37">
+                <span id="sgSpan-15-37" class="fa fa-caret-right"></span>&nbsp;/apis/template.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-37" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-template.openshift.io/v1.BrokerTemplateInstance.html">v1.BrokerTemplateInstance</a></li>
+                  <li><a class="" href="../../rest_api/apis-template.openshift.io/v1.Template.html">v1.Template</a></li>
+                  <li><a class="" href="../../rest_api/apis-template.openshift.io/v1.TemplateInstance.html">v1.TemplateInstance</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-38">
+                <span id="sgSpan-15-38" class="fa fa-caret-right"></span>&nbsp;/apis/user.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-38" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-user.openshift.io/v1.Group.html">v1.Group</a></li>
+                  <li><a class="" href="../../rest_api/apis-user.openshift.io/v1.Identity.html">v1.Identity</a></li>
+                  <li><a class="" href="../../rest_api/apis-user.openshift.io/v1.User.html">v1.User</a></li>
+                  <li><a class="" href="../../rest_api/apis-user.openshift.io/v1.UserIdentityMapping.html">v1.UserIdentityMapping</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-39">
+                <span id="sgSpan-15-39" class="fa fa-caret-right"></span>&nbsp;/oapi/v1
+              </a>
+              <ul id="topicSubGroup-15-39" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/oapi/v1.AppliedClusterResourceQuota.html">v1.AppliedClusterResourceQuota</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Build.html">v1.Build</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.BuildConfig.html">v1.BuildConfig</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ClusterNetwork.html">v1.ClusterNetwork</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ClusterResourceQuota.html">v1.ClusterResourceQuota</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ClusterRole.html">v1.ClusterRole</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ClusterRoleBinding.html">v1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.DeploymentConfig.html">v1.DeploymentConfig</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.EgressNetworkPolicy.html">v1.EgressNetworkPolicy</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Group.html">v1.Group</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.HostSubnet.html">v1.HostSubnet</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Identity.html">v1.Identity</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Image.html">v1.Image</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageSignature.html">v1.ImageSignature</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageStream.html">v1.ImageStream</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageStreamImage.html">v1.ImageStreamImage</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageStreamImport.html">v1.ImageStreamImport</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageStreamMapping.html">v1.ImageStreamMapping</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageStreamTag.html">v1.ImageStreamTag</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.LocalResourceAccessReview.html">v1.LocalResourceAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.NetNamespace.html">v1.NetNamespace</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.OAuthAccessToken.html">v1.OAuthAccessToken</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.OAuthAuthorizeToken.html">v1.OAuthAuthorizeToken</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.OAuthClient.html">v1.OAuthClient</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.OAuthClientAuthorization.html">v1.OAuthClientAuthorization</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.PodSecurityPolicyReview.html">v1.PodSecurityPolicyReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.PodSecurityPolicySelfSubjectReview.html">v1.PodSecurityPolicySelfSubjectReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.PodSecurityPolicySubjectReview.html">v1.PodSecurityPolicySubjectReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ProcessedTemplate.html">v1.ProcessedTemplate</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Project.html">v1.Project</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ProjectRequest.html">v1.ProjectRequest</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ResourceAccessReview.html">v1.ResourceAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Role.html">v1.Role</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.RoleBinding.html">v1.RoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.RoleBindingRestriction.html">v1.RoleBindingRestriction</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Route.html">v1.Route</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.SelfSubjectRulesReview.html">v1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.SubjectAccessReview.html">v1.SubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.SubjectRulesReview.html">v1.SubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Template.html">v1.Template</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.User.html">v1.User</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.UserIdentityMapping.html">v1.UserIdentityMapping</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+</ul>
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-9 main">
+        <div class="page-header">
+          <h1>Extended Registry Configuration</h1>
+        </div>
+        <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#maintaining-the-registry-ip-address">Maintaining the Registry IP Address</a></li>
+<li><a href="#whitelisting-docker-registries">Whitelisting Docker Registries</a></li>
+<li><a href="#setting-the-registry-hostname">Setting the Registry Hostname</a></li>
+<li><a href="#advanced-overriding-the-registry-configuration">Overriding the Registry Configuration</a></li>
+<li><a href="#registry-configuration-reference">Registry Configuration Reference</a>
+<ul class="sectlevel2">
+<li><a href="#docker-registry-configuration-reference-log">Log</a></li>
+<li><a href="#docker-registry-configuration-reference-hooks">Hooks</a></li>
+<li><a href="#docker-registry-configuration-reference-storage">Storage</a></li>
+<li><a href="#docker-registry-configuration-reference-auth">Auth</a></li>
+<li><a href="#docker-registry-configuration-reference-middleware">Middleware</a></li>
+<li><a href="#docker-registry-configuration-reference-openshift">OpenShift</a></li>
+<li><a href="#docker-registry-configuration-reference-reporting">Reporting</a></li>
+<li><a href="#docker-registry-configuration-reference-http">HTTP</a></li>
+<li><a href="#docker-registry-configuration-reference-notifications">Notifications</a></li>
+<li><a href="#docker-registry-configuration-reference-redis">Redis</a></li>
+<li><a href="#docker-registry-configuration-reference-health">Health</a></li>
+<li><a href="#docker-registry-configuration-reference-proxy">Proxy</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="maintaining-the-registry-ip-address"><a class="anchor" href="#maintaining-the-registry-ip-address"></a>Maintaining the Registry IP Address</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift Origin refers to the integrated registry by its service IP address,
+so if you decide to delete and recreate the <strong>docker-registry</strong> service,
+you can ensure a completely transparent transition by arranging to
+re-use the old IP address in the new service.
+If a new IP address cannot be avoided, you can minimize cluster
+disruption by rebooting only the masters.</p>
+</div>
+<div id="re-using-the-address" class="dlist">
+<dl>
+<dt class="hdlist1">Re-using the Address</dt>
+<dd>
+<p>To re-use the IP address, you must save the IP address of the old <strong>docker-registry</strong>
+service prior to deleting it, and arrange to replace the newly assigned IP address
+with the saved one in the new <strong>docker-registry</strong> service.</p>
+</dd>
+</dl>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make a note of the <code>clusterIP</code> for the service:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc get svc/docker-registry -o yaml | grep clusterIP:</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Delete the service:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc delete svc/docker-registry dc/docker-registry</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create the registry definition in <strong><em>registry.yaml</em></strong>, replacing <code>&lt;options&gt;</code>
+with, for example, those used in step 3 of the instructions in the
+<a href="#registry-non-production-use">Non-Production Use</a> section:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc adm registry &lt;options&gt; -o yaml &gt; registry.yaml</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Edit <strong><em>registry.yaml</em></strong>, find the <code>Service</code> there,
+and change its <code>clusterIP</code> to the address noted in step 1.</p>
+</li>
+<li>
+<p>Create the registry using the modified <strong><em>registry.yaml</em></strong>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc create -f registry.yaml</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="rebooting-the-masters" class="dlist">
+<dl>
+<dt class="hdlist1">Rebooting the Masters</dt>
+<dd>
+<p>If you are unable to re-use the IP address, any operation that uses a <a href="../../architecture/core_concepts/builds_and_image_streams.html#image-streams">pull specification</a>
+that includes the old IP address will fail.
+To minimize cluster disruption, you must reboot the masters:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap"># systemctl restart origin-master-api origin-master-controllers</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This ensures that the old registry URL, which includes the old IP address,
+is cleared from the cache.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+We recommend against rebooting the entire cluster because that incurs
+unnecessary downtime for pods and does not actually clear the cache.
+</td>
+</tr>
+</table>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="whitelisting-docker-registries"><a class="anchor" href="#whitelisting-docker-registries"></a>Whitelisting Docker Registries</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can specify a whitelist of docker registries, allowing you to curate a set
+of images and templates that are available for download by OpenShift Origin
+users. This curated set can be placed in one or more docker registries, and then
+added to the whitelist. When using a whitelist, only the specified registries
+are accessible within OpenShift Origin, and all other registries are denied
+access by default.</p>
+</div>
+<div class="paragraph">
+<p>To configure a whitelist:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Edit the <strong><em>/etc/sysconfig/docker</em></strong> file to block all registries:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">BLOCK_REGISTRY='--block-registry=all'</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may need to uncomment the <code><strong>BLOCK_REGISTRY</strong></code> line.</p>
+</div>
+</li>
+<li>
+<p>In the same file, add registries to which you want to allow access:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">ADD_REGISTRY='--add-registry=&lt;registry1&gt; --add-registry=&lt;registry2&gt;'</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Allowing Access to Registries</div>
+<div class="content">
+<pre class="nowrap">ADD_REGISTRY='--add-registry=registry.access.redhat.com'</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This example would restrict access to images available on the
+<a href="https://access.redhat.com/search/#/container-images">Red Hat Customer Portal</a>.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Once the whitelist is configured, if a user tries to pull from a docker registry
+that is not on the whitelist, they will receive an error message stating that
+this registry is not allowed.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="setting-the-registry-hostname"><a class="anchor" href="#setting-the-registry-hostname"></a>Setting the Registry Hostname</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can configure the hostname and port the registry is known by for both internal and external references.
+By doing this, image streams will provide hostname based push and pull specifications for images,
+allowing consumers of the images to be isolated from changes to the registry service ip and potentially
+allowing image streams and their references to be portable between clusters.</p>
+</div>
+<div class="paragraph">
+<p>To set the hostname used to reference the registry from within the cluster, set the <code>internalRegistryHostname</code>
+in the <code>imagePolicyConfig</code> section of the master configuration file.  The external hostname is controlled by setting the <code>externalRegistryHostname</code> value in the same location.</p>
+</div>
+<div class="listingblock">
+<div class="title">Image Policy Configuration</div>
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">imagePolicyConfig</span>:
+  <span style="color:#606">internalRegistryHostname</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">docker-registry.default.svc.cluster.local:5000</span></span>
+  <span style="color:#606">externalRegistryHostname</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">docker-registry.mycompany.com</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The registry itself must be configured with the same internal hostname value.  This can be accomplished by setting the
+<code><strong>REGISTRY_OPENSHIFT_SERVER_ADDR</strong></code> environment variable on the registry deployment configuration,
+or by setting the value in the <a href="extended_registry_configuration.html#docker-registry-configuration-reference-openshift">OpenShift section</a> of the registry configuration.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you have enabled TLS for your registry the server certificate must
+include the hostnames by which you expect the registry to be referenced.
+See <a href="securing_and_exposing_registry.html#securing-the-registry">securing
+the registry</a> for instructions on adding hostnames to the server certificate.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="advanced-overriding-the-registry-configuration"><a class="anchor" href="#advanced-overriding-the-registry-configuration"></a>Overriding the Registry Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can override the integrated registry&#8217;s default configuration, found by
+default at <strong><em>/config.yml</em></strong> in a running registry&#8217;s container, with your own
+<a href="#registry-configuration-reference">custom configuration</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Upstream configuration options in this file may also be overridden using
+environment variables. The
+<a href="#docker-registry-configuration-reference-middleware">middleware section</a> is
+an exception as there are just a few options that can be overridden using
+environment variables.
+<a href="https://docs.docker.com/registry/configuration/#override-specific-configuration-options">Learn
+how to override specific configuration options</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To enable management of the registry configuration file directly and deploy an updated configuration using
+a <a href="../../dev_guide/configmaps.html#dev-guide-configmaps"><code><strong>ConfigMap</strong></code></a>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="#deploy-registry">Deploy the registry</a>.</p>
+</li>
+<li>
+<p>Edit the registry configuration file locally as needed. The initial YAML file
+deployed on the registry is provided below.
+<a href="#registry-configuration-reference">Review supported options</a>.</p>
+<div class="listingblock">
+<div class="title">Registry Configuration File</div>
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">version</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">0.1</span></span>
+<span style="color:#606">log</span>:
+  <span style="color:#606">level</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">debug</span></span>
+<span style="color:#606">http</span>:
+  <span style="color:#606">addr</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">:5000</span></span>
+<span style="color:#606">storage</span>:
+  <span style="color:#606">cache</span>:
+    <span style="color:#606">blobdescriptor</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">inmemory</span></span>
+  <span style="color:#606">filesystem</span>:
+    <span style="color:#606">rootdirectory</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/registry</span></span>
+  <span style="color:#606">delete</span>:
+    <span style="color:#606">enabled</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span>
+<span style="color:#606">auth</span>:
+  <span style="color:#606">openshift</span>:
+    <span style="color:#606">realm</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">openshift</span></span>
+<span style="color:#606">middleware</span>:
+  <span style="color:#606">registry</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: openshift</span></span>
+  <span style="color:#606">repository</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: openshift</span></span>
+      <span style="color:#606">options</span>:
+        <span style="color:#606">acceptschema2</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span>
+        <span style="color:#606">pullthrough</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span>
+        <span style="color:#606">enforcequota</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">false</span></span>
+        <span style="color:#606">projectcachettl</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">1m</span></span>
+        <span style="color:#606">blobrepositorycachettl</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">10m</span></span>
+  <span style="color:#606">storage</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: openshift</span></span>
+<span style="color:#606">openshift</span>:
+  <span style="color:#606">version</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">1.0</span></span>
+  <span style="color:#606">metrics</span>:
+    <span style="color:#606">enabled</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">false</span></span>
+    <span style="color:#606">secret</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">&lt;secret&gt;</span></span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create a <code><strong>ConfigMap</strong></code> holding the content of each file in this directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc create configmap registry-config \
+    --from-file=&lt;/path/to/custom/registry/config.yml&gt;/</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add the <strong>registry-config</strong> ConfigMap as a volume to the registry&#8217;s deployment
+configuration to mount the custom configuration file at
+<strong><em>/etc/docker/registry/</em></strong>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc volume dc/docker-registry --add --type=configmap \
+    --configmap-name=registry-config -m /etc/docker/registry/</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Update the registry to reference the configuration path from the previous step
+by adding the following environment variable to the registry&#8217;s deployment
+configuration:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc set env dc/docker-registry \
+    REGISTRY_CONFIGURATION_PATH=/etc/docker/registry/config.yml</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This may be performed as an iterative process to achieve the desired
+configuration. For example, during troubleshooting, the configuration may be
+temporarily updated to put it in <strong>debug</strong> mode.</p>
+</div>
+<div class="paragraph">
+<p>To update an existing configuration:</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This procedure will overwrite the currently deployed registry configuration.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Edit the local registry configuration file, <strong><em>config.yml</em></strong>.</p>
+</li>
+<li>
+<p>Delete the <strong>registry-config</strong> secret:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc delete secret registry-config</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Recreate the secret to reference the updated configuration file:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc secrets new registry-config config.yml=&lt;/path/to/custom/registry/config.yml&gt;</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Redeploy the registry to read the updated configuration:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc rollout latest docker-registry</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Maintain configuration files in a source control repository.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="registry-configuration-reference"><a class="anchor" href="#registry-configuration-reference"></a>Registry Configuration Reference</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are many configuration options available in the upstream
+<a href="https://github.com/docker/distribution">docker distribution</a> library. Not
+all <a href="https://docs.docker.com/registry/configuration/">configuration options</a>
+are supported or enabled. Use this section as a reference when
+<a href="#advanced-overriding-the-registry-configuration">overriding the registry
+configuration</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Upstream configuration options in this file may also be overridden using
+environment variables. However, the
+<a href="#docker-registry-configuration-reference-middleware">middleware section</a> may
+<strong>not</strong> be overridden using environment variables.
+<a href="https://docs.docker.com/registry/configuration/#override-specific-configuration-options">Learn
+how to override specific configuration options</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="docker-registry-configuration-reference-log"><a class="anchor" href="#docker-registry-configuration-reference-log"></a>Log</h3>
+<div class="paragraph">
+<p><a href="https://docs.docker.com/registry/configuration/#log">Upstream options</a> are supported.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">log</span>:
+  <span style="color:#606">level</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">debug</span></span>
+  <span style="color:#606">formatter</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">text</span></span>
+  <span style="color:#606">fields</span>:
+    <span style="color:#606">service</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">registry</span></span>
+    <span style="color:#606">environment</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">staging</span></span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="docker-registry-configuration-reference-hooks"><a class="anchor" href="#docker-registry-configuration-reference-hooks"></a>Hooks</h3>
+<div class="paragraph">
+<p>Mail hooks are not supported.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="docker-registry-configuration-reference-storage"><a class="anchor" href="#docker-registry-configuration-reference-storage"></a>Storage</h3>
+<div class="paragraph">
+<p>This section lists the supported <a href="https://docs.docker.com/registry/configuration/#storage">registry storage drivers</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following list includes storage drivers that need to be configured in the
+registry&#8217;s configuration file:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.docker.com/registry/storage-drivers/filesystem">Filesystem</a>. Filesystem is the default and does not need to be configured.</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/registry/storage-drivers/s3/">S3</a>. Learn more about <a href="https://github.com/docker/docker.github.io/blob/master/registry/storage-drivers/s3.md#cloudfront-as-middleware-with-s3-backend">CloudFront configuration</a>.</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/registry/storage-drivers/swift/">OpenStack Swift</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/registry/storage-drivers/gcs/">Google Cloud Storage (GCS)</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/registry/storage-drivers/azure/">Microsoft Azure</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/registry/storage-drivers/oss/">Aliyun OSS</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.docker.com/registry/configuration/#maintenance">General registry storage configuration options</a> are supported.</p>
+</div>
+<div class="paragraph">
+<p>The following storage options need to be configured through the <a href="https://docs.docker.com/registry/storage-drivers/filesystem">filesystem driver</a>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../../install_config/storage_examples/gluster_backed_registry.html#dedicated-glusterfs-dynamic-example-overview">GlusterFS
+Storage</a></p>
+</li>
+<li>
+<p><a href="../../install_config/persistent_storage/persistent_storage_ceph_rbd.html#install-config-persistent-storage-persistent-storage-ceph-rbd">Ceph
+Rados Block Device</a></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For more information on supported persistent storage drivers, see <a href="../../install_config/persistent_storage/index.html#install-config-persistent-storage-persistent-storage-ceph-rbd">Configuring Persistent Storage</a> and <a href="../../install_config/storage_examples/index.html#install-config-storage-examples-index">Persistent Storage Examples</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">General Storage Configuration Options</div>
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">storage</span>:
+  <span style="color:#606">delete</span>:
+    <span style="color:#606">enabled</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true </span></span><i class="conum" data-value="1"></i><b>(1)</b>
+  <span style="color:#606">redirect</span>:
+    <span style="color:#606">disable</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">false</span></span>
+  <span style="color:#606">cache</span>:
+    <span style="color:#606">blobdescriptor</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">inmemory</span></span>
+  <span style="color:#606">maintenance</span>:
+    <span style="color:#606">uploadpurging</span>:
+      <span style="color:#606">enabled</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span>
+      <span style="color:#606">age</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">168h</span></span>
+      <span style="color:#606">interval</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">24h</span></span>
+      <span style="color:#606">dryrun</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">false</span></span>
+    <span style="color:#606">readonly</span>:
+      <span style="color:#606">enabled</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">false</span></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This entry is <strong>mandatory</strong> for image pruning to work properly.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="docker-registry-configuration-reference-auth"><a class="anchor" href="#docker-registry-configuration-reference-auth"></a>Auth</h3>
+<div class="paragraph">
+<p>Auth options should not be altered. The <strong>openshift</strong> extension is the only
+supported option.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">auth</span>:
+  <span style="color:#606">openshift</span>:
+    <span style="color:#606">realm</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">openshift</span></span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="docker-registry-configuration-reference-middleware"><a class="anchor" href="#docker-registry-configuration-reference-middleware"></a>Middleware</h3>
+<div class="paragraph">
+<p>The <strong>repository</strong> middleware extension allows to configure OpenShift Origin
+middleware responsible for interaction with OpenShift Origin and image proxying.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">middleware</span>:
+  <span style="color:#606">registry</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: openshift </span></span><i class="conum" data-value="1"></i><b>(1)</b>
+  <span style="color:#606">repository</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: openshift </span></span><i class="conum" data-value="1"></i><b>(1)</b>
+      <span style="color:#606">options</span>:
+        <span style="color:#606">acceptschema2</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true </span></span><i class="conum" data-value="2"></i><b>(2)</b>
+        <span style="color:#606">pullthrough</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true </span></span><i class="conum" data-value="3"></i><b>(3)</b>
+        <span style="color:#606">mirrorpullthrough</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true </span></span><i class="conum" data-value="4"></i><b>(4)</b>
+        <span style="color:#606">enforcequota</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">false </span></span><i class="conum" data-value="5"></i><b>(5)</b>
+        <span style="color:#606">projectcachettl</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">1m </span></span><i class="conum" data-value="6"></i><b>(6)</b>
+        <span style="color:#606">blobrepositorycachettl</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">10m </span></span><i class="conum" data-value="7"></i><b>(7)</b>
+  <span style="color:#606">storage</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: openshift </span></span><i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>These entries are mandatory. Their presence ensures required components are
+loaded. These values should not be changed.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Allows you to store
+<a href="https://github.com/docker/distribution/blob/master/docs/spec/manifest-v2-2.md#image-manifest-version-2-schema-2">manifest
+schema v2</a> during a push to the registry. See
+<a href="#middleware-repository-acceptschema2">below</a> for more details.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Allows the registry to act as a proxy for remote blobs. See
+<a href="#middleware-repository-pullthrough">below</a> for more details.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Allows the registry cache blobs to be served from remote registries for fast
+access later. The mirroring starts when the blob is accessed for the first time.
+The option has no effect if the
+<a href="#middleware-repository-pullthrough">pullthrough</a> is disabled.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Prevents blob uploads exceeding the size limit, which are defined in the
+targeted project.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>An expiration timeout for limits cached in the registry. The lower the
+value, the less time it takes for the limit changes to propagate to the
+registry. However, the registry will query limits from the server more
+frequently and, as a consequence, pushes will be slower.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>An expiration timeout for remembered associations between blob and
+repository. The higher the value, the higher probability of fast lookup and
+more efficient registry operation. On the other hand, memory usage will raise
+as well as a risk of serving image layer to user, who is no longer authorized
+to access it.</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="middleware-cloudfront"><a class="anchor" href="#middleware-cloudfront"></a>CloudFront Middleware</h4>
+<div class="paragraph">
+<p>The <a href="https://docs.docker.com/registry/configuration/#cloudfront"><strong>CloudFront</strong>
+middleware extension</a> can be added to support AWS, CloudFront CDN storage
+provider. CloudFront middleware speeds up distribution of image content
+internationally. The blobs are distributed to several edge locations around the
+world. The client is always directed to the edge with the lowest latency.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <a href="https://docs.docker.com/registry/configuration/#cloudfront"><strong>CloudFront</strong>
+middleware extension</a> can be only used with
+<a href="https://docs.docker.com/registry/storage-drivers/s3/">S3</a> storage.
+It is utilized only during blob serving. Therefore, only blob downloads can be
+speeded up, not uploads.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following is an example of minimal configuration of S3 storage driver with a
+CloudFront middleware:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">version</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">0.1</span></span>
+<span style="color:#606">log</span>:
+  <span style="color:#606">level</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">debug</span></span>
+<span style="color:#606">http</span>:
+  <span style="color:#606">addr</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">:5000</span></span>
+<span style="color:#606">storage</span>:
+  <span style="color:#606">cache</span>:
+    <span style="color:#606">blobdescriptor</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">inmemory</span></span>
+  <span style="color:#606">delete</span>:
+    <span style="color:#606">enabled</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span>
+  <span style="color:#606">s3</span>: <i class="conum" data-value="1"></i><b>(1)</b>
+    <span style="color:#606">accesskey</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">BJKMSZBRESWJQXRWMAEQ</span></span>
+    <span style="color:#606">secretkey</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">5ah5I91SNXbeoUXXDasFtadRqOdy62JzlnOW1goS</span></span>
+    <span style="color:#606">region</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">us-east-1</span></span>
+    <span style="color:#606">bucket</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">docker.myregistry.com</span></span>
+<span style="color:#606">auth</span>:
+  <span style="color:#606">openshift</span>:
+    <span style="color:#606">realm</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">openshift</span></span>
+<span style="color:#606">middleware</span>:
+  <span style="color:#606">registry</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: openshift</span></span>
+  <span style="color:#606">repository</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: openshift</span></span>
+   <span style="color:#606">storage</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: cloudfront </span></span><i class="conum" data-value="2"></i><b>(2)</b>
+      <span style="color:#606">options</span>:
+        <span style="color:#606">baseurl</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">https://jrpbyn0k5k88bi.cloudfront.net/ </span></span><i class="conum" data-value="3"></i><b>(3)</b>
+        <span style="color:#606">privatekey</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/etc/docker/cloudfront-ABCEDFGHIJKLMNOPQRST.pem </span></span><i class="conum" data-value="4"></i><b>(4)</b>
+        <span style="color:#606">keypairid</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ABCEDFGHIJKLMNOPQRST </span></span><i class="conum" data-value="5"></i><b>(5)</b>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: openshift</span></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The S3 storage must be configured the same way regardless of CloudFront
+middleware.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The CloudFront storage middleware needs to be listed before OpenShift
+middleware.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The CloudFront base URL. In the AWS management console, this is listed as
+<strong>Domain Name</strong> of CloudFront distribution.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The location of your AWS private key on the filesystem. This must be not
+confused with Amazon EC2 key pair. Please refer to
+<a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-trusted-signers.html#private-content-creating-cloudfront-key-pairs">AWS
+documentation</a> on creating CloudFront key pairs for your trusted signers. The
+file needs to be mounted as a secret
+<a href="../../dev_guide/secrets.html#dev-guide-secrets">secret</a> into the registry
+pod.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The ID of your Cloudfront key pair.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="middleware-overriding"><a class="anchor" href="#middleware-overriding"></a>Overriding Middleware Configuration Options</h4>
+<div class="paragraph">
+<p>The <strong>middleware</strong> section cannot be overridden using environment variables.
+There are a few exceptions, however. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">middleware</span>:
+  <span style="color:#606">repository</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: openshift</span></span>
+      <span style="color:#606">options</span>:
+        <span style="color:#606">acceptschema2</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true </span></span><i class="conum" data-value="1"></i><b>(1)</b>
+        <span style="color:#606">pullthrough</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true </span></span><i class="conum" data-value="2"></i><b>(2)</b>
+        <span style="color:#606">mirrorpullthrough</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true </span></span><i class="conum" data-value="3"></i><b>(3)</b>
+        <span style="color:#606">enforcequota</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">false </span></span><i class="conum" data-value="4"></i><b>(4)</b>
+        <span style="color:#606">projectcachettl</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">1m </span></span><i class="conum" data-value="5"></i><b>(5)</b>
+        <span style="color:#606">blobrepositorycachettl</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">10m </span></span><i class="conum" data-value="6"></i><b>(6)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>A configuration option that can be overridden by the boolean environment
+variable <code>REGISTRY_MIDDLEWARE_REPOSITORY_OPENSHIFT_ACCEPTSCHEMA2</code>, which
+allows for the ability to accept manifest schema v2 on manifest put requests.
+Recognized values are <code>true</code> and <code>false</code> (which applies to all the other
+boolean variables below).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>A configuration option that can be overridden by the boolean environment
+variable <code>REGISTRY_MIDDLEWARE_REPOSITORY_OPENSHIFT_PULLTHROUGH</code>, which
+enables a proxy mode for remote repositories.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>A configuration option that can be overridden by the boolean environment
+variable <code>REGISTRY_MIDDLEWARE_REPOSITORY_OPENSHIFT_MIRRORPULLTHROUGH</code>, which
+instructs registry to mirror blobs locally if serving remote blobs.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>A configuration option that can be overridden by the boolean environment
+variable <code>REGISTRY_MIDDLEWARE_REPOSITORY_OPENSHIFT_ENFORCEQUOTA</code>, which
+allows the ability to turn quota enforcement on or off. By default, quota
+enforcement is off.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>A configuration option that can be overridden by the environment variable
+<code>REGISTRY_MIDDLEWARE_REPOSITORY_OPENSHIFT_PROJECTCACHETTL</code>, specifying an
+eviction timeout for project quota objects. It takes a valid time duration
+string (for example, <code>2m</code>). If empty, you get the default timeout. If zero
+(<code>0m</code>), caching is disabled.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>A configuration option that can be overridden by the environment variable
+<code>REGISTRY_MIDDLEWARE_REPOSITORY_OPENSHIFT_BLOBREPOSITORYCACHETTL</code>, specifying
+an eviction timeout for associations between blob and containing repository.
+The format of the value is the same as in <code>projectcachettl</code> case.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="middleware-repository-pullthrough"><a class="anchor" href="#middleware-repository-pullthrough"></a>Image Pullthrough</h4>
+<div class="paragraph">
+<p>If enabled, the registry will attempt to fetch requested blob from a remote
+registry unless the blob exists locally. The remote candidates are calculated
+from <strong>DockerImage</strong> entries stored in status of the
+<a href="../../architecture/core_concepts/builds_and_image_streams.html#image-streams">image
+stream</a>, a client pulls from. All the unique remote registry references in
+such entries will be tried in turn until the blob is found.</p>
+</div>
+<div class="paragraph">
+<p>Pullthrough will only occur if an image stream tag exists for the image being
+pulled. For example, if the image being pulled is
+<code><strong>docker-registry.default.svc:5000/yourproject/yourimage:prod</strong></code> then the
+registry will look for an image stream tag named <code><strong>yourimage:prod</strong></code> in the
+project <code><strong>yourproject</strong></code>. If it finds one, it will attempt to pull the image
+using the <code><strong>dockerImageReference</strong></code> associated with that image stream tag.</p>
+</div>
+<div class="paragraph">
+<p>When performing pullthrough, the registry will use pull credentials found in the
+project associated with the image stream tag that is being referenced. This
+capability also makes it possible for you to pull images that reside on a
+registry they do not have credentials to access, as long as you have access
+to the image stream tag that references the image.</p>
+</div>
+<div class="paragraph">
+<p>Note that by default image stream tags use a reference policy type of <code><strong>Source</strong></code>
+which means that when the image stream reference is resolved to an image pull
+specification, the specification used will point to the source of the image.
+For images hosted on external registries, this will be the external registry and
+as a result the resource will reference and pull the image by the external
+registry. For example, <code><strong>registry.access.redhat.com/openshift3/jenkins-2-rhel7</strong></code> and
+pullthrough will not apply. To ensure that resources referencing image streams
+use a pull specification that points to the internal registry, the image stream
+tag should use a reference policy type of <code><strong>Local</strong></code>. More information is available on
+<a href="../../dev_guide/managing_images.html#reference-policy">Reference Policy</a>.</p>
+</div>
+<div class="paragraph">
+<p>This feature is on by default. However, it can be disabled using a
+<a href="#docker-registry-configuration-reference-middleware">configuration option</a>.</p>
+</div>
+<div class="paragraph">
+<p>By default, all the remote blobs served this way are stored locally for
+subsequent faster access unless <code>mirrorpullthrough</code> is disabled. The downside
+of this mirroring feature is an increased storage usage.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The mirroring starts when a client tries to fetch at least a single byte of the
+blob. To pre-fetch a particular image into integrated registry before it is
+actually needed, you can run the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc get imagestreamtag/${IS}:${TAG} -o jsonpath='{ .image.dockerImageLayers[*].name }' | \
+  xargs -n1 -I {} curl -H "Range: bytes=0-1" -u user:${TOKEN} \
+  http://${REGISTRY_IP}:${PORT}/v2/default/mysql/blobs/{}</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This OpenShift Origin mirroring feature should not be confused with the upstream
+<a href="https://docs.docker.com/registry/recipes/mirror/">registry pull through cache feature</a>,
+which is a similar but distinct capability.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="middleware-repository-acceptschema2"><a class="anchor" href="#middleware-repository-acceptschema2"></a>Manifest Schema v2 Support</h4>
+<div class="paragraph">
+<p>Each image has a manifest describing its blobs, instructions for running it
+and additional metadata. The manifest is versioned, with each version having different
+structure and fields as it evolves over time. The same image can be represented
+by multiple manifest versions. Each version will have different digest though.</p>
+</div>
+<div class="paragraph">
+<p>The registry currently supports
+<a href="https://github.com/docker/distribution/blob/master/docs/spec/manifest-v2-1.md#image-manifest-version-2-schema-1">manifest
+v2 schema 1</a> (<strong>schema1</strong>) and
+<a href="https://github.com/docker/distribution/blob/master/docs/spec/manifest-v2-2.md#image-manifest-version-2-schema-2">manifest
+v2 schema 2</a> (<strong>schema2</strong>). The former is being obsoleted but will be supported
+for an extended amount of time.</p>
+</div>
+<div class="paragraph">
+<p>You should be wary of compatibility issues with various Docker clients:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Docker clients of version 1.9 or older support only <strong>schema1</strong>. Any manifest
+this client pulls or pushes will be of this legacy schema.</p>
+</li>
+<li>
+<p>Docker clients of version 1.10 support both <strong>schema1</strong> and <strong>schema2</strong>. And by default, it will
+push the latter to the registry if it supports newer schema.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The registry, storing an image with <strong>schema1</strong> will always return it unchanged
+to the client. <strong>Schema2</strong> will be transferred unchanged only to newer Docker
+client. For the older one, it will be converted on-the-fly to <strong>schema1</strong>.</p>
+</div>
+<div class="paragraph">
+<p>This has significant consequences. For example an image pushed to the registry
+by a newer Docker client cannot be pulled by the older Docker by its digest.
+That&#8217;s because the stored image&#8217;s manifest is of <strong>schema2</strong> and its digest can
+be used to pull only this version of manifest.</p>
+</div>
+<div class="paragraph">
+<p>For this reason, the registry is configured by default not to store <strong>schema2</strong>.
+This ensures that any docker client will be able to pull from the registry any
+image pushed there regardless of client&#8217;s version.</p>
+</div>
+<div class="paragraph">
+<p>Once you&#8217;re confident that all the registry clients support <strong>schema2</strong>, you&#8217;ll
+be safe to enable its support in the registry. See the
+<a href="#docker-registry-configuration-reference-middleware">middleware
+configuration reference</a> above for particular option.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="docker-registry-configuration-reference-openshift"><a class="anchor" href="#docker-registry-configuration-reference-openshift"></a>OpenShift</h3>
+<div class="paragraph">
+<p>This section reviews the configuration of global settings for features specific
+to OpenShift Origin. In a future release, <code>openshift</code>-related settings in the
+<a href="#docker-registry-configuration-reference-middleware">Middleware</a> section will
+be obsoleted.</p>
+</div>
+<div class="paragraph">
+<p>Currently, this section allows you to configure registry metrics collection:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">openshift:
+  version: 1.0 <i class="conum" data-value="1"></i><b>(1)</b>
+  server:
+    addr: docker-registry.default.svc <i class="conum" data-value="2"></i><b>(2)</b>
+  metrics:
+    enabled: false <i class="conum" data-value="3"></i><b>(3)</b>
+    secret: &lt;secret&gt; <i class="conum" data-value="4"></i><b>(4)</b>
+  requests:
+    read:
+      maxrunning: 10 <i class="conum" data-value="5"></i><b>(5)</b>
+      maxinqueue: 10 <i class="conum" data-value="6"></i><b>(6)</b>
+      maxwaitinqueue 2m <i class="conum" data-value="7"></i><b>(7)</b>
+    write:
+      maxrunning: 10 <i class="conum" data-value="8"></i><b>(8)</b>
+      maxinqueue: 10 <i class="conum" data-value="9"></i><b>(9)</b>
+      maxwaitinqueue 2m <i class="conum" data-value="10"></i><b>(10)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>A mandatory entry specifying configuration version of this section. The only
+supported value is <code>1.0</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The hostname of the registry.  Should be set to the same value configured on the
+master.  It can be overridden by the environment variable <code>REGISTRY_OPENSHIFT_SERVER_ADDR</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Can be set to <code>true</code> to enable metrics collection. It can be overridden by the boolean
+environment variable <code>REGISTRY_OPENSHIFT_METRICS_ENABLED</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>A secret used to authorize client requests. Metrics clients must use it as a
+bearer token in <code>Authorization</code> header. It can be overridden by the environment
+variable <code>REGISTRY_OPENSHIFT_METRICS_SECRET</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Maximum number of simultaneous pull requests.  It can be overridden by the
+environment variable <code>REGISTRY_OPENSHIFT_REQUESTS_READ_MAXRUNNING</code>.  Zero indicates no limit.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Maximum number of queued pull requests.  It can be overridden by the
+environment variable <code>REGISTRY_OPENSHIFT_REQUESTS_READ_MAXINQUEUE</code>.  Zero indicates no limit.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Maximum time a pull request can wait in the queue before being rejected.
+It can be overridden by the environment variable <code>REGISTRY_OPENSHIFT_REQUESTS_READ_MAXWAITINQUEUE</code>.
+Zero indicates no limit.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>Maximum number of simultaneous push requests.  It can be overridden by the
+environment variable <code>REGISTRY_OPENSHIFT_REQUESTS_WRITE_MAXRUNNING</code>.  Zero indicates no limit.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>Maximum number of queued push requests.  It can be overridden by the
+environment variable <code>REGISTRY_OPENSHIFT_REQUESTS_WRITE_MAXINQUEUE</code>.  Zero indicates no limit.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>Maximum time a push request can wait in the queue before being rejected.  It can be overridden by the
+environment variable <code>REGISTRY_OPENSHIFT_REQUESTS_WRITE_MAXWAITINQUEUE</code>.
+Zero indicates no limit.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>See <a href="accessing_registry.html#accessing-registry-metrics">Accessing Registry Metrics</a> for usage information.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="docker-registry-configuration-reference-reporting"><a class="anchor" href="#docker-registry-configuration-reference-reporting"></a>Reporting</h3>
+<div class="paragraph">
+<p>Reporting is unsupported.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="docker-registry-configuration-reference-http"><a class="anchor" href="#docker-registry-configuration-reference-http"></a>HTTP</h3>
+<div class="paragraph">
+<p><a href="https://docs.docker.com/registry/configuration/#http">Upstream options</a> are
+supported. <a href="#securing-the-registry">Learn how to alter these settings via
+environment variables</a>. Only the <strong>tls</strong> section should be altered. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">http</span>:
+  <span style="color:#606">addr</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">:5000</span></span>
+  <span style="color:#606">tls</span>:
+    <span style="color:#606">certificate</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/etc/secrets/registry.crt</span></span>
+    <span style="color:#606">key</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/etc/secrets/registry.key</span></span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="docker-registry-configuration-reference-notifications"><a class="anchor" href="#docker-registry-configuration-reference-notifications"></a>Notifications</h3>
+<div class="paragraph">
+<p><a href="https://docs.docker.com/registry/configuration/#notifications">Upstream
+options</a> are supported. The <a href="../../rest_api/index.html#rest-api-index">REST API Reference</a>
+provides more comprehensive integration options.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">notifications</span>:
+  <span style="color:#606">endpoints</span>:
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: registry</span></span>
+      <span style="color:#606">disabled</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">false</span></span>
+      <span style="color:#606">url</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">https://url:port/path</span></span>
+      <span style="color:#606">headers</span>:
+        <span style="color:#606">Accept</span>:
+          - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">text/plain</span></span>
+      <span style="color:#606">timeout</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">500</span></span>
+      <span style="color:#606">threshold</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">5</span></span>
+      <span style="color:#606">backoff</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">1000</span></span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="docker-registry-configuration-reference-redis"><a class="anchor" href="#docker-registry-configuration-reference-redis"></a>Redis</h3>
+<div class="paragraph">
+<p>Redis is not supported.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="docker-registry-configuration-reference-health"><a class="anchor" href="#docker-registry-configuration-reference-health"></a>Health</h3>
+<div class="paragraph">
+<p><a href="https://docs.docker.com/registry/configuration/#health">Upstream options</a>
+are supported. The registry deployment configuration provides an integrated
+health check at <strong>/healthz</strong>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="docker-registry-configuration-reference-proxy"><a class="anchor" href="#docker-registry-configuration-reference-proxy"></a>Proxy</h3>
+<div class="paragraph">
+<p>Proxy configuration should not be enabled. This functionality is provided by
+the <a href="#docker-registry-configuration-reference-middleware">OpenShift Origin
+repository middleware extension</a>, <strong>pullthrough: true</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    /*<![CDATA[*/
+    $(document).ready(function() {
+      $("[id^='topicGroup']").on('show.bs.collapse', function (event) {
+        if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+          $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+        }
+      });
+      $("[id^='topicGroup']").on('hide.bs.collapse', function (event) {
+        if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+          $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+        }
+      });
+      $("[id^='topicSubGroup']").on('show.bs.collapse', function () {
+        $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+      });
+      $("[id^='topicSubGroup']").on('hide.bs.collapse', function () {
+        $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+      });
+    });
+    /*]]>*/
+  </script>
+    <footer class="footer-origin-docs">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="footer_social">
+          <a href="https://twitter.com/openshift" class="first">
+            <span>
+              <i class="fa fa-twitter-square fa-2x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="https://github.com/openshift/origin">
+            <span>
+              <i class="fa fa-github fa-2x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="https://plus.google.com/communities/114361859072744017486">
+            <span>
+              <i class="fa fa-google-plus-square fa-2x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="https://www.facebook.com/openshift">
+            <span>
+              <i class="fa fa-facebook-square fa-2x fa-inverse"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <a id="footer_logo" href="https://www.redhat.com/">
+          <img alt="Red Hat" src="https://assets.openshift.net/app/assets/redhat.svg">
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 text-center">
+        <a id="powered_by_openshift" title="Powered by OpenShift Online with the DIY Cartridge" href="https://hub.openshift.com/quickstarts/92-do-it-yourself-0-1">
+          <img src="https://www.openshift.com/sites/default/files/images/powered-transparent-white.png" alt="Powered by OpenShift Online">
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 text-right">
+        <a id="built_with_asciibinder" title="Built with AsciiBinder docs management system" href="http://asciibinder.org/">
+          <img src="../../../go-client-preview/_images/asciibinder_web_logo.svg" alt="AsciiBinder">
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="attribution">
+          <button type="button" class="btn btn-link" data-html="true" data-container="body" data-toggle="popover" data-placement="top" data-content="
+            '<a target='_blank' href='https://www.flickr.com/photos/eflon/3655695161/'>Spin</a>' by <a target='_blank' href='https://www.flickr.com/photos/eflon/'>eflon</a>,</br> used under <a target='_blank' href='https://creativecommons.org/licenses/by/2.0/'>CC BY 2.0</a> </br>Color tint added to original">
+            Image attribution
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
+    </script>
+  </div>
+</footer>
+</body>
+</html>

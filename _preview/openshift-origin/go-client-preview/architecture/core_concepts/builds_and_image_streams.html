@@ -1,0 +1,2383 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Builds and Image Streams - Core Concepts | Architecture | OpenShift Origin Branch Build</title>
+  <link href="https://assets.openshift.net/content/subdomain.css" rel="stylesheet" type="text/css">
+  <link href="../../../go-client-preview/_stylesheets/docs.css" rel="stylesheet" />
+  <link href="../../../go-client-preview/_stylesheets/search.css" rel="stylesheet" />
+  <link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png">
+  <link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="text/css">
+  <!--[if IE]><link rel="shortcut icon" href="https://assets.openshift.net/content/subdomain/favicon.ico"><![endif]-->
+  <!-- or, set /favicon.ico for IE10 win -->
+  <meta content="OpenShift" name="application-name">
+  <meta content="#000000" name="msapplication-TileColor">
+  <meta content="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" name="msapplication-TileImage">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://assets.openshift.net/content/html5shiv.js" type="text/javascript"></script>
+    <script src="https://assets.openshift.net/content/respond.js" type="text/javascript"></script>
+    <link href="https://assets.openshift.net/content/vendor/respond-js/respond-proxy.html" id="respond-proxy" rel="respond-proxy">
+    <link href="../../../go-client-preview/_images/respond.proxy.gif" id="respond-redirect" rel="respond-redirect">
+    <script src="../../../go-client-preview/_javascripts/respond.proxy.js" type="text/javascript"></script>
+  <![endif]-->
+  <script src="https://assets.openshift.net/content/modernizr.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/subdomain.js" type="text/javascript"></script>
+  <script src="../../../go-client-preview/_javascripts/bootstrap-offcanvas.js" type="text/javascript"></script>
+  <script src="../../../go-client-preview/_javascripts/reformat-html.js" type="text/javascript"></script>
+  <script src="../../../go-client-preview/_javascripts/hc-search.js" type="text/javascript"></script>
+  <script async src="//www.google-analytics.com/analytics.js" type="text/javascript"></script>
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-40375612-1', 'openshift.org');
+  ga('set', 'forceSSL', true);
+  ga('send', 'pageview');
+</script>
+</head>
+<body>
+  <div class="navbar navbar-default navbar-openshift navbar-origin" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand origin" href="/"></a>
+  </div>
+</div>
+  <div class="container">
+    <p class="toggle-nav visible-xs pull-left">
+      <button class="btn btn-default btn-sm" type="button" data-toggle="offcanvas">Toggle nav</button>
+    </p>
+    <ol class="breadcrumb">
+      <li class="sitename">
+        <a href="../../../index.html">Documentation</a>
+      </li>
+      <li class="hidden-xs active">
+        <a href="../../welcome/index.html">OpenShift Origin Branch Build</a>
+      </li>
+      <li class="hidden-xs active">
+        <a href="../../architecture/index.html">Architecture</a>
+      </li>
+      <li class="hidden-xs active"><a href="../../architecture/core_concepts/index.html">Core Concepts</a></li>
+      <li class="hidden-xs active">
+        Builds and Image Streams
+      </li>
+    </ol>
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-8 col-sm-3 col-md-3 sidebar sidebar-offcanvas">
+        <div class="row-fluid">
+          <div id="hc-search">
+  <input id="hc-search-input" type="text">
+  <button id="hc-search-btn">Search</button>
+</div>
+
+<div id="hc-search-modal">
+  <div id="hc-modal-content">
+    <span id="hc-modal-close">&times;</span>
+    <div id="hc-search-results"></div>
+  </div>
+</div>
+
+<script>
+  hcSearchCategory("docs_origin", "Branch Build");
+</script>
+        </div>
+        <ul class="nav nav-sidebar">
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup0">
+        <span id="tgSpan0" class="fa fa-angle-right"></span>About
+      </a>
+      <ul id="topicGroup0" class="collapse  list-unstyled">
+            <li><a class="" href="../../welcome/index.html">Welcome</a></li>
+            <li><a class="" href="../../welcome/legal_notice.html">Legal Notice</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup1">
+        <span id="tgSpan1" class="fa fa-angle-right"></span>What's New?
+      </a>
+      <ul id="topicGroup1" class="collapse  list-unstyled">
+            <li><a class="" href="../../whats_new/index.html">Overview</a></li>
+            <li><a class="" href="../../whats_new/applications.html">Applications</a></li>
+            <li><a class="" href="../../whats_new/carts_vs_images.html">Cartridges vs Images</a></li>
+            <li><a class="" href="../../whats_new/terminology.html">Terminology</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup2">
+        <span id="tgSpan2" class="fa fa-angle-right"></span>Getting Started
+      </a>
+      <ul id="topicGroup2" class="collapse  list-unstyled">
+            <li><a class="" href="../../getting_started/index.html">Overview</a></li>
+            <li><a class="" href="../../getting_started/developers_console.html">Web Console Walkthrough</a></li>
+            <li><a class="" href="../../getting_started/developers_cli.html">Command-Line Walkthrough</a></li>
+            <li><a class="" href="../../getting_started/administrators.html">Setting Up a Cluster</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup3">
+        <span id="tgSpan3" class="fa fa-angle-down"></span>Architecture
+      </a>
+      <ul id="topicGroup3" class="collapse in list-unstyled">
+            <li><a class="" href="../../architecture/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-1">
+                <span id="sgSpan-3-1" class="fa fa-caret-right"></span>&nbsp;Infrastructure Components
+              </a>
+              <ul id="topicSubGroup-3-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/infrastructure_components/kubernetes_infrastructure.html">Kubernetes Infrastructure</a></li>
+                  <li><a class="" href="../../architecture/infrastructure_components/image_registry.html">Container Registry</a></li>
+                  <li><a class="" href="../../architecture/infrastructure_components/web_console.html">Web Console</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-2">
+                <span id="sgSpan-3-2" class="fa fa-caret-down"></span>&nbsp;Core Concepts
+              </a>
+              <ul id="topicSubGroup-3-2" class="nav-tertiary list-unstyled collapse in">
+                  <li><a class="" href="../../architecture/core_concepts/index.html">Overview</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/containers_and_images.html">Containers and Images</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/pods_and_services.html">Pods and Services</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/projects_and_users.html">Projects and Users</a></li>
+                  <li><a class=" active" href="../../architecture/core_concepts/builds_and_image_streams.html">Builds and Image Streams</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/deployments.html">Deployments</a></li>
+                  <li><a class="" href="../../architecture/core_concepts/templates.html">Templates</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-3">
+                <span id="sgSpan-3-3" class="fa fa-caret-right"></span>&nbsp;Additional Concepts
+              </a>
+              <ul id="topicSubGroup-3-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/additional_concepts/authentication.html">Authentication</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/authorization.html">Authorization</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/storage.html">Persistent Storage</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/scm.html">Source Control Management</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/admission_controllers.html">Admission Controllers</a></li>
+                  <li><a class="" href="../../architecture/additional_concepts/other_api_objects.html">Other API Objects</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-4">
+                <span id="sgSpan-3-4" class="fa fa-caret-right"></span>&nbsp;Networking
+              </a>
+              <ul id="topicSubGroup-3-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/networking/networking.html">Networking</a></li>
+                  <li><a class="" href="../../architecture/networking/sdn.html">OpenShift SDN</a></li>
+                  <li><a class="" href="../../architecture/networking/network_plugins.html">Network Plug-ins</a></li>
+                  <li><a class="" href="../../architecture/networking/port_forwarding.html">Port Forwarding</a></li>
+                  <li><a class="" href="../../architecture/networking/remote_commands.html">Remote Commands</a></li>
+                  <li><a class="" href="../../architecture/networking/haproxy-router.html">HAProxy Router Plug-in</a></li>
+                  <li><a class="" href="../../architecture/networking/routes.html">Routes</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-3-5">
+                <span id="sgSpan-3-5" class="fa fa-caret-right"></span>&nbsp;Service Catalog Components
+              </a>
+              <ul id="topicSubGroup-3-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../architecture/service_catalog/index.html">Service Catalog</a></li>
+                  <li><a class="" href="../../architecture/service_catalog/template_service_broker.html">Template Service Broker</a></li>
+                  <li><a class="" href="../../architecture/service_catalog/ansible_service_broker.html">OpenShift Ansible Broker</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup4">
+        <span id="tgSpan4" class="fa fa-angle-right"></span>Container Security Guide
+      </a>
+      <ul id="topicGroup4" class="collapse  list-unstyled">
+            <li><a class="" href="../../security/index.html">Introduction</a></li>
+            <li><a class="" href="../../security/hosts_multitenancy.html">Container Hosts and Multi-tenancy</a></li>
+            <li><a class="" href="../../security/container_content.html">Container Content</a></li>
+            <li><a class="" href="../../security/registries.html">Registries</a></li>
+            <li><a class="" href="../../security/build_process.html">Build Process</a></li>
+            <li><a class="" href="../../security/deployment.html">Deployment</a></li>
+            <li><a class="" href="../../security/securing_container_platform.html">Securing the Container Platform</a></li>
+            <li><a class="" href="../../security/network_security.html">Network Security</a></li>
+            <li><a class="" href="../../security/storage.html">Attached Storage</a></li>
+            <li><a class="" href="../../security/monitoring.html">Monitoring Events and Logs</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup5">
+        <span id="tgSpan5" class="fa fa-angle-right"></span>Installation and Configuration
+      </a>
+      <ul id="topicGroup5" class="collapse  list-unstyled">
+            <li><a class="" href="../../install_config/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-1">
+                <span id="sgSpan-5-1" class="fa fa-caret-right"></span>&nbsp;Installing a Cluster
+              </a>
+              <ul id="topicSubGroup-5-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/install/planning.html">Planning</a></li>
+                  <li><a class="" href="../../install_config/install/prerequisites.html">Prerequisites</a></li>
+                  <li><a class="" href="../../install_config/install/host_preparation.html">Host Preparation</a></li>
+                  <li><a class="" href="../../install_config/install/rpm_vs_containerized.html">Installing on Containerized Hosts</a></li>
+                  <li><a class="" href="../../install_config/install/quick_install.html">Quick Installation</a></li>
+                  <li><a class="" href="../../install_config/install/advanced_install.html">Advanced Installation</a></li>
+                  <li><a class="" href="../../install_config/install/stand_alone_registry.html">Installing a Stand-alone Deployment of OpenShift Container Registry</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-2">
+                <span id="sgSpan-5-2" class="fa fa-caret-right"></span>&nbsp;Setting up the Registry
+              </a>
+              <ul id="topicSubGroup-5-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/registry/index.html">Registry Overview</a></li>
+                  <li><a class="" href="../../install_config/registry/deploy_registry_existing_clusters.html">Deploying a Registry on Existing Clusters</a></li>
+                  <li><a class="" href="../../install_config/registry/accessing_registry.html">Accessing the Registry</a></li>
+                  <li><a class="" href="../../install_config/registry/securing_and_exposing_registry.html">Securing and Exposing the Registry</a></li>
+                  <li><a class="" href="../../install_config/registry/extended_registry_configuration.html">Extended Registry Configuration</a></li>
+                  <li><a class="" href="../../install_config/registry/registry_known_issues.html">Known Issues</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-3">
+                <span id="sgSpan-5-3" class="fa fa-caret-right"></span>&nbsp;Setting up a Router
+              </a>
+              <ul id="topicSubGroup-5-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/router/index.html">Router Overview</a></li>
+                  <li><a class="" href="../../install_config/router/default_haproxy_router.html">Using the Default HAProxy Router</a></li>
+                  <li><a class="" href="../../install_config/router/customized_haproxy_router.html">Deploying a Customized HAProxy Router</a></li>
+                  <li><a class="" href="../../install_config/router/proxy_protocol.html">Configuring the HAProxy Router to Use the PROXY Protocol</a></li>
+                  <li><a class="" href="../../install_config/router/f5_router.html">Using the F5 Router Plug-in</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-4">
+                <span id="sgSpan-5-4" class="fa fa-caret-right"></span>&nbsp;Upgrading a Cluster
+              </a>
+              <ul id="topicSubGroup-5-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/upgrading/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/upgrading/automated_upgrades.html">Automated In-place Upgrades</a></li>
+                  <li><a class="" href="../../install_config/upgrading/manual_upgrades.html">Manual In-place Upgrades</a></li>
+                  <li><a class="" href="../../install_config/upgrading/blue_green_deployments.html">Blue-Green Deployments</a></li>
+                  <li><a class="" href="../../install_config/upgrading/os_upgrades.html">Operating System Updates and Upgrades</a></li>
+                  <li><a class="" href="../../install_config/upgrading/migrating_embedded_etcd.html">Migrating Embedded etcd to External etcd</a></li>
+                  <li><a class="" href="../../install_config/upgrading/migrating_etcd.html">Migrating etcd Data (v2 to v3)</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../install_config/master_node_configuration.html">Master and Node Configuration</a></li>
+            <li><a class="" href="../../install_config/oab_broker_configuration.html">OpenShift Ansible Broker Configuration</a></li>
+            <li><a class="" href="../../install_config/adding_hosts_to_existing_cluster.html">Adding Hosts to an Existing Cluster</a></li>
+            <li><a class="" href="../../install_config/imagestreams_templates.html">Loading the Default Image Streams and Templates</a></li>
+            <li><a class="" href="../../install_config/certificate_customization.html">Configuring Custom Certificates</a></li>
+            <li><a class="" href="../../install_config/redeploying_certificates.html">Redeploying Certificates</a></li>
+            <li><a class="" href="../../install_config/configuring_authentication.html">Configuring Authentication and User Agent</a></li>
+            <li><a class="" href="../../install_config/syncing_groups_with_ldap.html">Syncing Groups With LDAP</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-13">
+                <span id="sgSpan-5-13" class="fa fa-caret-right"></span>&nbsp;Advanced LDAP Configuration
+              </a>
+              <ul id="topicSubGroup-5-13" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/sssd_for_ldap_failover.html">Setting up SSSD for LDAP Failover</a></li>
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/configuring_form_based_authentication.html">Configuring Form-Based Authentication</a></li>
+                  <li><a class="" href="../../install_config/advanced_ldap_configuration/configuring_extended_ldap_attributes.html">Configuring Extended LDAP Attributes</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../install_config/configuring_sdn.html">Configuring the SDN</a></li>
+            <li><a class="" href="../../install_config/configuring_nuagesdn.html">Configuring Nuage SDN</a></li>
+            <li><a class="" href="../../install_config/configuring_kuryrsdn.html">Configuring Kuryr SDN</a></li>
+            <li><a class="" href="../../install_config/configuring_aws.html">Configuring for AWS</a></li>
+            <li><a class="" href="../../install_config/configuring_openstack.html">Configuring for OpenStack</a></li>
+            <li><a class="" href="../../install_config/configuring_gce.html">Configuring for GCE</a></li>
+            <li><a class="" href="../../install_config/configuring_azure.html">Configuring for Azure</a></li>
+            <li><a class="" href="../../install_config/configuring_vsphere.html">Configuring for VMWare vSphere</a></li>
+            <li><a class="" href="../../install_config/configuring_local.html">Configuring for local Volume</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-23">
+                <span id="sgSpan-5-23" class="fa fa-caret-right"></span>&nbsp;Configuring Persistent Storage
+              </a>
+              <ul id="topicSubGroup-5-23" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/persistent_storage/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_nfs.html">Using NFS</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_glusterfs.html">Using GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_cinder.html">Using OpenStack Cinder</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_ceph_rbd.html">Using Ceph RBD</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_aws.html">Using AWS Elastic Block Store</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_gce.html">Using GCE Persistent Disk</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_iscsi.html">Using iSCSI</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_fibre_channel.html">Using Fibre Channel</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_azure.html">Using Azure Disk</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_azure_file.html">Using Azure File</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_flex_volume.html">Using FlexVolume</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_vsphere.html">Using VMWare vSphere</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/persistent_storage_local.html">Using Local Volume</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/dynamically_provisioning_pvs.html">Dynamic Provisioning and Creating Storage Classes</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/pod_security_context.html">Volume Security</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/selector_label_binding.html">Selector-Label Volume Binding</a></li>
+                  <li><a class="" href="../../install_config/persistent_storage/enabling_controller_attach_detach.html">Enabling Controller-managed Attachment and Detachment</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-5-24">
+                <span id="sgSpan-5-24" class="fa fa-caret-right"></span>&nbsp;Persistent Storage Examples
+              </a>
+              <ul id="topicSubGroup-5-24" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../install_config/storage_examples/index.html">Overview</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/shared_storage.html">Sharing an NFS PV Across Two Pods</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/ceph_example.html">Complete Example Using Ceph RBD</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/ceph_rbd_dynamic_example.html">Complete Example Using Ceph RBD for Dynamic Provisioning</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/gluster_example.html">Complete Example Using GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/gluster_dynamic_example.html">Dynamic Provisioning Example Using Containerized GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/dedicated_gluster_dynamic_example.html">Dynamic Provisioning Example Using Dedicated GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/containerized_heketi_with_dedicated_gluster.html">Containerized Heketi for Managing Dedicated GlusterFS</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/privileged_pod_storage.html">Mounting Volumes To Privileged Pods</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/gluster_backed_registry.html">Backing Docker Registry with GlusterFS Storage</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/binding_pv_by_label.html">Binding Persistent Volumes by Label</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/storage_classes_dynamic_provisioning.html">Using StorageClasses for Dynamic Provisioning</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/storage_classes_legacy.html">Using StorageClasses for Existing Legacy Storage</a></li>
+                  <li><a class="" href="../../install_config/storage_examples/azure_blob_docker_registry_example.html">Configuring Azure Blob Storage for Integrated Docker Registry</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../install_config/http_proxies.html">Working with HTTP Proxies</a></li>
+            <li><a class="" href="../../install_config/build_defaults_overrides.html">Configuring Global Build Defaults and Overrides</a></li>
+            <li><a class="" href="../../install_config/configuring_pipeline_execution.html">Configuring Pipeline Execution</a></li>
+            <li><a class="" href="../../install_config/configuring_routing.html">Configuring Route Timeouts</a></li>
+            <li><a class="" href="../../install_config/configuring_native_container_routing.html">Configuring Native Container Routing</a></li>
+            <li><a class="" href="../../install_config/routing_from_edge_lb.html">Routing from Edge Load Balancers</a></li>
+            <li><a class="" href="../../install_config/aggregate_logging.html">Aggregating Container Logs</a></li>
+            <li><a class="" href="../../install_config/aggregate_logging_sizing.html">Aggregate Logging Sizing Guidelines</a></li>
+            <li><a class="" href="../../install_config/cluster_metrics.html">Enabling Cluster Metrics</a></li>
+            <li><a class="" href="../../install_config/web_console_customization.html">Customizing the Web Console</a></li>
+            <li><a class="" href="../../install_config/provisioners.html">Deploying External Persistent Volume Provisioners</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup6">
+        <span id="tgSpan6" class="fa fa-angle-right"></span>Day Two Operations Guide
+      </a>
+      <ul id="topicGroup6" class="collapse  list-unstyled">
+            <li><a class="" href="../../day_two_guide/index.html">Overview</a></li>
+            <li><a class="" href="../../day_two_guide/run_once_tasks.html">Run-once tasks</a></li>
+            <li><a class="" href="../../day_two_guide/environment_health_checks.html">Environment health checks</a></li>
+            <li><a class="" href="../../day_two_guide/host_level_tasks.html">Host-level tasks</a></li>
+            <li><a class="" href="../../day_two_guide/project_level_tasks.html">Project-level tasks</a></li>
+            <li><a class="" href="../../day_two_guide/docker_tasks.html">Docker tasks</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup7">
+        <span id="tgSpan7" class="fa fa-angle-right"></span>Cluster Administration
+      </a>
+      <ul id="topicGroup7" class="collapse  list-unstyled">
+            <li><a class="" href="../../admin_guide/index.html">Overview</a></li>
+            <li><a class="" href="../../admin_guide/manage_nodes.html">Managing Nodes</a></li>
+            <li><a class="" href="../../admin_guide/manage_users.html">Managing Users</a></li>
+            <li><a class="" href="../../admin_guide/managing_projects.html">Managing Projects</a></li>
+            <li><a class="" href="../../admin_guide/managing_pods.html">Managing Pods</a></li>
+            <li><a class="" href="../../admin_guide/managing_networking.html">Managing Networking</a></li>
+            <li><a class="" href="../../admin_guide/service_accounts.html">Configuring Service Accounts</a></li>
+            <li><a class="" href="../../admin_guide/manage_rbac.html">Managing Role-based Access Control</a></li>
+            <li><a class="" href="../../admin_guide/image_policy.html">Image Policy</a></li>
+            <li><a class="" href="../../admin_guide/image_signatures.html">Image Signatures</a></li>
+            <li><a class="" href="../../admin_guide/scoped_tokens.html">Scoped Tokens</a></li>
+            <li><a class="" href="../../admin_guide/monitoring_images.html">Monitoring Images</a></li>
+            <li><a class="" href="../../admin_guide/manage_scc.html">Managing Security Context Constraints</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-7-13">
+                <span id="sgSpan-7-13" class="fa fa-caret-right"></span>&nbsp;Scheduling
+              </a>
+              <ul id="topicSubGroup-7-13" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../admin_guide/scheduling/index.html">Overview</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/scheduler.html">Default Scheduling</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/custom_scheduler.html">Custom Scheduling</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/scheduler-advanced.html">Advanced Scheduling</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/node_affinity.html">Advanced Scheduling and Node Affinity</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/pod_affinity.html">Advanced Scheduling and Pod Affinity/Anti-affinity</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/node_selector.html">Advanced Scheduling and Node Selectors</a></li>
+                  <li><a class="" href="../../admin_guide/scheduling/taints_tolerations.html">Advanced Scheduling and Taints and Tolerations</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../admin_guide/quota.html">Setting Quotas</a></li>
+            <li><a class="" href="../../admin_guide/multiproject_quota.html">Setting Multi-Project Quotas</a></li>
+            <li><a class="" href="../../admin_guide/limits.html">Setting Limit Ranges</a></li>
+            <li><a class="" href="../../admin_guide/pruning_resources.html">Pruning Objects</a></li>
+            <li><a class="" href="../../admin_guide/custom_resource_definitions.html">Extending the Kubernetes API with Custom Resources</a></li>
+            <li><a class="" href="../../admin_guide/garbage_collection.html">Garbage Collection</a></li>
+            <li><a class="" href="../../admin_guide/allocating_node_resources.html">Allocating Node Resources</a></li>
+            <li><a class="" href="../../admin_guide/opaque_integer_resources.html">Opaque Integer Resources</a></li>
+            <li><a class="" href="../../admin_guide/overcommit.html">Overcommitting</a></li>
+            <li><a class="" href="../../admin_guide/tcp_ingress_external_ports.html">Assigning Unique External IPs for Ingress Traffic</a></li>
+            <li><a class="" href="../../admin_guide/out_of_resource_handling.html">Out of Resource Handling</a></li>
+            <li><a class="" href="../../admin_guide/router.html">Monitoring and Debugging Routers</a></li>
+            <li><a class="" href="../../admin_guide/high_availability.html">High Availability</a></li>
+            <li><a class="" href="../../admin_guide/iptables.html">IPtables</a></li>
+            <li><a class="" href="../../admin_guide/securing_builds.html">Securing Builds by Strategy</a></li>
+            <li><a class="" href="../../admin_guide/seccomp.html">Restricting Application Capabilities Using Seccomp</a></li>
+            <li><a class="" href="../../admin_guide/sysctls.html">Sysctls</a></li>
+            <li><a class="" href="../../admin_guide/encrypting_data.html">Encrypting Data at Datastore Layer</a></li>
+            <li><a class="" href="../../admin_guide/ipsec.html">Encrypting Hosts with IPsec</a></li>
+            <li><a class="" href="../../admin_guide/building_dependency_trees.html">Building Dependency Trees</a></li>
+            <li><a class="" href="../../admin_guide/backup_restore.html">Backup and Restore</a></li>
+            <li><a class="" href="../../admin_guide/sdn_troubleshooting.html">Troubleshooting Networking</a></li>
+            <li><a class="" href="../../admin_guide/diagnostics_tool.html">Diagnostics Tool</a></li>
+            <li><a class="" href="../../admin_guide/idling_applications.html">Idling Applications</a></li>
+            <li><a class="" href="../../admin_guide/cluster_capacity.html">Analyzing Cluster Capacity</a></li>
+            <li><a class="" href="../../admin_guide/kuryr.html">Kuryr SDN Administration</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup8">
+        <span id="tgSpan8" class="fa fa-angle-right"></span>Scaling and Performance Guide
+      </a>
+      <ul id="topicGroup8" class="collapse  list-unstyled">
+            <li><a class="" href="../../scaling_performance/index.html">Overview</a></li>
+            <li><a class="" href="../../scaling_performance/install_practices.html">Recommended Installation Practices</a></li>
+            <li><a class="" href="../../scaling_performance/host_practices.html">Recommended Host Practices</a></li>
+            <li><a class="" href="../../scaling_performance/optimizing_compute_resources.html">Optimizing Compute Resources</a></li>
+            <li><a class="" href="../../scaling_performance/optimizing_storage.html">Optimizing Storage</a></li>
+            <li><a class="" href="../../scaling_performance/network_optimization.html">Network Optimization</a></li>
+            <li><a class="" href="../../scaling_performance/routing_optimization.html">Routing Optimization</a></li>
+            <li><a class="" href="../../scaling_performance/scaling_cluster_metrics.html">Scaling Cluster Metrics</a></li>
+            <li><a class="" href="../../scaling_performance/cluster_limits.html">Cluster Limits</a></li>
+            <li><a class="" href="../../scaling_performance/using_cluster_loader.html">Using Cluster Loader</a></li>
+            <li><a class="" href="../../scaling_performance/using_cpu_manager.html">Using CPU Manager</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup9">
+        <span id="tgSpan9" class="fa fa-angle-right"></span>CLI Reference
+      </a>
+      <ul id="topicGroup9" class="collapse  list-unstyled">
+            <li><a class="" href="../../cli_reference/index.html">Overview</a></li>
+            <li><a class="" href="../../cli_reference/get_started_cli.html">Get Started with the CLI</a></li>
+            <li><a class="" href="../../cli_reference/manage_cli_profiles.html">Managing CLI Profiles</a></li>
+            <li><a class="" href="../../cli_reference/basic_cli_operations.html">Developer CLI Operations</a></li>
+            <li><a class="" href="../../cli_reference/admin_cli_operations.html">Administrator CLI Operations</a></li>
+            <li><a class="" href="../../cli_reference/extend_cli.html">Extending the CLI</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup10">
+        <span id="tgSpan10" class="fa fa-angle-right"></span>Developer Guide
+      </a>
+      <ul id="topicGroup10" class="collapse  list-unstyled">
+            <li><a class="" href="../../dev_guide/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-1">
+                <span id="sgSpan-10-1" class="fa fa-caret-right"></span>&nbsp;Application Life Cycle Management
+              </a>
+              <ul id="topicSubGroup-10-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/application_lifecycle/development_process.html">Planning Your Development Process</a></li>
+                  <li><a class="" href="../../dev_guide/application_lifecycle/new_app.html">Creating New Applications</a></li>
+                  <li><a class="" href="../../dev_guide/application_lifecycle/promoting_applications.html">Promoting Applications Across Environments</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../dev_guide/authentication.html">Authentication</a></li>
+            <li><a class="" href="../../dev_guide/authorization.html">Authorization</a></li>
+            <li><a class="" href="../../dev_guide/projects.html">Projects</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-5">
+                <span id="sgSpan-10-5" class="fa fa-caret-right"></span>&nbsp;Migrating Applications
+              </a>
+              <ul id="topicSubGroup-10-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/migrating_applications/index.html">Overview</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/database_applications.html">Database Applications</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/web_framework_applications.html">Web Framework Applications</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/quickstart_examples.html">QuickStart Examples</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/continuous_integration_and_deployment.html">Continuous Integration and Deployment</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/web_hooks_action_hooks.html">Webhooks and Action Hooks</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/S2I_tool.html">S2I Tool</a></li>
+                  <li><a class="" href="../../dev_guide/migrating_applications/support_guide.html">Support Guide</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-6">
+                <span id="sgSpan-10-6" class="fa fa-caret-right"></span>&nbsp;Tutorials
+              </a>
+              <ul id="topicSubGroup-10-6" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/dev_tutorials/index.html">Overview</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/quickstarts.html">Quickstart Templates</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/ruby_on_rails.html">Ruby on Rails</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/maven_tutorial.html">Setting Up a Nexus Mirror</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/openshift_pipeline.html">OpenShift Pipeline Builds</a></li>
+                  <li><a class="" href="../../dev_guide/dev_tutorials/binary_builds.html">Binary Builds</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-7">
+                <span id="sgSpan-10-7" class="fa fa-caret-right"></span>&nbsp;Builds
+              </a>
+              <ul id="topicSubGroup-10-7" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/builds/index.html">How Builds Work</a></li>
+                  <li><a class="" href="../../dev_guide/builds/basic_build_operations.html">Basic Build Operations</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_inputs.html">Build Inputs</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_output.html">Build Output</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_strategies.html">Build Strategy Options</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_environment.html">Build Environment</a></li>
+                  <li><a class="" href="../../dev_guide/builds/triggering_builds.html">Triggering Builds</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_hooks.html">Build Hooks</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_run_policy.html">Build Run Policy</a></li>
+                  <li><a class="" href="../../dev_guide/builds/advanced_build_operations.html">Advanced Build Operations</a></li>
+                  <li><a class="" href="../../dev_guide/builds/build_troubleshooting.html">Troubleshooting</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-8">
+                <span id="sgSpan-10-8" class="fa fa-caret-right"></span>&nbsp;Deployments
+              </a>
+              <ul id="topicSubGroup-10-8" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/deployments/how_deployments_work.html">How Deployments Work</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/basic_deployment_operations.html">Basic Deployment Operations</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/deployment_strategies.html">Deployment Strategies</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/advanced_deployment_strategies.html">Advanced Deployment Strategies</a></li>
+                  <li><a class="" href="../../dev_guide/deployments/kubernetes_deployments.html">Kubernetes Deployments Support</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../dev_guide/templates.html">Templates</a></li>
+            <li><a class="" href="../../dev_guide/ssh_environment.html">Opening a Remote Shell to Containers</a></li>
+            <li><a class="" href="../../dev_guide/service_accounts.html">Service Accounts</a></li>
+            <li><a class="" href="../../dev_guide/managing_images.html">Managing Images</a></li>
+            <li><a class="" href="../../dev_guide/compute_resources.html">Quotas and Limit Ranges</a></li>
+            <li><a class="" href="../../dev_guide/pod_preset.html">Injecting Information into Pods Using Pod Presets</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-15">
+                <span id="sgSpan-10-15" class="fa fa-caret-right"></span>&nbsp;Getting Traffic into a Cluster over Non-Standard Ports
+              </a>
+              <ul id="topicSubGroup-10-15" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../dev_guide/expose_service/index.html">Overview</a></li>
+                  <li><a class="" href="../../dev_guide/expose_service/expose_internal_ip_router.html">Using a Router</a></li>
+                  <li><a class="" href="../../dev_guide/expose_service/expose_internal_ip_load_balancer.html">Using a Load Balancer</a></li>
+                  <li><a class="" href="../../dev_guide/expose_service/expose_internal_ip_service.html">Using a Service ExternalIP</a></li>
+                  <li><a class="" href="../../dev_guide/expose_service/expose_internal_ip_nodeport.html">Using a NodePort</a></li>
+              </ul>
+            </li>
+            <li><a class="" href="../../dev_guide/routes.html">Routes</a></li>
+            <li><a class="" href="../../dev_guide/integrating_external_services.html">Integrating External Services</a></li>
+            <li><a class="" href="../../dev_guide/secrets.html">Secrets</a></li>
+            <li><a class="" href="../../dev_guide/configmaps.html">ConfigMaps</a></li>
+            <li><a class="" href="../../dev_guide/downward_api.html">Downward API</a></li>
+            <li><a class="" href="../../dev_guide/projected_volumes.html">Projected Volumes</a></li>
+            <li><a class="" href="../../dev_guide/daemonsets.html">Using Daemonsets</a></li>
+            <li><a class="" href="../../dev_guide/pod_autoscaling.html">Pod Autoscaling</a></li>
+            <li><a class="" href="../../dev_guide/volumes.html">Managing Volumes</a></li>
+            <li><a class="" href="../../dev_guide/persistent_volumes.html">Using Persistent Volumes</a></li>
+            <li><a class="" href="../../dev_guide/executing_remote_commands.html">Executing Remote Commands</a></li>
+            <li><a class="" href="../../dev_guide/copy_files_to_container.html">Copying Files</a></li>
+            <li><a class="" href="../../dev_guide/port_forwarding.html">Port Forwarding</a></li>
+            <li><a class="" href="../../dev_guide/shared_memory.html">Shared Memory</a></li>
+            <li><a class="" href="../../dev_guide/application_health.html">Application Health</a></li>
+            <li><a class="" href="../../dev_guide/events.html">Events</a></li>
+            <li><a class="" href="../../dev_guide/environment_variables.html">Managing Environment Variables</a></li>
+            <li><a class="" href="../../dev_guide/jobs.html">Jobs</a></li>
+            <li><a class="" href="../../dev_guide/openshift_pipeline.html">OpenShift Pipeline</a></li>
+            <li><a class="" href="../../dev_guide/cron_jobs.html">Cron Jobs</a></li>
+            <li><a class="" href="../../dev_guide/create_from_url.html">Create from URL</a></li>
+            <li><a class="" href="../../dev_guide/application_memory_sizing.html">Application memory sizing</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup11">
+        <span id="tgSpan11" class="fa fa-angle-right"></span>Creating Images
+      </a>
+      <ul id="topicGroup11" class="collapse  list-unstyled">
+            <li><a class="" href="../../creating_images/index.html">Overview</a></li>
+            <li><a class="" href="../../creating_images/guidelines.html">Guidelines</a></li>
+            <li><a class="" href="../../creating_images/metadata.html">Image Metadata</a></li>
+            <li><a class="" href="../../creating_images/s2i.html">S2I Requirements</a></li>
+            <li><a class="" href="../../creating_images/s2i_testing.html">Testing S2I Images</a></li>
+            <li><a class="" href="../../creating_images/custom.html">Custom Builder</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup12">
+        <span id="tgSpan12" class="fa fa-angle-right"></span>Using Images
+      </a>
+      <ul id="topicGroup12" class="collapse  list-unstyled">
+            <li><a class="" href="../../using_images/index.html">Overview</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-1">
+                <span id="sgSpan-12-1" class="fa fa-caret-right"></span>&nbsp;Source-to-Image (S2I)
+              </a>
+              <ul id="topicSubGroup-12-1" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/s2i_images/index.html">Overview</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/nodejs.html">Node.js</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/perl.html">Perl</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/php.html">PHP</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/python.html">Python</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/ruby.html">Ruby</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/wildfly.html">Wildfly</a></li>
+                  <li><a class="" href="../../using_images/s2i_images/customizing_s2i_images.html">Customizing S2I Images</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-2">
+                <span id="sgSpan-12-2" class="fa fa-caret-right"></span>&nbsp;Database Images
+              </a>
+              <ul id="topicSubGroup-12-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/db_images/index.html">Overview</a></li>
+                  <li><a class="" href="../../using_images/db_images/mysql.html">MySQL</a></li>
+                  <li><a class="" href="../../using_images/db_images/postgresql.html">PostgreSQL</a></li>
+                  <li><a class="" href="../../using_images/db_images/mongodb.html">MongoDB</a></li>
+                  <li><a class="" href="../../using_images/db_images/mariadb.html">MariaDB</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-3">
+                <span id="sgSpan-12-3" class="fa fa-caret-right"></span>&nbsp;Docker Images
+              </a>
+              <ul id="topicSubGroup-12-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/docker_images/index.html">Overview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-12-4">
+                <span id="sgSpan-12-4" class="fa fa-caret-right"></span>&nbsp;Other Images
+              </a>
+              <ul id="topicSubGroup-12-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../using_images/other_images/index.html">Overview</a></li>
+                  <li><a class="" href="../../using_images/other_images/jenkins.html">Jenkins</a></li>
+                  <li><a class="" href="../../using_images/other_images/jenkins_slaves.html">Jenkins Slaves</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup13">
+        <span id="tgSpan13" class="fa fa-angle-right"></span>Ansible Playbook Bundle Development Guide
+      </a>
+      <ul id="topicGroup13" class="collapse  list-unstyled">
+            <li><a class="" href="../../apb_devel/index.html">Introduction</a></li>
+            <li><a class="" href="../../apb_devel/cli_tooling.html">CLI Tooling</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-13-2">
+                <span id="sgSpan-13-2" class="fa fa-caret-right"></span>&nbsp;Writing APBs
+              </a>
+              <ul id="topicSubGroup-13-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../apb_devel/writing/getting_started.html">Getting Started</a></li>
+                  <li><a class="" href="../../apb_devel/writing/reference.html">Reference</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup14">
+        <span id="tgSpan14" class="fa fa-angle-right"></span>Go Client Library Reference
+      </a>
+      <ul id="topicGroup14" class="collapse  list-unstyled">
+            <li><a class="" href="../../go_client/getting_started.html">Getting Started</a></li>
+            <li><a class="" href="../../go_client/connecting_to_the_cluster.html">Connecting to the Cluster</a></li>
+            <li><a class="" href="../../go_client/tracing_api_requests_and_responses.html">Tracing API Requests and Responses</a></li>
+            <li><a class="" href="../../go_client/standard_api_operations.html">Standard API Operations</a></li>
+            <li><a class="" href="../../go_client/serializing_and_deserializing.html">Serializing and Deserializing</a></li>
+            <li><a class="" href="../../go_client/instantiating_templates.html">Instantiating Templates</a></li>
+            <li><a class="" href="../../go_client/executing_remote_processes.html">Executing Remote Processes</a></li>
+      </ul>
+    </li>
+    <li class="nav-header">
+      <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup15">
+        <span id="tgSpan15" class="fa fa-angle-right"></span>REST API Reference
+      </a>
+      <ul id="topicGroup15" class="collapse  list-unstyled">
+            <li><a class="" href="../../rest_api/index.html">Overview</a></li>
+            <li><a class="" href="../../rest_api/examples.html">Examples</a></li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-2">
+                <span id="sgSpan-15-2" class="fa fa-caret-right"></span>&nbsp;/api/v1
+              </a>
+              <ul id="topicSubGroup-15-2" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/api/v1.APIResourceList.html">v1.APIResourceList</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.APIVersions.html">v1.APIVersions</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Binding.html">v1.Binding</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ComponentStatus.html">v1.ComponentStatus</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ConfigMap.html">v1.ConfigMap</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Endpoints.html">v1.Endpoints</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Event.html">v1.Event</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.LimitRange.html">v1.LimitRange</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Namespace.html">v1.Namespace</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Node.html">v1.Node</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.PersistentVolume.html">v1.PersistentVolume</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.PersistentVolumeClaim.html">v1.PersistentVolumeClaim</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Pod.html">v1.Pod</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.PodTemplate.html">v1.PodTemplate</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ReplicationController.html">v1.ReplicationController</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ResourceQuota.html">v1.ResourceQuota</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Secret.html">v1.Secret</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.SecurityContextConstraints.html">v1.SecurityContextConstraints</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.Service.html">v1.Service</a></li>
+                  <li><a class="" href="../../rest_api/api/v1.ServiceAccount.html">v1.ServiceAccount</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-3">
+                <span id="sgSpan-15-3" class="fa fa-caret-right"></span>&nbsp;/apis/v1
+              </a>
+              <ul id="topicSubGroup-15-3" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis/v1.APIGroup.html">v1.APIGroup</a></li>
+                  <li><a class="" href="../../rest_api/apis/v1.APIGroupList.html">v1.APIGroupList</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-4">
+                <span id="sgSpan-15-4" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1
+              </a>
+              <ul id="topicSubGroup-15-4" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apps/v1.ControllerRevision.html">v1.ControllerRevision</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1.DaemonSet.html">v1.DaemonSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1.Deployment.html">v1.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1.ReplicaSet.html">v1.ReplicaSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1.StatefulSet.html">v1.StatefulSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-5">
+                <span id="sgSpan-15-5" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-5" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta1.ControllerRevision.html">v1beta1.ControllerRevision</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta1.Deployment.html">v1beta1.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta1.StatefulSet.html">v1beta1.StatefulSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-6">
+                <span id="sgSpan-15-6" class="fa fa-caret-right"></span>&nbsp;/apis/apps/v1beta2
+              </a>
+              <ul id="topicSubGroup-15-6" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.ControllerRevision.html">v1beta2.ControllerRevision</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.DaemonSet.html">v1beta2.DaemonSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.Deployment.html">v1beta2.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.ReplicaSet.html">v1beta2.ReplicaSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-apps/v1beta2.StatefulSet.html">v1beta2.StatefulSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-7">
+                <span id="sgSpan-15-7" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v1
+              </a>
+              <ul id="topicSubGroup-15-7" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-autoscaling/v1.HorizontalPodAutoscaler.html">v1.HorizontalPodAutoscaler</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-8">
+                <span id="sgSpan-15-8" class="fa fa-caret-right"></span>&nbsp;/apis/autoscaling/v2beta1
+              </a>
+              <ul id="topicSubGroup-15-8" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-autoscaling/v2beta1.HorizontalPodAutoscaler.html">v2beta1.HorizontalPodAutoscaler</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-9">
+                <span id="sgSpan-15-9" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1
+              </a>
+              <ul id="topicSubGroup-15-9" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-batch/v1.Job.html">v1.Job</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-10">
+                <span id="sgSpan-15-10" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-10" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-batch/v1beta1.CronJob.html">v1beta1.CronJob</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-11">
+                <span id="sgSpan-15-11" class="fa fa-caret-right"></span>&nbsp;/apis/batch/v2alpha1
+              </a>
+              <ul id="topicSubGroup-15-11" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-batch/v2alpha1.CronJob.html">v2alpha1.CronJob</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-12">
+                <span id="sgSpan-15-12" class="fa fa-caret-right"></span>&nbsp;/apis/extensions/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-12" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.DaemonSet.html">v1beta1.DaemonSet</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.Deployment.html">v1beta1.Deployment</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.Ingress.html">v1beta1.Ingress</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.NetworkPolicy.html">v1beta1.NetworkPolicy</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.PodSecurityPolicy.html">v1beta1.PodSecurityPolicy</a></li>
+                  <li><a class="" href="../../rest_api/apis-extensions/v1beta1.ReplicaSet.html">v1beta1.ReplicaSet</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-13">
+                <span id="sgSpan-15-13" class="fa fa-caret-right"></span>&nbsp;/apis/policy/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-13" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-policy/v1beta1.PodDisruptionBudget.html">v1beta1.PodDisruptionBudget</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-14">
+                <span id="sgSpan-15-14" class="fa fa-caret-right"></span>&nbsp;/apis/admissionregistration.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-14" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-admissionregistration.k8s.io/v1beta1.MutatingWebhookConfiguration.html">v1beta1.MutatingWebhookConfiguration</a></li>
+                  <li><a class="" href="../../rest_api/apis-admissionregistration.k8s.io/v1beta1.ValidatingWebhookConfiguration.html">v1beta1.ValidatingWebhookConfiguration</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-15">
+                <span id="sgSpan-15-15" class="fa fa-caret-right"></span>&nbsp;/apis/apiregistration.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-15" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apiregistration.k8s.io/v1beta1.APIService.html">v1beta1.APIService</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-16">
+                <span id="sgSpan-15-16" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-15-16" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authentication.k8s.io/v1.TokenReview.html">v1.TokenReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-17">
+                <span id="sgSpan-15-17" class="fa fa-caret-right"></span>&nbsp;/apis/authentication.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-17" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authentication.k8s.io/v1beta1.TokenReview.html">v1beta1.TokenReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-18">
+                <span id="sgSpan-15-18" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-15-18" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.SelfSubjectAccessReview.html">v1.SelfSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.SelfSubjectRulesReview.html">v1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1.SubjectAccessReview.html">v1.SubjectAccessReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-19">
+                <span id="sgSpan-15-19" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-19" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.LocalSubjectAccessReview.html">v1beta1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectAccessReview.html">v1beta1.SelfSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SelfSubjectRulesReview.html">v1beta1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.k8s.io/v1beta1.SubjectAccessReview.html">v1beta1.SubjectAccessReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-20">
+                <span id="sgSpan-15-20" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-15-20" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.ClusterRole.html">v1.ClusterRole</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.ClusterRoleBinding.html">v1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.Role.html">v1.Role</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1.RoleBinding.html">v1.RoleBinding</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-21">
+                <span id="sgSpan-15-21" class="fa fa-caret-right"></span>&nbsp;/apis/rbac.authorization.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-21" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRole.html">v1beta1.ClusterRole</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.ClusterRoleBinding.html">v1beta1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.Role.html">v1beta1.Role</a></li>
+                  <li><a class="" href="../../rest_api/apis-rbac.authorization.k8s.io/v1beta1.RoleBinding.html">v1beta1.RoleBinding</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-22">
+                <span id="sgSpan-15-22" class="fa fa-caret-right"></span>&nbsp;/apis/certificates.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-22" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-certificates.k8s.io/v1beta1.CertificateSigningRequest.html">v1beta1.CertificateSigningRequest</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-23">
+                <span id="sgSpan-15-23" class="fa fa-caret-right"></span>&nbsp;/apis/events.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-23" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-events.k8s.io/v1beta1.Event.html">v1beta1.Event</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-24">
+                <span id="sgSpan-15-24" class="fa fa-caret-right"></span>&nbsp;/apis/networking.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-15-24" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-networking.k8s.io/v1.NetworkPolicy.html">v1.NetworkPolicy</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-25">
+                <span id="sgSpan-15-25" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1
+              </a>
+              <ul id="topicSubGroup-15-25" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-storage.k8s.io/v1.StorageClass.html">v1.StorageClass</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-26">
+                <span id="sgSpan-15-26" class="fa fa-caret-right"></span>&nbsp;/apis/storage.k8s.io/v1beta1
+              </a>
+              <ul id="topicSubGroup-15-26" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-storage.k8s.io/v1beta1.StorageClass.html">v1beta1.StorageClass</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-27">
+                <span id="sgSpan-15-27" class="fa fa-caret-right"></span>&nbsp;/apis/apps.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-27" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-apps.openshift.io/v1.DeploymentConfig.html">v1.DeploymentConfig</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-28">
+                <span id="sgSpan-15-28" class="fa fa-caret-right"></span>&nbsp;/apis/authorization.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-28" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.ClusterRole.html">v1.ClusterRole</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.ClusterRoleBinding.html">v1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.LocalResourceAccessReview.html">v1.LocalResourceAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.ResourceAccessReview.html">v1.ResourceAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.Role.html">v1.Role</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.RoleBinding.html">v1.RoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.RoleBindingRestriction.html">v1.RoleBindingRestriction</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.SelfSubjectRulesReview.html">v1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.SubjectAccessReview.html">v1.SubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-authorization.openshift.io/v1.SubjectRulesReview.html">v1.SubjectRulesReview</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-29">
+                <span id="sgSpan-15-29" class="fa fa-caret-right"></span>&nbsp;/apis/build.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-29" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-build.openshift.io/v1.Build.html">v1.Build</a></li>
+                  <li><a class="" href="../../rest_api/apis-build.openshift.io/v1.BuildConfig.html">v1.BuildConfig</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-30">
+                <span id="sgSpan-15-30" class="fa fa-caret-right"></span>&nbsp;/apis/image.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-30" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.Image.html">v1.Image</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageSignature.html">v1.ImageSignature</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageStream.html">v1.ImageStream</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageStreamImage.html">v1.ImageStreamImage</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageStreamImport.html">v1.ImageStreamImport</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageStreamMapping.html">v1.ImageStreamMapping</a></li>
+                  <li><a class="" href="../../rest_api/apis-image.openshift.io/v1.ImageStreamTag.html">v1.ImageStreamTag</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-31">
+                <span id="sgSpan-15-31" class="fa fa-caret-right"></span>&nbsp;/apis/network.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-31" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-network.openshift.io/v1.ClusterNetwork.html">v1.ClusterNetwork</a></li>
+                  <li><a class="" href="../../rest_api/apis-network.openshift.io/v1.EgressNetworkPolicy.html">v1.EgressNetworkPolicy</a></li>
+                  <li><a class="" href="../../rest_api/apis-network.openshift.io/v1.HostSubnet.html">v1.HostSubnet</a></li>
+                  <li><a class="" href="../../rest_api/apis-network.openshift.io/v1.NetNamespace.html">v1.NetNamespace</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-32">
+                <span id="sgSpan-15-32" class="fa fa-caret-right"></span>&nbsp;/apis/oauth.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-32" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-oauth.openshift.io/v1.OAuthAccessToken.html">v1.OAuthAccessToken</a></li>
+                  <li><a class="" href="../../rest_api/apis-oauth.openshift.io/v1.OAuthAuthorizeToken.html">v1.OAuthAuthorizeToken</a></li>
+                  <li><a class="" href="../../rest_api/apis-oauth.openshift.io/v1.OAuthClient.html">v1.OAuthClient</a></li>
+                  <li><a class="" href="../../rest_api/apis-oauth.openshift.io/v1.OAuthClientAuthorization.html">v1.OAuthClientAuthorization</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-33">
+                <span id="sgSpan-15-33" class="fa fa-caret-right"></span>&nbsp;/apis/project.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-33" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-project.openshift.io/v1.Project.html">v1.Project</a></li>
+                  <li><a class="" href="../../rest_api/apis-project.openshift.io/v1.ProjectRequest.html">v1.ProjectRequest</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-34">
+                <span id="sgSpan-15-34" class="fa fa-caret-right"></span>&nbsp;/apis/quota.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-34" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-quota.openshift.io/v1.AppliedClusterResourceQuota.html">v1.AppliedClusterResourceQuota</a></li>
+                  <li><a class="" href="../../rest_api/apis-quota.openshift.io/v1.ClusterResourceQuota.html">v1.ClusterResourceQuota</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-35">
+                <span id="sgSpan-15-35" class="fa fa-caret-right"></span>&nbsp;/apis/route.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-35" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-route.openshift.io/v1.Route.html">v1.Route</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-36">
+                <span id="sgSpan-15-36" class="fa fa-caret-right"></span>&nbsp;/apis/security.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-36" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-security.openshift.io/v1.PodSecurityPolicyReview.html">v1.PodSecurityPolicyReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-security.openshift.io/v1.PodSecurityPolicySelfSubjectReview.html">v1.PodSecurityPolicySelfSubjectReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-security.openshift.io/v1.PodSecurityPolicySubjectReview.html">v1.PodSecurityPolicySubjectReview</a></li>
+                  <li><a class="" href="../../rest_api/apis-security.openshift.io/v1.SecurityContextConstraints.html">v1.SecurityContextConstraints</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-37">
+                <span id="sgSpan-15-37" class="fa fa-caret-right"></span>&nbsp;/apis/template.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-37" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-template.openshift.io/v1.BrokerTemplateInstance.html">v1.BrokerTemplateInstance</a></li>
+                  <li><a class="" href="../../rest_api/apis-template.openshift.io/v1.Template.html">v1.Template</a></li>
+                  <li><a class="" href="../../rest_api/apis-template.openshift.io/v1.TemplateInstance.html">v1.TemplateInstance</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-38">
+                <span id="sgSpan-15-38" class="fa fa-caret-right"></span>&nbsp;/apis/user.openshift.io/v1
+              </a>
+              <ul id="topicSubGroup-15-38" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/apis-user.openshift.io/v1.Group.html">v1.Group</a></li>
+                  <li><a class="" href="../../rest_api/apis-user.openshift.io/v1.Identity.html">v1.Identity</a></li>
+                  <li><a class="" href="../../rest_api/apis-user.openshift.io/v1.User.html">v1.User</a></li>
+                  <li><a class="" href="../../rest_api/apis-user.openshift.io/v1.UserIdentityMapping.html">v1.UserIdentityMapping</a></li>
+              </ul>
+            </li>
+            <li class="nav-header">
+              <a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-15-39">
+                <span id="sgSpan-15-39" class="fa fa-caret-right"></span>&nbsp;/oapi/v1
+              </a>
+              <ul id="topicSubGroup-15-39" class="nav-tertiary list-unstyled collapse">
+                  <li><a class="" href="../../rest_api/oapi/v1.AppliedClusterResourceQuota.html">v1.AppliedClusterResourceQuota</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Build.html">v1.Build</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.BuildConfig.html">v1.BuildConfig</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ClusterNetwork.html">v1.ClusterNetwork</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ClusterResourceQuota.html">v1.ClusterResourceQuota</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ClusterRole.html">v1.ClusterRole</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ClusterRoleBinding.html">v1.ClusterRoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.DeploymentConfig.html">v1.DeploymentConfig</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.EgressNetworkPolicy.html">v1.EgressNetworkPolicy</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Group.html">v1.Group</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.HostSubnet.html">v1.HostSubnet</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Identity.html">v1.Identity</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Image.html">v1.Image</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageSignature.html">v1.ImageSignature</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageStream.html">v1.ImageStream</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageStreamImage.html">v1.ImageStreamImage</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageStreamImport.html">v1.ImageStreamImport</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageStreamMapping.html">v1.ImageStreamMapping</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ImageStreamTag.html">v1.ImageStreamTag</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.LocalResourceAccessReview.html">v1.LocalResourceAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.LocalSubjectAccessReview.html">v1.LocalSubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.NetNamespace.html">v1.NetNamespace</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.OAuthAccessToken.html">v1.OAuthAccessToken</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.OAuthAuthorizeToken.html">v1.OAuthAuthorizeToken</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.OAuthClient.html">v1.OAuthClient</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.OAuthClientAuthorization.html">v1.OAuthClientAuthorization</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.PodSecurityPolicyReview.html">v1.PodSecurityPolicyReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.PodSecurityPolicySelfSubjectReview.html">v1.PodSecurityPolicySelfSubjectReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.PodSecurityPolicySubjectReview.html">v1.PodSecurityPolicySubjectReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ProcessedTemplate.html">v1.ProcessedTemplate</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Project.html">v1.Project</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ProjectRequest.html">v1.ProjectRequest</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.ResourceAccessReview.html">v1.ResourceAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Role.html">v1.Role</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.RoleBinding.html">v1.RoleBinding</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.RoleBindingRestriction.html">v1.RoleBindingRestriction</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Route.html">v1.Route</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.SelfSubjectRulesReview.html">v1.SelfSubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.SubjectAccessReview.html">v1.SubjectAccessReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.SubjectRulesReview.html">v1.SubjectRulesReview</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.Template.html">v1.Template</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.User.html">v1.User</a></li>
+                  <li><a class="" href="../../rest_api/oapi/v1.UserIdentityMapping.html">v1.UserIdentityMapping</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+</ul>
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-9 main">
+        <div class="page-header">
+          <h1>Builds and Image Streams</h1>
+        </div>
+        <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#builds">Builds</a>
+<ul class="sectlevel2">
+<li><a href="#docker-build">Docker Build</a></li>
+<li><a href="#source-build">Source-to-Image (S2I) Build</a></li>
+<li><a href="#custom-build">Custom Build</a></li>
+<li><a href="#pipeline-build">Pipeline Build</a></li>
+</ul>
+</li>
+<li><a href="#image-streams">Image Streams</a>
+<ul class="sectlevel2">
+<li><a href="#important-terms">Important terms</a></li>
+<li><a href="#image-stream-configure">Configuring Image Streams</a></li>
+<li><a href="#image-stream-image">Image Stream Images</a></li>
+<li><a href="#image-stream-tag">Image Stream Tags</a></li>
+<li><a href="#image-stream-triggers">Image Stream Change Triggers</a></li>
+<li><a href="#image-stream-mappings">Image Stream Mappings</a></li>
+<li><a href="#image-stream-mappings-working">Working with Image Streams</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="builds"><a class="anchor" href="#builds"></a>Builds</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <em>build</em> is the process of transforming input parameters into a resulting
+object. Most often, the process is used to transform input parameters or source
+code into a runnable image. A
+<a href="../../dev_guide/builds/index.html#defining-a-buildconfig"><code>BuildConfig</code></a>
+object is the definition of the entire build process.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift Origin leverages Kubernetes by creating Docker-formatted containers from build
+images and pushing them to a
+<a href="../../architecture/infrastructure_components/image_registry.html#integrated-openshift-registry">container registry</a>.</p>
+</div>
+<div class="paragraph">
+<p>Build objects share common characteristics: inputs for a build, the need to
+complete a build process, logging the build process, publishing resources from
+successful builds, and publishing the final status of the build. Builds take
+advantage of resource restrictions, specifying limitations on resources such as
+CPU usage, memory usage, and build or pod execution time.</p>
+</div>
+<div class="paragraph">
+<p>The OpenShift Origin build system provides extensible support for <em>build
+strategies</em> that are based on selectable types specified in the build API. There
+are three primary build strategies available:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#docker-build">Docker build</a></p>
+</li>
+<li>
+<p><a href="#source-build">Source-to-Image (S2I) build</a></p>
+</li>
+<li>
+<p><a href="#custom-build">Custom build</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>By default, Docker builds and S2I builds are supported.</p>
+</div>
+<div class="paragraph">
+<p>The resulting object of a build depends on the builder used to create it. For
+Docker and S2I builds, the resulting objects are runnable images. For Custom
+builds, the resulting objects are whatever the builder image author has
+specified.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, the
+<a href="#pipeline-build">Pipeline build</a>
+strategy can be used to implement sophisticated workflows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>continuous integration</p>
+</li>
+<li>
+<p>continuous deployment</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For a list of build commands, see the
+<a href="../../dev_guide/builds/index.html#dev-guide-how-builds-work">Developer&#8217;s Guide</a>.</p>
+</div>
+<div class="paragraph">
+<p>For more information on how OpenShift Origin leverages Docker for builds, see the
+<a href="https://github.com/openshift/origin/blob/master/docs/builds.md#how-it-works">upstream
+documentation</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="docker-build"><a class="anchor" href="#docker-build"></a>Docker Build</h3>
+<div class="paragraph">
+<p>The Docker build strategy invokes the <a href="https://docs.docker.com/engine/reference/commandline/build/">docker build</a> command, and it therefore expects a repository with a <strong><em>Dockerfile</em></strong> and all required
+artifacts in it to produce a runnable image.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="source-build"><a class="anchor" href="#source-build"></a>Source-to-Image (S2I) Build</h3>
+<div class="paragraph">
+<p><a href="../../creating_images/s2i.html#creating-images-s2i">Source-to-Image (S2I)</a> is a tool for
+building reproducible, Docker-formatted container images. It produces ready-to-run images by
+injecting application source into a container image and assembling a new image. The new image incorporates the base image (the builder) and built source
+and is ready to use with the <code>docker run</code> command. S2I supports incremental
+builds, which re-use previously downloaded dependencies, previously built
+artifacts, etc.</p>
+</div>
+<div class="paragraph">
+<p>The advantages of S2I include the following:</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Image flexibility
+</td>
+<td class="hdlist2">
+<p>S2I scripts can be written to inject application code into
+almost any existing Docker-formatted container image, taking advantage of the existing ecosystem.
+Note that, currently, S2I relies on <code>tar</code> to inject application
+source, so the image needs to be able to process tarred content.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Speed
+</td>
+<td class="hdlist2">
+<p>With S2I, the assemble process can perform a large number of complex
+operations without creating a new layer at each step, resulting in a fast
+process. In addition, S2I scripts can be written to re-use artifacts stored in a
+previous version of the application image, rather than having to download or
+build them each time the build is run.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Patchability
+</td>
+<td class="hdlist2">
+<p>S2I allows you to rebuild the application consistently if an
+underlying image needs a patch due to a security issue.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Operational efficiency
+</td>
+<td class="hdlist2">
+<p>By restricting build operations instead of allowing
+arbitrary actions, as a <strong><em>Dockerfile</em></strong> would allow, the PaaS operator can avoid
+accidental or intentional abuses of the build system.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Operational security
+</td>
+<td class="hdlist2">
+<p>Building an arbitrary <strong><em>Dockerfile</em></strong> exposes the host
+system to root privilege escalation. This can be exploited by a malicious user
+because the entire Docker build process is run as a user with Docker privileges.
+S2I restricts the operations performed as a root user and can run the scripts
+as a non-root user.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+User efficiency
+</td>
+<td class="hdlist2">
+<p>S2I prevents developers from performing arbitrary <code>yum
+install</code> type operations, which could slow down development iteration, during
+their application build.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Ecosystem
+</td>
+<td class="hdlist2">
+<p>S2I encourages a shared ecosystem of images where you can leverage
+best practices for your applications.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Reproducibility
+</td>
+<td class="hdlist2">
+<p>Produced images can include all inputs including specific versions
+of build tools and dependencies. This ensures that the image can be reproduced
+precisely.</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="custom-build"><a class="anchor" href="#custom-build"></a>Custom Build</h3>
+<div class="paragraph">
+<p>The Custom build strategy allows developers to define a specific builder image
+responsible for the entire build process. Using your own builder image allows
+you to customize your build process.</p>
+</div>
+<div class="paragraph">
+<p>A <a href="../../creating_images/custom.html#creating-images-custom">Custom builder image</a> is a plain Docker-formatted container image embedded with build process logic, for example for building RPMs or base images. The <code>openshift/origin-custom-docker-builder</code> image is available
+on the
+<a href="https://registry.hub.docker.com/u/openshift/origin-custom-docker-builder">Docker Hub</a> registry as an example implementation of a Custom builder image.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="pipeline-build"><a class="anchor" href="#pipeline-build"></a>Pipeline Build</h3>
+<div class="paragraph">
+<p>The Pipeline build strategy allows developers to define a <em>Jenkins pipeline</em>
+for execution by the Jenkins pipeline plugin.
+The build can be started, monitored, and managed by
+OpenShift Origin in the same way as any other build type.</p>
+</div>
+<div class="paragraph">
+<p>Pipeline workflows are defined in a Jenkinsfile,
+either embedded directly in the build configuration,
+or supplied in a Git repository and referenced by the build configuration.</p>
+</div>
+<div class="paragraph">
+<p>The first time a project defines a build configuration using a Pipeline
+strategy, OpenShift Origin instantiates a Jenkins server to execute the
+pipeline.  Subsequent Pipeline build configurations in the project share this
+Jenkins server.</p>
+</div>
+<div class="paragraph">
+<p>For more details on how the Jenkins server is deployed and how to configure or
+disable the autoprovisioning behavior, see
+<a href="../../install_config/configuring_pipeline_execution.html#install-config-configuring-pipeline-execution">Configuring Pipeline Execution</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The Jenkins server is not automatically removed,
+even if all Pipeline build configurations are deleted.
+It must be manually deleted by the user.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For more information about Jenkins Pipelines, please see the
+<a href="https://jenkins.io/doc/pipeline/">Jenkins documentation</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="image-streams"><a class="anchor" href="#image-streams"></a>Image Streams</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An image stream and its associated tags provide an abstraction for referencing
+<a href="../../architecture/core_concepts/containers_and_images.html#docker-images">Docker images</a> from within OpenShift Origin.
+The image stream and its tags allow you to see what images are available
+and ensure that you are using the specific image you need even if the image in the repository changes.</p>
+</div>
+<div class="paragraph">
+<p>Image streams do not contain actual image data, but present a single virtual view of related images, similar to an image repository.</p>
+</div>
+<div class="paragraph">
+<p>You can  configure <a href="../../dev_guide/builds/triggering_builds.html#image-change-triggers">Builds</a> and
+<a href="../../dev_guide/deployments/basic_deployment_operations.html#image-change-trigger">Deployments</a> to watch an image stream
+for notifications when new images are added and react by performing a Build or Deployment, respectively.</p>
+</div>
+<div class="paragraph">
+<p>For example, if a Deployment is using a certain image and a new version of that image is created,
+a Deployment could be automatically performed to pick up the new version of the image.</p>
+</div>
+<div class="paragraph">
+<p>However, if the image stream tag used by the Deployment or Build is not updated,
+then even if the Docker image in the Docker registry is updated, the Build or Deployment will continue using the previous (presumably known good) image.</p>
+</div>
+<div class="paragraph">
+<p>The source images can be stored in any of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>OpenShift Origin&#8217;s <a href="../../architecture/infrastructure_components/image_registry.html#integrated-openshift-registry">integrated
+registry</a></p>
+</li>
+<li>
+<p>An external registry, for example <code>registry.access.redhat.com</code> or <code>hub.docker.com</code></p>
+</li>
+<li>
+<p>Other image streams in the OpenShift Origin cluster</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When you define an object that references an image stream tag (such as a or Build configuration or Deployment configuration), you point to an image stream tag, not the Docker repository. When you Build or Deploy your application, OpenShift Origin queries the Docker repository using the image stream tag to locate the associated ID of the image and uses that
+exact image.</p>
+</div>
+<div class="paragraph">
+<p>The image stream metadata is stored in the etcd instance along with other cluster information.</p>
+</div>
+<div class="paragraph">
+<p>The following image stream contains two tags: <code>34</code> which points to a Python v3.4 image and <code>35</code> which points to a Python v3.5 image:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc describe is python
+Name:			python
+Namespace:		imagestream
+Created:		25 hours ago
+Labels:			app=python
+Annotations:		openshift.io/generated-by=OpenShiftWebConsole
+			openshift.io/image.dockerRepositoryCheck=2017-10-03T19:48:00Z
+Docker Pull Spec:	docker-registry.default.svc:5000/imagestream/python
+Image Lookup:		local=false
+Unique Images:		2
+Tags:			2
+
+34
+  tagged from centos/python-34-centos7
+
+  * centos/python-34-centos7@sha256:28178e2352d31f240de1af1370be855db33ae9782de737bb005247d8791a54d0
+      14 seconds ago
+
+35
+  tagged from centos/python-35-centos7
+
+  * centos/python-35-centos7@sha256:2efb79ca3ac9c9145a63675fb0c09220ab3b8d4005d35e0644417ee552548b10
+      7 seconds ago</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using image streams has several significant benefits:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You can tag, rollback a tag, and quickly deal with images, without having to re-push using the command line.</p>
+</li>
+<li>
+<p>You can trigger Builds and Deployments when a new image is pushed to the registry. Also,
+OpenShift Origin also has generic triggers for other resources (such as Kubernetes objects).</p>
+</li>
+<li>
+<p>You can <a href="../../dev_guide/managing_images.html#importing-tag-and-image-metadata">mark a tag for periodic re-import</a>.
+If the source image has changed, that change is picked up and reflected in the image stream, which triggers the Build and/or Deployment flow, depending upon the Build or Deployment configuration.</p>
+</li>
+<li>
+<p>You can share images using fine-grained access control and quickly distribute images across your teams.</p>
+</li>
+<li>
+<p>If the source image changes, the image stream tag will still point to a known-good version of the image, ensuring that your application will not break unexpectedly.</p>
+</li>
+<li>
+<p>You can <a href="../../admin_guide/manage_rbac.html#admin-guide-manage-rbac">configure security</a> around who can view and use the images through permissions on the image stream objects.</p>
+</li>
+<li>
+<p>Users that lack permission to read or list images on the cluster level can still retrieve the images tagged in a project using image streams.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For a curated set of image streams, see the
+<a href="https://github.com/openshift/library">OpenShift Image Streams and Templates
+library</a>.</p>
+</div>
+<div class="paragraph">
+<p>When using image streams, it is important to understand what the image stream tag is pointing to and how changes to tags and images can affect you. For example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If your image stream tag points to a Docker image tag, you need to understand how that Docker image tag is updated. For example, a Docker image tag <code>docker.io/ruby:2.4</code> will probably always point to a v2.4 ruby image. But, a Docker image tag <code>docker.io/ruby:latest</code> will probably change with major versions. So, the Docker image tag that a image stream tag points to can tell you how stable the image stream tag will be, if you choose to reference it.</p>
+</li>
+<li>
+<p>If your image stream tag follows another image stream tag (it does not point directly to a docker image tag), it is possible that the image stream tag will be updated to follow a different image stream tag in the future. Again, this could result in picking up an incompatible version change.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="important-terms"><a class="anchor" href="#important-terms"></a>Important terms</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Docker repository</dt>
+<dd>
+<p>A collection of related docker images and tags identifying them.
+For example, the OpenShift Jenkins images are in a Docker repository:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">docker.io/openshift/jenkins-2-centos7</pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">Docker registry</dt>
+<dd>
+<p>A content server that can store and service images from Docker repositories.
+For example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">registry.access.redhat.com</pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">Docker image</dt>
+<dd>
+<p>A specific set of content that can be run as a container. Usually associated with a particular tag within a Docker repository.</p>
+</dd>
+<dt class="hdlist1">Docker image tag</dt>
+<dd>
+<p>A label applied to a Docker image in a repository that distinguishes a specific image. For example, here <strong>3.6.0</strong> is a tag:</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">docker.io/openshift/jenkins-2-centos7:3.6.0</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>A Docker image tag can be updated to point to new Docker image content at any time.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Docker image ID</dt>
+<dd>
+<p>A SHA (Secure Hash Algorithm) code that can be used to pull an image. For example:</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">docker.io/openshift/jenkins-2-centos7@sha256:ab312bda324</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>A SHA image ID cannot change. A specific SHA identifier always references the exact same docker image content.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Image stream</dt>
+<dd>
+<p>An OpenShift Origin object that contains pointers to any number of Docker-formatted container images identified by tags. You can think of an image stream
+as equivalent to a Docker repository.</p>
+</dd>
+<dt class="hdlist1">Image stream tag</dt>
+<dd>
+<p>A named pointer to an image in an image stream. An image stream tag is similar to a Docker image tag. See <a href="#image-stream-tag">Image Stream Tag</a> below.</p>
+</dd>
+<dt class="hdlist1">Image stream image</dt>
+<dd>
+<p>An image that allows you to retrieve a specific Docker image from a particular image stream where it is tagged.
+An image stream image is an API resource object that pulls together some metadata about a particular image SHA identifier.
+See <a href="#image-stream-image">Image Stream Images</a> below.</p>
+</dd>
+<dt class="hdlist1">Image stream trigger</dt>
+<dd>
+<p>A trigger that causes a specific action when an image stream tag changes. For example, importing can cause the value of the tag to change, which
+causes a trigger to fire when there are Deployments, Builds, or other resources listening for those. See <a href="#image-stream-triggers">Image Stream Triggers</a> below.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="image-stream-configure"><a class="anchor" href="#image-stream-configure"></a>Configuring Image Streams</h3>
+<div class="paragraph">
+<p>An image stream object file contains the following elements.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>See the <a href="../../dev_guide/managing_images.html#dev-guide-managing-images">Developer Guide</a> for details
+on managing images and image streams.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="image-stream-object-definition" class="listingblock">
+<div class="title">Image Stream Object Definition</div>
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">v1</span></span>
+<span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ImageStream</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">annotations</span>:
+    <span style="color:#606">openshift.io/generated-by</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">OpenShiftNewApp</span></span>
+  <span style="color:#606">creationTimestamp</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">2017-09-29T13:33:49Z</span></span>
+  <span style="color:#606">generation</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">1</span></span>
+  <span style="color:#606">labels</span>:
+    <span style="color:#606">app</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ruby-sample-build</span></span>
+    <span style="color:#606">template</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">application-template-stibuild</span></span>
+  <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">origin-ruby-sample </span></span><i class="conum" data-value="1"></i><b>(1)</b>
+  <span style="color:#606">namespace</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">test</span></span>
+  <span style="color:#606">resourceVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">633</span><span style="color:#710">&quot;</span></span>
+  <span style="color:#606">selflink</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/oapi/v1/namespaces/test/imagestreams/origin-ruby-sample</span></span>
+  <span style="color:#606">uid</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ee2b9405-c68c-11e5-8a99-525400f25e34</span></span>
+<span style="color:#606">spec</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">{}</span></span>
+<span style="color:#606">status</span>:
+  <span style="color:#606">dockerImageRepository</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">172.30.56.218:5000/test/origin-ruby-sample </span></span><i class="conum" data-value="2"></i><b>(2)</b>
+  <span style="color:#606">tags</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">items:</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">created: 2017-09-02T10:15:09Z</span></span>
+      <span style="color:#606">dockerImageReference</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">172.30.56.218:5000/test/origin-ruby-sample@sha256:47463d94eb5c049b2d23b03a9530bf944f8f967a0fe79147dd6b9135bf7dd13d </span></span><i class="conum" data-value="3"></i><b>(3)</b>
+      <span style="color:#606">generation</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">2</span></span>
+      <span style="color:#606">image</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">sha256:909de62d1f609a717ec433cc25ca5cf00941545c83a01fb31527771e1fab3fc5 </span></span><i class="conum" data-value="4"></i><b>(4)</b>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">created: 2017-09-29T13:40:11Z</span></span>
+      <span style="color:#606">dockerImageReference</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">172.30.56.218:5000/test/origin-ruby-sample@sha256:909de62d1f609a717ec433cc25ca5cf00941545c83a01fb31527771e1fab3fc5</span></span>
+      <span style="color:#606">generation</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">1</span></span>
+      <span style="color:#606">image</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">sha256:47463d94eb5c049b2d23b03a9530bf944f8f967a0fe79147dd6b9135bf7dd13d</span></span>
+    <span style="color:#606">tag</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">latest </span></span><i class="conum" data-value="5"></i><b>(5)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The name of the image stream.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Docker repository path where new images can be pushed to add/update them in this image stream.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The SHA identifier that this image stream tag currently references. Resources that reference this image stream tag use this identifier.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The SHA identifier that this image stream tag previously referenced. Can be used to rollback to an older image.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The image stream tag name.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For a sample build configuration that references an image stream, see <a href="../../dev_guide/builds/index.html#defining-a-buildconfig">What Is a BuildConfig?</a>
+in the <code>Strategy</code> stanza of the configuration.</p>
+</div>
+<div class="paragraph">
+<p>For a sample deployment configuration that references an image stream,
+see <a href="../../dev_guide/deployments/how_deployments_work.html#creating-a-deployment-configuration">Creating a Deployment Configuration</a>
+in the <code>Strategy</code> stanza of the configuration.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="image-stream-image"><a class="anchor" href="#image-stream-image"></a>Image Stream Images</h3>
+<div class="paragraph">
+<p>An <em>image stream image</em> points from within an image stream
+to a particular image ID.</p>
+</div>
+<div class="paragraph">
+<p>Image stream images allow you to retrieve metadata about an image from a particular image stream
+where it is tagged.</p>
+</div>
+<div class="paragraph">
+<p>Image stream image objects are automatically created in OpenShift Origin whenever
+you import or tag an image into the image stream. You should never have to explicitly define an
+image stream image object in any image stream definition that you use to create image streams.</p>
+</div>
+<div class="paragraph">
+<p>The image stream image consists of the image stream name and image ID from the repository, delimited by an <code>@</code> sign:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">&lt;image-stream-name&gt;@&lt;image-id&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To refer to the image in the
+<a href="#image-stream-object-definition">image stream object example above</a>, the image stream image looks like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">origin-ruby-sample@sha256:47463d94eb5c049b2d23b03a9530bf944f8f967a0fe79147dd6b9135bf7dd13d</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="image-stream-tag"><a class="anchor" href="#image-stream-tag"></a>Image Stream Tags</h3>
+<div class="paragraph">
+<p>An <em>image stream tag</em> is a named pointer to an image in an <em>image stream</em>. It
+is often abbreviated as <em>istag</em>. An image stream tag is used to reference or retrieve
+an image for a given image stream and tag.</p>
+</div>
+<div class="paragraph">
+<p>Image stream tags can reference any local or externally
+managed image. It contains a history of images represented as a stack of all
+images the tag ever pointed to. Whenever a new or existing image is tagged
+under particular image stream tag, it is placed at the first position in the
+history stack. The image previously occupying the top position will be available at
+the second position, and so forth. This allows for easy rollbacks to make tags point to
+historical images again.</p>
+</div>
+<div class="paragraph">
+<p>The following image stream tag is from the the <a href="#image-stream-object-definition">image stream object example above</a>:</p>
+</div>
+<div class="listingblock">
+<div class="title">Image Stream Tag with Two Images in its History</div>
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml">  <span style="color:#606">tags</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">items:</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">created: 2017-09-02T10:15:09Z</span></span>
+      <span style="color:#606">dockerImageReference</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">172.30.56.218:5000/test/origin-ruby-sample@sha256:47463d94eb5c049b2d23b03a9530bf944f8f967a0fe79147dd6b9135bf7dd13d</span></span>
+      <span style="color:#606">generation</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">2</span></span>
+      <span style="color:#606">image</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">sha256:909de62d1f609a717ec433cc25ca5cf00941545c83a01fb31527771e1fab3fc5</span></span>
+    - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">created: 2017-09-29T13:40:11Z</span></span>
+      <span style="color:#606">dockerImageReference</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">172.30.56.218:5000/test/origin-ruby-sample@sha256:909de62d1f609a717ec433cc25ca5cf00941545c83a01fb31527771e1fab3fc5</span></span>
+      <span style="color:#606">generation</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">1</span></span>
+      <span style="color:#606">image</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">sha256:47463d94eb5c049b2d23b03a9530bf944f8f967a0fe79147dd6b9135bf7dd13d</span></span>
+    <span style="color:#606">tag</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">latest</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Image stream tags can be <em>permanent</em> tags or <em>tracking</em> tags.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Permanent tags</em> are version-specific tags that point to a particular version of an image, such as Python 3.5.</p>
+</li>
+<li>
+<p><em>Tracking tags</em> are reference tags that follow another image stream tag and could be updated in the future to change which image they follow, much like a symlink. Note that these new levels are not guaranteed to be backwards-compatible.</p>
+<div class="paragraph">
+<p>For example, the <code>latest</code> image stream tags that ship with OpenShift Origin are tracking tags. This means consumers of the <code>latest</code> image stream tag will be updated to the newest level of the framework provided by the image when a new level becomes available. A <code>latest</code> image stream tag to <code>v3.6</code> could be changed to <code>v3.7</code> at any time. It is important to be aware that these <code>latest</code> image stream tags behave differently than the Docker <code>latest</code> tag. The <code>latest</code> image stream tag, in this case, does not point to the latest image in the Docker repository. It points to another image stream tag, which might not be the latest version of an image. For example, if the <code>latest</code> image stream tag points to <code>v3.2</code> of an image, when the <code>3.3</code> version is released, the <code>latest</code> tag is not automatically updated to <code>v3.3</code>, and remains at <code>v3.2</code> until it is manually updated to point to a <code>v3.3</code> image stream tag.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Tracking tags are limited to a single image stream and cannot reference other image streams.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can create your own image stream tags for your own needs. See the <a href="../../dev_guide/managing_images.html#tag-naming">Recommended Tagging Conventions</a>.</p>
+</div>
+<div class="paragraph">
+<p>The image stream tag is composed of the name of the image stream and a tag, separated by a colon:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">&lt;image stream name&gt;:&lt;tag&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example, to refer to the
+<code>sha256:47463d94eb5c049b2d23b03a9530bf944f8f967a0fe79147dd6b9135bf7dd13d</code> image
+in the  <a href="#image-stream-object-definition">image stream object example above</a>, the image stream tag
+would be:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">origin-ruby-sample:latest</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="image-stream-triggers"><a class="anchor" href="#image-stream-triggers"></a>Image Stream Change Triggers</h3>
+<div class="paragraph">
+<p>Image stream triggers allow your Builds and Deployments to be automatically invoked when a new version of an upstream image is available.</p>
+</div>
+<div class="paragraph">
+<p>For example, Builds and Deployments can be automatically started when an image stream tag is modified.
+This is achieved by monitoring that particular image stream tag and notifying the Build or Deployment when a change is detected.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ImageChange</code> trigger results in a new replication controller whenever the
+content of an
+<a href="../../architecture/core_concepts/builds_and_image_streams.html#image-stream-tag">image
+stream tag</a> changes (when a new version of the image is pushed).</p>
+</div>
+<div class="exampleblock">
+<div class="title">Example 1. An ImageChange Trigger</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">triggers</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">type: &quot;ImageChange&quot;</span></span>
+    <span style="color:#606">imageChangeParams</span>:
+      <span style="color:#606">automatic</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true </span></span><i class="conum" data-value="1"></i><b>(1)</b>
+      <span style="color:#606">from</span>:
+        <span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">ImageStreamTag</span><span style="color:#710">&quot;</span></span>
+        <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">origin-ruby-sample:latest</span><span style="color:#710">&quot;</span></span>
+        <span style="color:#606">namespace</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">myproject</span><span style="color:#710">&quot;</span></span>
+      <span style="color:#606">containerNames</span>:
+        - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">helloworld</span><span style="color:#710">&quot;</span></span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>If the <code>imageChangeParams.automatic</code> field is set to <code>false</code>,
+the trigger is disabled.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>With the above example, when the <code>latest</code> tag value of the <strong>origin-ruby-sample</strong>
+image stream changes and the new image value differs from the current image
+specified in the deployment configuration&#8217;s <strong>helloworld</strong> container, a new
+replication controller is created using the new image for the <strong>helloworld</strong> container.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If an <code>ImageChange</code> trigger is defined on a deployment configuration (with a
+<code>ConfigChange</code> trigger and <code>automatic=false</code>, or with <code>automatic=true</code>) and the
+<code>ImageStreamTag</code> pointed by the <code>ImageChange</code> trigger does not exist yet, then
+the initial deployment process will automatically start as soon as an image is
+imported or pushed by a build to the <code>ImageStreamTag</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="image-stream-mappings"><a class="anchor" href="#image-stream-mappings"></a>Image Stream Mappings</h3>
+<div class="paragraph">
+<p>When the
+<a href="../../architecture/infrastructure_components/image_registry.html#integrated-openshift-registry">integrated
+registry</a> receives a new image, it creates and sends an image stream mapping
+to OpenShift Origin, providing the image&#8217;s project, name,
+tag, and image metadata.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Configuring image stream mappings is an advanced feature.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This information is used to create a new image (if it does not already exist)
+and to tag the image into the image stream. OpenShift Origin stores complete
+metadata about each image, such as commands, entry point, and environment
+variables. Images in OpenShift Origin are immutable and the maximum name length
+is 63 characters.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>See the <a href="../../dev_guide/managing_images.html#dev-guide-managing-images">Developer Guide</a> for details
+on manually tagging images.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following image stream mapping example results in an image being tagged as
+<strong>test/origin-ruby-sample:latest</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="title">Image Stream Mapping Object Definition</div>
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="yaml"><span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">v1</span></span>
+<span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ImageStreamMapping</span></span>
+<span style="color:#606">metadata</span>:
+  <span style="color:#606">creationTimestamp</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">null</span></span>
+  <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">origin-ruby-sample</span></span>
+  <span style="color:#606">namespace</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">test</span></span>
+<span style="color:#606">tag</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">latest</span></span>
+<span style="color:#606">image</span>:
+  <span style="color:#606">dockerImageLayers</span>:
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef</span></span>
+    <span style="color:#606">size</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">0</span></span>
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: sha256:ee1dd2cb6df21971f4af6de0f1d7782b81fb63156801cfde2bb47b4247c23c29</span></span>
+    <span style="color:#606">size</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">196634330</span></span>
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef</span></span>
+    <span style="color:#606">size</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">0</span></span>
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef</span></span>
+    <span style="color:#606">size</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">0</span></span>
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: sha256:ca062656bff07f18bff46be00f40cfbb069687ec124ac0aa038fd676cfaea092</span></span>
+    <span style="color:#606">size</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">177723024</span></span>
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: sha256:63d529c59c92843c395befd065de516ee9ed4995549f8218eac6ff088bfa6b6e</span></span>
+    <span style="color:#606">size</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">55679776</span></span>
+  - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">name: sha256:92114219a04977b5563d7dff71ec4caa3a37a15b266ce42ee8f43dba9798c966</span></span>
+    <span style="color:#606">size</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">11939149</span></span>
+  <span style="color:#606">dockerImageMetadata</span>:
+    <span style="color:#606">Architecture</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">amd64</span></span>
+    <span style="color:#606">Config</span>:
+      <span style="color:#606">Cmd</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/usr/libexec/s2i/run</span></span>
+      <span style="color:#606">Entrypoint</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">container-entrypoint</span></span>
+      <span style="color:#606">Env</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">RACK_ENV=production</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">OPENSHIFT_BUILD_NAMESPACE=test</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">OPENSHIFT_BUILD_SOURCE=https://github.com/openshift/ruby-hello-world.git</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">EXAMPLE=sample-app</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">OPENSHIFT_BUILD_NAME=ruby-sample-build-1</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">PATH=/opt/app-root/src/bin:/opt/app-root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">STI_SCRIPTS_URL=image:///usr/libexec/s2i</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">STI_SCRIPTS_PATH=/usr/libexec/s2i</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">HOME=/opt/app-root/src</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">BASH_ENV=/opt/app-root/etc/scl_enable</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ENV=/opt/app-root/etc/scl_enable</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">PROMPT_COMMAND=. /opt/app-root/etc/scl_enable</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">RUBY_VERSION=2.2</span></span>
+      <span style="color:#606">ExposedPorts</span>:
+        <span style="color:#606">8080/tcp</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">{}</span></span>
+      <span style="color:#606">Labels</span>:
+        <span style="color:#606">build-date</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">2015-12-23</span></span>
+        <span style="color:#606">io.k8s.description</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">Platform for building and running Ruby 2.2 applications</span></span>
+        <span style="color:#606">io.k8s.display-name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">172.30.56.218:5000/test/origin-ruby-sample:latest</span></span>
+        <span style="color:#606">io.openshift.build.commit.author</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">Ben Parees &lt;bparees@users.noreply.github.com&gt;</span></span>
+        <span style="color:#606">io.openshift.build.commit.date</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">Wed Jan 20 10:14:27 2016 -0500</span></span>
+        <span style="color:#606">io.openshift.build.commit.id</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">00cadc392d39d5ef9117cbc8a31db0889eedd442</span></span>
+        <span style="color:#606">io.openshift.build.commit.message</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">'Merge pull request</span></span> <span style="color:#777">#51 from php-coder/fix_url_and_sti'</span>
+        <span style="color:#606">io.openshift.build.commit.ref</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">master</span></span>
+        <span style="color:#606">io.openshift.build.image</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">centos/ruby-22-centos7@sha256:3a335d7d8a452970c5b4054ad7118ff134b3a6b50a2bb6d0c07c746e8986b28e</span></span>
+        <span style="color:#606">io.openshift.build.source-location</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">https://github.com/openshift/ruby-hello-world.git</span></span>
+        <span style="color:#606">io.openshift.builder-base-version</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">8d95148</span></span>
+        <span style="color:#606">io.openshift.builder-version</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">8847438ba06307f86ac877465eadc835201241df</span></span>
+        <span style="color:#606">io.openshift.expose-services</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">8080:http</span></span>
+        <span style="color:#606">io.openshift.s2i.scripts-url</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">image:///usr/libexec/s2i</span></span>
+        <span style="color:#606">io.openshift.tags</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">builder,ruby,ruby22</span></span>
+        <span style="color:#606">io.s2i.scripts-url</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">image:///usr/libexec/s2i</span></span>
+        <span style="color:#606">license</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">GPLv2</span></span>
+        <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">CentOS Base Image</span></span>
+        <span style="color:#606">vendor</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">CentOS</span></span>
+      <span style="color:#606">User</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1001</span><span style="color:#710">&quot;</span></span>
+      <span style="color:#606">WorkingDir</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/opt/app-root/src</span></span>
+    <span style="color:#606">Container</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">86e9a4a3c760271671ab913616c51c9f3cea846ca524bf07c04a6f6c9e103a76</span></span>
+    <span style="color:#606">ContainerConfig</span>:
+      <span style="color:#606">AttachStdout</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span>
+      <span style="color:#606">Cmd</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/bin/sh</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">-c</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">tar -C /tmp -xf - &amp;&amp; /usr/libexec/s2i/assemble</span></span>
+      <span style="color:#606">Entrypoint</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">container-entrypoint</span></span>
+      <span style="color:#606">Env</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">RACK_ENV=production</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">OPENSHIFT_BUILD_NAME=ruby-sample-build-1</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">OPENSHIFT_BUILD_NAMESPACE=test</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">OPENSHIFT_BUILD_SOURCE=https://github.com/openshift/ruby-hello-world.git</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">EXAMPLE=sample-app</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">PATH=/opt/app-root/src/bin:/opt/app-root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">STI_SCRIPTS_URL=image:///usr/libexec/s2i</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">STI_SCRIPTS_PATH=/usr/libexec/s2i</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">HOME=/opt/app-root/src</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">BASH_ENV=/opt/app-root/etc/scl_enable</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ENV=/opt/app-root/etc/scl_enable</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">PROMPT_COMMAND=. /opt/app-root/etc/scl_enable</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">RUBY_VERSION=2.2</span></span>
+      <span style="color:#606">ExposedPorts</span>:
+        <span style="color:#606">8080/tcp</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">{}</span></span>
+      <span style="color:#606">Hostname</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">ruby-sample-build-1-build</span></span>
+      <span style="color:#606">Image</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">centos/ruby-22-centos7@sha256:3a335d7d8a452970c5b4054ad7118ff134b3a6b50a2bb6d0c07c746e8986b28e</span></span>
+      <span style="color:#606">OpenStdin</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span>
+      <span style="color:#606">StdinOnce</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">true</span></span>
+      <span style="color:#606">User</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1001</span><span style="color:#710">&quot;</span></span>
+      <span style="color:#606">WorkingDir</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">/opt/app-root/src</span></span>
+    <span style="color:#606">Created</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">2016-01-29T13:40:00Z</span></span>
+    <span style="color:#606">DockerVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">1.8.2.fc21</span></span>
+    <span style="color:#606">Id</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">9d7fd5e2d15495802028c569d544329f4286dcd1c9c085ff5699218dbaa69b43</span></span>
+    <span style="color:#606">Parent</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">57b08d979c86f4500dc8cad639c9518744c8dd39447c055a3517dc9c18d6fccd</span></span>
+    <span style="color:#606">Size</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">441976279</span></span>
+    <span style="color:#606">apiVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1.0</span><span style="color:#710">&quot;</span></span>
+    <span style="color:#606">kind</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">DockerImage</span></span>
+  <span style="color:#606">dockerImageMetadataVersion</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1.0</span><span style="color:#710">&quot;</span></span>
+  <span style="color:#606">dockerImageReference</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">172.30.56.218:5000/test/origin-ruby-sample@sha256:47463d94eb5c049b2d23b03a9530bf944f8f967a0fe79147dd6b9135bf7dd13d</span></span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="image-stream-mappings-working"><a class="anchor" href="#image-stream-mappings-working"></a>Working with Image Streams</h3>
+<div class="paragraph">
+<p>The following sections describe how to use image streams and image stream tags. For more information on working with
+image streams, see <a href="../../dev_guide/managing_images.html#dev-guide-managing-images">Managing Images</a>.</p>
+</div>
+<div class="sect3">
+<h4 id="image-stream-mappings-working-getting"><a class="anchor" href="#image-stream-mappings-working-getting"></a>Getting Information about Image Streams</h4>
+<div class="paragraph">
+<p>To get general information about the image stream and detailed information about all the tags it is pointing to,
+use the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc describe is/&lt;image-name&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc describe is/python
+
+Name:			python
+Namespace:		default
+Created:		About a minute ago
+Labels:			&lt;none&gt;
+Annotations:		openshift.io/image.dockerRepositoryCheck=2017-10-02T17:05:11Z
+Docker Pull Spec:	docker-registry.default.svc:5000/default/python
+Image Lookup:		local=false
+Unique Images:		1
+Tags:			1
+
+3.5
+  tagged from centos/python-35-centos7
+
+  * centos/python-35-centos7@sha256:49c18358df82f4577386404991c51a9559f243e0b1bdc366df25
+      About a minute ago</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To get all the information available about particular image stream tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc describe istag/&lt;image-stream&gt;:&lt;tag-name&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc describe istag/python:latest
+
+Image Name:	sha256:49c18358df82f4577386404991c51a9559f243e0b1bdc366df25
+Docker Image:	centos/python-35-centos7@sha256:49c18358df82f4577386404991c51a9559f243e0b1bdc366df25
+Name:		sha256:49c18358df82f4577386404991c51a9559f243e0b1bdc366df25
+Created:	2 minutes ago
+Image Size:	251.2 MB (first layer 2.898 MB, last binary layer 72.26 MB)
+Image Created:	2 weeks ago
+Author:		&lt;none&gt;
+Arch:		amd64
+Entrypoint:	container-entrypoint
+Command:	/bin/sh -c $STI_SCRIPTS_PATH/usage
+Working Dir:	/opt/app-root/src
+User:		1001
+Exposes Ports:	8080/tcp
+Docker Labels:	build-date=20170801</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>More information is output than shown.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="image-stream-mappings-working-adding"><a class="anchor" href="#image-stream-mappings-working-adding"></a>Adding Additional Tags to an Image Stream</h4>
+<div class="paragraph">
+<p>To add a tag that points to one of the existing tags, you can use the <code>oc tag</code> command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc tag &lt;image-name:tag&gt; &lt;image-name:tag&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc tag python:3.5 python:latest
+
+Tag python:latest set to python@sha256:49c18358df82f4577386404991c51a9559f243e0b1bdc366df25.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use the <code>oc describe</code> command to confirm the the image stream has two tags, one (<code>3.5</code>) pointing at the external Docker image and another tag (<code>latest</code>) pointing to the same image because it was created based on the first tag.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc describe is/python
+
+Name:			python
+Namespace:		default
+Created:		5 minutes ago
+Labels:			&lt;none&gt;
+Annotations:		openshift.io/image.dockerRepositoryCheck=2017-10-02T17:05:11Z
+Docker Pull Spec:	docker-registry.default.svc:5000/default/python
+Image Lookup:		local=false
+Unique Images:		1
+Tags:			2
+
+latest
+  tagged from python@sha256:49c18358df82f4577386404991c51a9559f243e0b1bdc366df25
+
+  * centos/python-35-centos7@sha256:49c18358df82f4577386404991c51a9559f243e0b1bdc366df25
+      About a minute ago
+
+3.5
+  tagged from centos/python-35-centos7
+
+  * centos/python-35-centos7@sha256:49c18358df82f4577386404991c51a9559f243e0b1bdc366df25
+      5 minutes ago</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="image-stream-mappings-working-adding-tags"><a class="anchor" href="#image-stream-mappings-working-adding-tags"></a>Adding Tags for an External Image</h4>
+<div class="paragraph">
+<p>Use the <code>oc tag</code> command for all tag-related operations, such as adding tags pointing to internal or external images:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc tag &lt;repositiory/image&gt; &lt;image-name:tag&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example, this command maps the <code>docker.io/python:3.6.0</code> image to the <code>3.6</code> tag in the <code>python</code> image stream.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc tag docker.io/python:3.6.0 python:3.6
+Tag python:3.6 set to docker.io/python:3.6.0.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the external image is secured, you will need to create a secret with credentials for accessing that registry.
+See <a href="../../dev_guide/managing_images.html#private-registries">Importing Images from Private Registries</a> for more details.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="image-stream-mappings-working-updating"><a class="anchor" href="#image-stream-mappings-working-updating"></a>Updating an Image Stream Tag</h4>
+<div class="paragraph">
+<p>To update a tag to reflect another tag in an image stream:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc tag &lt;image-name:tag&gt; &lt;image-name:latest&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example, the following updates the <code>latest</code> tag to reflect the <code>3.6</code> tag in an image stream:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc tag python:3.6 python:latest
+Tag python:latest set to python@sha256:438208801c4806548460b27bd1fbcb7bb188273d13871ab43f.</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="removing-image-stream-tags-from-an-image-stream"><a class="anchor" href="#removing-image-stream-tags-from-an-image-stream"></a>Removing Image Stream Tags from an Image Stream</h4>
+<div class="paragraph">
+<p>To remove old tags from an image stream:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc tag -d &lt;image-name:tag&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc tag -d python:3.5
+
+Deleted tag default/python:3.5.</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="image-stream-mappings-working-periodic"><a class="anchor" href="#image-stream-mappings-working-periodic"></a>Configuring Periodic Importing of Tags</h4>
+<div class="paragraph">
+<p>When working with an external Docker registry, to periodically re-import an image (such as, to get latest security updates), use the <code>--scheduled</code> flag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc tag &lt;repositiory/image&gt; &lt;image-name:tag&gt; --scheduled</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc tag docker.io/python:3.6.0 python:3.6 --scheduled
+
+Tag python:3.6 set to import docker.io/python:3.6.0 periodically.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command causes OpenShift Origin to periodically update this particular image stream tag. This period is a
+<a href="../../install_config/master_node_configuration.html#master-config-image-config">cluster-wide setting</a> set to 15 minutes by default.</p>
+</div>
+<div class="paragraph">
+<p>To remove the periodic check, re-run above command but omit the <code>--scheduled</code> flag. This will reset its behavior to default.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">oc tag &lt;repositiory/image&gt; &lt;image-name:tag&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    /*<![CDATA[*/
+    $(document).ready(function() {
+      $("[id^='topicGroup']").on('show.bs.collapse', function (event) {
+        if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+          $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+        }
+      });
+      $("[id^='topicGroup']").on('hide.bs.collapse', function (event) {
+        if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+          $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+        }
+      });
+      $("[id^='topicSubGroup']").on('show.bs.collapse', function () {
+        $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+      });
+      $("[id^='topicSubGroup']").on('hide.bs.collapse', function () {
+        $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+      });
+    });
+    /*]]>*/
+  </script>
+    <footer class="footer-origin-docs">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="footer_social">
+          <a href="https://twitter.com/openshift" class="first">
+            <span>
+              <i class="fa fa-twitter-square fa-2x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="https://github.com/openshift/origin">
+            <span>
+              <i class="fa fa-github fa-2x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="https://plus.google.com/communities/114361859072744017486">
+            <span>
+              <i class="fa fa-google-plus-square fa-2x fa-inverse"></i>
+            </span>
+          </a>
+          <a href="https://www.facebook.com/openshift">
+            <span>
+              <i class="fa fa-facebook-square fa-2x fa-inverse"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <a id="footer_logo" href="https://www.redhat.com/">
+          <img alt="Red Hat" src="https://assets.openshift.net/app/assets/redhat.svg">
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 text-center">
+        <a id="powered_by_openshift" title="Powered by OpenShift Online with the DIY Cartridge" href="https://hub.openshift.com/quickstarts/92-do-it-yourself-0-1">
+          <img src="https://www.openshift.com/sites/default/files/images/powered-transparent-white.png" alt="Powered by OpenShift Online">
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 text-right">
+        <a id="built_with_asciibinder" title="Built with AsciiBinder docs management system" href="http://asciibinder.org/">
+          <img src="../../../go-client-preview/_images/asciibinder_web_logo.svg" alt="AsciiBinder">
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="attribution">
+          <button type="button" class="btn btn-link" data-html="true" data-container="body" data-toggle="popover" data-placement="top" data-content="
+            '<a target='_blank' href='https://www.flickr.com/photos/eflon/3655695161/'>Spin</a>' by <a target='_blank' href='https://www.flickr.com/photos/eflon/'>eflon</a>,</br> used under <a target='_blank' href='https://creativecommons.org/licenses/by/2.0/'>CC BY 2.0</a> </br>Color tint added to original">
+            Image attribution
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
+    </script>
+  </div>
+</footer>
+</body>
+</html>
